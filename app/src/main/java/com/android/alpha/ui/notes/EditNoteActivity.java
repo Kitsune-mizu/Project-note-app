@@ -285,10 +285,11 @@ public class EditNoteActivity extends AppCompatActivity {
     /** Menyimpan snapshot teks + span saat ini ke undo stack. */
     private void pushUndoSnapshot() {
         SpannableStringBuilder snapshot = new SpannableStringBuilder(etContent.getText());
-        if (!undoStack.isEmpty() && undoStack.peek().toString().equals(snapshot.toString())) return;
+        SpannableStringBuilder top = undoStack.peek();
+        if (top != null && top.toString().equals(snapshot.toString())) return;
         undoStack.push(snapshot);
         if (undoStack.size() > MAX_UNDO_HISTORY)
-            ((ArrayDeque<SpannableStringBuilder>) undoStack).removeLast();
+            undoStack.removeLast();
         refreshUndoRedoButtons();
     }
 
@@ -368,7 +369,7 @@ public class EditNoteActivity extends AppCompatActivity {
         final View contentView = findViewById(android.R.id.content);
         contentView.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
             boolean isKeyboardVisible =
-                    (contentView.getRootView().getHeight() - contentView.getHeight()) > dpToPx(200);
+                    (contentView.getRootView().getHeight() - contentView.getHeight()) > dpToPx();
             if (isKeyboardVisible) {
                 etContent.post(() -> { etContent.requestFocus(); etContent.setCursorVisible(true); });
                 layoutDefaultActions.setVisibility(View.GONE);
@@ -382,8 +383,8 @@ public class EditNoteActivity extends AppCompatActivity {
     }
 
     /** Konversi dp ke pixel. */
-    private int dpToPx(int dp) {
-        return Math.round(dp * getResources().getDisplayMetrics().density);
+    private int dpToPx() {
+        return Math.round(200 * getResources().getDisplayMetrics().density);
     }
 
     /** Mendaftarkan handler tombol back sistem. */
@@ -565,8 +566,8 @@ public class EditNoteActivity extends AppCompatActivity {
         SpannableStringBuilder result = new SpannableStringBuilder();
         String[] paragraphs = html.split("(?i)</p>", -1);
 
-        for (int i = 0; i < paragraphs.length; i++) {
-            String para = paragraphs[i].trim();
+        for (String paragraph : paragraphs) {
+            String para = paragraph.trim();
             if (para.isEmpty()) continue;
 
             // Ekstrak alignment dari CSS
@@ -574,10 +575,10 @@ public class EditNoteActivity extends AppCompatActivity {
             java.util.regex.Matcher mAlign = java.util.regex.Pattern
                     .compile("(?i)text-align\\s*:\\s*(\\w+)").matcher(para);
             if (mAlign.find()) {
-                String a = mAlign.group(1).toLowerCase(Locale.ROOT);
-                if ("center".equals(a))     alignment = Layout.Alignment.ALIGN_CENTER;
+                String a = Objects.requireNonNull(mAlign.group(1)).toLowerCase(Locale.ROOT);
+                if ("center".equals(a)) alignment = Layout.Alignment.ALIGN_CENTER;
                 else if ("right".equals(a)) alignment = Layout.Alignment.ALIGN_OPPOSITE;
-                else                        alignment = Layout.Alignment.ALIGN_NORMAL;
+                else alignment = Layout.Alignment.ALIGN_NORMAL;
             }
 
             // Ekstrak ukuran teks dari data-sizes
@@ -585,7 +586,7 @@ public class EditNoteActivity extends AppCompatActivity {
             java.util.regex.Matcher mSize = java.util.regex.Pattern
                     .compile("data-sizes=\"([^\"]*)\"").matcher(para);
             if (mSize.find()) {
-                for (String token : mSize.group(1).split(",")) {
+                for (String token : Objects.requireNonNull(mSize.group(1)).split(",")) {
                     String[] parts = token.split(":");
                     if (parts.length == 3) {
                         try {
@@ -594,7 +595,8 @@ public class EditNoteActivity extends AppCompatActivity {
                                     Integer.parseInt(parts[1]),
                                     Integer.parseInt(parts[2])
                             });
-                        } catch (NumberFormatException ignored) {}
+                        } catch (NumberFormatException ignored) {
+                        }
                     }
                 }
             }

@@ -91,6 +91,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="8dp"
             android:layout_toEndOf="@id/action_cancel_selection"
+            android:layout_toStartOf="@id/action_select_all"
             android:text="@string/selection_count_placeholder"
             android:textColor="?attr/colorOnPrimary"
             android:textSize="18sp"

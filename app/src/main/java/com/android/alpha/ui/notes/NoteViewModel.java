@@ -116,27 +116,6 @@ public class NoteViewModel extends ViewModel {
         refreshNotes(context);
     }
 
-    /**
-     * Ubah status pin catatan berdasarkan ID.
-     * Timestamp catatan akan diperbarui setelah perubahan pin.
-     */
-    public void pinNote(Context context, String id, boolean pinned) {
-        if (userId == null || context == null || id == null) return;
-
-        try {
-            Note note = getNoteById(context, id);
-            if (note == null) return;
-
-            note.setPinned(pinned);
-            note.setTimestamp(System.currentTimeMillis());
-            putNote(context, id, note);
-
-            refreshNotes(context);
-        } catch (Exception e) {
-            Log.e(TAG, "pinNote error", e);
-        }
-    }
-
     // --- Data Retrieval ---
 
     /**

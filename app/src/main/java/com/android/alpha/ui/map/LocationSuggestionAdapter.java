@@ -1,5 +1,6 @@
 package com.android.alpha.ui.map;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,6 +77,7 @@ public class LocationSuggestionAdapter extends RecyclerView.Adapter<LocationSugg
      * Does nothing if the new list is null.
      * @param newSuggestions the replacement data set.
      */
+    @SuppressLint("NotifyDataSetChanged")
     public void updateData(List<LocationSuggestion> newSuggestions) {
         if (newSuggestions == null) return;
         suggestions.clear();
