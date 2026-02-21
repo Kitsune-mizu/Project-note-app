@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Layout: Item Note Card
+    Deskripsi: Tampilan satu item catatan dalam bentuk CardView
+-->
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,84 +12,88 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="12dp"
     android:layout_marginVertical="6dp"
-    android:foreground="?attr/selectableItemBackground"
-    android:descendantFocusability="blocksDescendants"
     android:clickable="true"
+    android:descendantFocusability="blocksDescendants"
     android:focusable="true"
-    app:cardElevation="1dp"
-    app:strokeWidth="0dp"
+    android:foreground="?attr/selectableItemBackground"
     app:cardBackgroundColor="?attr/colorSurfaceContainerHighest"
-    app:cardCornerRadius="16dp">
+    app:cardCornerRadius="16dp"
+    app:cardElevation="1dp"
+    app:strokeWidth="0dp">
 
+    <!-- ================= ROOT CONSTRAINT LAYOUT ================= -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
         tools:ignore="ExtraText">
 
-        // Select Note Button
+        <!-- Select Note Button (Checkbox Indicator) -->
         <ImageView
             android:id="@+id/btn_select_note"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:visibility="gone"
             android:clickable="false"
+            android:contentDescription="@string/cd_select_note"
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:src="@drawable/ic_checkbox_off"
-            android:contentDescription="@string/cd_select_note"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:tint="?attr/colorPrimary"/>
+            app:tint="?attr/colorPrimary" />
 
-        // Pin Indicator
+        <!-- Pin Indicator (Menandakan catatan dipin) -->
         <ImageView
             android:id="@+id/iv_note_pin"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:visibility="gone"
-            android:src="@drawable/ic_pin_filled"
             android:contentDescription="@string/cd_note_pinned"
-            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_pin_filled"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:tint="?attr/colorSecondary" />
 
-        // Note Text Content
+        <!-- ================= TEXT CONTENT CONTAINER ================= -->
         <LinearLayout
             android:id="@+id/container_note_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintStart_toEndOf="@+id/btn_select_note"
-            app:layout_constraintEnd_toStartOf="@id/iv_note_pin"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:paddingStart="6dp"
-            android:paddingEnd="12dp">
+            android:paddingEnd="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/iv_note_pin"
+            app:layout_constraintStart_toEndOf="@id/btn_select_note"
+            app:layout_constraintTop_toTopOf="parent">
 
+            <!-- Note Title -->
             <TextView
                 android:id="@+id/tv_note_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:text="@string/note_title_placeholder"
                 android:textColor="?attr/colorOnSurface"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:maxLines="1"
-                android:ellipsize="end"/>
+                android:textStyle="bold" />
 
+            <!-- Note Preview / Sub Content -->
             <TextView
                 android:id="@+id/tv_note_sub"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
+                android:ellipsize="end"
+                android:maxLines="4"
                 android:text="@string/note_content_placeholder"
                 android:textColor="?attr/colorOnSurfaceVariant"
-                android:textSize="14sp"
-                android:maxLines="4"
-                android:ellipsize="end"/>
+                android:textSize="14sp" />
 
+            <!-- Note Date / Metadata -->
             <TextView
                 android:id="@+id/tv_note_date"
                 android:layout_width="wrap_content"
@@ -93,7 +101,8 @@
                 android:layout_marginTop="6dp"
                 android:text="@string/note_date_placeholder"
                 android:textColor="?attr/colorOnSurfaceVariant"
-                android:textSize="12sp"/>
+                android:textSize="12sp" />
+
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

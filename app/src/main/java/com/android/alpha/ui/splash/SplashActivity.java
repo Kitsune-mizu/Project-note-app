@@ -45,28 +45,40 @@ import java.net.URL;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * Splash screen yang menampilkan animasi pembuka, mendeteksi lokasi pengguna,
+ * lalu menampilkan bendera dan sapaan sesuai negara sebelum masuk ke aplikasi.
+ */
 @SuppressLint("CustomSplashScreen")
 public class SplashActivity extends AppCompatActivity {
 
-    // === CONSTANTS ===
+    // Tag untuk logging dan kode request izin lokasi
     private static final String TAG = "SplashActivity";
     private static final int LOCATION_PERMISSION_REQUEST = 101;
 
-    // === UI COMPONENTS ===
+    // --- UI Components ---
+
     private FrameLayout flagContainer;
     private ImageView imgFlag;
     private TextView tvGreeting;
     private LottieAnimationView lottieAnimationView;
 
-    // === LOCATION FIELDS ===
+    // --- Location Fields ---
+
+    // Client untuk mendapatkan lokasi dan callback penerima update lokasi
     private FusedLocationProviderClient fusedLocationClient;
     private LocationCallback locationCallback;
+
+    // Kode negara terakhir yang dideteksi (mencegah update berulang jika negara sama)
     private String lastCountry = "";
 
-    // === HANDLERS ===
+    // --- Handler ---
+
+    // Handler untuk menjalankan aksi dengan delay di main thread
     private final Handler handler = new Handler();
 
-    // === LIFECYCLE METHODS ===
+    // --- Lifecycle ---
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,26 +91,33 @@ public class SplashActivity extends AppCompatActivity {
         playSplashSequence();
     }
 
-    // === VIEW INITIALIZATION ===
+    // --- View Initialization ---
+
+    /** Bind komponen UI dan set font custom pada tvGreeting */
     private void initViews() {
         lottieAnimationView = findViewById(R.id.lottieAnimationView);
-        flagContainer = findViewById(R.id.flagContainer);
-        imgFlag = findViewById(R.id.imgFlag);
-        tvGreeting = findViewById(R.id.tvGreeting);
+        flagContainer       = findViewById(R.id.flagContainer);
+        imgFlag             = findViewById(R.id.imgFlag);
+        tvGreeting          = findViewById(R.id.tvGreeting);
         tvGreeting.setTypeface(ResourcesCompat.getFont(this, R.font.montserrat));
     }
 
-    // === SPLASH SEQUENCE & NAVIGATION ===
+    // --- Splash Sequence & Navigation ---
+
+    /** Putar animasi Lottie, lalu cek izin lokasi setelah 3 detik */
     private void playSplashSequence() {
         lottieAnimationView.setAnimation(R.raw.splash_animation);
         lottieAnimationView.playAnimation();
         handler.postDelayed(this::checkLocationPermission, 3000);
     }
 
+    /**
+     * Hentikan update lokasi dan navigasi ke layar berikutnya.
+     * Arahkan ke MainActivity jika sudah login, LoginActivity jika belum.
+     */
     private void goNext() {
-        if (fusedLocationClient != null && locationCallback != null) {
+        if (fusedLocationClient != null && locationCallback != null)
             fusedLocationClient.removeLocationUpdates(locationCallback);
-        }
 
         startActivity(new Intent(this,
                 UserSession.getInstance().isLoggedIn() ? MainActivity.class : LoginActivity.class));
@@ -106,20 +125,25 @@ public class SplashActivity extends AppCompatActivity {
         finish();
     }
 
-    // === LOCATION & PERMISSION HANDLING ===
+    // --- Location & Permission Handling ---
+
+    /** Minta izin lokasi jika belum diberikan, langsung mulai update jika sudah ada */
     private void checkLocationPermission() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-
             ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_REQUEST);
-
-        } else startRealtimeLocationUpdates();
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    LOCATION_PERMISSION_REQUEST);
+        } else {
+            startRealtimeLocationUpdates();
+        }
     }
 
+    /** Mulai menerima update lokasi real-time dengan akurasi tinggi */
     @SuppressLint("MissingPermission")
     private void startRealtimeLocationUpdates() {
         if (fusedLocationClient == null) return;
+
         LocationRequest request = new LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 4000)
                 .setMinUpdateIntervalMillis(2000)
                 .setWaitForAccurateLocation(true)
@@ -133,7 +157,6 @@ public class SplashActivity extends AppCompatActivity {
                     Log.w(TAG, "Location is null, waiting for next update...");
                     return;
                 }
-
                 Log.d(TAG, "Location received: " + location.getLatitude() + ", " + location.getLongitude());
                 handleLocation(location);
             }
@@ -145,19 +168,23 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
-
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if (requestCode == LOCATION_PERMISSION_REQUEST &&
-                grantResults.length > 0 &&
-                grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
+        if (requestCode == LOCATION_PERMISSION_REQUEST
+                && grantResults.length > 0
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             startRealtimeLocationUpdates();
-
-        } else getNetworkLocationFallback();
+        } else {
+            getNetworkLocationFallback();
+        }
     }
 
-    // === GEOLOCATION PROCESSING ===
+    // --- Geolocation Processing ---
+
+    /**
+     * Konversi koordinat lokasi ke kode negara menggunakan Geocoder di background thread.
+     * Jika gagal, fallback ke deteksi via jaringan.
+     */
     private void handleLocation(Location location) {
         double lat = location.getLatitude();
         double lon = location.getLongitude();
@@ -175,15 +202,17 @@ public class SplashActivity extends AppCompatActivity {
                         getNetworkLocationFallback();
                     }
                 });
-
             } catch (Exception e) {
-                // Catches IOException (e.g., timeout) and other exceptions
                 Log.e(TAG, "Geocoder error: " + e.getMessage());
                 runOnUiThread(this::getNetworkLocationFallback);
             }
         }).start();
     }
 
+    /**
+     * Perbarui negara aktif hanya jika kode negara baru berbeda dari sebelumnya.
+     * Mencegah animasi bendera diputar ulang tanpa perubahan.
+     */
     private void updateCountry(String countryCode) {
         if (countryCode == null) return;
         countryCode = countryCode.toLowerCase(Locale.ROOT);
@@ -194,12 +223,15 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
-    // === FALLBACK MECHANISMS (NETWORK/LOCALE) ===
+    // --- Fallback Mechanisms ---
+
+    /** Deteksi negara via IP API jika GPS/Geocoder tidak tersedia */
     private void getNetworkLocationFallback() {
         new Thread(() -> {
             try {
                 String countryCode = getCountryCodeFromIP();
-                runOnUiThread(() -> updateCountry(countryCode.isEmpty() ? Locale.getDefault().getCountry() : countryCode));
+                runOnUiThread(() -> updateCountry(
+                        countryCode.isEmpty() ? Locale.getDefault().getCountry() : countryCode));
             } catch (Exception e) {
                 Log.e(TAG, "Network location failed: " + e.getMessage());
                 runOnUiThread(this::useLocaleFallback);
@@ -207,10 +239,12 @@ public class SplashActivity extends AppCompatActivity {
         }).start();
     }
 
+    /** Gunakan locale perangkat sebagai fallback terakhir jika semua metode gagal */
     private void useLocaleFallback() {
         updateCountry(Locale.getDefault().getCountry().toLowerCase());
     }
 
+    /** Ambil kode negara dari IP menggunakan API ipapi.co */
     private String getCountryCodeFromIP() throws Exception {
         HttpURLConnection connection = (HttpURLConnection) new URL("https://ipapi.co/json/").openConnection();
         connection.setRequestMethod("GET");
@@ -222,9 +256,12 @@ public class SplashActivity extends AppCompatActivity {
                 .toLowerCase(Locale.ROOT);
     }
 
-    // === NETWORK UTILITIES ===
+    // --- Network Utilities ---
+
+    /** Baca seluruh response HTTP menjadi satu string */
     private String readResponse(HttpURLConnection connection) throws Exception {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(connection.getInputStream()))) {
             StringBuilder response = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) response.append(line);
@@ -232,7 +269,12 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
-    // === UI ANIMATION AND CONTENT DISPLAY ===
+    // --- UI Animation & Content Display ---
+
+    /**
+     * Tampilkan bendera negara dan sapaan dengan urutan animasi:
+     * fade-out Lottie → tampilkan bendera → fade-in → tampilkan sapaan → navigasi.
+     */
     private void showFlagSequence(String countryCode) {
         String flagUrl = "https://flagcdn.com/w320/" + countryCode + ".png";
 
@@ -258,11 +300,14 @@ public class SplashActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Animasikan perubahan teks sapaan dengan fade-in,
+     * lalu navigasi ke layar berikutnya setelah 2 detik.
+     */
     private void animateGreetingChange(String newText) {
         tvGreeting.animate().cancel();
         tvGreeting.setAlpha(0f);
         tvGreeting.setVisibility(View.VISIBLE);
-
         tvGreeting.setText(newText);
         tvGreeting.animate()
                 .alpha(1f)
@@ -271,11 +316,15 @@ public class SplashActivity extends AppCompatActivity {
                 .start();
     }
 
-    // === GREETING LOGIC ===
+    // --- Greeting Logic ---
+
+    /**
+     * Kembalikan sapaan dalam bahasa lokal berdasarkan kode negara ISO 3166-1 alpha-2.
+     * Defaultnya "Hello!" jika kode negara tidak dikenali.
+     */
     private String getManualGreeting(String countryCode) {
         switch (countryCode.toLowerCase()) {
-
-            // Asia & Oceania
+            // Asia Tenggara
             case "id": return "Halo!";
             case "my": return "Hai!";
             case "sg": return "Hello!";
@@ -285,80 +334,69 @@ public class SplashActivity extends AppCompatActivity {
             case "la": return "ສະບາຍດີ";
             case "kh": return "សួស្តី";
             case "mm": return "မင်္ဂလာပါ";
+
+            // Asia Timur
             case "jp": return "こんにちは";
             case "kr": return "안녕하세요";
-            case "cn": return "你好";
-            case "tw": return "你好";
-            case "hk": return "你好";
+            case "cn": case "tw": case "hk": return "你好";
+
+            // Asia Selatan & Timur Tengah
             case "in": return "नमस्ते";
             case "pk": return "السلام عليكم";
             case "bd": return "হ্যালো";
             case "sa": return "السلام عليكم";
-            case "ae": return "مرحبا";
+            case "ae": case "eg": case "ma": case "dz": return "مرحبا";
             case "il": return "שלום";
             case "ir": return "سلام";
             case "tr": return "Merhaba!";
 
-            // Europe
-            case "uk": return "Hello!";
-            case "ie": return "Dia dhuit!";
+            // Eropa Barat
+            case "uk": case "ie": return "Hello!";
             case "fr": return "Bonjour!";
-            case "de": return "Hallo!";
-            case "es": return "¡Hola!";
-            case "pt": return "Olá!";
+            case "de": case "nl": case "be": case "no": return "Hallo!";
+            case "es": case "mx": case "ar": case "cl":
+            case "co": case "ve": case "pe": return "¡Hola!";
+            case "pt": case "br": return "Olá!";
             case "it": return "Ciao!";
-            case "nl": return "Hallo!";
-            case "be": return "Hallo!";
             case "ch": return "Grüezi!";
             case "gr": return "Γειά σου";
-            case "pl": return "Cześć!";
-            case "se": return "Hej!";
-            case "no": return "Hallo!";
-            case "dk": return "Hej!";
+
+            // Eropa Utara & Timur
+            case "se": case "dk": return "Hej!";
             case "fi": return "Hei!";
             case "ru": return "Привет!";
             case "ua": return "Привіт!";
-            case "cz": return "Ahoj!";
-            case "sk": return "Ahoj!";
+            case "cz": case "sk": return "Ahoj!";
             case "hu": return "Szia!";
             case "ro": return "Salut!";
             case "bg": return "Здравей";
+            case "pl": return "Cześć!";
 
-            // Americas
-            case "us": return "Hello!";
-            case "ca": return "Hello!";
-            case "mx": return "¡Hola!";
-            case "br": return "Olá!";
-            case "ar": return "¡Hola!";
-            case "cl": return "¡Hola!";
-            case "co": return "¡Hola!";
-            case "ve": return "¡Hola!";
-            case "pe": return "¡Hola!";
+            // Amerika Utara
+            case "us": case "ca": return "Hello!";
 
-            // Africa
-            case "za": return "Hello!";
-            case "eg": return "مرحبا";
-            case "ma": return "مرحبا";
-            case "dz": return "مرحبا";
-            case "ng": return "Hello!";
+            // Afrika
+            case "za": case "ng": return "Hello!";
             case "ke": return "Jambo!";
             case "et": return "Selam!";
 
-            // Australia
-            case "au": return "Hello!";
-            case "nz": return "Hello!";
+            // Australia & Selandia Baru
+            case "au": case "nz": return "Hello!";
 
-            default: return "Hello!"; // Universal fallback
+            default: return "Hello!";
         }
     }
 
-    // === ANIMATION HELPERS ===
+    // --- Animation Helpers ---
+
+    /** Animasi fade-in pada view, lalu jalankan endAction setelah selesai */
     private void fadeIn(View view, Runnable endAction) {
         view.setAlpha(0f);
         view.setVisibility(View.VISIBLE);
         view.animate().alpha(1f).setDuration(800).withEndAction(endAction).start();
     }
 
+    /** Animasi fade-out pada view, sembunyikan view, lalu jalankan endAction */
     private void fadeOut(View view, Runnable endAction) {
         view.animate().alpha(0f).setDuration(600)
                 .withEndAction(() -> {

@@ -5,41 +5,49 @@ import android.view.animation.AlphaAnimation;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 
+/**
+ * Utility class untuk mengelola tampilan shimmer loading dan transisi ke konten asli.
+ * Mendukung animasi fade-in saat konten ditampilkan kembali.
+ */
 public class ShimmerHelper {
 
-    // === SHIMMER CONTROL METHODS ===
+    // --- Shimmer Control ---
 
     /**
-     * Shows the Shimmer layout and hides content views.
+     * Tampilkan shimmer dan sembunyikan konten selama data sedang dimuat.
+     *
+     * @param shimmerLayout Layout shimmer yang akan ditampilkan
+     * @param contentViews  View konten yang disembunyikan selama shimmer aktif
      */
     public static void show(ShimmerFrameLayout shimmerLayout, View... contentViews) {
         if (shimmerLayout == null) return;
-
         shimmerLayout.setVisibility(View.VISIBLE);
         shimmerLayout.startShimmer();
         hideContent(contentViews);
     }
 
     /**
-     * Hides the Shimmer layout and shows content views with fade-in animation.
+     * Hentikan shimmer dan tampilkan konten kembali dengan animasi fade-in.
+     *
+     * @param shimmerLayout Layout shimmer yang akan disembunyikan
+     * @param contentViews  View konten yang ditampilkan setelah shimmer selesai
      */
     public static void hide(ShimmerFrameLayout shimmerLayout, View... contentViews) {
         if (shimmerLayout == null) return;
-
         shimmerLayout.stopShimmer();
         shimmerLayout.setVisibility(View.GONE);
-
         showContentWithFade(contentViews);
     }
 
-    // === VISIBILITY & ANIMATION HELPERS ===
+    // --- Visibility & Animation Helpers ---
 
+    /** Sembunyikan semua view konten (INVISIBLE agar tetap menempati ruang layout) */
     private static void hideContent(View... views) {
-        for (View v : views) {
+        for (View v : views)
             if (v != null) v.setVisibility(View.INVISIBLE);
-        }
     }
 
+    /** Tampilkan setiap view konten dengan animasi fade-in */
     private static void showContentWithFade(View... views) {
         for (View v : views) {
             if (v != null) {
@@ -49,6 +57,7 @@ public class ShimmerHelper {
         }
     }
 
+    /** Jalankan animasi fade-in dari alpha 0.3 ke 1.0 selama 400ms */
     private static void applyFadeIn(View view) {
         AlphaAnimation fadeIn = new AlphaAnimation(0.3f, 1f);
         fadeIn.setDuration(400);

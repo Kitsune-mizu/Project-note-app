@@ -1,68 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Layout: Custom Edit Dialog
+    Deskripsi: Dialog untuk mengedit atau memasukkan data baru
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="24dp"
     android:background="@drawable/bg_dialog_rounded"
     android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="24dp"
     tools:ignore="ExtraText">
 
-    // Dialog Title
+    <!-- ================= DIALOG TITLE ================= -->
     <TextView
         android:id="@+id/tvDialogTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="16dp"
         android:text="@string/dialog_title_edit_data"
         android:textAppearance="?attr/textAppearanceHeadlineSmall"
-        android:textColor="?attr/colorOnSurface"
-        android:gravity="center"
-        android:paddingBottom="16dp" />
+        android:textColor="?attr/colorOnSurface" />
 
-    // Input Field
+    <!-- ================= INPUT FIELD ================= -->
+    <!-- TextInputLayout sebagai container input -->
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/input_hint_enter_new_text">
 
+        <!-- TextInputEditText sebagai field input -->
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:inputType="text" />
+            android:inputType="text"
+            android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    // Horizontal Buttons
+    <!-- ================= ACTION BUTTONS ================= -->
+    <!-- Container tombol Cancel dan Confirm -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
         android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="horizontal"
         android:weightSum="2">
 
+        <!-- Cancel Button -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnCancel"
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:text="@string/button_cancel"
-            app:cornerRadius="16dp"
-            android:layout_marginEnd="8dp" />
+            app:cornerRadius="16dp" />
 
+        <!-- Confirm / Save Button -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnConfirm"
             style="@style/Widget.Material3.Button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:text="@string/button_save"
             android:backgroundTint="?attr/colorPrimary"
+            android:text="@string/button_save"
             android:textColor="?attr/colorOnPrimary"
-            app:cornerRadius="16dp"
-            android:layout_marginStart="8dp" />
+            app:cornerRadius="16dp" />
+
     </LinearLayout>
+
 </LinearLayout>

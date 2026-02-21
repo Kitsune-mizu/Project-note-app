@@ -11,26 +11,42 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * RecyclerView adapter that displays a list of {@link LocationSuggestion} items
+ * and notifies a click listener when the user selects one.
+ */
 public class LocationSuggestionAdapter extends RecyclerView.Adapter<LocationSuggestionAdapter.ViewHolder> {
 
-    // === INTERFACES ===
+    // ─── INTERFACE ─────────────────────────────────────────────────────────────
+
+    /** Callback triggered when a suggestion item is tapped. */
     public interface OnItemClickListener {
         void onItemClick(LocationSuggestion suggestion);
     }
 
-    // === INSTANCE VARIABLES ===
+    // ─── FIELDS ────────────────────────────────────────────────────────────────
     private final List<LocationSuggestion> suggestions = new ArrayList<>();
-    private final OnItemClickListener listener;
+    private final OnItemClickListener      listener;
 
-    // === CONSTRUCTOR ===
+    // ══════════════════════════════════════════════════════════════════════════
+    // CONSTRUCTOR
+    // ══════════════════════════════════════════════════════════════════════════
+
+    /**
+     * Creates the adapter with an optional initial list of suggestions.
+     * @param initialSuggestions the starting data set; ignored if null.
+     * @param listener           click callback for item selection.
+     */
     public LocationSuggestionAdapter(List<LocationSuggestion> initialSuggestions, OnItemClickListener listener) {
-        if (initialSuggestions != null) {
-            this.suggestions.addAll(initialSuggestions);
-        }
+        if (initialSuggestions != null) suggestions.addAll(initialSuggestions);
         this.listener = listener;
     }
 
-    // === RECYCLERVIEW ADAPTER OVERRIDES ===
+    // ══════════════════════════════════════════════════════════════════════════
+    // ADAPTER OVERRIDES
+    // ══════════════════════════════════════════════════════════════════════════
+
+    /** Inflates the simple list item layout and wraps it in a ViewHolder. */
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -39,6 +55,7 @@ public class LocationSuggestionAdapter extends RecyclerView.Adapter<LocationSugg
         return new ViewHolder(view);
     }
 
+    /** Binds the suggestion's display name to the TextView and wires the item click. */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         LocationSuggestion suggestion = suggestions.get(position);
@@ -46,21 +63,31 @@ public class LocationSuggestionAdapter extends RecyclerView.Adapter<LocationSugg
         holder.itemView.setOnClickListener(v -> listener.onItemClick(suggestion));
     }
 
+    /** Returns the total number of suggestions currently in the list. */
     @Override
-    public int getItemCount() {
-        return suggestions.size();
-    }
+    public int getItemCount() { return suggestions.size(); }
 
-    // === DATA MANAGEMENT ===
+    // ══════════════════════════════════════════════════════════════════════════
+    // DATA MANAGEMENT
+    // ══════════════════════════════════════════════════════════════════════════
+
+    /**
+     * Replaces the current suggestion list with the given data and refreshes the RecyclerView.
+     * Does nothing if the new list is null.
+     * @param newSuggestions the replacement data set.
+     */
     public void updateData(List<LocationSuggestion> newSuggestions) {
         if (newSuggestions == null) return;
-
-        this.suggestions.clear();
-        this.suggestions.addAll(newSuggestions);
-        notifyDataSetChanged(); // langsung refresh RecyclerView
+        suggestions.clear();
+        suggestions.addAll(newSuggestions);
+        notifyDataSetChanged();
     }
 
-    // === VIEW-HOLDER CLASS ===
+    // ══════════════════════════════════════════════════════════════════════════
+    // VIEW HOLDER
+    // ══════════════════════════════════════════════════════════════════════════
+
+    /** Holds a reference to the TextView used to display a single suggestion's name. */
     public static class ViewHolder extends RecyclerView.ViewHolder {
         final TextView textView;
 

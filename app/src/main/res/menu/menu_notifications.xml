@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+    Menu: Note Actions
+    Deskripsi: Menu aksi untuk halaman catatan
+-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="ExtraText">
 
-    // Action Clear All
+    <!-- Action: Clear All Notes -->
     <item
         android:id="@+id/action_clear_all"
         android:icon="@drawable/ic_delete"
-        app:iconTint="?attr/colorOnSurface"
         android:title="@string/clear_all"
+        app:iconTint="?attr/colorOnSurface"
         app:showAsAction="ifRoom" />
+
 </menu>

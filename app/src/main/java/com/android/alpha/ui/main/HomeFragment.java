@@ -45,6 +45,11 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+/**
+ * The main home screen fragment displaying a greeting, active-days counter,
+ * recent activity history, and a horizontal notes preview.
+ * Implements session listeners to react to profile updates, new activities, and clears.
+ */
 public class HomeFragment extends Fragment implements
         MainActivity.ToolbarTitleProvider,
         UserSession.UserSessionListener,
@@ -52,42 +57,48 @@ public class HomeFragment extends Fragment implements
         UserSession.ActivityClearedListener,
         Refreshable {
 
-    // === CONSTANTS ===
+    // ─── TAG ───────────────────────────────────────────────────────────────────
     private final String TAG = "HomeFragment";
 
-    // === VIEWS ===
-    private ShimmerFrameLayout shimmerLayout;
+    // ─── VIEWS ─────────────────────────────────────────────────────────────────
+    private ShimmerFrameLayout  shimmerLayout;
     private LottieAnimationView lottieWelcome;
-    private TextView tvGreeting, tvUsername, tvDateTime, tvActiveDays, tvViewAll;
-    private RecyclerView recyclerViewActivities;
+    private TextView            tvGreeting, tvUsername, tvDateTime, tvActiveDays, tvViewAll;
+    private RecyclerView        recyclerViewActivities;
     private NotificationAdapter activityAdapter;
-    private LinearLayout emptyActivity;
-    private SwipeRefreshLayout swipeRefreshLayout;
-    private TextView tvViewAllNotes;
-    private RecyclerView recyclerViewNotes;
-    private LinearLayout emptyNotes;
+    private LinearLayout        emptyActivity;
+    private SwipeRefreshLayout  swipeRefreshLayout;
+    private TextView            tvViewAllNotes;
+    private RecyclerView        recyclerViewNotes;
+    private LinearLayout        emptyNotes;
 
-    // === DATA & ADAPTERS ===
-    private NoteViewModel noteViewModel;
-    private NoteAdapter adapter;
-    private final List<ActivityItem> activityList = new ArrayList<>();
-    private final Handler handler = new Handler(Looper.getMainLooper());
-    private final SimpleDateFormat dateFormat =
+    // ─── DATA & ADAPTERS ───────────────────────────────────────────────────────
+    private NoteViewModel              noteViewModel;
+    private NoteAdapter                adapter;
+    private final List<ActivityItem>   activityList = new ArrayList<>();
+    private final Handler              handler      = new Handler(Looper.getMainLooper());
+    private final SimpleDateFormat     dateFormat   =
             new SimpleDateFormat("EEEE, d MMMM yyyy • HH:mm", Locale.getDefault());
 
-    // === LAUNCHERS ===
+    // ─── LAUNCHERS ─────────────────────────────────────────────────────────────
     private ActivityResultLauncher<Intent> noteLauncher;
 
-    // === RUNNABLE ===
+    // ─── RUNNABLES ─────────────────────────────────────────────────────────────
+
+    /** Updates the date/time display every 60 seconds while the fragment is active. */
     private final Runnable timeUpdater = new Runnable() {
         @Override
         public void run() {
             updateDateTime();
-            handler.postDelayed(this, 60000); // Updates every 1 minute
+            handler.postDelayed(this, 60000);
         }
     };
 
-    // === FRAGMENT LIFECYCLE ===
+    // ══════════════════════════════════════════════════════════════════════════
+    // LIFECYCLE
+    // ══════════════════════════════════════════════════════════════════════════
+
+    /** Required empty constructor for fragment instantiation. */
     public HomeFragment() {}
 
     @Override
@@ -95,6 +106,7 @@ public class HomeFragment extends Fragment implements
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
+    /** Initializes all views, components, listeners, and starts the shimmer load sequence. */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -110,14 +122,14 @@ public class HomeFragment extends Fragment implements
         handler.post(timeUpdater);
     }
 
+    /** Reloads notes every time the fragment becomes visible. */
     @Override
     public void onResume() {
         super.onResume();
-        if (getActivity() instanceof MainActivity) {
-            loadNotes();
-        }
+        if (getActivity() instanceof MainActivity) loadNotes();
     }
 
+    /** Removes handler callbacks and unregisters session listeners to avoid memory leaks. */
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -126,28 +138,32 @@ public class HomeFragment extends Fragment implements
         unregisterListeners();
     }
 
+    /** Returns the toolbar title string resource for this fragment. */
     @Override
-    public int getToolbarTitleRes() {
-        return R.string.menu_title_home;
-    }
+    public int getToolbarTitleRes() { return R.string.menu_title_home; }
 
-    // === INITIALIZATION ===
+    // ══════════════════════════════════════════════════════════════════════════
+    // INITIALIZATION
+    // ══════════════════════════════════════════════════════════════════════════
+
+    /** Binds all view references from the given root view. */
     private void initializeViews(View view) {
-        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
-        shimmerLayout = view.findViewById(R.id.shimmerLayout);
-        lottieWelcome = view.findViewById(R.id.lottieWelcome);
-        tvGreeting = view.findViewById(R.id.tvGreeting);
-        tvUsername = view.findViewById(R.id.tvUsername);
-        tvDateTime = view.findViewById(R.id.tvDateTime);
-        tvActiveDays = view.findViewById(R.id.tvActiveDays);
-        tvViewAll = view.findViewById(R.id.tvViewAll);
+        swipeRefreshLayout     = view.findViewById(R.id.swipeRefreshLayout);
+        shimmerLayout          = view.findViewById(R.id.shimmerLayout);
+        lottieWelcome          = view.findViewById(R.id.lottieWelcome);
+        tvGreeting             = view.findViewById(R.id.tvGreeting);
+        tvUsername             = view.findViewById(R.id.tvUsername);
+        tvDateTime             = view.findViewById(R.id.tvDateTime);
+        tvActiveDays           = view.findViewById(R.id.tvActiveDays);
+        tvViewAll              = view.findViewById(R.id.tvViewAll);
         recyclerViewActivities = view.findViewById(R.id.recyclerViewActivities);
-        emptyActivity = view.findViewById(R.id.emptyActivity);
-        tvViewAllNotes = view.findViewById(R.id.tvViewAllNotes);
-        recyclerViewNotes = view.findViewById(R.id.recyclerViewNotes);
-        emptyNotes = view.findViewById(R.id.emptyNotes);
+        emptyActivity          = view.findViewById(R.id.emptyActivity);
+        tvViewAllNotes         = view.findViewById(R.id.tvViewAllNotes);
+        recyclerViewNotes      = view.findViewById(R.id.recyclerViewNotes);
+        emptyNotes             = view.findViewById(R.id.emptyNotes);
     }
 
+    /** Sets up the Lottie animation, pull-to-refresh, back press, and click listeners. */
     private void initUIComponents() {
         setupLottie();
         setupRefresh();
@@ -155,16 +171,19 @@ public class HomeFragment extends Fragment implements
         setupClickListeners();
     }
 
+    /** Configures and starts the looping welcome Lottie animation. */
     private void setupLottie() {
         lottieWelcome.setAnimation(R.raw.welcome_animation);
         lottieWelcome.setRepeatCount(LottieDrawable.INFINITE);
         lottieWelcome.playAnimation();
     }
 
+    /** Wires the SwipeRefreshLayout to the refresh handler. */
     private void setupRefresh() {
         swipeRefreshLayout.setOnRefreshListener(this::onRefreshRequested);
     }
 
+    /** Intercepts the back button to show an exit confirmation dialog. */
     private void setupBackPress() {
         requireActivity().getOnBackPressedDispatcher().addCallback(
                 getViewLifecycleOwner(),
@@ -185,30 +204,41 @@ public class HomeFragment extends Fragment implements
         );
     }
 
+    /** Sets click listeners for "View All" activity and notes links. */
     private void setupClickListeners() {
         tvViewAll.setOnClickListener(v -> openAllActivities());
         tvViewAllNotes.setOnClickListener(v -> openAllNotes());
     }
 
+    /** Registers this fragment as a listener for session, activity, and clear events. */
     private void registerListeners() {
         UserSession.getInstance().addListener(this);
         UserSession.getInstance().addActivityListener(this);
         UserSession.getInstance().setActivityClearedListener(this);
     }
 
-    private void unregisterListeners() {
-        // Placeholder for cleanup if needed
-    }
+    /** Placeholder for any future listener cleanup logic. */
+    private void unregisterListeners() {}
 
+    /** Clears the local activity list and refreshes the RecyclerView when all activities are cleared. */
     @Override
     public void onActivitiesCleared() {
         activityList.clear();
         refreshActivityList();
     }
 
-    // === NOTES & RECYCLERVIEW MANAGEMENT ===
+    // ══════════════════════════════════════════════════════════════════════════
+    // NOTES & RECYCLERVIEW
+    // ══════════════════════════════════════════════════════════════════════════
+
+    /**
+     * Sets up the horizontal notes RecyclerView, initializes the NoteViewModel,
+     * and observes note changes to update the adapter and empty-state visibility.
+     */
     private void setupRecyclerView() {
-        adapter = new NoteAdapter(new ArrayList<>(), note -> openNoteDetail(note.getId()),
+        adapter = new NoteAdapter(
+                new ArrayList<>(),
+                note -> openNoteDetail(note.getId()),
                 new NoteAdapter.OnSelectionModeListener() {
                     @Override public void onSelectionModeChange(boolean active) {}
                     @Override public void onSelectionCountChange(int count) {}
@@ -217,17 +247,14 @@ public class HomeFragment extends Fragment implements
                 false
         );
 
-        LinearLayoutManager layoutManager =
-                new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerViewNotes.setLayoutManager(layoutManager);
+        recyclerViewNotes.setLayoutManager(
+                new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerViewNotes.setHasFixedSize(false);
         recyclerViewNotes.setAdapter(adapter);
 
         noteViewModel = new ViewModelProvider(requireActivity()).get(NoteViewModel.class);
-
         String userId = UserSession.getInstance()
                 .getUserData(UserSession.getInstance().getUsername()).userId;
-
         noteViewModel.setUserId(userId);
         loadNotes();
 
@@ -236,30 +263,26 @@ public class HomeFragment extends Fragment implements
 
             List<Note> sorted = new ArrayList<>(notes);
             sorted.sort((n1, n2) -> Long.compare(n2.getTimestamp(), n1.getTimestamp()));
-
             adapter.updateNotes(sorted);
 
-            if (sorted.isEmpty()) {
-                emptyNotes.setVisibility(View.VISIBLE);
-                recyclerViewNotes.setVisibility(View.GONE);
-            } else {
-                emptyNotes.setVisibility(View.GONE);
-                recyclerViewNotes.setVisibility(View.VISIBLE);
-            }
+            boolean isEmpty = sorted.isEmpty();
+            emptyNotes.setVisibility(isEmpty ? View.VISIBLE : View.GONE);
+            recyclerViewNotes.setVisibility(isEmpty ? View.GONE : View.VISIBLE);
         });
     }
 
+    /** Triggers a ViewModel notes refresh if the ViewModel is initialized. */
     public void refreshNotes() {
-        if (noteViewModel != null) {
-            noteViewModel.loadNotes(requireContext());
-        }
+        if (noteViewModel != null) noteViewModel.loadNotes(requireContext());
     }
 
+    /** Loads and refreshes notes from the ViewModel. */
     private void loadNotes() {
         noteViewModel.loadNotes(requireContext());
         noteViewModel.refreshNotes(requireContext());
     }
 
+    /** Registers the activity result launcher used to open and return from note editing. */
     private void setupNoteLauncher() {
         noteLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -267,6 +290,7 @@ public class HomeFragment extends Fragment implements
         );
     }
 
+    /** Opens the EditNoteActivity for the selected note using the note launcher. */
     private void openNoteDetail(String noteId) {
         Note selectedNote = noteViewModel.getNoteById(requireContext(), noteId);
         Intent intent = new Intent(requireContext(), EditNoteActivity.class);
@@ -274,12 +298,19 @@ public class HomeFragment extends Fragment implements
         noteLauncher.launch(intent);
     }
 
+    /** Navigates to the full NoteActivity screen. */
     private void openAllNotes() {
-        Intent intent = new Intent(requireContext(), NoteActivity.class);
-        startActivity(intent);
+        startActivity(new Intent(requireContext(), NoteActivity.class));
     }
 
-    // === DATA LOADING & SHIMMER ===
+    // ══════════════════════════════════════════════════════════════════════════
+    // DATA LOADING & SHIMMER
+    // ══════════════════════════════════════════════════════════════════════════
+
+    /**
+     * Shows the shimmer skeleton loader, then hides it and loads real data
+     * after a 1.2-second delay.
+     */
     private void startShimmerInitialLoad(View scrollView) {
         ShimmerHelper.show(shimmerLayout, scrollView);
         handler.postDelayed(() -> {
@@ -288,6 +319,7 @@ public class HomeFragment extends Fragment implements
         }, 1200);
     }
 
+    /** Loads user data, activity history, and updates the date/time display. */
     private void loadAllData() {
         try {
             loadUserData();
@@ -298,7 +330,14 @@ public class HomeFragment extends Fragment implements
         }
     }
 
-    // === USER DATA & GREETING ===
+    // ══════════════════════════════════════════════════════════════════════════
+    // USER DATA & GREETING
+    // ══════════════════════════════════════════════════════════════════════════
+
+    /**
+     * Loads the current user's display name from their profile JSON,
+     * updates the greeting, username label, and active-days counter.
+     */
     public void loadUserData() {
         String username = Optional.ofNullable(UserSession.getInstance().getUsername())
                 .orElse(getString(R.string.title_guest));
@@ -321,20 +360,29 @@ public class HomeFragment extends Fragment implements
                 UserSession.getInstance().getActiveDays()));
     }
 
+    /** Sets the greeting text based on the current hour of day. */
     private void updateGreeting() {
         int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-        int res = (hour < 12) ? R.string.greeting_morning :
+        int res  = (hour < 12) ? R.string.greeting_morning  :
                 (hour < 15) ? R.string.greeting_afternoon :
-                        (hour < 19) ? R.string.greeting_evening :
+                        (hour < 19) ? R.string.greeting_evening   :
                                 R.string.greeting_night;
         tvGreeting.setText(getString(res));
     }
 
+    /** Updates the date/time TextView with the current time using the configured date format. */
     private void updateDateTime() {
         tvDateTime.setText(dateFormat.format(new Date()));
     }
 
-    // === ACTIVITY HISTORY ===
+    // ══════════════════════════════════════════════════════════════════════════
+    // ACTIVITY HISTORY
+    // ══════════════════════════════════════════════════════════════════════════
+
+    /**
+     * Populates the local activity list from the session, adds a login activity
+     * if not already present, then refreshes the activity RecyclerView.
+     */
     private void loadActivityHistory() {
         activityList.clear();
         activityList.addAll(UserSession.getInstance().getActivities());
@@ -347,16 +395,18 @@ public class HomeFragment extends Fragment implements
         refreshActivityList();
     }
 
+    /** Sets up the activity history RecyclerView with a vertical LinearLayoutManager. */
     private void setupActivityRecycler() {
         activityAdapter = new NotificationAdapter();
-
-        recyclerViewActivities.setLayoutManager(
-                new LinearLayoutManager(requireContext())
-        );
+        recyclerViewActivities.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerViewActivities.setNestedScrollingEnabled(false);
         recyclerViewActivities.setAdapter(activityAdapter);
     }
 
+    /**
+     * Submits the latest activity list (capped at 5 items) to the adapter,
+     * toggling the empty-state view as needed.
+     */
     private void refreshActivityList() {
         if (activityList.isEmpty()) {
             emptyActivity.setVisibility(View.VISIBLE);
@@ -367,24 +417,29 @@ public class HomeFragment extends Fragment implements
         emptyActivity.setVisibility(View.GONE);
         recyclerViewActivities.setVisibility(View.VISIBLE);
 
-        List<ActivityItem> limited =
-                activityList.subList(0, Math.min(activityList.size(), 5));
-
+        List<ActivityItem> limited = activityList.subList(0, Math.min(activityList.size(), 5));
         activityAdapter.submitList(new ArrayList<>(limited));
     }
 
+    /** Navigates to the full NotificationActivity and hides the notification badge. */
     private void openAllActivities() {
         startActivity(new Intent(requireContext(), NotificationActivity.class));
         if (getActivity() instanceof MainActivity)
             ((MainActivity) getActivity()).hideNotificationBadge();
     }
 
-    // === USER-SESSION LISTENERS ===
-    @Override
-    public void onProfileUpdated() {
-        loadUserData();
-    }
+    // ══════════════════════════════════════════════════════════════════════════
+    // SESSION LISTENERS
+    // ══════════════════════════════════════════════════════════════════════════
 
+    /** Reloads user data when the session profile is updated. */
+    @Override
+    public void onProfileUpdated() { loadUserData(); }
+
+    /**
+     * Prepends the new activity item to the local list (capped at 10),
+     * refreshes the RecyclerView, and shows the notification badge.
+     */
     @Override
     public void onNewActivity(ActivityItem item) {
         if (item == null) return;
@@ -397,7 +452,14 @@ public class HomeFragment extends Fragment implements
             ((MainActivity) getActivity()).showNotificationBadge();
     }
 
-    // === REFRESHABLE ===
+    // ══════════════════════════════════════════════════════════════════════════
+    // REFRESHABLE
+    // ══════════════════════════════════════════════════════════════════════════
+
+    /**
+     * Handles pull-to-refresh: shows shimmer, reloads all data and notes,
+     * then hides shimmer and stops the refresh indicator.
+     */
     @Override
     public void onRefreshRequested() {
         View scroll = requireView().findViewById(R.id.scrollViewHome);

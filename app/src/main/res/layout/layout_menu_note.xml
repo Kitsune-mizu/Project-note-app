@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Layout: Menu Note Popup
+    Deskripsi: Menu aksi untuk catatan (Reminder, Share, Delete)
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="8dp"
     android:background="@drawable/bg_menu_note"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
     tools:ignore="ExtraText">
 
-    // Action Reminder
+    <!-- ================= ACTION REMINDER ================= -->
+    <!-- Tombol untuk menambahkan atau mengatur pengingat -->
     <LinearLayout
         android:id="@+id/action_reminder"
         android:layout_width="wrap_content"
@@ -22,22 +27,25 @@
         android:foreground="?attr/selectableItemBackground"
         tools:ignore="UseCompoundDrawables">
 
+        <!-- Icon Reminder -->
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_reminder"
             android:contentDescription="@string/cd_action_reminder"
+            android:src="@drawable/ic_reminder"
             app:tint="?attr/colorOnSurface" />
 
+        <!-- Text Reminder -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:text="@string/action_reminder_text"
-            android:textColor="?attr/colorOnSurface"
-            android:layout_marginStart="8dp" />
+            android:textColor="?attr/colorOnSurface" />
     </LinearLayout>
 
-    // Action Share
+    <!-- ================= ACTION SHARE ================= -->
+    <!-- Tombol untuk membagikan catatan -->
     <LinearLayout
         android:id="@+id/action_share"
         android:layout_width="wrap_content"
@@ -50,22 +58,25 @@
         android:foreground="?attr/selectableItemBackground"
         tools:ignore="UseCompoundDrawables">
 
+        <!-- Icon Share -->
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_share"
             android:contentDescription="@string/cd_action_share"
+            android:src="@drawable/ic_share"
             app:tint="?attr/colorOnSurface" />
 
+        <!-- Text Share -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:text="@string/action_share_note"
-            android:textColor="?attr/colorOnSurface"
-            android:layout_marginStart="8dp"/>
+            android:textColor="?attr/colorOnSurface" />
     </LinearLayout>
 
-    // Action Delete
+    <!-- ================= ACTION DELETE ================= -->
+    <!-- Tombol untuk menghapus catatan -->
     <LinearLayout
         android:id="@+id/action_delete"
         android:layout_width="wrap_content"
@@ -78,18 +89,21 @@
         android:foreground="?attr/selectableItemBackground"
         tools:ignore="UseCompoundDrawables">
 
+        <!-- Icon Delete -->
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_delete"
             android:contentDescription="@string/cd_action_delete"
+            android:src="@drawable/ic_delete"
             app:tint="?attr/colorError" />
 
+        <!-- Text Delete -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:text="@string/action_delete_note"
-            android:textColor="?attr/colorError"
-            android:layout_marginStart="8dp"/>
+            android:textColor="?attr/colorError" />
     </LinearLayout>
+
 </LinearLayout>

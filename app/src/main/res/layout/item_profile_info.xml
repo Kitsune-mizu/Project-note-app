@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Layout: Profile Item Section
+    Deskripsi: Menampilkan data profil pengguna (Nama, Email, Tanggal Lahir, Lokasi)
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,135 +11,143 @@
     android:orientation="vertical"
     tools:ignore="ExtraText">
 
-    // Full Name
+    <!-- ================= FULL NAME ================= -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp"
         android:background="@drawable/card_item_bg"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="16dp">
 
+        <!-- Text Full Name -->
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvFullName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:drawableStartCompat="@drawable/ic_person"
-            app:tint="?attr/colorOnSurface"
+            android:contentDescription="@string/cd_full_name_value"
             android:drawablePadding="12dp"
             android:text="@string/placeholder_name"
             android:textColor="?attr/colorOnSurface"
             android:textSize="16sp"
-            android:contentDescription="@string/cd_full_name_value" />
+            app:drawableStartCompat="@drawable/ic_person"
+            app:tint="?attr/colorOnSurface" />
 
+        <!-- Edit Full Name Button -->
         <ImageButton
             android:id="@+id/ibEditName"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/cd_edit_full_name"
             android:src="@drawable/ic_edit"
-            app:tint="?attr/colorPrimary"
-            android:contentDescription="@string/cd_edit_full_name" />
+            app:tint="?attr/colorPrimary" />
     </LinearLayout>
 
-    // Email
+    <!-- ================= EMAIL ================= -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/card_item_bg"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="16dp">
 
+        <!-- Text Email -->
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvEmail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:drawableStartCompat="@drawable/ic_email"
-            app:tint="?attr/colorOnSurface"
+            android:contentDescription="@string/cd_email_value"
             android:drawablePadding="12dp"
             android:text="@string/placeholder_email"
             android:textColor="?attr/colorOnSurface"
             android:textSize="16sp"
-            android:contentDescription="@string/cd_email_value" />
+            app:drawableStartCompat="@drawable/ic_email"
+            app:tint="?attr/colorOnSurface" />
 
+        <!-- Edit Email Button -->
         <ImageButton
             android:id="@+id/ibEditEmail"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/cd_edit_email"
             android:src="@drawable/ic_edit"
-            app:tint="?attr/colorPrimary"
-            android:contentDescription="@string/cd_edit_email" />
+            app:tint="?attr/colorPrimary" />
     </LinearLayout>
 
-    // Birthday
+    <!-- ================= BIRTHDAY ================= -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/card_item_bg"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="16dp">
 
+        <!-- Text Birthday -->
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvBirthday"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:drawableStartCompat="@drawable/ic_cake"
-            app:tint="?attr/colorOnSurface"
+            android:contentDescription="@string/cd_birthday_value"
             android:drawablePadding="12dp"
             android:text="@string/placeholder_birthday"
             android:textColor="?attr/colorOnSurface"
             android:textSize="16sp"
-            android:contentDescription="@string/cd_birthday_value" />
+            app:drawableStartCompat="@drawable/ic_cake"
+            app:tint="?attr/colorOnSurface" />
 
+        <!-- Edit Birthday Button -->
         <ImageButton
             android:id="@+id/ibEditBirthday"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/cd_edit_birthday"
             android:src="@drawable/ic_edit"
-            app:tint="?attr/colorPrimary"
-            android:contentDescription="@string/cd_edit_birthday" />
+            app:tint="?attr/colorPrimary" />
     </LinearLayout>
 
-    // Location
+    <!-- ================= LOCATION ================= -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/card_item_bg"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="16dp">
 
+        <!-- Text Location -->
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvLocation"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:drawableStartCompat="@drawable/ic_location"
-            app:tint="?attr/colorOnSurface"
+            android:contentDescription="@string/cd_location_value"
             android:drawablePadding="12dp"
             android:text="@string/placeholder_location"
             android:textColor="?attr/colorOnSurface"
             android:textSize="16sp"
-            android:contentDescription="@string/cd_location_value" />
+            app:drawableStartCompat="@drawable/ic_location"
+            app:tint="?attr/colorOnSurface" />
 
+        <!-- Edit Location Button -->
         <ImageButton
             android:id="@+id/ibEditLocation"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/cd_edit_location"
             android:src="@drawable/ic_edit"
-            app:tint="?attr/colorPrimary"
-            android:contentDescription="@string/cd_edit_location" />
+            app:tint="?attr/colorPrimary" />
     </LinearLayout>
 
 </LinearLayout>

@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Layout: Notes List Screen
+    Deskripsi: Menampilkan daftar catatan dengan fitur pencarian,
+    mode seleksi, dan tombol tambah catatan.
+-->
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,6 +12,7 @@
     android:layout_height="match_parent"
     android:background="@color/md_theme_light_surface">
 
+    <!-- ================= APP BAR AREA ================= -->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
@@ -21,46 +27,43 @@
             app:layout_scrollFlags="scroll|enterAlwaysCollapsed|exitUntilCollapsed"
             tools:ignore="ExtraText">
 
-            // Search View
+            <!-- Search View -->
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/search_view"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginTop="12dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="12dp"
                 android:iconifiedByDefault="false"
-                app:queryHint="@string/search_notes_hint"
                 app:closeIcon="@drawable/transparent_icon"
-                app:iconifiedByDefault="false" >
-
-            </androidx.appcompat.widget.SearchView>
+                app:queryHint="@string/search_notes_hint" />
 
         </LinearLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    // Notes RecyclerView
+    <!-- ================= NOTES RECYCLER VIEW ================= -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_notes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    // FAB Add Note
+    <!-- ================= FLOATING ACTION BUTTON ================= -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_note"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        android:src="@drawable/ic_add"
         android:contentDescription="@string/cd_add_new_note"
-        app:tint="?attr/colorOnPrimary"
-        app:backgroundTint="?attr/colorPrimary"/>
+        android:src="@drawable/ic_add"
+        app:backgroundTint="?attr/colorPrimary"
+        app:tint="?attr/colorOnPrimary" />
 
-    // Selection Mode Header
+    <!-- ================= SELECTION MODE HEADER ================= -->
     <RelativeLayout
         android:id="@+id/selection_mode_header"
         android:layout_width="match_parent"
@@ -69,67 +72,74 @@
         android:elevation="4dp"
         android:visibility="gone">
 
+        <!-- Cancel Selection Button -->
         <ImageButton
             android:id="@+id/action_cancel_selection"
             android:layout_width="48dp"
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
-            android:src="@drawable/ic_close"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/cd_cancel_selection"
-            app:tint="?attr/colorOnPrimary"/>
+            android:src="@drawable/ic_close"
+            app:tint="?attr/colorOnPrimary" />
 
+        <!-- Selected Items Count -->
         <TextView
             android:id="@+id/tv_selection_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/action_cancel_selection"
             android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/action_cancel_selection"
             android:text="@string/selection_count_placeholder"
-            android:textSize="18sp"
-            android:textStyle="bold"
             android:textColor="?attr/colorOnPrimary"
-            android:layout_marginStart="8dp"/>
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
+        <!-- Select All Button -->
         <ImageButton
             android:id="@+id/action_select_all"
             android:layout_width="48dp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_select_all"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/cd_select_all"
-            app:tint="?attr/colorOnPrimary"/>
+            android:src="@drawable/ic_select_all"
+            app:tint="?attr/colorOnPrimary" />
+
     </RelativeLayout>
 
-    // Selection Mode Action Bar
+    <!-- ================= SELECTION MODE ACTION BAR ================= -->
     <LinearLayout
         android:id="@+id/selection_mode_action_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:orientation="horizontal"
         android:background="?attr/colorSurface"
+        android:baselineAligned="false"
         android:elevation="8dp"
+        android:orientation="horizontal"
         android:paddingVertical="8dp"
-        android:visibility="gone"
-        android:baselineAligned="false">
+        android:visibility="gone">
 
+        <!-- Pin Action -->
         <ImageButton
             android:id="@+id/action_pin"
             style="@style/ActionIconStyle"
             android:layout_weight="1"
-            android:src="@drawable/ic_pin_outline"
             android:contentDescription="@string/cd_pin_notes"
-            app:tint="?attr/colorOnSurface"/>
+            android:src="@drawable/ic_pin_outline"
+            app:tint="?attr/colorOnSurface" />
 
+        <!-- Delete Action -->
         <ImageButton
             android:id="@+id/action_delete"
             style="@style/ActionIconStyle"
             android:layout_weight="1"
-            android:src="@drawable/ic_delete"
             android:contentDescription="@string/cd_delete_notes"
-            app:tint="?attr/colorError"/>
+            android:src="@drawable/ic_delete"
+            app:tint="?attr/colorError" />
+
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

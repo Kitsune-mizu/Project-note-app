@@ -14,18 +14,33 @@ import com.android.alpha.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.button.MaterialButton;
 
+/**
+ * A BottomSheetDialogFragment that presents a simple text input dialog
+ * with a title, pre-filled value, and confirm/cancel actions.
+ */
 @SuppressWarnings("unused")
 public class InputDialog extends BottomSheetDialogFragment {
 
-    // --- Interface ---
+    // ─── INTERFACE ─────────────────────────────────────────────────────────────
+
+    /** Callback triggered when the user confirms the entered text. */
     public interface InputDialogListener {
         void onTextEntered(String newText);
     }
 
-    // --- Instance Variables ---
+    // ─── STATE ─────────────────────────────────────────────────────────────────
     private InputDialogListener listener;
 
-    // --- Factory Method ---
+    // ══════════════════════════════════════════════════════════════════════════
+    // FACTORY METHOD
+    // ══════════════════════════════════════════════════════════════════════════
+
+    /**
+     * Creates a new InputDialog instance with the given title and pre-filled value.
+     * @param title        the dialog title displayed at the top.
+     * @param initialValue the text pre-filled in the input field.
+     * @param listener     callback to receive the confirmed text.
+     */
     public static InputDialog newInstance(String title, String initialValue, InputDialogListener listener) {
         InputDialog dialog = new InputDialog();
         Bundle args = new Bundle();
@@ -36,12 +51,23 @@ public class InputDialog extends BottomSheetDialogFragment {
         return dialog;
     }
 
-    // --- Listener Setter ---
+    // ══════════════════════════════════════════════════════════════════════════
+    // LISTENER
+    // ══════════════════════════════════════════════════════════════════════════
+
+    /** Sets the listener that receives the confirmed input text. */
     public void setListener(InputDialogListener listener) {
         this.listener = listener;
     }
 
-    // --- Fragment Lifecycle ---
+    // ══════════════════════════════════════════════════════════════════════════
+    // LIFECYCLE
+    // ══════════════════════════════════════════════════════════════════════════
+
+    /**
+     * Inflates the dialog layout, binds views, applies argument values,
+     * and wires up confirm/cancel button actions.
+     */
     @Nullable
     @Override
     public View onCreateView(
@@ -51,22 +77,22 @@ public class InputDialog extends BottomSheetDialogFragment {
     ) {
         View view = inflater.inflate(R.layout.dialog_input, container, false);
 
-        // Get arguments safely
-        Bundle args = getArguments();
-        String title = args == null ? "" : args.getString("title", "");
+        // Read arguments safely
+        Bundle args        = getArguments();
+        String title       = args == null ? "" : args.getString("title", "");
         String initialValue = args == null ? "" : args.getString("value", "");
 
-        // Bind Views
-        TextView tvTitle = view.findViewById(R.id.tvDialogTitle);
-        EditText etInput = view.findViewById(R.id.etInput);
+        // Bind views
+        TextView       tvTitle    = view.findViewById(R.id.tvDialogTitle);
+        EditText       etInput    = view.findViewById(R.id.etInput);
         MaterialButton btnConfirm = view.findViewById(R.id.btnConfirm);
-        MaterialButton btnCancel = view.findViewById(R.id.btnCancel);
+        MaterialButton btnCancel  = view.findViewById(R.id.btnCancel);
 
-        // Apply Values
+        // Apply initial values
         tvTitle.setText(title);
         etInput.setText(initialValue);
 
-        // Button Actions
+        // Button actions
         btnCancel.setOnClickListener(v -> dismiss());
         btnConfirm.setOnClickListener(v -> {
             if (listener != null) listener.onTextEntered(etInput.getText().toString());
@@ -76,6 +102,7 @@ public class InputDialog extends BottomSheetDialogFragment {
         return view;
     }
 
+    /** Returns the custom bottom sheet theme style. */
     @Override
     public int getTheme() {
         return R.style.BottomSheetDialogTheme;

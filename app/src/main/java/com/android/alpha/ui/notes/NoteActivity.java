@@ -31,15 +31,19 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Activity utama untuk menampilkan, mencari, dan mengelola daftar catatan.
+ * Mendukung multi-selection untuk pin dan hapus catatan sekaligus.
+ */
 public class NoteActivity extends AppCompatActivity
         implements NoteAdapter.OnNoteClickListener, NoteAdapter.OnSelectionModeListener {
 
-    // === ADAPTER & VIEWMODEL ===
+    // Adapter dan ViewModel untuk data catatan
     private NoteAdapter adapter;
     private NoteViewModel viewModel;
     private List<Note> allNotes = new ArrayList<>();
 
-    // === UI COMPONENTS ===
+    // Komponen UI utama
     private RecyclerView recyclerView;
     private FloatingActionButton fabAddNote;
     private LinearLayout selectionModeActionBar;
@@ -47,10 +51,11 @@ public class NoteActivity extends AppCompatActivity
     private TextView tvSelectionCount;
     private SearchView searchView;
 
-    // === ENUMS ===
+    // Aksi yang tersedia saat mode multi-selection aktif
     private enum MultiAction { PIN, DELETE }
 
-    // === LIFECYCLE ===
+    // --- Lifecycle ---
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +67,7 @@ public class NoteActivity extends AppCompatActivity
         setupRecyclerView();
         setupListeners();
 
+        // Observasi perubahan data catatan aktif dan terapkan filter pencarian
         viewModel.getActiveNotes().observe(this, notes -> {
             allNotes = notes;
             applyFilter();
@@ -71,28 +77,31 @@ public class NoteActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
+        // Reload catatan setiap kali activity kembali aktif
         viewModel.loadNotes(this);
     }
 
-    // === INITIALIZATION ===
+    // --- Initialization ---
+
+    /** Inisialisasi ViewModel dan set userId dari sesi pengguna aktif */
     private void initViewModel() {
         viewModel = new ViewModelProvider(this).get(NoteViewModel.class);
-
         String userId = UserSession.getInstance()
                 .getUserData(UserSession.getInstance().getUsername()).userId;
-
         viewModel.setUserId(userId);
     }
 
+    /** Bind semua komponen UI dari layout */
     private void initViews() {
-        recyclerView = findViewById(R.id.recycler_view_notes);
-        fabAddNote = findViewById(R.id.fab_add_note);
+        recyclerView           = findViewById(R.id.recycler_view_notes);
+        fabAddNote             = findViewById(R.id.fab_add_note);
         selectionModeActionBar = findViewById(R.id.selection_mode_action_bar);
-        selectionModeHeader = findViewById(R.id.selection_mode_header);
-        tvSelectionCount = findViewById(R.id.tv_selection_count);
-        searchView = findViewById(R.id.search_view);
+        selectionModeHeader    = findViewById(R.id.selection_mode_header);
+        tvSelectionCount       = findViewById(R.id.tv_selection_count);
+        searchView             = findViewById(R.id.search_view);
     }
 
+    /** Inisialisasi RecyclerView dengan adapter catatan */
     private void setupRecyclerView() {
         adapter = new NoteAdapter(
                 new ArrayList<>(),
@@ -101,19 +110,23 @@ public class NoteActivity extends AppCompatActivity
                 false,  // isHome = false
                 true    // selectionEnabled = true
         );
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
     }
 
-    // === UI SETUP & STYLING ===
+    // --- UI Setup ---
+
+    /** Kustomisasi tampilan SearchView: background, hint, warna ikon, dan ukuran */
     private void setupSearchView() {
         searchView.post(() -> {
+            // Background search plate
             View searchPlate = searchView.findViewById(androidx.appcompat.R.id.search_plate);
             if (searchPlate != null)
                 searchPlate.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_search_rounded));
 
-            android.widget.EditText searchEditText = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
+            // Styling teks input
+            android.widget.EditText searchEditText =
+                    searchView.findViewById(androidx.appcompat.R.id.search_src_text);
             if (searchEditText != null) {
                 searchEditText.setBackground(null);
                 searchEditText.setHint(getString(R.string.search_notes_hint));
@@ -121,40 +134,52 @@ public class NoteActivity extends AppCompatActivity
                 searchEditText.setTextColor(ContextCompat.getColor(this, R.color.md_theme_light_onBackground));
             }
 
+            // Ikon pencarian: gambar, warna, dan ukuran
             ImageView searchIcon = searchView.findViewById(androidx.appcompat.R.id.search_mag_icon);
             if (searchIcon != null) {
                 searchIcon.setImageResource(R.drawable.ic_search_note);
-                searchIcon.setColorFilter(ContextCompat.getColor(this, R.color.md_theme_light_onSurface), PorterDuff.Mode.SRC_IN);
-                int sizeInPx = (int) (40 * getResources().getDisplayMetrics().density + 0.5f);
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(sizeInPx, sizeInPx);
+                searchIcon.setColorFilter(
+                        ContextCompat.getColor(this, R.color.md_theme_light_onSurface),
+                        PorterDuff.Mode.SRC_IN);
+                int sizePx = (int) (40 * getResources().getDisplayMetrics().density + 0.5f);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(sizePx, sizePx);
                 params.gravity = Gravity.CENTER_VERTICAL;
                 searchIcon.setLayoutParams(params);
             }
 
+            // Sembunyikan ikon close bawaan dengan ikon transparan
             ImageView closeIcon = searchView.findViewById(androidx.appcompat.R.id.search_close_btn);
             if (closeIcon != null)
                 closeIcon.setImageResource(R.drawable.transparent_icon);
         });
     }
 
-    // === LISTENERS ===
+    // --- Listeners ---
+
+    /**
+     * Setup semua listener UI:
+     * FAB tambah catatan, tombol selection bar, SearchView, dan touch RecyclerView.
+     */
     @SuppressLint("ClickableViewAccessibility")
     private void setupListeners() {
+        // Buka halaman tambah catatan baru
         fabAddNote.setOnClickListener(v ->
-                startActivity(new Intent(this, EditNoteActivity.class))
-        );
+                startActivity(new Intent(this, EditNoteActivity.class)));
 
+        // Tombol aksi pada selection bar
         findViewById(R.id.action_cancel_selection).setOnClickListener(v -> adapter.exitSelectionMode());
         findViewById(R.id.action_select_all).setOnClickListener(v -> adapter.selectAll());
         findViewById(R.id.action_pin).setOnClickListener(v -> handleMultiAction(MultiAction.PIN));
         findViewById(R.id.action_delete).setOnClickListener(v -> handleMultiAction(MultiAction.DELETE));
 
+        // Filter pencarian saat teks berubah atau di-submit
         searchView.clearFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override public boolean onQueryTextSubmit(String query) { applyFilter(query); return true; }
-            @Override public boolean onQueryTextChange(String newText) { applyFilter(newText); return true; }
+            @Override public boolean onQueryTextChange(String text)  { applyFilter(text);  return true; }
         });
 
+        // Tutup keyboard/SearchView saat RecyclerView disentuh
         recyclerView.setOnTouchListener((v, event) -> {
             if (!searchView.isIconified()) {
                 searchView.setIconified(true);
@@ -165,20 +190,29 @@ public class NoteActivity extends AppCompatActivity
         });
     }
 
-    // === DATA FILTERING ===
+    // --- Data Filtering ---
+
+    /** Filter catatan berdasarkan query: cocokkan judul atau isi catatan */
     private void applyFilter(String query) {
         String search = query != null ? query.toLowerCase(Locale.ROOT) : "";
         List<Note> filtered = allNotes.stream()
-                .filter(n -> n.getTitle().toLowerCase().contains(search) || n.getContent().toLowerCase().contains(search))
+                .filter(n -> n.getTitle().toLowerCase().contains(search)
+                        || n.getContent().toLowerCase().contains(search))
                 .collect(Collectors.toList());
         adapter.updateNotes(filtered);
     }
 
+    /** Terapkan filter menggunakan query yang sedang aktif di SearchView */
     private void applyFilter() {
         applyFilter(searchView.getQuery() != null ? searchView.getQuery().toString() : "");
     }
 
-    // === MULTI-SELECTION HANDLERS ===
+    // --- Multi-Selection Handlers ---
+
+    /**
+     * Menangani aksi PIN atau DELETE terhadap catatan yang dipilih.
+     * DELETE menampilkan dialog konfirmasi sebelum dieksekusi.
+     */
     private void handleMultiAction(MultiAction action) {
         Set<String> selectedIds = adapter.getSelectedNoteIds();
         if (selectedIds.isEmpty()) return;
@@ -189,12 +223,19 @@ public class NoteActivity extends AppCompatActivity
 
         switch (action) {
             case PIN:
+                // Toggle pin: pin semua jika belum semua di-pin, unpin jika sudah semua
                 boolean targetPin = !notes.stream().allMatch(Note::isPinned);
-                notes.forEach(n -> { n.setPinned(targetPin); viewModel.saveNote(this, n); });
-                Toast.makeText(this, targetPin ? getString(R.string.toast_pinned) : getString(R.string.toast_unpinned), Toast.LENGTH_SHORT).show();
+                notes.forEach(n -> {
+                    n.setPinned(targetPin);
+                    viewModel.saveNote(this, n);
+                });
+                Toast.makeText(this,
+                        targetPin ? getString(R.string.toast_pinned) : getString(R.string.toast_unpinned),
+                        Toast.LENGTH_SHORT).show();
                 break;
 
             case DELETE:
+                // Tampilkan konfirmasi sebelum menghapus
                 DialogUtils.showConfirmDialog(
                         this,
                         getString(R.string.dialog_delete_multiple_title),
@@ -208,14 +249,16 @@ public class NoteActivity extends AppCompatActivity
                             viewModel.loadNotes(this);
                         },
                         null);
-                return;
+                return; // Hindari pemanggilan exitSelectionMode di bawah sebelum konfirmasi
         }
 
         adapter.exitSelectionMode();
         viewModel.loadNotes(this);
     }
 
-    // === NOTE-ADAPTER INTERFACE IMPLEMENTATIONS ===
+    // --- NoteAdapter Interface Implementations ---
+
+    /** Buka halaman edit saat catatan diklik */
     @Override
     public void onNoteClick(Note note) {
         Intent intent = new Intent(this, EditNoteActivity.class);
@@ -223,15 +266,20 @@ public class NoteActivity extends AppCompatActivity
         startActivity(intent);
     }
 
+    /** Tampilkan atau sembunyikan selection bar dan FAB berdasarkan status mode seleksi */
     @Override
     public void onSelectionModeChange(boolean active) {
-        selectionModeHeader.setVisibility(active ? View.VISIBLE : View.GONE);
-        selectionModeActionBar.setVisibility(active ? View.VISIBLE : View.GONE);
-        fabAddNote.setVisibility(active ? View.GONE : View.VISIBLE);
+        int selectionVisibility = active ? View.VISIBLE : View.GONE;
+        int fabVisibility       = active ? View.GONE   : View.VISIBLE;
+        selectionModeHeader.setVisibility(selectionVisibility);
+        selectionModeActionBar.setVisibility(selectionVisibility);
+        fabAddNote.setVisibility(fabVisibility);
     }
 
+    /** Perbarui teks jumlah catatan yang dipilih */
     @Override
     public void onSelectionCountChange(int count) {
-        tvSelectionCount.setText(String.format(Locale.getDefault(), getString(R.string.selection_count_format), count));
+        tvSelectionCount.setText(
+                String.format(Locale.getDefault(), getString(R.string.selection_count_format), count));
     }
 }

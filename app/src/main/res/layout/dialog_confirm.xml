@@ -1,64 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Layout: Custom Confirmation Dialog
+    Deskripsi: Dialog konfirmasi dengan tombol Yes dan No
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="24dp"
     android:background="@drawable/bg_dialog_rounded"
     android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="24dp"
     tools:ignore="ExtraText">
 
-    // Dialog Title
+    <!-- Dialog Title -->
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?attr/textAppearanceHeadlineSmall"
-        android:textColor="?attr/colorOnSurface"
         android:gravity="center"
         android:paddingBottom="8dp"
-        android:text="@string/dialog_title_confirmation" />
+        android:text="@string/dialog_title_confirmation"
+        android:textAppearance="?attr/textAppearanceHeadlineSmall"
+        android:textColor="?attr/colorOnSurface" />
 
-    // Dialog Message
+    <!-- Dialog Message -->
     <TextView
         android:id="@+id/tvMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?attr/textAppearanceBodyMedium"
-        android:textColor="?attr/colorOnSurfaceVariant"
         android:gravity="center"
         android:paddingBottom="20dp"
-        android:text="@string/dialog_message_are_you_sure" />
+        android:text="@string/dialog_message_are_you_sure"
+        android:textAppearance="?attr/textAppearanceBodyMedium"
+        android:textColor="?attr/colorOnSurfaceVariant" />
 
-    // Horizontal Action Buttons
+    <!-- Horizontal Action Buttons Container -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="center"
+        android:orientation="horizontal"
         android:weightSum="2">
 
+        <!-- Negative Button (No) -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnNegative"
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:text="@string/button_no"
-            app:cornerRadius="16dp"
-            android:layout_marginEnd="8dp" />
+            app:cornerRadius="16dp" />
 
+        <!-- Positive Button (Yes) -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnPositive"
             style="@style/Widget.Material3.Button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:text="@string/button_yes"
             android:backgroundTint="?attr/colorPrimary"
+            android:text="@string/button_yes"
             android:textColor="?attr/colorOnPrimary"
-            app:cornerRadius="16dp"
-            android:layout_marginStart="8dp" />
+            app:cornerRadius="16dp" />
+
     </LinearLayout>
+
 </LinearLayout>

@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Layout: Splash Screen
+    Deskripsi: Menampilkan animasi Lottie dan konten tambahan (bendera & sapaan)
+-->
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,7 +14,7 @@
     tools:context=".ui.splash.SplashActivity"
     tools:ignore="ExtraText">
 
-    // Lottie Splash Animation
+    <!-- ================= LOTTIE SPLASH ANIMATION ================= -->
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieAnimationView"
         android:layout_width="300dp"
@@ -25,7 +29,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
-    // Container for flag and greeting (stacked to prevent shifting)
+    <!-- ================= FLAG & GREETING CONTAINER ================= -->
+    <!--
+        Container untuk gambar bendera dan teks sapaan.
+        Menggunakan FrameLayout agar elemen tidak saling menggeser.
+    -->
     <FrameLayout
         android:id="@+id/flagContainer"
         android:layout_width="wrap_content"
@@ -37,31 +45,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        // Flag Image
+        <!-- Flag Image -->
         <ImageView
             android:id="@+id/imgFlag"
             android:layout_width="150dp"
             android:layout_height="100dp"
-            android:scaleType="centerCrop"
             android:adjustViewBounds="true"
             android:contentDescription="@string/flag_desc"
-            android:visibility="gone"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:visibility="gone" />
 
-        // Greeting Text
+        <!-- Greeting Text -->
         <TextView
             android:id="@+id/tvGreeting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginTop="110dp"
+            android:gravity="center"
+            android:paddingTop="24sp"
             android:text="@string/hello_message"
             android:textColor="@color/md_theme_light_onBackground"
             android:textSize="24sp"
-            android:paddingTop="24sp"
             android:textStyle="bold"
-            android:gravity="center"
-            android:visibility="gone"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_marginTop="110dp" />
+            android:visibility="gone" />
 
     </FrameLayout>
 

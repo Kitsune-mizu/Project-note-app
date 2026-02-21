@@ -14,31 +14,51 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * ViewModel untuk mengelola data catatan menggunakan SharedPreferences sebagai penyimpanan.
+ * Data disimpan per-user berdasarkan userId yang diset sebelum operasi apapun.
+ */
 public class NoteViewModel extends ViewModel {
 
-    // === CONSTANTS ===
+    // Tag untuk logging
     private static final String TAG = "NoteViewModel";
 
-    // === DATA FIELDS ===
+    // --- Fields ---
+
+    // LiveData daftar catatan aktif yang diobservasi oleh UI
     private final MutableLiveData<List<Note>> activeNotes = new MutableLiveData<>(new ArrayList<>());
+
+    // ID pengguna yang sedang aktif, digunakan sebagai namespace penyimpanan
     private String userId;
+
+    // Instance Gson untuk serialisasi/deserialisasi objek Note
     private final Gson gson = new Gson();
 
-    // === USER ID MANAGEMENT ===
+    // --- User ID Management ---
+
+    /** Set userId sebelum melakukan operasi apapun pada catatan */
     public void setUserId(String userId) {
         this.userId = userId;
     }
 
+    /** Kembalikan userId yang sedang aktif */
     public String getUserId() {
         return userId;
     }
 
-    // === LIVE DATA ACCESSORS ===
+    // --- LiveData Accessors ---
+
+    /** Kembalikan LiveData daftar catatan aktif untuk diobservasi oleh UI */
     public LiveData<List<Note>> getActiveNotes() {
         return activeNotes;
     }
 
-    // === CRUD OPERATIONS ===
+    // --- CRUD Operations ---
+
+    /**
+     * Muat semua catatan dari SharedPreferences, urutkan berdasarkan pin lalu timestamp terbaru,
+     * kemudian posting hasilnya ke LiveData.
+     */
     public void loadNotes(Context context) {
         if (userId == null || context == null) return;
 
@@ -51,6 +71,7 @@ public class NoteViewModel extends ViewModel {
                 if (note != null) notesList.add(note);
             }
 
+            // Urutan: pinned di atas, lalu timestamp terbaru
             notesList.sort((a, b) -> {
                 if (a.isPinned() && !b.isPinned()) return -1;
                 if (!a.isPinned() && b.isPinned()) return 1;
@@ -63,6 +84,10 @@ public class NoteViewModel extends ViewModel {
         }
     }
 
+    /**
+     * Simpan catatan ke SharedPreferences.
+     * Timestamp catatan akan diperbarui secara otomatis sebelum disimpan.
+     */
     public void saveNote(Context context, Note note) {
         if (userId == null || context == null || note == null) return;
 
@@ -76,6 +101,9 @@ public class NoteViewModel extends ViewModel {
         refreshNotes(context);
     }
 
+    /**
+     * Hapus catatan dari SharedPreferences berdasarkan ID-nya.
+     */
     public void deleteNote(Context context, String id) {
         if (userId == null || context == null || id == null) return;
 
@@ -88,6 +116,10 @@ public class NoteViewModel extends ViewModel {
         refreshNotes(context);
     }
 
+    /**
+     * Ubah status pin catatan berdasarkan ID.
+     * Timestamp catatan akan diperbarui setelah perubahan pin.
+     */
     public void pinNote(Context context, String id, boolean pinned) {
         if (userId == null || context == null || id == null) return;
 
@@ -105,7 +137,12 @@ public class NoteViewModel extends ViewModel {
         }
     }
 
-    // === DATA RETRIEVAL ===
+    // --- Data Retrieval ---
+
+    /**
+     * Ambil satu catatan dari SharedPreferences berdasarkan ID.
+     * Kembalikan null jika tidak ditemukan atau terjadi error.
+     */
     public Note getNoteById(Context context, String id) {
         if (userId == null || context == null || id == null) return null;
 
@@ -118,15 +155,22 @@ public class NoteViewModel extends ViewModel {
         }
     }
 
-    // === UTILITY METHODS ===
+    // --- Utility ---
+
+    /** Muat ulang catatan dari penyimpanan dan perbarui LiveData */
     public void refreshNotes(Context context) {
         loadNotes(context);
     }
 
+    /** Kembalikan SharedPreferences yang digunakan untuk menyimpan catatan user ini */
     private SharedPreferences getPrefs(Context context) {
         return context.getSharedPreferences("notes_" + userId, Context.MODE_PRIVATE);
     }
 
+    /**
+     * Deserialisasi JSON ke objek Note dengan aman.
+     * Kembalikan null dan log warning jika JSON tidak valid.
+     */
     private Note safeFromJson(String json) {
         try {
             return gson.fromJson(json, Note.class);
@@ -136,6 +180,7 @@ public class NoteViewModel extends ViewModel {
         }
     }
 
+    /** Simpan objek Note ke SharedPreferences dalam bentuk JSON string */
     private void putNote(Context context, String id, Note note) {
         getPrefs(context).edit().putString(id, gson.toJson(note)).apply();
     }

@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Layout: Settings Screen
+    Deskripsi: Halaman pengaturan akun dan preferensi aplikasi
+-->
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,6 +11,7 @@
     android:background="?attr/colorSurface"
     android:fillViewport="true">
 
+    <!-- Root Container -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,7 +19,7 @@
         android:padding="16dp"
         tools:ignore="ExtraText">
 
-        // Header Card (Settings Info)
+        <!-- ================= HEADER CARD (Settings Info) ================= -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,13 +35,15 @@
                 android:orientation="horizontal"
                 android:padding="20dp">
 
+                <!-- Settings Icon -->
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
+                    android:contentDescription="@string/cd_settings_icon"
                     app:srcCompat="@drawable/ic_settings"
-                    app:tint="?attr/colorPrimary"
-                    android:contentDescription="@string/cd_settings_icon" />
+                    app:tint="?attr/colorPrimary" />
 
+                <!-- Title & Description -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -59,14 +66,13 @@
                         android:text="@string/settings_description"
                         android:textColor="?attr/colorOnSurfaceVariant"
                         android:textSize="14sp" />
-
                 </LinearLayout>
 
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
-        // Settings Options Card
+        <!-- ================= SETTINGS OPTIONS CARD ================= -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -82,7 +88,7 @@
                 android:orientation="vertical"
                 android:padding="8dp">
 
-                // Header Account
+                <!-- ===== SECTION HEADER: ACCOUNT ===== -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -95,27 +101,27 @@
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
-                // Profile
+                <!-- Profile Option -->
                 <LinearLayout
                     android:id="@+id/layoutProfile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
                     android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:background="?attr/selectableItemBackground">
+                    android:padding="16dp">
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
+                        android:contentDescription="@string/cd_profile_icon"
                         app:srcCompat="@drawable/ic_person"
-                        app:tint="?attr/colorPrimary"
-                        android:contentDescription="@string/cd_profile_icon" />
+                        app:tint="?attr/colorPrimary" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_marginStart="16dp"
+                        android:layout_weight="1"
                         android:orientation="vertical">
 
                         <TextView
@@ -132,18 +138,17 @@
                             android:text="@string/profile_subtitle"
                             android:textColor="?attr/colorOnSurfaceVariant"
                             android:textSize="12sp" />
-
                     </LinearLayout>
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
+                        android:contentDescription="@string/cd_next_button"
                         app:srcCompat="@drawable/ic_chevron_right"
-                        app:tint="?attr/colorOnSurfaceVariant"
-                        android:contentDescription="@string/cd_next_button" />
-
+                        app:tint="?attr/colorOnSurfaceVariant" />
                 </LinearLayout>
 
+                <!-- Divider -->
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -151,27 +156,27 @@
                     android:layout_marginEnd="20dp"
                     android:background="?attr/colorOutline" />
 
-                // Forgot Password
+                <!-- Forgot Password Option -->
                 <LinearLayout
                     android:id="@+id/layoutForgotPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
                     android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:background="?attr/selectableItemBackground">
+                    android:padding="16dp">
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
+                        android:contentDescription="@string/cd_forgot_password"
                         app:srcCompat="@drawable/ic_lock"
-                        app:tint="?attr/colorTertiary"
-                        android:contentDescription="@string/cd_forgot_password" />
+                        app:tint="?attr/colorTertiary" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_marginStart="16dp"
+                        android:layout_weight="1"
                         android:orientation="vertical">
 
                         <TextView
@@ -188,18 +193,17 @@
                             android:text="@string/forgot_password_subtitle"
                             android:textColor="?attr/colorOnSurfaceVariant"
                             android:textSize="12sp" />
-
                     </LinearLayout>
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
+                        android:contentDescription="@string/cd_next_button"
                         app:srcCompat="@drawable/ic_chevron_right"
-                        app:tint="?attr/colorOnSurfaceVariant"
-                        android:contentDescription="@string/cd_next_button" />
-
+                        app:tint="?attr/colorOnSurfaceVariant" />
                 </LinearLayout>
 
+                <!-- Divider -->
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -207,27 +211,27 @@
                     android:layout_marginEnd="20dp"
                     android:background="?attr/colorOutline" />
 
-                // Notifications
+                <!-- Notifications Option -->
                 <LinearLayout
                     android:id="@+id/layoutNotifications"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
                     android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:background="?attr/selectableItemBackground">
+                    android:padding="16dp">
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
+                        android:contentDescription="@string/cd_notifications_icon"
                         app:srcCompat="@drawable/ic_notifications"
-                        app:tint="?attr/colorSecondary"
-                        android:contentDescription="@string/cd_notifications_icon" />
+                        app:tint="?attr/colorSecondary" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_marginStart="16dp"
+                        android:layout_weight="1"
                         android:orientation="vertical">
 
                         <TextView
@@ -244,7 +248,6 @@
                             android:text="@string/notifications_subtitle"
                             android:textColor="?attr/colorOnSurfaceVariant"
                             android:textSize="12sp" />
-
                     </LinearLayout>
 
                     <com.google.android.material.switchmaterial.SwitchMaterial
@@ -253,10 +256,9 @@
                         android:layout_height="wrap_content"
                         android:checked="true"
                         android:contentDescription="@string/cd_notifications_toggle" />
-
                 </LinearLayout>
 
-                // Divider
+                <!-- Divider -->
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -264,27 +266,27 @@
                     android:layout_marginEnd="20dp"
                     android:background="?attr/colorOutline" />
 
-                // Language
+                <!-- Language Option -->
                 <LinearLayout
                     android:id="@+id/layoutLanguage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
                     android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:background="?attr/selectableItemBackground">
+                    android:padding="16dp">
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
+                        android:contentDescription="@string/cd_language_icon"
                         app:srcCompat="@drawable/ic_language"
-                        app:tint="?attr/colorPrimary"
-                        android:contentDescription="@string/cd_language_icon" />
+                        app:tint="?attr/colorPrimary" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_marginStart="16dp"
+                        android:layout_weight="1"
                         android:orientation="vertical">
 
                         <TextView
@@ -302,18 +304,17 @@
                             android:text="@string/language_subtitle"
                             android:textColor="?attr/colorOnSurfaceVariant"
                             android:textSize="12sp" />
-
                     </LinearLayout>
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
+                        android:contentDescription="@string/cd_next_button"
                         app:srcCompat="@drawable/ic_chevron_right"
-                        app:tint="?attr/colorOnSurfaceVariant"
-                        android:contentDescription="@string/cd_next_button" />
-
+                        app:tint="?attr/colorOnSurfaceVariant" />
                 </LinearLayout>
 
+                <!-- Divider -->
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -321,33 +322,34 @@
                     android:layout_marginEnd="20dp"
                     android:background="?attr/colorOutline" />
 
-                // Delete Account
+                <!-- Delete Account Option -->
                 <LinearLayout
                     android:id="@+id/layoutDeleteAccount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
                     android:orientation="horizontal"
-                    android:padding="20dp"
-                    android:background="?attr/selectableItemBackground">
+                    android:padding="20dp">
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
+                        android:contentDescription="@string/cd_delete_account"
                         app:srcCompat="@drawable/ic_delete_account"
-                        app:tint="?attr/colorError"
-                        android:contentDescription="@string/cd_delete_account" />
+                        app:tint="?attr/colorError" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_marginStart="16dp"
+                        android:layout_weight="1"
                         android:text="@string/action_delete_account"
                         android:textColor="?attr/colorError"
                         android:textSize="16sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
+                <!-- Divider -->
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -355,32 +357,31 @@
                     android:layout_marginEnd="20dp"
                     android:background="?attr/colorOutline" />
 
-                // Logout
+                <!-- Logout Option -->
                 <LinearLayout
                     android:id="@+id/layoutLogout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
                     android:orientation="horizontal"
-                    android:padding="20dp"
-                    android:background="?attr/selectableItemBackground">
+                    android:padding="20dp">
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
+                        android:contentDescription="@string/cd_logout_icon"
                         app:srcCompat="@drawable/ic_logout"
-                        app:tint="?attr/colorError"
-                        android:contentDescription="@string/cd_logout_icon" />
+                        app:tint="?attr/colorError" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_marginStart="16dp"
+                        android:layout_weight="1"
                         android:text="@string/logout_button"
                         android:textColor="?attr/colorError"
                         android:textSize="16sp"
                         android:textStyle="bold" />
-
                 </LinearLayout>
 
             </LinearLayout>

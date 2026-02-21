@@ -7,56 +7,75 @@ import org.json.JSONObject;
 import java.io.*;
 import java.util.Objects;
 
+/**
+ * Singleton manager responsible for all file-based user data operations,
+ * including profile save/load, user directory management, and active user context.
+ */
 public class UserStorageManager {
 
-    // === CONSTANTS =======================================
+    // ─── TAG ───────────────────────────────────────────────────────────────────
     private static final String TAG = "UserStorageManager";
+
+    // ─── SINGLETON ─────────────────────────────────────────────────────────────
     private static UserStorageManager instance;
 
-    // === INSTANCE VARIABLES ==============================
+    // ─── DEPENDENCIES ──────────────────────────────────────────────────────────
     private final Context context;
-    private String currentUserId = null;
+
+    // ─── ACTIVE SESSION STATE ──────────────────────────────────────────────────
+    private String currentUserId   = null;
     private String currentUsername = null;
 
-    // === CONSTRUCTOR =====================================
+    // ══════════════════════════════════════════════════════════════════════════
+    // INITIALIZATION
+    // ══════════════════════════════════════════════════════════════════════════
+
+    /** Private constructor — use {@link #getInstance(Context)}. */
     public UserStorageManager(Context context) {
         this.context = context.getApplicationContext();
     }
 
-    // === STATIC INITIALIZER ==============================
+    /** Returns the singleton instance, creating it if necessary. Thread-safe. */
     public static synchronized UserStorageManager getInstance(Context context) {
-        if (instance == null) {
-            instance = new UserStorageManager(context);
-        }
+        if (instance == null) instance = new UserStorageManager(context);
         return instance;
     }
 
-    // === USER CONTEXT/SESSION MANAGEMENT =================
+    // ══════════════════════════════════════════════════════════════════════════
+    // USER CONTEXT / SESSION MANAGEMENT
+    // ══════════════════════════════════════════════════════════════════════════
+
     /**
      * Sets the active user context and ensures the user's dedicated directory exists.
+     * Must be called after a successful login before accessing user files.
      */
     public void switchUserContext(String userId, String username) {
-        this.currentUserId = userId;
+        this.currentUserId   = userId;
         this.currentUsername = username;
-
-        File userDir = getUserDir(userId);
-        createDirectoryIfNeeded(userDir, "user folder for " + username);
+        createDirectoryIfNeeded(getUserDir(userId), "user folder for " + username);
     }
 
+    /** Clears the active user context (called on logout or account deletion). */
     public void clearActiveContext() {
-        currentUserId = null;
+        currentUserId   = null;
         currentUsername = null;
         Log.d(TAG, "Cleared active user context");
     }
 
-    // === PROFILE MANAGEMENT (SAVE/LOAD) ==================
+    // ══════════════════════════════════════════════════════════════════════════
+    // PROFILE MANAGEMENT
+    // ══════════════════════════════════════════════════════════════════════════
+
+    /**
+     * Creates and saves an initial profile.json for a new user.
+     * @param initialPhotoPath optional path to profile photo; stored as empty string if null.
+     */
     public void saveUserProfile(String userId, String username, String email, String initialPhotoPath) {
         try {
             JSONObject json = new JSONObject();
             json.put("username", username);
             json.put("email", email);
             json.put("photoPath", initialPhotoPath != null ? initialPhotoPath : "");
-
             saveUserProfile(userId, json);
             Log.d(TAG, "Saved INITIAL profile for " + username);
         } catch (Exception e) {
@@ -64,6 +83,10 @@ public class UserStorageManager {
         }
     }
 
+    /**
+     * Writes a JSONObject as profile.json inside the user's directory.
+     * Does nothing if profileJson is null.
+     */
     public void saveUserProfile(String userId, JSONObject profileJson) {
         if (profileJson == null) {
             Log.e(TAG, "Attempted to save a null profile JSON for user: " + userId);
@@ -71,7 +94,6 @@ public class UserStorageManager {
         }
 
         File file = new File(getUserDir(userId), "profile.json");
-
         createDirectoryIfNeeded(Objects.requireNonNull(file.getParentFile()), "directory for user: " + userId);
 
         try (FileWriter writer = new FileWriter(file)) {
@@ -82,6 +104,10 @@ public class UserStorageManager {
         }
     }
 
+    /**
+     * Loads the profile.json for the currently active user.
+     * @return the parsed JSONObject, or null if no active user or file is missing.
+     */
     public JSONObject loadActiveUserProfile() {
         if (currentUserId == null) {
             Log.w(TAG, "Cannot load active profile. Active user ID is null.");
@@ -90,6 +116,10 @@ public class UserStorageManager {
         return loadUserProfile(currentUserId);
     }
 
+    /**
+     * Reads and parses profile.json for the given userId.
+     * @return the parsed JSONObject, or null if the file does not exist or fails to parse.
+     */
     public JSONObject loadUserProfile(String userId) {
         File file = new File(getUserDir(userId), "profile.json");
         if (!file.exists()) {
@@ -101,7 +131,6 @@ public class UserStorageManager {
             StringBuilder sb = new StringBuilder();
             String line;
             while ((line = br.readLine()) != null) sb.append(line);
-
             return new JSONObject(sb.toString());
         } catch (Exception e) {
             Log.e(TAG, "Failed to load profile: " + e.getMessage());
@@ -109,15 +138,24 @@ public class UserStorageManager {
         }
     }
 
-    // === USER DATA / FILE MANAGEMENT UTILITIES =============
+    // ══════════════════════════════════════════════════════════════════════════
+    // USER FILE & DIRECTORY UTILITIES
+    // ══════════════════════════════════════════════════════════════════════════
+
+    /** Creates the user's root directory if it does not already exist. */
     public void createUserFolder(String userId, String username) {
         createDirectoryIfNeeded(getUserDir(userId), "user folder for " + username);
     }
 
+    /**
+     * Returns a File reference to a named file within the active user's directory.
+     * Falls back to app's files directory if no user is active.
+     */
     public File getUserFile(String filename) {
         return new File(getActiveUserDir(), filename);
     }
 
+    /** Deletes the entire directory tree for the given userId, if it exists. */
     public void deleteUserFolder(String userId) {
         File dir = getUserDir(userId);
         if (dir.exists()) {
@@ -126,6 +164,7 @@ public class UserStorageManager {
         }
     }
 
+    /** Returns the directory of the active user, or the app's files dir as fallback. */
     private File getActiveUserDir() {
         if (currentUserId == null) {
             Log.w(TAG, "Active user ID is null — defaulting to app files dir");
@@ -134,22 +173,22 @@ public class UserStorageManager {
         return getUserDir(currentUserId);
     }
 
+    /** Returns the root File directory for a given userId. */
     private File getUserDir(String userId) {
         return new File(context.getFilesDir(), "user_" + userId);
     }
 
+    /** Creates the given directory (and any parents) if it does not already exist. */
     private void createDirectoryIfNeeded(File dir, String logName) {
         if (!dir.exists()) {
-            if (dir.mkdirs()) {
-                Log.d(TAG, "Created " + logName + ": " + dir.getAbsolutePath());
-            } else {
-                Log.e(TAG, "Failed to create " + logName);
-            }
+            if (dir.mkdirs()) Log.d(TAG, "Created " + logName + ": " + dir.getAbsolutePath());
+            else              Log.e(TAG, "Failed to create " + logName);
         } else {
             Log.d(TAG, "Using existing " + logName + ": " + dir.getAbsolutePath());
         }
     }
 
+    /** Recursively deletes a file or directory tree. Logs a warning for any failure. */
     private void deleteRecursive(File file) {
         if (file.isDirectory()) {
             File[] children = file.listFiles();
@@ -157,17 +196,16 @@ public class UserStorageManager {
                 for (File child : children) deleteRecursive(child);
             }
         }
-        if (!file.delete()) {
-            Log.w(TAG, "Failed to delete: " + file.getAbsolutePath());
-        }
+        if (!file.delete()) Log.w(TAG, "Failed to delete: " + file.getAbsolutePath());
     }
 
-    // === GETTERS AND SETTERS =============================
-    public String getCurrentUsername() {
-        return currentUsername;
-    }
+    // ══════════════════════════════════════════════════════════════════════════
+    // GETTERS & SETTERS
+    // ══════════════════════════════════════════════════════════════════════════
 
-    public void setCurrentUsername(String currentUsername) {
-        this.currentUsername = currentUsername;
-    }
+    /** Returns the username of the currently active user. */
+    public String getCurrentUsername() { return currentUsername; }
+
+    /** Sets the username for the currently active user. */
+    public void setCurrentUsername(String currentUsername) { this.currentUsername = currentUsername; }
 }

@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Layout Item: Language Selector
+    Deskripsi: Item pilihan bahasa dengan nama, icon centang aktif, dan bendera
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -13,7 +17,7 @@
     android:focusable="true"
     tools:ignore="ExtraText">
 
-    // Language Name
+    <!-- Language Name Text -->
     <TextView
         android:id="@+id/tvLanguageName"
         android:layout_width="0dp"
@@ -23,7 +27,7 @@
         android:textColor="?attr/colorOnSurface"
         tools:text="English" />
 
-    // Active Checkmark
+    <!-- Active Checkmark Icon (Visible if selected) -->
     <ImageView
         android:id="@+id/iconCheck"
         android:layout_width="20dp"
@@ -34,13 +38,14 @@
         android:contentDescription="@string/cd_selected_language"
         app:tint="?attr/colorPrimary" />
 
-    // Small Flag on the right
+    <!-- Language Flag Icon (Circular Shape) -->
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imgFlag"
         android:layout_width="22dp"
         android:layout_height="22dp"
         android:scaleType="centerCrop"
-        app:shapeAppearanceOverlay="@style/CircleShape"
         android:contentDescription="@string/cd_language_flag"
+        app:shapeAppearanceOverlay="@style/CircleShape"
         tools:ignore="ContentDescription" />
+
 </LinearLayout>

@@ -9,24 +9,34 @@ import android.content.Intent;
 import android.os.Build;
 
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.TaskStackBuilder;
 
 import com.android.alpha.R;
 
+/**
+ * BroadcastReceiver yang menangani pengiriman notifikasi pengingat catatan.
+ * Dipanggil oleh AlarmManager pada waktu yang telah dijadwalkan.
+ */
 public class ReminderReceiver extends BroadcastReceiver {
 
-    // === CONSTANTS ===
+    // ID channel notifikasi untuk pengingat catatan
     private static final String CHANNEL_ID = "note_reminder_channel";
 
-    // === BROADCAST HANDLER ===
+    // --- Broadcast Handler ---
+
+    /**
+     * Dipanggil saat alarm pengingat terpicu.
+     * Membaca data dari intent, lalu menampilkan notifikasi ke pengguna.
+     */
     @Override
     public void onReceive(Context context, Intent intent) {
-        String title = intent.getStringExtra("title");
+        String title  = intent.getStringExtra("title");
         String noteId = intent.getStringExtra("note_id");
         String userId = intent.getStringExtra("user_id");
 
-        if (title == null || title.trim().isEmpty()) {
+        // Gunakan judul default jika title kosong atau null
+        if (title == null || title.trim().isEmpty())
             title = context.getString(R.string.notification_default_title);
-        }
 
         NotificationManager manager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -35,14 +45,19 @@ public class ReminderReceiver extends BroadcastReceiver {
 
         PendingIntent pendingIntent = createPendingIntent(context, noteId, userId);
 
-        NotificationCompat.Builder builder = buildNotification(context, title, pendingIntent);
-
+        // ID unik per notifikasi agar tidak saling menimpa
         int notificationId = (int) System.currentTimeMillis();
-        manager.notify(notificationId, builder.build());
+        manager.notify(notificationId, buildNotification(context, title, pendingIntent).build());
     }
 
-    // === NOTIFICATION BUILDER ===
-    private NotificationCompat.Builder buildNotification(Context context, String title, PendingIntent pendingIntent) {
+    // --- Notification Builder ---
+
+    /**
+     * Buat NotificationCompat.Builder dengan konten, ikon, prioritas, dan pola getar.
+     * BigTextStyle digunakan agar teks panjang tetap terbaca di panel notifikasi.
+     */
+    private NotificationCompat.Builder buildNotification(Context context, String title,
+                                                         PendingIntent pendingIntent) {
         return new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_notifications)
                 .setContentTitle(context.getString(R.string.notification_alert_title))
@@ -54,7 +69,12 @@ public class ReminderReceiver extends BroadcastReceiver {
                 .setVibrate(new long[]{0, 300, 250, 300});
     }
 
-    // === CHANNEL MANAGEMENT ===
+    // --- Channel Management ---
+
+    /**
+     * Buat notification channel (hanya diperlukan di Android O ke atas).
+     * Channel yang sudah ada tidak akan dibuat ulang oleh sistem.
+     */
     private void createNotificationChannel(Context context, NotificationManager manager) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(
@@ -68,19 +88,21 @@ public class ReminderReceiver extends BroadcastReceiver {
         }
     }
 
-    // === INTENT & PENDING INTENT CREATION ===
+    // --- Intent & PendingIntent Creation ---
+
+    /**
+     * Buat PendingIntent yang membuka EditNoteActivity saat notifikasi ditekan.
+     * TaskStackBuilder digunakan agar back-stack navigasi terbentuk dengan benar.
+     */
     private PendingIntent createPendingIntent(Context context, String noteId, String userId) {
-        int requestCode = (noteId != null)
-                ? noteId.hashCode()
-                : (int) System.currentTimeMillis();
+        // Request code unik per catatan, fallback ke timestamp jika noteId null
+        int requestCode = noteId != null ? noteId.hashCode() : (int) System.currentTimeMillis();
 
         Intent intent = new Intent(context, EditNoteActivity.class);
         intent.putExtra("note_id", noteId);
         intent.putExtra("user_id", userId);
 
-        androidx.core.app.TaskStackBuilder stackBuilder =
-                androidx.core.app.TaskStackBuilder.create(context);
-
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addParentStack(EditNoteActivity.class);
         stackBuilder.addNextIntent(intent);
 

@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Layout: Login Screen
+    Deskripsi: Tampilan halaman login dengan animasi, form input, dan aksi autentikasi
+-->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,6 +11,7 @@
     android:background="?android:windowBackground"
     android:fillViewport="true">
 
+    <!-- ================= ROOT CONTAINER ================= -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,7 +20,7 @@
         android:paddingTop="50dp"
         tools:ignore="ExtraText">
 
-        // Lottie Animation
+        <!-- ================= LOTTIE ANIMATION ================= -->
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lottieAnimationView"
             android:layout_width="200dp"
@@ -24,7 +29,7 @@
             app:lottie_autoPlay="true"
             app:lottie_loop="true" />
 
-        // Welcome Text
+        <!-- ================= WELCOME TEXT ================= -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,27 +49,27 @@
             android:textColor="?attr/colorOnSurface"
             android:textSize="14sp" />
 
-        // Form Fields
+        <!-- ================= FORM FIELDS ================= -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="40dp">
+            android:layout_marginTop="40dp"
+            android:orientation="vertical">
 
-            // Username Input
+            <!-- ===== Username Input ===== -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                app:errorEnabled="true"
-                app:boxCornerRadiusTopStart="12dp"
-                app:boxCornerRadiusTopEnd="12dp"
-                app:boxCornerRadiusBottomStart="12dp"
                 app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
                 app:boxStrokeColor="?attr/colorPrimary"
                 app:endIconMode="clear_text"
                 app:endIconTint="?attr/colorPrimary"
+                app:errorEnabled="true"
                 app:startIconDrawable="@drawable/ic_person"
                 app:startIconTint="?attr/colorPrimary">
 
@@ -79,20 +84,20 @@
                     android:textColorHint="?attr/colorOnSurface" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            // Password Input
+            <!-- ===== Password Input ===== -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                app:errorEnabled="true"
-                app:boxCornerRadiusTopStart="12dp"
-                app:boxCornerRadiusTopEnd="12dp"
-                app:boxCornerRadiusBottomStart="12dp"
                 app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
                 app:boxStrokeColor="?attr/colorPrimary"
                 app:endIconMode="password_toggle"
                 app:endIconTint="?attr/colorPrimary"
+                app:errorEnabled="true"
                 app:startIconDrawable="@drawable/ic_lock"
                 app:startIconTint="?attr/colorPrimary">
 
@@ -107,22 +112,24 @@
                     android:textColorHint="?attr/colorOnSurface" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            // Remember Me and Forgot Password
+            <!-- ===== Remember Me & Forgot Password ===== -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_marginBottom="20dp"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="20dp">
+                android:orientation="horizontal">
 
+                <!-- Remember Me Checkbox -->
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:id="@+id/cbRememberMe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:buttonTint="?attr/colorPrimary"
                     android:focusable="false"
-                    android:focusableInTouchMode="false" />
+                    android:focusableInTouchMode="false"
+                    app:buttonTint="?attr/colorPrimary" />
 
+                <!-- Remember Me Text -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -131,6 +138,7 @@
                     android:textColor="?attr/colorOnSurface"
                     android:textSize="14sp" />
 
+                <!-- Forgot Password Link -->
                 <TextView
                     android:id="@+id/tvForgotPassword"
                     android:layout_width="0dp"
@@ -143,7 +151,7 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-            // Login Button
+            <!-- ===== Login Button ===== -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
@@ -153,11 +161,11 @@
                 android:textColor="?attr/colorOnPrimary"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:cornerRadius="12dp"
                 app:backgroundTint="?attr/colorPrimary"
+                app:cornerRadius="12dp"
                 app:rippleColor="?attr/colorOnPrimary" />
 
-            // Sign Up Link
+            <!-- ===== Sign Up Link ===== -->
             <TextView
                 android:id="@+id/tvSignUp"
                 android:layout_width="wrap_content"
@@ -168,6 +176,7 @@
                 android:textColor="?attr/colorPrimary"
                 android:textSize="14sp"
                 android:textStyle="bold" />
+
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

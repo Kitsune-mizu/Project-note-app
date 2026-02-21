@@ -1,3 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Layout: Custom Information Dialog
+    Deskripsi: Dialog sederhana dengan judul, pesan, dan tombol tutup
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,38 +14,40 @@
     android:gravity="center_horizontal"
     tools:ignore="ExtraText">
 
-    // Title
+    <!-- ================= DIALOG TITLE ================= -->
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="8dp"
         android:text="@string/dialog_title_information"
         android:textAppearance="?attr/textAppearanceTitleMedium"
-        android:textColor="?attr/colorOnSurface"
-        android:gravity="center"
-        android:paddingBottom="8dp" />
+        android:textColor="?attr/colorOnSurface" />
 
-    // Message
+    <!-- ================= DIALOG MESSAGE ================= -->
     <TextView
         android:id="@+id/tvMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="20dp"
         android:text="@string/dialog_message_notification"
         android:textAppearance="?attr/textAppearanceBodyMedium"
-        android:textColor="?attr/colorOnSurfaceVariant"
-        android:gravity="center"
-        android:paddingBottom="20dp" />
+        android:textColor="?attr/colorOnSurfaceVariant" />
 
-    // Close Button
+    <!-- ================= ACTION BUTTON ================= -->
+    <!-- Tombol untuk menutup dialog -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnOk"
         style="@style/Widget.Material3.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/button_close"
-        app:cornerRadius="16dp"
         android:backgroundTint="?attr/colorPrimary"
-        android:textColor="?attr/colorOnPrimary"
         android:paddingStart="32dp"
-        android:paddingEnd="32dp" />
+        android:paddingEnd="32dp"
+        android:text="@string/button_close"
+        android:textColor="?attr/colorOnPrimary"
+        app:cornerRadius="16dp" />
+
 </LinearLayout>

@@ -1,61 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<!--
+    Navigation Drawer Menu
+    Deskripsi: Struktur menu navigasi utama aplikasi
+-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- ================= MAIN MENU GROUP ================= -->
     <group
         android:id="@+id/main_group"
         android:checkableBehavior="single"
         tools:ignore="ExtraText">
 
-        // Nav Home
+        <!-- Navigation: Home -->
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home"
             android:title="@string/menu_title_home"
-            app:iconTint="@color/nav_item_color"
-            app:iconPadding="8dp" />
+            app:iconPadding="8dp"
+            app:iconTint="@color/nav_item_color" />
 
-        // Nav Profile
+        <!-- Navigation: Profile -->
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_person"
             android:title="@string/menu_title_profile"
-            app:iconTint="@color/nav_item_color"
-            app:iconPadding="8dp" />
+            app:iconPadding="8dp"
+            app:iconTint="@color/nav_item_color" />
+
     </group>
 
+    <!-- ================= PREFERENCES SECTION ================= -->
     <item android:title="@string/menu_section_preferences">
         <menu>
             <group android:checkableBehavior="single">
-                // Nav Notifications
+
+                <!-- Navigation: Notifications -->
                 <item
                     android:id="@+id/nav_notifications"
                     android:icon="@drawable/ic_notifications"
                     android:title="@string/menu_title_notifications"
-                    app:iconTint="@color/nav_item_color"
-                    app:iconPadding="8dp" />
+                    app:iconPadding="8dp"
+                    app:iconTint="@color/nav_item_color" />
 
-                // Nav Settings
+                <!-- Navigation: Settings -->
                 <item
                     android:id="@+id/nav_settings"
                     android:icon="@drawable/ic_settings"
                     android:title="@string/menu_title_settings"
-                    app:iconTint="@color/nav_item_color"
-                    app:iconPadding="8dp" />
+                    app:iconPadding="8dp"
+                    app:iconTint="@color/nav_item_color" />
+
             </group>
         </menu>
     </item>
 
+    <!-- ================= ACCOUNT SECTION ================= -->
     <item android:title="@string/menu_section_account">
         <menu>
             <group android:checkableBehavior="single">
-                // Nav Logout
+
+                <!-- Navigation: Logout -->
                 <item
                     android:id="@+id/nav_logout"
                     android:icon="@drawable/ic_logout"
                     android:title="@string/menu_title_logout"
                     app:iconPadding="8dp" />
+
             </group>
         </menu>
     </item>

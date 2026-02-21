@@ -19,15 +19,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Activity untuk menampilkan daftar aktivitas/notifikasi pengguna.
+ * Mendukung pembaruan real-time via listener dan hapus semua notifikasi.
+ */
 public class NotificationActivity extends AppCompatActivity {
 
-    // === FIELDS ===
+    // --- Fields ---
+
+    // Adapter untuk daftar notifikasi
     private NotificationAdapter adapter;
+
+    // Listener untuk menerima aktivitas baru secara real-time dari UserSession
     private UserSession.ActivityListener activityListener;
+
+    // Komponen UI utama
     private RecyclerView rvActivities;
     private View emptyActivity;
 
-    // === LIFECYCLE METHODS ===
+    // --- Lifecycle ---
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,31 +53,28 @@ public class NotificationActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
-        adapter.submitList(
-                new ArrayList<>(adapter.getCurrentList()),
-                this::updateEmptyState
-        );
-
+        // Refresh tampilan list dan tandai notifikasi sebagai sudah dibaca
+        adapter.submitList(new ArrayList<>(adapter.getCurrentList()), this::updateEmptyState);
         UserSession.getInstance().notifyBadgeCleared();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (activityListener != null) {
+        // Lepas listener agar tidak terjadi memory leak
+        if (activityListener != null)
             UserSession.getInstance().removeActivityListener();
-        }
     }
 
-    // === UI SETUP ===
+    // --- UI Setup ---
+
+    /** Setup toolbar dengan tombol back dan judul halaman */
     private void setupToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            // Already using @string
             getSupportActionBar().setTitle(R.string.notifications_title);
         }
 
@@ -75,6 +83,7 @@ public class NotificationActivity extends AppCompatActivity {
                 .setTint(ContextCompat.getColor(this, R.color.md_theme_light_onSurface));
     }
 
+    /** Inisialisasi RecyclerView, empty state view, dan adapter */
     private void setupRecyclerView() {
         rvActivities = findViewById(R.id.rvActivities);
         emptyActivity = findViewById(R.id.emptyActivity);
@@ -84,44 +93,56 @@ public class NotificationActivity extends AppCompatActivity {
         rvActivities.setAdapter(adapter);
     }
 
+    /** Tampilkan empty state jika list kosong, sembunyikan jika ada data */
     private void updateEmptyState() {
         boolean isEmpty = adapter.getCurrentList().isEmpty();
-
         emptyActivity.setVisibility(isEmpty ? View.VISIBLE : View.GONE);
         rvActivities.setVisibility(isEmpty ? View.GONE : View.VISIBLE);
     }
 
-    // === DATA MANAGEMENT ===
+    // --- Data Management ---
+
+    /** Muat daftar aktivitas awal dari UserSession saat activity pertama kali dibuka */
     private void loadInitialActivities() {
         adapter.submitList(
                 new ArrayList<>(UserSession.getInstance().getActivities()),
-                this::updateEmptyState
-        );
+                this::updateEmptyState);
     }
 
+    /**
+     * Daftarkan listener ke UserSession untuk menerima aktivitas baru secara real-time.
+     * Item baru ditambahkan di posisi paling atas list.
+     */
     private void setupActivityListener() {
         activityListener = item -> runOnUiThread(() -> {
             List<ActivityItem> current = new ArrayList<>(adapter.getCurrentList());
             current.add(0, item);
-
             adapter.submitList(current, this::updateEmptyState);
         });
 
         UserSession.getInstance().addActivityListener(activityListener);
     }
 
+    /** Hapus semua notifikasi dari session dan kosongkan list di UI */
     private void clearAllNotifications() {
         UserSession.getInstance().clearActivities();
         adapter.submitList(new ArrayList<>(), this::updateEmptyState);
     }
 
-    // === MENU & ACTION HANDLING ===
+    // --- Menu & Action Handling ---
+
+    /** Inflate menu dengan tombol "Clear All" */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_notifications, menu);
         return true;
     }
 
+    /**
+     * Tangani aksi menu:
+     * - home (back): tutup activity
+     * - action_clear_all: hapus semua notifikasi
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();

@@ -17,20 +17,29 @@ import com.android.alpha.data.session.UserSession;
 import com.android.alpha.utils.LoadingDialog;
 import com.google.android.material.textfield.TextInputEditText;
 
+/**
+ * Activity that allows a user to reset their password
+ * by providing their username, old password, and a new password.
+ */
 public class ForgotPasswordActivity extends AppCompatActivity {
 
-    // === INTERFACE ===
+    // ─── INTERFACE ─────────────────────────────────────────────────────────────
+
+    /** Functional interface for validating text input on change. */
     private interface TextValidation { void onValidated(String text); }
 
-    // === UI COMPONENTS ===
+    // ─── UI COMPONENTS ─────────────────────────────────────────────────────────
     private TextInputEditText etUsername, etOldPassword, etNewPassword;
-    private TextView tvUsernameError, tvOldPasswordError, tvNewPasswordError;
-    private Button btnChangePassword;
+    private TextView          tvUsernameError, tvOldPasswordError, tvNewPasswordError;
+    private Button            btnChangePassword;
 
-    // === DEPENDENCIES ===
+    // ─── DEPENDENCIES ──────────────────────────────────────────────────────────
     private LoadingDialog loadingDialog;
 
-    // === ACTIVITY LIFECYCLE ===
+    // ══════════════════════════════════════════════════════════════════════════
+    // LIFECYCLE
+    // ══════════════════════════════════════════════════════════════════════════
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,31 +50,43 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         btnChangePassword.setOnClickListener(v -> attemptPasswordChange());
     }
 
-    // === INITIALIZATION ===
+    // ══════════════════════════════════════════════════════════════════════════
+    // INITIALIZATION
+    // ══════════════════════════════════════════════════════════════════════════
+
+    /** Binds all views and sets up the loading dialog and Lottie animation. */
     private void initializeComponents() {
-        etUsername = findViewById(R.id.etUsername);
+        etUsername    = findViewById(R.id.etUsername);
         etOldPassword = findViewById(R.id.etOldPassword);
         etNewPassword = findViewById(R.id.etNewPassword);
 
-        tvUsernameError = findViewById(R.id.tvUsernameError);
+        tvUsernameError    = findViewById(R.id.tvUsernameError);
         tvOldPasswordError = findViewById(R.id.tvOldPasswordError);
         tvNewPasswordError = findViewById(R.id.tvNewPasswordError);
 
         btnChangePassword = findViewById(R.id.btnChangePassword);
-        loadingDialog = new LoadingDialog(this);
+        loadingDialog     = new LoadingDialog(this);
 
         LottieAnimationView lottie = findViewById(R.id.lottieAnimationView);
         lottie.setAnimation(R.raw.login_animation);
         lottie.playAnimation();
     }
 
-    // === INPUT LISTENERS ===
+    // ══════════════════════════════════════════════════════════════════════════
+    // INPUT LISTENERS
+    // ══════════════════════════════════════════════════════════════════════════
+
+    /** Attaches real-time TextWatchers to each input field for inline validation. */
     private void setupInputListeners() {
         etUsername.addTextChangedListener(createWatcher(this::validateUsername));
         etOldPassword.addTextChangedListener(createWatcher(s -> hideError(tvOldPasswordError)));
         etNewPassword.addTextChangedListener(createWatcher(this::validateNewPassword));
     }
 
+    /**
+     * Creates a TextWatcher that invokes the given callback on text change.
+     * @param callback the validation logic to run after text changes.
+     */
     private TextWatcher createWatcher(TextValidation callback) {
         return new TextWatcher() {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -74,45 +95,64 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         };
     }
 
-    // === VALIDATION LOGIC ===
+    // ══════════════════════════════════════════════════════════════════════════
+    // VALIDATION
+    // ══════════════════════════════════════════════════════════════════════════
+
+    /** Validates the username field inline and shows/hides the error view accordingly. */
     private void validateUsername(String username) {
         if (username.isEmpty()) { hideError(tvUsernameError); return; }
-
-        if (UserSession.isUsernameInvalid(username)) {
-            showError(tvUsernameError, R.string.username_error_message);
-        } else hideError(tvUsernameError);
+        if (UserSession.isUsernameInvalid(username)) showError(tvUsernameError, R.string.username_error_message);
+        else                                         hideError(tvUsernameError);
     }
 
+    /** Validates the new password field inline and shows/hides the error view accordingly. */
     private void validateNewPassword(String password) {
         if (password.isEmpty()) { hideError(tvNewPasswordError); return; }
-
-        if (UserSession.isPasswordInvalid(password)) {
-            showError(tvNewPasswordError, R.string.password_error_message);
-        } else hideError(tvNewPasswordError);
+        if (UserSession.isPasswordInvalid(password)) showError(tvNewPasswordError, R.string.password_error_message);
+        else                                         hideError(tvNewPasswordError);
     }
 
+    /**
+     * Validates all three input fields before submitting the password change request.
+     * @return true if any field has a validation error, false if all inputs are valid.
+     */
     private boolean validateInputFields(String username, String oldPassword, String newPassword) {
         boolean hasError = false;
 
-        if (username.isEmpty()) { showError(tvUsernameError, R.string.field_required); hasError = true; }
-        else if (UserSession.isUsernameInvalid(username)) { showError(tvUsernameError, R.string.username_error_message); hasError = true; }
+        if (username.isEmpty()) {
+            showError(tvUsernameError, R.string.field_required); hasError = true;
+        } else if (UserSession.isUsernameInvalid(username)) {
+            showError(tvUsernameError, R.string.username_error_message); hasError = true;
+        }
 
-        if (oldPassword.isEmpty()) { showError(tvOldPasswordError, R.string.field_required); hasError = true; }
+        if (oldPassword.isEmpty()) {
+            showError(tvOldPasswordError, R.string.field_required); hasError = true;
+        }
 
-        if (newPassword.isEmpty()) { showError(tvNewPasswordError, R.string.field_required); hasError = true; }
-        else if (UserSession.isPasswordInvalid(newPassword)) { showError(tvNewPasswordError, R.string.password_error_message); hasError = true; }
+        if (newPassword.isEmpty()) {
+            showError(tvNewPasswordError, R.string.field_required); hasError = true;
+        } else if (UserSession.isPasswordInvalid(newPassword)) {
+            showError(tvNewPasswordError, R.string.password_error_message); hasError = true;
+        }
 
-        if (newPassword.equals(oldPassword) && !newPassword.isEmpty()) {
-            showError(tvNewPasswordError, R.string.new_password_same_error);
-            hasError = true;
+        if (!newPassword.isEmpty() && newPassword.equals(oldPassword)) {
+            showError(tvNewPasswordError, R.string.new_password_same_error); hasError = true;
         }
 
         return hasError;
     }
 
-    // === PASSWORD CHANGE PROCESS ===
+    // ══════════════════════════════════════════════════════════════════════════
+    // PASSWORD CHANGE PROCESS
+    // ══════════════════════════════════════════════════════════════════════════
+
+    /**
+     * Reads input fields, runs validation, then attempts the password reset
+     * after a short loading delay. Finishes the activity on success.
+     */
     private void attemptPasswordChange() {
-        final String username = getText(etUsername);
+        final String username    = getText(etUsername);
         final String oldPassword = getText(etOldPassword);
         final String newPassword = getText(etNewPassword);
 
@@ -127,7 +167,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
         new Handler().postDelayed(() -> {
             UserSession session = UserSession.getInstance();
-            boolean success = session.resetPassword(username, oldPassword, newPassword);
+            boolean success     = session.resetPassword(username, oldPassword, newPassword);
 
             loadingDialog.dismiss();
 
@@ -140,8 +180,11 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         }, 2000);
     }
 
+    /**
+     * Shows the appropriate error when password reset fails.
+     * Distinguishes between "username not found" and "incorrect old password".
+     */
     private void handlePasswordResetError(UserSession session, String username) {
-        // If username exists in the map but reset failed, it means the old password was incorrect.
         if (session.getUserData(username) != null) {
             showError(tvOldPasswordError, R.string.incorrect_old_password);
             showToast(getString(R.string.incorrect_old_password));
@@ -151,23 +194,31 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         }
     }
 
-    // === UI UTILITIES ===
+    // ══════════════════════════════════════════════════════════════════════════
+    // UI UTILITIES
+    // ══════════════════════════════════════════════════════════════════════════
+
+    /** Hides the given error TextView. */
     private void hideError(TextView tv) { tv.setVisibility(View.GONE); }
 
+    /** Hides all three error TextViews at once. */
     private void hideAllErrors() {
         hideError(tvUsernameError);
         hideError(tvOldPasswordError);
         hideError(tvNewPasswordError);
     }
 
+    /** Sets the given string resource as the error text and makes the TextView visible. */
     private void showError(TextView tv, int resId) {
         tv.setText(resId);
         tv.setVisibility(View.VISIBLE);
     }
 
+    /** Safely extracts trimmed text from a TextInputEditText, returning empty string if null. */
     private String getText(TextInputEditText editText) {
         return editText.getText() != null ? editText.getText().toString().trim() : "";
     }
 
+    /** Shows a short Toast message. */
     private void showToast(String message) { Toast.makeText(this, message, Toast.LENGTH_SHORT).show(); }
 }

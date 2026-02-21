@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Layout: Home Screen
+    Deskripsi: Tampilan utama dengan SwipeRefresh, konten utama, dan shimmer loading
+-->
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,12 +12,12 @@
     android:layout_height="match_parent"
     tools:ignore="ExtraText">
 
-    // FRAME LAYOUT: to allow shimmer to overlay scroll content
+    <!-- FrameLayout: memungkinkan shimmer overlay di atas konten -->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        // MAIN CONTENT
+        <!-- ================= MAIN CONTENT ================= -->
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scrollViewHome"
             android:layout_width="match_parent"
@@ -26,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                // Header Card
+                <!-- ================= HEADER CARD ================= -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="280dp"
@@ -38,7 +42,7 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/gradient_primary">
 
-                        // Lottie Animation
+                        <!-- Lottie Welcome Animation -->
                         <com.airbnb.lottie.LottieAnimationView
                             android:id="@+id/lottieWelcome"
                             android:layout_width="0dp"
@@ -48,11 +52,13 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent" />
 
-                        // Active Days Badge
+                        <!-- Active Days Badge -->
                         <TextView
                             android:id="@+id/tvActiveDays"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
                             android:ellipsize="end"
                             android:singleLine="true"
                             android:paddingVertical="8dp"
@@ -63,26 +69,25 @@
                             android:textSize="12sp"
                             android:textStyle="bold"
                             android:gravity="center"
-                            app:drawableStartCompat="@drawable/ic_fire"
                             android:drawablePadding="8dp"
+                            app:drawableStartCompat="@drawable/ic_fire"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginEnd="8dp" />
+                            app:layout_constraintEnd_toEndOf="parent" />
 
-                        // Greeting Texts
+                        <!-- Greeting Container -->
                         <LinearLayout
                             android:id="@+id/greetingContainer"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
                             android:layout_marginStart="24dp"
                             android:layout_marginEnd="24dp"
                             android:layout_marginBottom="24dp"
+                            android:orientation="vertical"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent">
 
+                            <!-- Greeting Text -->
                             <TextView
                                 android:id="@+id/tvGreeting"
                                 android:layout_width="wrap_content"
@@ -92,6 +97,7 @@
                                 android:textSize="28sp"
                                 android:textStyle="bold" />
 
+                            <!-- Username -->
                             <TextView
                                 android:id="@+id/tvUsername"
                                 android:layout_width="wrap_content"
@@ -102,6 +108,7 @@
                                 android:textSize="18sp"
                                 android:alpha="0.9" />
 
+                            <!-- Date & Time -->
                             <TextView
                                 android:id="@+id/tvDateTime"
                                 android:layout_width="wrap_content"
@@ -116,7 +123,7 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                // Recent Activity Card
+                <!-- ================= RECENT ACTIVITY CARD ================= -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -132,7 +139,7 @@
                         android:orientation="vertical"
                         android:padding="20dp">
 
-                        // HEADER: ICON + TITLE + VIEW ALL
+                        <!-- Header Row -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -144,13 +151,13 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                app:drawableStartCompat="@drawable/ic_history"
                                 android:drawablePadding="12dp"
-                                app:iconTint="@color/md_theme_light_onSurface"
                                 android:text="@string/header_recent_activity"
                                 android:textColor="@color/md_theme_light_onSurface"
                                 android:textSize="18sp"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold"
+                                app:drawableStartCompat="@drawable/ic_history"
+                                app:iconTint="@color/md_theme_light_onSurface" />
 
                             <TextView
                                 android:id="@+id/tvViewAll"
@@ -159,10 +166,10 @@
                                 android:text="@string/button_view_all"
                                 android:textColor="@color/md_theme_light_primary"
                                 android:textSize="14sp"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold" />
                         </LinearLayout>
 
-                        // ACTIVITY CONTAINER
+                        <!-- RecyclerView Activity -->
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerViewActivities"
                             android:layout_width="match_parent"
@@ -172,7 +179,7 @@
                             android:clipToPadding="false"
                             android:padding="4dp" />
 
-                        // EMPTY PLACEHOLDER
+                        <!-- Empty Activity State -->
                         <LinearLayout
                             android:id="@+id/emptyActivity"
                             android:layout_width="match_parent"
@@ -197,12 +204,12 @@
                                 android:text="@string/empty_state_no_activity"
                                 android:textColor="@color/md_theme_light_onBackground"
                                 android:textSize="16sp"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold" />
                         </LinearLayout>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                // Recent Notes Card
+                <!-- ================= RECENT NOTES CARD ================= -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardRecentNotes"
                     android:layout_width="match_parent"
@@ -219,6 +226,7 @@
                         android:orientation="vertical"
                         android:padding="20dp">
 
+                        <!-- Header Row -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -230,12 +238,12 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                app:drawableStartCompat="@drawable/ic_note"
                                 android:drawablePadding="12dp"
                                 android:text="@string/header_your_notes"
                                 android:textColor="@color/md_theme_light_onSurface"
                                 android:textSize="18sp"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold"
+                                app:drawableStartCompat="@drawable/ic_note" />
 
                             <TextView
                                 android:id="@+id/tvViewAllNotes"
@@ -244,9 +252,10 @@
                                 android:text="@string/button_view_all"
                                 android:textColor="@color/md_theme_light_primary"
                                 android:textSize="14sp"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold" />
                         </LinearLayout>
 
+                        <!-- RecyclerView Notes -->
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerViewNotes"
                             android:layout_width="match_parent"
@@ -256,6 +265,7 @@
                             android:clipToPadding="false"
                             android:padding="4dp" />
 
+                        <!-- Empty Notes State -->
                         <LinearLayout
                             android:id="@+id/emptyNotes"
                             android:layout_width="match_parent"
@@ -280,7 +290,7 @@
                                 android:text="@string/empty_state_no_notes"
                                 android:textColor="@color/md_theme_light_onBackground"
                                 android:textSize="16sp"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -289,7 +299,7 @@
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
-        // SHIMMER LAYER OVER EVERYTHING
+        <!-- ================= SHIMMER OVERLAY ================= -->
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/shimmerLayout"
             android:layout_width="match_parent"
@@ -299,7 +309,7 @@
             app:shimmer_auto_start="false"
             app:shimmer_duration="1000">
 
-            // Skeleton shimmer
+            <!-- Skeleton Loading Placeholder -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -310,14 +320,14 @@
                 <View
                     android:layout_width="180dp"
                     android:layout_height="20dp"
-                    android:background="@color/overlay_surface"
-                    android:layout_marginBottom="12dp" />
+                    android:layout_marginBottom="12dp"
+                    android:background="@color/overlay_surface" />
 
                 <View
                     android:layout_width="120dp"
                     android:layout_height="20dp"
-                    android:background="@color/overlay_surface"
-                    android:layout_marginBottom="8dp" />
+                    android:layout_marginBottom="8dp"
+                    android:background="@color/overlay_surface" />
 
                 <View
                     android:layout_width="150dp"
@@ -325,5 +335,6 @@
                     android:background="@color/overlay_surface" />
             </LinearLayout>
         </com.facebook.shimmer.ShimmerFrameLayout>
+
     </FrameLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

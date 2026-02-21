@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Layout: Navigation Header
+    Deskripsi: Header drawer dengan profil, animasi, dan informasi user
+-->
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -9,33 +13,33 @@
     android:padding="20dp"
     tools:ignore="ExtraText">
 
-    // Background Pattern
+    <!-- Background Pattern (Dekorasi Sudut Bawah) -->
     <ImageView
         android:id="@+id/bgPattern"
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:alpha="0.2"
-        android:src="@drawable/ic_pattern_placeholder"
         android:contentDescription="@string/cd_background_pattern"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:src="@drawable/ic_pattern_placeholder"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    // Profile Container
+    <!-- ================= PROFILE CONTAINER ================= -->
     <FrameLayout
         android:id="@+id/profileContainer"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="8dp"
-        android:foregroundGravity="center"
-        android:clipToPadding="false"
         android:clipChildren="false"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:clipToPadding="false"
+        android:foregroundGravity="center"
+        app:layout_constraintBottom_toTopOf="@id/userInfo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/userInfo">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        // Lottie Animation
+        <!-- Lottie Animation (Default Profile Animation) -->
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lottieProfileNav"
             android:layout_width="match_parent"
@@ -44,66 +48,69 @@
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/profile_animation" />
 
-        // Profile Image
+        <!-- Profile Image (Akan tampil jika user memiliki foto profil) -->
         <ImageView
             android:id="@+id/ivProfile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:contentDescription="@string/cd_profile_image"
             android:scaleType="centerCrop"
-            android:visibility="gone"
-            android:contentDescription="@string/cd_profile_image" />
+            android:visibility="gone" />
 
+        <!-- Profile Border Overlay -->
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/profile_border" />
 
-        // Online Badge
+        <!-- Online Status Indicator -->
         <View
             android:id="@+id/onlineIndicator"
             android:layout_width="13dp"
             android:layout_height="9dp"
-            android:background="@drawable/online_indicator"
             android:layout_gravity="bottom|end"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
+            android:background="@drawable/online_indicator"
             android:elevation="2dp" />
     </FrameLayout>
 
-    // User Info
+    <!-- ================= USER INFORMATION ================= -->
     <LinearLayout
         android:id="@+id/userInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_marginTop="7dp"
         android:gravity="center_horizontal"
-        app:layout_constraintTop_toBottomOf="@id/profileContainer"
-        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="7dp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profileContainer">
 
+        <!-- Username Text -->
         <TextView
             android:id="@+id/tvUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="@string/placeholder_name"
             android:textColor="@color/md_theme_light_onPrimary"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:maxLines="1"
-            android:ellipsize="end" />
+            android:textStyle="bold" />
 
+        <!-- User Email Text -->
         <TextView
             android:id="@+id/tvUserEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
+            android:alpha="0.8"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="@string/placeholder_email"
             android:textColor="@color/md_theme_light_onPrimary"
-            android:textSize="12sp"
-            android:alpha="0.8"
-            android:maxLines="1"
-            android:ellipsize="end" />
+            android:textSize="12sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

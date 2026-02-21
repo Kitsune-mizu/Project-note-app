@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Layout: Activity Notifications Screen
+    Deskripsi: Menampilkan daftar aktivitas/notifikasi dengan empty state
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,7 +12,7 @@
     android:background="?android:windowBackground"
     tools:ignore="ExtraText">
 
-    // Material 3 Toolbar
+    <!-- ================= MATERIAL 3 TOOLBAR ================= -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -18,27 +22,30 @@
         android:titleTextColor="?attr/colorOnPrimary"
         app:titleCentered="true" />
 
-    // RecyclerView for Activities
+    <!-- ================= RECYCLERVIEW LIST ================= -->
+    <!-- Menampilkan daftar aktivitas/notifikasi -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvActivities"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:padding="8dp"
         android:clipToPadding="false"
+        android:padding="8dp"
         android:scrollbars="vertical" />
 
-    <!-- EMPTY STATE (LOTTIE) -->
+    <!-- ================= EMPTY STATE (LOTTIE) ================= -->
+    <!-- Ditampilkan ketika tidak ada data aktivitas -->
     <LinearLayout
         android:id="@+id/emptyActivity"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingVertical="20dp"
         android:paddingHorizontal="16dp"
+        android:paddingVertical="20dp"
         android:visibility="gone">
 
+        <!-- Lottie Animation -->
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lottieEmpty"
             android:layout_width="100dp"
@@ -47,6 +54,7 @@
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/empty_activity" />
 
+        <!-- Empty State Text -->
         <TextView
             android:id="@+id/tvEmptyText"
             android:layout_width="wrap_content"
@@ -55,7 +63,8 @@
             android:text="@string/empty_state_no_activity"
             android:textColor="@color/md_theme_light_onBackground"
             android:textSize="16sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
+
     </LinearLayout>
 
 </LinearLayout>
