@@ -38,3 +38,4 @@ Dosen Pengampu 	: Donny Maulana, S.Kom., M.M.S.I.
 ![UI-UX_Phase2](https://github.com/user-attachments/assets/34260d0a-2619-4c5d-b08e-5ace2ec11d71)
 
 
+# Project-note-app
