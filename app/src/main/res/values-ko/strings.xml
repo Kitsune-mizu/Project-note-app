@@ -124,7 +124,7 @@
     <string name="gps_unavailable">GPS 위치를 사용할 수 없습니다.</string>
     <string name="failed_get_location">현재 위치를 가져오지 못했습니다.</string>
     <string name="turn_on_gps_prompt">GPS 위치 서비스를 켜세요.</string>
-    <string name="zoom_in_for_address_korean">주소를 보려면 확대하세요</string>
+    <string name="zoom_in_for_address">주소를 보려면 확대하세요</string>
 
     <!-- Edit Note Activity -->
     <string name="metadata_format">마지막 수정: %1$s | 길이: %2$d자</string>
@@ -348,4 +348,45 @@
     <string name="menu_title_notifications">알림</string>
     <string name="menu_section_account">계정</string>
     <string name="menu_title_logout">로그아웃</string>
+
+    <!-- ── Chat Activity Log Strings ─────────────────────────────────────────── -->
+    <string name="fab_try_gemini">Gemini AI 체험하기</string>
+    <string name="cd_open_gemini">Gemini AI 열기</string>
+
+    <string name="action_retry">재시도</string>
+
+    <string name="cd_ai_avatar">AI 아이콘</string>
+    <string name="cd_copy_message">메시지 복사</string>
+    <string name="action_save_as_note">노트로 저장</string>
+    <string name="toast_copied">클립보드에 복사되었습니다</string>
+
+    <string name="dialog_save_note_title">노트로 저장</string>
+    <string name="dialog_save_note_subtitle">AI 응답이 노트에 저장됩니다</string>
+    <string name="hint_note_title">노트 제목…</string>
+    <string name="dialog_save_note_info">콘텐츠는 일반 텍스트(Plain Text)로 저장됩니다</string>
+    <string name="action_save_note">저장</string>
+
+    <string name="note_from_gemini_default_title">Gemini AI에서 저장된 노트</string>
+    <string name="toast_note_saved_from_ai">노트 저장 완료! ✓</string>
+
+    <string name="error_connection">연결에 실패했습니다. 인터넷 상태를 확인하세요.\n(%1$s)</string>
+    <string name="error_rate_limit">요청 제한에 도달했습니다. 잠시 후 다시 시도하세요.</string>
+    <string name="error_parse">AI 응답을 처리하지 못했습니다.</string>
+    <string name="error_unknown">알 수 없는 오류</string>
+    <string name="error_http">HTTP %1$d</string>
+    <string name="error_prefix">오류: %1$s</string>
+
+    <string name="usage_remaining">오늘 남은 횟수: %1$d/%2$d</string>
+
+    <string name="dialog_rate_limit_title">요청 과다</string>
+    <string name="dialog_rate_limit_msg">분당 15회 요청 제한을 초과했습니다 (Gemini Free Tier).\n잠시 기다린 후 다시 시도해 주세요.</string>
+    <string name="dialog_not_logged_in_title">로그인 필요</string>
+    <string name="dialog_not_logged_in_msg">채팅 기능을 사용하려면 먼저 로그인해 주세요.</string>
+
+    <string name="action_rename">이름 변경</string>
+
+    <string name="activity_new_chat_title">새 채팅 생성됨</string>
+    <string name="activity_new_chat_message">Gemini AI와 새로운 대화 세션을 시작했습니다</string>
+    <string name="activity_chat_deleted_title">채팅 삭제됨</string>
+    <string name="activity_chat_deleted_message">대화 세션이 삭제되었습니다</string>
 </resources>

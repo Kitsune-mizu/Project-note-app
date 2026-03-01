@@ -348,4 +348,56 @@
     <string name="menu_title_notifications">Notifikasi</string>
     <string name="menu_section_account">Akun</string>
     <string name="menu_title_logout">Logout</string>
+
+    <!-- ── Chat Activity Log Strings ─────────────────────────────────────────── -->
+    <!-- ── FAB Gemini Extended ──────────────────────────────────────────────── -->
+    <string name="fab_try_gemini">Try Gemini AI</string>
+    <string name="cd_open_gemini">Buka Gemini AI</string>
+
+    <!-- ── Error retry ──────────────────────────────────────────────────────── -->
+    <string name="action_retry">Coba Lagi</string>
+
+    <!-- ── Bubble AI actions ──────────────────────────────────────────────── -->
+    <string name="cd_ai_avatar">Ikon AI</string>
+    <string name="cd_copy_message">Salin pesan</string>
+    <string name="action_save_as_note">Jadikan Catatan</string>
+    <string name="toast_copied">Teks disalin ke clipboard</string>
+
+    <!-- ── Dialog Save as Note ────────────────────────────────────────────── -->
+    <string name="dialog_save_note_title">Simpan sebagai Catatan</string>
+    <string name="dialog_save_note_subtitle">Respon AI akan disimpan ke Notes</string>
+    <string name="hint_note_title">Judul catatan…</string>
+    <string name="dialog_save_note_info">Konten akan disimpan apa adanya (plain text)</string>
+    <string name="action_save_note">Simpan</string>
+
+    <!-- ── Note dari Gemini ───────────────────────────────────────────────── -->
+    <string name="note_from_gemini_default_title">Catatan dari Gemini AI</string>
+    <string name="toast_note_saved_from_ai">Catatan berhasil disimpan! ✓</string>
+
+    <!-- ── Error messages ────────────────────────────────────────────────── -->
+    <string name="error_connection">Koneksi gagal. Periksa internet Anda.\n(%1$s)</string>
+    <string name="error_rate_limit">Batas permintaan/menit tercapai. Coba lagi sebentar.</string>
+    <string name="error_parse">Gagal memproses respons AI.</string>
+    <string name="error_unknown">Error tidak diketahui</string>
+    <string name="error_http">HTTP %1$d</string>
+    <string name="error_prefix">Error: %1$s</string>
+
+    <!-- ── Usage counter ──────────────────────────────────────────────────── -->
+    <string name="usage_remaining">Sisa hari ini: %1$d/%2$d</string>
+
+    <!-- ── Dialogs chat ────────────────────────────────────────────────────── -->
+    <string name="dialog_rate_limit_title">Terlalu Banyak Permintaan</string>
+    <string name="dialog_rate_limit_msg">Anda melebihi 15 permintaan/menit (Gemini Free Tier).\nTunggu sebentar lalu coba lagi.</string>
+    <string name="dialog_not_logged_in_title">Belum Login</string>
+    <string name="dialog_not_logged_in_msg">Silakan login terlebih dahulu untuk menggunakan fitur chat.</string>
+
+    <!-- ── History popup ───────────────────────────────────────────────────── -->
+    <string name="action_rename">Rename</string>
+
+    <!-- ── Activity log ────────────────────────────────────────────────────── -->
+    <string name="activity_new_chat_title">Chat Baru Dibuat</string>
+    <string name="activity_new_chat_message">Anda memulai sesi percakapan baru dengan Gemini AI</string>
+    <string name="activity_chat_deleted_title">Chat Dihapus</string>
+    <string name="activity_chat_deleted_message">Sebuah sesi percakapan telah dihapus</string>
+
 </resources>

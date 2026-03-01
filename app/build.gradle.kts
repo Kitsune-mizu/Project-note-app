@@ -1,3 +1,6 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -13,11 +16,23 @@ android {
         targetSdk = 36 // Target the latest SDK (36)
         versionCode = 1
         // Vesion code di ubah kalau rilis di playstore setiap update
-        versionName = "2.0.0.26"
+        versionName = "2.1.2.26"
         // Major = 1.0.0 > 2.0.0 perubahan total
         // Minor = 1.0.0 > 1.1.0 penambahan fitur
         // Patch = 1.0.0 > 1.0.1 perbaikan kecil
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // GeminiAI
+        val localProperties = Properties()
+        val localPropertiesFile = rootProject.file("local.properties")
+
+        if (localPropertiesFile.exists()) {
+            localProperties.load(FileInputStream(localPropertiesFile))
+        }
+
+        val geminiApiKey = localProperties.getProperty("GEMINI_API_KEY") ?: ""
+
+        buildConfigField("String", "GEMINI_API_KEY", "\"$geminiApiKey\"")
     }
 
     buildTypes {
@@ -31,18 +46,19 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlin {
         compilerOptions {
-            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
         }
     }
 
     buildFeatures {
-        viewBinding = true // Enables View Binding for easier view access
+        buildConfig = true
+        viewBinding = true
     }
 }
 
@@ -110,4 +126,10 @@ dependencies {
     implementation(libs.yalantis.ucrop)
 
     implementation(libs.yukuku.ambilwarna)
+
+    // --- GeminiAI ---
+    // DrawerLayout
+    implementation(libs.androidx.drawerlayout)
+    // CardView
+    implementation(libs.androidx.cardview)
 }

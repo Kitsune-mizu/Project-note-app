@@ -32,4 +32,7 @@
 
     <!-- Overlay / semi-transparent surface -->
     <color name="overlay_surface">#CCDEE3FF</color>
+
+    <!-- Chat Activity -->
+    <color name="md_theme_light_onSurfaceVariant">#49454F</color>
 </resources>

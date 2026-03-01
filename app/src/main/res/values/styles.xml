@@ -99,4 +99,32 @@
         <item name="shapeAppearance">@style/ShapeAppearance.PopupMenu</item>
     </style>
 
+    <!-- Base Application Theme ChatAI -->
+    <style name="Theme.GeminiChat" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">#6C63FF</item>
+        <item name="colorPrimaryDark">#5751E0</item>
+        <item name="colorAccent">#6C63FF</item>
+        <item name="android:windowBackground">#F8F9FE</item>
+        <item name="android:statusBarColor">#FFFFFF</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">#F8F9FE</item>
+    </style>
+
+    <!-- Rounded Dialog Style -->
+    <style name="RoundedDialog" parent="Theme.MaterialComponents.Light.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowMinWidthMajor">85%</item>
+        <item name="android:windowMinWidthMinor">85%</item>
+        <item name="colorPrimary">#6C63FF</item>
+        <item name="colorAccent">#6C63FF</item>
+    </style>
+
+    <!-- item massage -->
+    <style name="CustomCardShape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">4dp</item>
+        <item name="cornerSizeTopRight">18dp</item>
+        <item name="cornerSizeBottomLeft">18dp</item>
+        <item name="cornerSizeBottomRight">18dp</item>
+    </style>
 </resources>

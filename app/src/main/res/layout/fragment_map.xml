@@ -44,7 +44,7 @@
                 android:autofillHints="postalAddress"
                 android:background="@android:color/transparent"
                 android:drawablePadding="8dp"
-                android:drawableStart="@drawable/ic_search"
+                android:drawableStart="@drawable/ic_search_location"
                 android:hint="@string/search_hint"
                 android:inputType="text"
                 android:padding="12dp"

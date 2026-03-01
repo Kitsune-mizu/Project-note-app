@@ -28,6 +28,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.android.alpha.R;
 import com.android.alpha.data.local.UserStorageManager;
 import com.android.alpha.data.session.UserSession;
+import com.android.alpha.geminichat.ChatSessionManager;
 import com.android.alpha.ui.auth.LoginActivity;
 import com.android.alpha.ui.notifications.NotificationActivity;
 import com.android.alpha.utils.DialogUtils;
@@ -84,8 +85,10 @@ public class MainActivity extends AppCompatActivity
     /** Applies the saved locale before the activity's context is attached. */
     @Override
     protected void attachBaseContext(Context newBase) {
-        String lang = UserSession.getInstance() != null
-                ? UserSession.getInstance().getLanguage() : "en";
+        String lang = "en";
+        try {
+            lang = UserSession.getInstance().getLanguage();
+        } catch (IllegalStateException ignored) {}
         super.attachBaseContext(com.android.alpha.utils.LocaleHelper.setLocale(newBase, lang));
     }
 
@@ -470,6 +473,9 @@ public class MainActivity extends AppCompatActivity
         showLoading();
         handler.postDelayed(() -> {
             try {
+                String username = UserSession.getInstance().getUsername();
+                ChatSessionManager.getInstance(this).onUserLogout(username);
+
                 UserSession.getInstance().logout();
                 Intent i = new Intent(this, LoginActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

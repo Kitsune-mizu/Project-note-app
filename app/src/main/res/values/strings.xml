@@ -350,4 +350,44 @@
     <string name="menu_section_account">Account</string>
     <string name="menu_title_logout">Logout</string>
 
+    <!-- ── Chat Activity Log Strings ─────────────────────────────────────────── -->
+    <string name="fab_try_gemini">Try Gemini AI</string>
+    <string name="cd_open_gemini">Open Gemini AI</string>
+
+    <string name="action_retry">Retry</string>
+
+    <string name="cd_ai_avatar">AI Icon</string>
+    <string name="cd_copy_message">Copy message</string>
+    <string name="action_save_as_note">Save as Note</string>
+    <string name="toast_copied">Text copied to clipboard</string>
+
+    <string name="dialog_save_note_title">Save as Note</string>
+    <string name="dialog_save_note_subtitle">AI response will be saved to Notes</string>
+    <string name="hint_note_title">Note title…</string>
+    <string name="dialog_save_note_info">Content will be saved as plain text</string>
+    <string name="action_save_note">Save</string>
+
+    <string name="note_from_gemini_default_title">Note from Gemini AI</string>
+    <string name="toast_note_saved_from_ai">Note saved successfully! ✓</string>
+
+    <string name="error_connection">Connection failed. Check your internet.\n(%1$s)</string>
+    <string name="error_rate_limit">Rate limit reached. Please try again in a moment.</string>
+    <string name="error_parse">Failed to process AI response.</string>
+    <string name="error_unknown">Unknown error</string>
+    <string name="error_http">HTTP %1$d</string>
+    <string name="error_prefix">Error: %1$s</string>
+
+    <string name="usage_remaining">Remaining today: %1$d/%2$d</string>
+
+    <string name="dialog_rate_limit_title">Too Many Requests</string>
+    <string name="dialog_rate_limit_msg">You have exceeded 15 requests/min (Gemini Free Tier).\nPlease wait a moment and try again.</string>
+    <string name="dialog_not_logged_in_title">Not Logged In</string>
+    <string name="dialog_not_logged_in_msg">Please log in first to use the chat feature.</string>
+
+    <string name="action_rename">Rename</string>
+
+    <string name="activity_new_chat_title">New Chat Created</string>
+    <string name="activity_new_chat_message">You started a new conversation session with Gemini AI</string>
+    <string name="activity_chat_deleted_title">Chat Deleted</string>
+    <string name="activity_chat_deleted_message">A conversation session has been deleted</string>
 </resources>

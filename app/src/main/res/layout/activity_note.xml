@@ -4,6 +4,16 @@
     Deskripsi: Menampilkan daftar catatan dengan fitur pencarian,
     mode seleksi, dan tombol tambah catatan.
 -->
+<!--
+    PERUBAHAN:
+    - fab_gemini diganti ExtendedFloatingActionButton (teks + icon gemini_icon.png)
+    - Muncul extended (teks tampil) setiap masuk ke halaman, lalu shrink setelah 2.5 detik
+    - Tooltip dihapus karena teks sudah ada di dalam FAB
+    - FAB container diberi padding agar shadow tidak terpotong
+    - SearchView diganti MaterialCardView agar tampil seperti search bar dengan shadow merata
+    - Search card seluruh area bisa diklik (clickable + focusable)
+    - SearchView mengisi hingga ujung kanan card (rounded mengikuti card)
+-->
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -12,7 +22,6 @@
     android:layout_height="match_parent"
     android:background="@color/md_theme_light_surface">
 
-    <!-- ================= APP BAR AREA ================= -->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
@@ -27,43 +36,105 @@
             app:layout_scrollFlags="scroll|enterAlwaysCollapsed|exitUntilCollapsed"
             tools:ignore="ExtraText">
 
-            <!-- Search View -->
+            <!--
+                Search Bar: satu kesatuan — SearchView langsung
+                dengan background drawable rounded pill + elevation via layer.
+                Tidak ada card terpisah, tidak ada tumpukan view.
+            -->
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/search_view"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="52dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/bg_search_bar"
+                android:elevation="4dp"
                 android:iconifiedByDefault="false"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
                 app:closeIcon="@drawable/transparent_icon"
-                app:queryHint="@string/search_notes_hint" />
+                app:searchHintIcon="@drawable/transparent_icon"
+                app:searchIcon="@drawable/ic_search_note"
+                app:iconifiedByDefault="false"
+                app:queryBackground="@android:color/transparent"
+                app:queryHint="@string/search_notes_hint"/>
 
         </LinearLayout>
-
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- ================= NOTES RECYCLER VIEW ================= -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_notes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-    <!-- ================= FLOATING ACTION BUTTON ================= -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_add_note"
+    <!--
+        FAB Group: masing-masing FAB dibungkus MaterialCardView
+        dengan style shadow identik seperti search bar
+        (cardElevation=4dp, cardMaxElevation=4dp, stroke, cornerRadius)
+        agar shadow merata atas bawah kiri kanan tanpa terpotong.
+    -->
+
+    <!-- Card wrapper: FAB Tambah Note -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_fab_add_note"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:contentDescription="@string/cd_add_new_note"
-        android:src="@drawable/ic_add"
-        app:backgroundTint="?attr/colorPrimary"
-        app:tint="?attr/colorOnPrimary" />
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="18dp"
+        app:cardCornerRadius="28dp"
+        app:cardBackgroundColor="@null"
+        app:cardElevation="4dp"
+        app:cardMaxElevation="4dp"
+        app:strokeColor="#E8E8F0"
+        app:strokeWidth="1dp">
 
-    <!-- ================= SELECTION MODE HEADER ================= -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_add_note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/cd_add_new_note"
+            android:src="@drawable/ic_add"
+            app:backgroundTint="?attr/colorPrimary"
+            app:tint="?attr/colorOnPrimary"
+            app:elevation="0dp"
+            app:maxImageSize="24dp"/>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Card wrapper: ExtendedFAB Gemini -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_fab_gemini"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="88dp"
+        app:cardCornerRadius="28dp"
+        app:cardBackgroundColor="@null"
+        app:cardElevation="4dp"
+        app:cardMaxElevation="4dp"
+        app:strokeColor="#E8E8F0"
+        app:strokeWidth="1dp">
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fab_gemini"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fab_try_gemini"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            app:icon="@drawable/gemini_icon"
+            app:iconSize="22dp"
+            app:iconTint="@null"
+            app:backgroundTint="#1A1A2E"
+            app:elevation="0dp"
+            android:contentDescription="@string/cd_open_gemini"/>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Selection Mode Header -->
     <RelativeLayout
         android:id="@+id/selection_mode_header"
         android:layout_width="match_parent"
@@ -72,7 +143,6 @@
         android:elevation="4dp"
         android:visibility="gone">
 
-        <!-- Cancel Selection Button -->
         <ImageButton
             android:id="@+id/action_cancel_selection"
             android:layout_width="48dp"
@@ -81,9 +151,8 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/cd_cancel_selection"
             android:src="@drawable/ic_close"
-            app:tint="?attr/colorOnPrimary" />
+            app:tint="?attr/colorOnPrimary"/>
 
-        <!-- Selected Items Count -->
         <TextView
             android:id="@+id/tv_selection_count"
             android:layout_width="wrap_content"
@@ -95,9 +164,8 @@
             android:text="@string/selection_count_placeholder"
             android:textColor="?attr/colorOnPrimary"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
-        <!-- Select All Button -->
         <ImageButton
             android:id="@+id/action_select_all"
             android:layout_width="48dp"
@@ -106,11 +174,10 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/cd_select_all"
             android:src="@drawable/ic_select_all"
-            app:tint="?attr/colorOnPrimary" />
-
+            app:tint="?attr/colorOnPrimary"/>
     </RelativeLayout>
 
-    <!-- ================= SELECTION MODE ACTION BAR ================= -->
+    <!-- Selection Mode Action Bar -->
     <LinearLayout
         android:id="@+id/selection_mode_action_bar"
         android:layout_width="match_parent"
@@ -123,24 +190,21 @@
         android:paddingVertical="8dp"
         android:visibility="gone">
 
-        <!-- Pin Action -->
         <ImageButton
             android:id="@+id/action_pin"
             style="@style/ActionIconStyle"
             android:layout_weight="1"
             android:contentDescription="@string/cd_pin_notes"
             android:src="@drawable/ic_pin_outline"
-            app:tint="?attr/colorOnSurface" />
+            app:tint="?attr/colorOnSurface"/>
 
-        <!-- Delete Action -->
         <ImageButton
             android:id="@+id/action_delete"
             style="@style/ActionIconStyle"
             android:layout_weight="1"
             android:contentDescription="@string/cd_delete_notes"
             android:src="@drawable/ic_delete"
-            app:tint="?attr/colorError" />
-
+            app:tint="?attr/colorError"/>
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F8F9FE">
+
+        <!-- Top Bar -->
+        <LinearLayout
+            android:id="@+id/topBar"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="12dp"
+            android:background="#FFFFFF"
+            android:elevation="4dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageButton
+                android:id="@+id/menuButton"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:src="@drawable/ic_menu"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Menu"
+                app:tint="#5F6368"/>
+
+            <!-- Logo gemini_ai.png — polos, no tint -->
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/gemini_ai"
+                android:scaleType="fitStart"
+                android:adjustViewBounds="true"
+                android:contentDescription="Gemini AI"/>
+
+            <ImageButton
+                android:id="@+id/newChatButton"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:src="@drawable/ic_new_chat"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Chat Baru"
+                app:tint="#5F6368"/>
+        </LinearLayout>
+
+        <!-- Empty State -->
+        <LinearLayout
+            android:id="@+id/emptyStateLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="32dp"
+            app:layout_constraintTop_toBottomOf="@id/topBar"
+            app:layout_constraintBottom_toTopOf="@id/inputCard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <!-- Hero image: gemini_ai.png besar -->
+            <ImageView
+                android:id="@+id/aiIconView"
+                android:layout_width="300dp"
+                android:layout_height="150dp"
+                android:src="@drawable/gemini_ai"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:contentDescription="Gemini AI"/>
+
+            <TextView
+                android:id="@+id/greetingText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Halo! Saya Gemini AI 👋"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#1A1A2E"
+                android:fontFamily="sans-serif-medium"/>
+
+            <TextView
+                android:id="@+id/suggestionText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Tanya saya apa saja — kode, ide, riset, atau sekadar ngobrol!"
+                android:textSize="14sp"
+                android:textColor="#8A8A99"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.4"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="32dp">
+
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="💡 Bantu ide"
+                    android:textSize="13sp"
+                    android:layout_marginEnd="8dp"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    app:chipBackgroundColor="#EEF2FF"
+                    app:chipStrokeColor="#C7C9F3"
+                    app:chipStrokeWidth="1dp"/>
+
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🛠️ Bantu kode"
+                    android:textSize="13sp"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    app:chipBackgroundColor="#EEF2FF"
+                    app:chipStrokeColor="#C7C9F3"
+                    app:chipStrokeWidth="1dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="✍️ Bantu nulis"
+                    android:textSize="13sp"
+                    android:layout_marginEnd="8dp"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    app:chipBackgroundColor="#EEF2FF"
+                    app:chipStrokeColor="#C7C9F3"
+                    app:chipStrokeWidth="1dp"/>
+
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🔍 Bantu riset"
+                    android:textSize="13sp"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    app:chipBackgroundColor="#EEF2FF"
+                    app:chipStrokeColor="#C7C9F3"
+                    app:chipStrokeWidth="1dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Chat RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chatRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            android:clipToPadding="false"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            app:layout_constraintTop_toBottomOf="@id/topBar"
+            app:layout_constraintBottom_toTopOf="@id/inputCard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- Input Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/inputCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="28dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardElevation="8dp"
+            app:strokeColor="#E8E8F0"
+            app:strokeWidth="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="20dp"
+                android:paddingEnd="8dp"
+                android:paddingVertical="6dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/messageInput"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Tanya apa saja..."
+                    android:textSize="15sp"
+                    android:textColor="#1A1A2E"
+                    android:textColorHint="#AAAABB"
+                    android:background="@null"
+                    android:maxLines="5"
+                    android:minLines="1"
+                    android:imeOptions="actionSend"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:paddingVertical="12dp"/>
+
+                <ImageButton
+                    android:id="@+id/sendButton"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/ic_send"
+                    android:background="@drawable/bg_send_button"
+                    android:padding="12dp"
+                    android:contentDescription="Kirim"
+                    app:tint="#FFFFFF"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- ===== SIDEBAR ===== -->
+    <LinearLayout
+        android:id="@+id/sidebarContent"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:orientation="vertical"
+        android:background="#FFFFFF"
+        android:fitsSystemWindows="true"
+        android:elevation="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:paddingTop="48dp"
+            android:background="#EEF2FF">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <!-- Icon kecil gemini_icon.png — polos -->
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/gemini_icon"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="Gemini icon"/>
+
+                <!-- Logo teks gemini_ai.png -->
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/gemini_ai"
+                    android:scaleType="fitStart"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="Gemini AI"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/usageLimitText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Sisa hari ini: --/1500"
+                android:textSize="12sp"
+                android:textColor="#888899"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/sidebarNewChatBtn"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="20dp"
+            android:background="?attr/selectableItemBackground"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="12dp">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/ic_new_chat"
+                app:tint="#6C63FF"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chat Baru"
+                android:textSize="15sp"
+                android:textColor="#6C63FF"
+                android:textStyle="bold"
+                android:paddingStart="14dp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#F0F0F8"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="12dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Riwayat Chat"
+            android:textSize="12sp"
+            android:textColor="#AAAABB"
+            android:textAllCaps="true"
+            android:letterSpacing="0.1"
+            android:paddingHorizontal="20dp"
+            android:paddingBottom="8dp"
+            android:fontFamily="sans-serif-medium"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/historyRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:paddingBottom="16dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:background="#F8F9FE">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Powered by Gemini 2.5 Flash"
+                android:textSize="11sp"
+                android:textColor="#BBBBCC"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Free Tier: 15 req/min · 1500 req/day"
+                android:textSize="10sp"
+                android:textColor="#CCCCDD"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

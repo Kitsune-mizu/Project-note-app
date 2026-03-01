@@ -23,6 +23,7 @@ import androidx.fragment.app.*;
 
 import com.android.alpha.R;
 import com.android.alpha.data.session.UserSession;
+import com.android.alpha.geminichat.ChatSessionManager;
 import com.android.alpha.ui.auth.ForgotPasswordActivity;
 import com.android.alpha.ui.auth.LoginActivity;
 import com.android.alpha.utils.DialogUtils;
@@ -300,7 +301,11 @@ public class SettingsFragment extends Fragment implements
                 getString(R.string.action_cancel),
                 () -> {
                     UserSession s = UserSession.getInstance();
-                    if (s.deleteAccount(s.getUsername())) {
+                    String username = s.getUsername();
+
+                    ChatSessionManager.getInstance(requireContext()).onAccountDeleted(username);
+
+                    if (s.deleteAccount(username)) {
                         Toast.makeText(requireContext(), R.string.toast_account_deleted, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(requireContext(), LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
