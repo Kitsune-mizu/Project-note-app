@@ -28,7 +28,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.android.alpha.R;
 import com.android.alpha.data.local.UserStorageManager;
 import com.android.alpha.data.session.UserSession;
-import com.android.alpha.geminichat.ChatSessionManager;
+import com.android.alpha.ui.geminichat.ChatSessionManager;
 import com.android.alpha.ui.auth.LoginActivity;
 import com.android.alpha.ui.notifications.NotificationActivity;
 import com.android.alpha.utils.DialogUtils;

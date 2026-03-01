@@ -23,7 +23,7 @@ import androidx.fragment.app.*;
 
 import com.android.alpha.R;
 import com.android.alpha.data.session.UserSession;
-import com.android.alpha.geminichat.ChatSessionManager;
+import com.android.alpha.ui.geminichat.ChatSessionManager;
 import com.android.alpha.ui.auth.ForgotPasswordActivity;
 import com.android.alpha.ui.auth.LoginActivity;
 import com.android.alpha.utils.DialogUtils;

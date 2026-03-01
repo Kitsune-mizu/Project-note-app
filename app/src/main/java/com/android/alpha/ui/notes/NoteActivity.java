@@ -24,7 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.alpha.R;
 import com.android.alpha.data.session.UserSession;
-import com.android.alpha.geminichat.ChatActivity;
+import com.android.alpha.ui.geminichat.ChatActivity;
 import com.android.alpha.utils.DialogUtils;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

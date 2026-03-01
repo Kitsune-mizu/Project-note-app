@@ -1,4 +1,4 @@
-package com.android.alpha.geminichat;
+package com.android.alpha.ui.geminichat;
 
 import android.view.LayoutInflater;
 import android.view.View;

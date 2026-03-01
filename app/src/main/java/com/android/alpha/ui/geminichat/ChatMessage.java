@@ -1,4 +1,4 @@
-package com.android.alpha.geminichat;
+package com.android.alpha.ui.geminichat;
 
 /**
  * Immutable data model untuk satu pesan dalam sesi chat.

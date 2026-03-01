@@ -81,7 +81,7 @@
         <uses-library android:name="org.osmdroid" android:required="false" />
 
         <activity
-            android:name=".geminichat.ChatActivity"
+            android:name=".ui.geminichat.ChatActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize"
             android:theme="@style/Theme.GeminiChat">
