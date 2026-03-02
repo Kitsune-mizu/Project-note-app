@@ -187,13 +187,15 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         private void startAnimations() {
+            // Fade in/out icon
             if (loadingIcon != null) {
-                android.animation.ObjectAnimator rotate =
-                        android.animation.ObjectAnimator.ofFloat(loadingIcon, "rotation", 0f, 360f);
-                rotate.setDuration(1800);
-                rotate.setRepeatCount(android.animation.ObjectAnimator.INFINITE);
-                rotate.setInterpolator(new android.view.animation.LinearInterpolator());
-                rotate.start();
+                android.animation.ObjectAnimator fade =
+                        android.animation.ObjectAnimator.ofFloat(loadingIcon, "alpha", 1f, 0.2f);
+                fade.setDuration(800);
+                fade.setRepeatCount(android.animation.ObjectAnimator.INFINITE);
+                fade.setRepeatMode(android.animation.ObjectAnimator.REVERSE);
+                fade.setInterpolator(new android.view.animation.AccelerateDecelerateInterpolator());
+                fade.start();
             }
             bounceDot(dot1, 0);
             bounceDot(dot2, 180);

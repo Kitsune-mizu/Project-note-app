@@ -83,7 +83,8 @@ public class EditNoteActivity extends AppCompatActivity {
     private ImageButton btnDelete, btnShare;
 
     // --- Tombol undo/redo & simpan manual ---
-    private ImageButton btnUndo, btnRedo, btnSaveManual;
+    private ImageButton btnUndo, btnRedo;
+    private com.google.android.material.button.MaterialButton btnSaveManual;
 
     // --- Stack undo/redo berbasis snapshot SpannableStringBuilder ---
     private final Deque<SpannableStringBuilder> undoStack = new ArrayDeque<>();
@@ -737,7 +738,7 @@ public class EditNoteActivity extends AppCompatActivity {
     /** Menampilkan popup menu (reminder, share, delete) di bawah tombol anchor. */
     private void showMenuPopup(View anchor) {
         ViewGroup root = (ViewGroup) anchor.getRootView();
-        View popupView = getLayoutInflater().inflate(R.layout.layout_menu_note, root, false);
+        View popupView = getLayoutInflater().inflate(R.layout.popup_menu_note, root, false);
 
         PopupWindow popup = new PopupWindow(popupView,
                 LinearLayout.LayoutParams.WRAP_CONTENT,

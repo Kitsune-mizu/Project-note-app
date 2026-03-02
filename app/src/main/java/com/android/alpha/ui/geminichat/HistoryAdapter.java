@@ -1,10 +1,12 @@
 package com.android.alpha.ui.geminichat;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,19 +42,15 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ChatSession session = sessions.get(position);
-        holder.bind(session, listener);
+        holder.bind(sessions.get(position), listener);
     }
 
     @Override
     public int getItemCount() { return sessions.size(); }
 
-    // ViewHolder di-package-private (tidak static public) agar tidak exposed
-    // di luar scope yang diperlukan, sesuai lint recommendation.
-    // ViewHolder diperbaiki visibility-nya agar tidak lebih sempit dari Adapter
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView titleText;
+        private final TextView    titleText;
         private final ImageButton moreButton;
 
         public ViewHolder(@NonNull View v) {
@@ -63,28 +61,39 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
         void bind(ChatSession session, HistoryListener listener) {
             titleText.setText(session.getTitle());
-
             itemView.setOnClickListener(v -> listener.onSessionClick(session));
 
-            moreButton.setOnClickListener(v -> {
-                PopupMenu popup = new PopupMenu(v.getContext(), v);
-                popup.getMenu().add(0, 0, 0,
-                        v.getContext().getString(R.string.action_rename));
-                popup.getMenu().add(0, 1, 1,
-                        v.getContext().getString(R.string.action_delete));
+            moreButton.setOnClickListener(anchor -> {
+                @android.annotation.SuppressLint("InflateParams")
+                View popup = LayoutInflater.from(anchor.getContext())
+                        .inflate(R.layout.popup_history_menu, null);
 
-                popup.setOnMenuItemClickListener(item -> {
+                PopupWindow popupWindow = new PopupWindow(
+                        popup,
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        true);
+                popupWindow.setElevation(16f);
+                popupWindow.setOutsideTouchable(true);
+                popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                popup.findViewById(R.id.menuRename).setOnClickListener(v -> {
                     int pos = getBindingAdapterPosition();
-                    if (pos == RecyclerView.NO_POSITION) return false;
-
-                    if (item.getItemId() == 0) {
-                        listener.onRenameClick(session, pos);
-                    } else {
-                        listener.onDeleteClick(session, pos);
-                    }
-                    return true;
+                    if (pos != RecyclerView.NO_POSITION) listener.onRenameClick(session, pos);
+                    popupWindow.dismiss();
                 });
-                popup.show();
+
+                popup.findViewById(R.id.menuDelete).setOnClickListener(v -> {
+                    int pos = getBindingAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION) listener.onDeleteClick(session, pos);
+                    popupWindow.dismiss();
+                });
+
+                popup.measure(
+                        View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                        View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+                int offsetX = -popup.getMeasuredWidth() + anchor.getWidth();
+                popupWindow.showAsDropDown(anchor, offsetX, 0);
             });
         }
     }

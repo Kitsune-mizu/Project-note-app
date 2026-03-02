@@ -91,9 +91,16 @@ public class NoteActivity extends AppCompatActivity
 
     private void initViewModel() {
         viewModel = new ViewModelProvider(this).get(NoteViewModel.class);
-        String userId = UserSession.getInstance()
-                .getUserData(UserSession.getInstance().getUsername()).userId;
-        viewModel.setUserId(userId);
+        try {
+            String userId = UserSession.getInstance()
+                    .getUserData(UserSession.getInstance().getUsername()).userId;
+            viewModel.setUserId(userId);
+        } catch (IllegalStateException e) {
+            // UserSession belum init (cold start langsung ke NoteActivity)
+            startActivity(new Intent(this, com.android.alpha.ui.auth.LoginActivity.class)
+                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+            finish();
+        }
     }
 
     private void initViews() {
@@ -183,10 +190,11 @@ public class NoteActivity extends AppCompatActivity
     }
 
     // ── Multi-selection ───────────────────────────────────────────────────────
+
     private void handleMultiAction(MultiAction action) {
         Set<String> selectedIds = adapter.getSelectedNoteIds();
         if (selectedIds.isEmpty()) return;
-        @SuppressLint({"NewApi", "LocalSuppress"}) List<Note> notes = allNotes.stream()
+        List<Note> notes = allNotes.stream()
                 .filter(n -> selectedIds.contains(n.getId()))
                 .toList();
         switch (action) {

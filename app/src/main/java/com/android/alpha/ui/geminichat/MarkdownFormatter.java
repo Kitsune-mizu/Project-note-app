@@ -1,6 +1,5 @@
 package com.android.alpha.ui.geminichat;
 
-import android.annotation.SuppressLint;
 import android.graphics.Typeface;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -24,7 +23,6 @@ public class MarkdownFormatter {
     private static final int BULLET_GAP = 16;
 
     /** Untuk ditampilkan di bubble chat (Spannable dengan format visual). */
-    @SuppressLint("NewApi")
     public static SpannableStringBuilder toSpannable(String raw) {
         SpannableStringBuilder sb = new SpannableStringBuilder();
         String[] lines = raw.split("\n");
@@ -34,7 +32,7 @@ public class MarkdownFormatter {
 
             if (trimmed.isEmpty()) {
                 // Baris kosong: tambah satu newline sebagai spacer antar paragraf
-                if (!sb.isEmpty() && sb.charAt(sb.length() - 1) != '\n') {
+                if (sb.length() > 0 && sb.charAt(sb.length() - 1) != '\n') {
                     sb.append("\n");
                 }
                 continue;
