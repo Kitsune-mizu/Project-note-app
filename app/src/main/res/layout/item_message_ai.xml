@@ -69,6 +69,7 @@
                 android:layout_height="38dp"
                 android:orientation="horizontal"
                 android:gravity="end|center_vertical"
+                android:paddingStart="6dp"
                 android:paddingEnd="6dp">
 
                 <ImageButton

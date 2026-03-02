@@ -122,8 +122,8 @@
         android:textSize="11sp"
         android:textColor="#BBBBCC"
         android:gravity="center_vertical"
-        android:drawableStart="@drawable/ic_warning"
         android:drawablePadding="5dp"
+        app:drawableStartCompat="@drawable/ic_warning"
         app:drawableTint="#BBBBCC"/>
 
     <!-- Tombol aksi -->

@@ -1,35 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Item: Chat Error Bubble
+    Fix: LinearLayout (icon + teks error) diganti TextView dengan drawableStart
+         → menghilangkan lint "This tag and its children can be replaced by one TextView"
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
     android:gravity="start"
+    android:orientation="horizontal"
     android:paddingStart="12dp"
-    android:paddingEnd="16dp"
     android:paddingTop="6dp"
+    android:paddingEnd="16dp"
     android:paddingBottom="6dp">
 
-    <!-- Avatar gemini_icon.png — sama seperti AI bubble -->
+    <!-- Avatar Gemini -->
     <ImageView
         android:layout_width="28dp"
         android:layout_height="28dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="8dp"
-        android:src="@drawable/gemini_icon"
-        android:scaleType="fitCenter"
         android:adjustViewBounds="true"
-        android:contentDescription="@string/gemini_ai"/>
+        android:contentDescription="@string/gemini_ai"
+        android:scaleType="fitCenter"
+        android:src="@drawable/gemini_icon" />
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_marginTop="2dp"
-        android:layout_marginBottom="2dp"
         android:layout_marginEnd="48dp"
-        app:cardCornerRadius="18dp"
+        android:layout_marginBottom="2dp"
         app:cardBackgroundColor="#FFF5F5"
+        app:cardCornerRadius="18dp"
         app:cardElevation="4dp"
         app:cardMaxElevation="4dp"
         app:strokeColor="#FFDDDD"
@@ -40,41 +45,34 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Baris icon error + teks -->
-            <LinearLayout
+            <!--
+                FIX: LinearLayout (ic_warning + TextView) digabung jadi satu TextView.
+                drawableStart menggantikan ImageView ic_warning.
+                drawablePadding menggantikan layout_marginEnd="8dp" pada icon.
+                app:drawableStartCompat dipakai agar bisa apply tint lewat drawableTint.
+            -->
+            <TextView
+                android:id="@+id/messageText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:drawablePadding="8dp"
                 android:gravity="center_vertical"
+                android:lineSpacingMultiplier="1.35"
                 android:paddingStart="14dp"
-                android:paddingEnd="14dp"
                 android:paddingTop="12dp"
-                android:paddingBottom="8dp">
-
-                <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:src="@drawable/ic_warning"
-                    android:layout_marginEnd="8dp"
-                    android:contentDescription="@null"
-                    app:tint="#E53935" />
-
-                <TextView
-                    android:id="@+id/messageText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="#C62828"
-                    android:textSize="13.5sp"
-                    android:lineSpacingMultiplier="1.35"/>
-            </LinearLayout>
+                android:paddingEnd="14dp"
+                android:paddingBottom="8dp"
+                android:textColor="#C62828"
+                android:textSize="13.5sp"
+                app:drawableStartCompat="@drawable/ic_warning"
+                app:drawableTint="#E53935" />
 
             <!-- Divider -->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.6dp"
                 android:layout_marginHorizontal="10dp"
-                android:background="#FFE0E0"/>
+                android:background="#FFE0E0" />
 
             <!-- Tombol Coba Lagi -->
             <LinearLayout
@@ -92,18 +90,18 @@
                 <ImageView
                     android:layout_width="14dp"
                     android:layout_height="14dp"
-                    android:src="@drawable/ic_refresh"
                     android:contentDescription="@null"
+                    android:src="@drawable/ic_refresh"
                     app:tint="#E53935" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
+                    android:fontFamily="sans-serif-medium"
                     android:text="@string/action_retry"
                     android:textColor="#E53935"
-                    android:textSize="12sp"
-                    android:fontFamily="sans-serif-medium"/>
+                    android:textSize="12sp" />
             </LinearLayout>
 
         </LinearLayout>
