@@ -1,30 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Layout: Language Bottom Sheet
-    Deskripsi: Dialog untuk memilih bahasa aplikasi
+    Layout: Language Bottom Sheet (Modern)
+    Handle indicator ditambahkan di atas untuk bottom sheet feel
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_language_bottomsheet"
+    android:background="@drawable/bg_dialog_rounded"
     android:orientation="vertical"
-    android:paddingTop="16dp"
     android:paddingBottom="28dp"
     tools:ignore="ExtraText">
+
+    <!-- Handle indicator -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="16dp"
+        android:alpha="0.3"
+        android:background="@drawable/bg_dialog_rounded" />
 
     <!-- Title -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="20dp"
-        android:paddingBottom="12dp"
+        android:paddingBottom="8dp"
         android:text="@string/dialog_language_title"
+        android:textAppearance="?attr/textAppearanceTitleMedium"
         android:textColor="?attr/colorOnSurface"
-        android:textSize="18sp"
         android:textStyle="bold" />
 
-    <!-- Language List Container -->
+    <!-- Thin divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="8dp"
+        android:alpha="0.08"
+        android:background="?attr/colorOnSurface" />
+
+    <!-- Language List -->
     <LinearLayout
         android:id="@+id/languageContainer"
         android:layout_width="match_parent"

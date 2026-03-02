@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Dialog: Konfirmasi Hapus Chat
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -8,6 +11,7 @@
     android:padding="28dp"
     android:gravity="center">
 
+    <!-- Icon Delete -->
     <com.google.android.material.card.MaterialCardView
         android:layout_width="64dp"
         android:layout_height="64dp"
@@ -19,29 +23,30 @@
             android:layout_width="34dp"
             android:layout_height="34dp"
             android:layout_gravity="center"
+            android:contentDescription="@string/cd_delete_icon"
             android:src="@drawable/ic_delete"
-            android:tint="#E53935"/>
+            app:tint="#E53935" />
     </com.google.android.material.card.MaterialCardView>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Hapus Chat?"
+        android:text="@string/dialog_delete_chat_title"
         android:textSize="18sp"
         android:textStyle="bold"
         android:textColor="#1A1A2E"
-        android:fontFamily="sans-serif-medium"/>
+        android:fontFamily="sans-serif-medium" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Chat ini akan dihapus secara permanen dan tidak dapat dipulihkan."
+        android:text="@string/dialog_delete_chat_message"
         android:textSize="14sp"
         android:textColor="#6A6A7E"
         android:gravity="center"
-        android:lineSpacingMultiplier="1.4"/>
+        android:lineSpacingMultiplier="1.4" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,27 +56,29 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnDeleteCancel"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_weight="1"
-            android:text="Batal"
-            android:textSize="14sp"
             android:layout_marginEnd="8dp"
+            android:text="@string/button_cancel"
+            android:textColor="#6C63FF"
+            android:textSize="14sp"
             app:backgroundTint="#F0F0F8"
             app:cornerRadius="24dp"
-            android:textColor="#6C63FF"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+            app:strokeColor="#6C63FF"
+            app:strokeWidth="1dp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnDeleteConfirm"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_weight="1"
-            android:text="Hapus"
-            android:textSize="14sp"
             android:layout_marginStart="8dp"
+            android:text="@string/button_delete"
+            android:textSize="14sp"
             app:backgroundTint="#E53935"
-            app:cornerRadius="24dp"/>
+            app:cornerRadius="24dp" />
 
     </LinearLayout>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Layout: Login Screen
+    Layout: Login Screen (Modern)
     Deskripsi: Tampilan halaman login dengan animasi, form input, dan aksi autentikasi
 -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -8,68 +8,71 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:windowBackground"
+    android:background="?attr/colorSurface"
     android:fillViewport="true">
 
-    <!-- ================= ROOT CONTAINER ================= -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingHorizontal="30dp"
-        android:paddingTop="50dp"
+        android:paddingHorizontal="28dp"
+        android:paddingTop="48dp"
+        android:paddingBottom="32dp"
         tools:ignore="ExtraText">
 
-        <!-- ================= LOTTIE ANIMATION ================= -->
+        <!-- ── Lottie Animation ── -->
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lottieAnimationView"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
             android:layout_gravity="center_horizontal"
             app:lottie_autoPlay="true"
             app:lottie_loop="true" />
 
-        <!-- ================= WELCOME TEXT ================= -->
+        <!-- ── Welcome Title ── -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:text="@string/welcome_back"
-            android:textColor="?attr/colorOnBackground"
-            android:textSize="24sp"
+            android:textAppearance="?attr/textAppearanceHeadlineSmall"
+            android:textColor="?attr/colorOnSurface"
             android:textStyle="bold" />
 
+        <!-- ── Subtitle ── -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="32dp"
             android:text="@string/please_sign_in"
-            android:textColor="?attr/colorOnSurface"
-            android:textSize="14sp" />
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:textColor="?attr/colorOutline" />
 
-        <!-- ================= FORM FIELDS ================= -->
+        <!-- ── Form Fields ── -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
             android:orientation="vertical">
 
-            <!-- ===== Username Input ===== -->
+            <!-- Username -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilUsername"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                app:boxCornerRadiusBottomEnd="12dp"
-                app:boxCornerRadiusBottomStart="12dp"
-                app:boxCornerRadiusTopEnd="12dp"
-                app:boxCornerRadiusTopStart="12dp"
+                android:layout_marginBottom="14dp"
+                app:boxCornerRadiusBottomEnd="14dp"
+                app:boxCornerRadiusBottomStart="14dp"
+                app:boxCornerRadiusTopEnd="14dp"
+                app:boxCornerRadiusTopStart="14dp"
                 app:boxStrokeColor="?attr/colorPrimary"
                 app:endIconMode="clear_text"
                 app:endIconTint="?attr/colorPrimary"
                 app:errorEnabled="true"
+                app:hintTextColor="?attr/colorPrimary"
                 app:startIconDrawable="@drawable/ic_person"
                 app:startIconTint="?attr/colorPrimary">
 
@@ -79,25 +82,28 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/username_hint"
                     android:inputType="text"
-                    android:padding="16dp"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
                     android:textColor="?attr/colorOnSurface"
-                    android:textColorHint="?attr/colorOnSurface" />
+                    android:textColorHint="?attr/colorOnSurfaceVariant" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- ===== Password Input ===== -->
+            <!-- Password -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilPassword"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                app:boxCornerRadiusBottomEnd="12dp"
-                app:boxCornerRadiusBottomStart="12dp"
-                app:boxCornerRadiusTopEnd="12dp"
-                app:boxCornerRadiusTopStart="12dp"
+                android:layout_marginBottom="8dp"
+                app:boxCornerRadiusBottomEnd="14dp"
+                app:boxCornerRadiusBottomStart="14dp"
+                app:boxCornerRadiusTopEnd="14dp"
+                app:boxCornerRadiusTopStart="14dp"
                 app:boxStrokeColor="?attr/colorPrimary"
                 app:endIconMode="password_toggle"
                 app:endIconTint="?attr/colorPrimary"
                 app:errorEnabled="true"
+                app:hintTextColor="?attr/colorPrimary"
                 app:startIconDrawable="@drawable/ic_lock"
                 app:startIconTint="?attr/colorPrimary">
 
@@ -107,20 +113,20 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/password_hint"
                     android:inputType="textPassword"
-                    android:padding="16dp"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
                     android:textColor="?attr/colorOnSurface"
-                    android:textColorHint="?attr/colorOnSurface" />
+                    android:textColorHint="?attr/colorOnSurfaceVariant" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- ===== Remember Me & Forgot Password ===== -->
+            <!-- Remember Me & Forgot Password -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="24dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <!-- Remember Me Checkbox -->
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:id="@+id/cbRememberMe"
                     android:layout_width="wrap_content"
@@ -129,16 +135,14 @@
                     android:focusableInTouchMode="false"
                     app:buttonTint="?attr/colorPrimary" />
 
-                <!-- Remember Me Text -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="6dp"
                     android:text="@string/remember_me"
-                    android:textColor="?attr/colorOnSurface"
-                    android:textSize="14sp" />
+                    android:textAppearance="?attr/textAppearanceBodySmall"
+                    android:textColor="?attr/colorOnSurfaceVariant" />
 
-                <!-- Forgot Password Link -->
                 <TextView
                     android:id="@+id/tvForgotPassword"
                     android:layout_width="0dp"
@@ -146,35 +150,36 @@
                     android:layout_weight="1"
                     android:gravity="end"
                     android:text="@string/forgot_password"
+                    android:textAppearance="?attr/textAppearanceBodySmall"
                     android:textColor="?attr/colorPrimary"
-                    android:textSize="14sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
-            <!-- ===== Login Button ===== -->
+            <!-- Login Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnLogin"
+                style="@style/Widget.Material3.Button"
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
+                android:layout_height="54dp"
                 android:text="@string/sign_in_button"
                 android:textAllCaps="false"
                 android:textColor="?attr/colorOnPrimary"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 app:backgroundTint="?attr/colorPrimary"
-                app:cornerRadius="12dp"
+                app:cornerRadius="14dp"
                 app:rippleColor="?attr/colorOnPrimary" />
 
-            <!-- ===== Sign Up Link ===== -->
+            <!-- Sign Up Link -->
             <TextView
                 android:id="@+id/tvSignUp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="24dp"
                 android:text="@string/dont_have_account_signup"
+                android:textAppearance="?attr/textAppearanceBodyMedium"
                 android:textColor="?attr/colorPrimary"
-                android:textSize="14sp"
                 android:textStyle="bold" />
 
         </LinearLayout>

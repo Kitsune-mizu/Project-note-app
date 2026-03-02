@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Layout: Sign Up Screen
+    Layout: Sign Up Screen (Modern)
     Deskripsi: Tampilan pendaftaran akun baru
 -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -8,67 +8,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:windowBackground"
+    android:background="?attr/colorSurface"
     android:fillViewport="true">
 
-    <!-- Root Container -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:paddingBottom="32dp"
         tools:ignore="ExtraText">
 
-        <!-- Lottie Animation -->
+        <!-- ── Lottie Animation ── -->
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lottieAnimationViewSignUp"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="48dp"
             app:lottie_autoPlay="true"
             app:lottie_loop="true" />
 
-        <!-- Title Section -->
+        <!-- ── Title ── -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
             android:text="@string/create_account_title"
-            android:textColor="?attr/colorOnBackground"
-            android:textSize="24sp"
+            android:textAppearance="?attr/textAppearanceHeadlineSmall"
+            android:textColor="?attr/colorOnSurface"
             android:textStyle="bold" />
 
-        <!-- Subtitle -->
+        <!-- ── Subtitle ── -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="32dp"
             android:text="@string/fill_details_to_sign_up"
-            android:textColor="?attr/colorOnSurface"
-            android:textSize="14sp" />
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:textColor="?attr/colorOutline" />
 
-        <!-- ================= FORM FIELDS ================= -->
+        <!-- ── Form Fields ── -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:layout_marginHorizontal="30dp"
+            android:layout_marginHorizontal="28dp"
             android:orientation="vertical">
 
-            <!-- Username Input Field -->
+            <!-- Username -->
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                app:boxCornerRadiusBottomEnd="12dp"
-                app:boxCornerRadiusBottomStart="12dp"
-                app:boxCornerRadiusTopEnd="12dp"
-                app:boxCornerRadiusTopStart="12dp"
+                android:layout_marginBottom="6dp"
+                app:boxCornerRadiusBottomEnd="14dp"
+                app:boxCornerRadiusBottomStart="14dp"
+                app:boxCornerRadiusTopEnd="14dp"
+                app:boxCornerRadiusTopStart="14dp"
                 app:boxStrokeColor="?attr/colorPrimary"
                 app:endIconMode="clear_text"
                 app:endIconTint="?attr/colorPrimary"
+                app:hintTextColor="?attr/colorPrimary"
                 app:startIconDrawable="@drawable/ic_person"
                 app:startIconTint="?attr/colorPrimary">
 
@@ -78,34 +80,37 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/username_hint"
                     android:inputType="text"
-                    android:padding="16dp"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
                     android:textColor="?attr/colorOnSurface"
                     android:textColorHint="?attr/colorOnSurfaceVariant" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Username Error Message -->
+            <!-- Username Error -->
             <TextView
                 android:id="@+id/tvUsernameError"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="10dp"
                 android:text="@string/username_error_message"
-                android:textColor="@color/md_theme_light_error"
+                android:textColor="?attr/colorError"
                 android:textSize="12sp"
                 android:visibility="gone" />
 
-            <!-- Password Input Field -->
+            <!-- Password -->
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                app:boxCornerRadiusBottomEnd="12dp"
-                app:boxCornerRadiusBottomStart="12dp"
-                app:boxCornerRadiusTopEnd="12dp"
-                app:boxCornerRadiusTopStart="12dp"
+                android:layout_marginBottom="6dp"
+                app:boxCornerRadiusBottomEnd="14dp"
+                app:boxCornerRadiusBottomStart="14dp"
+                app:boxCornerRadiusTopEnd="14dp"
+                app:boxCornerRadiusTopStart="14dp"
                 app:boxStrokeColor="?attr/colorPrimary"
                 app:endIconMode="password_toggle"
                 app:endIconTint="?attr/colorPrimary"
+                app:hintTextColor="?attr/colorPrimary"
                 app:startIconDrawable="@drawable/ic_lock"
                 app:startIconTint="?attr/colorPrimary">
 
@@ -115,34 +120,37 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/password_hint"
                     android:inputType="textPassword"
-                    android:padding="16dp"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
                     android:textColor="?attr/colorOnSurface"
                     android:textColorHint="?attr/colorOnSurfaceVariant" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Password Error Message -->
+            <!-- Password Error -->
             <TextView
                 android:id="@+id/tvPasswordError"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="10dp"
                 android:text="@string/password_error_message"
-                android:textColor="@color/md_theme_light_error"
+                android:textColor="?attr/colorError"
                 android:textSize="12sp"
                 android:visibility="gone" />
 
-            <!-- Confirm Password Input Field -->
+            <!-- Confirm Password -->
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                app:boxCornerRadiusBottomEnd="12dp"
-                app:boxCornerRadiusBottomStart="12dp"
-                app:boxCornerRadiusTopEnd="12dp"
-                app:boxCornerRadiusTopStart="12dp"
+                android:layout_marginBottom="6dp"
+                app:boxCornerRadiusBottomEnd="14dp"
+                app:boxCornerRadiusBottomStart="14dp"
+                app:boxCornerRadiusTopEnd="14dp"
+                app:boxCornerRadiusTopStart="14dp"
                 app:boxStrokeColor="?attr/colorPrimary"
                 app:endIconMode="password_toggle"
                 app:endIconTint="?attr/colorPrimary"
+                app:hintTextColor="?attr/colorPrimary"
                 app:startIconDrawable="@drawable/ic_lock"
                 app:startIconTint="?attr/colorPrimary">
 
@@ -152,34 +160,36 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/confirm_password_hint"
                     android:inputType="textPassword"
-                    android:padding="16dp"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
                     android:textColor="?attr/colorOnSurface"
                     android:textColorHint="?attr/colorOnSurfaceVariant" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Confirm Password Error Message -->
+            <!-- Confirm Password Error -->
             <TextView
                 android:id="@+id/tvConfirmPasswordError"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="20dp"
                 android:text="@string/confirm_password_error_message"
-                android:textColor="@color/md_theme_light_error"
+                android:textColor="?attr/colorError"
                 android:textSize="12sp"
                 android:visibility="gone" />
 
             <!-- Sign Up Button -->
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSignUp"
+                style="@style/Widget.Material3.Button"
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:background="@drawable/button_rounded"
-                android:drawablePadding="8dp"
+                android:layout_height="54dp"
                 android:text="@string/sign_up_button"
                 android:textAllCaps="false"
                 android:textColor="?attr/colorOnPrimary"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:backgroundTint="?attr/colorPrimary"
+                app:cornerRadius="14dp" />
 
             <!-- Login Link -->
             <TextView
@@ -187,14 +197,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="24dp"
                 android:text="@string/already_have_account_signin"
+                android:textAppearance="?attr/textAppearanceBodyMedium"
                 android:textColor="?attr/colorPrimary"
-                android:textSize="14sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
-
     </LinearLayout>
-
 </ScrollView>

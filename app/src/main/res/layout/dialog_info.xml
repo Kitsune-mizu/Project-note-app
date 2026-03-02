@@ -1,53 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Layout: Custom Information Dialog
-    Deskripsi: Dialog sederhana dengan judul, pesan, dan tombol tutup
+    Layout: Custom Information Dialog (Modern)
+    Deskripsi: Dialog informasi modern dengan judul, pesan, dan tombol tutup
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="24dp"
     android:background="@drawable/bg_dialog_rounded"
     android:gravity="center_horizontal"
-    tools:ignore="ExtraText">
+    android:orientation="vertical"
+    android:padding="28dp">
 
-    <!-- ================= DIALOG TITLE ================= -->
+    <!-- Dialog Title -->
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:paddingBottom="8dp"
+        android:paddingBottom="10dp"
         android:text="@string/dialog_title_information"
-        android:textAppearance="?attr/textAppearanceTitleMedium"
-        android:textColor="?attr/colorOnSurface" />
+        android:textAppearance="?attr/textAppearanceTitleLarge"
+        android:textColor="?attr/colorOnSurface"
+        android:textStyle="bold" />
 
-    <!-- ================= DIALOG MESSAGE ================= -->
+    <!-- Dialog Message -->
     <TextView
         android:id="@+id/tvMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:paddingBottom="20dp"
+        android:lineSpacingMultiplier="1.5"
+        android:paddingBottom="24dp"
         android:text="@string/dialog_message_notification"
         android:textAppearance="?attr/textAppearanceBodyMedium"
         android:textColor="?attr/colorOnSurfaceVariant" />
 
-    <!-- ================= ACTION BUTTON ================= -->
-    <!-- Tombol untuk menutup dialog -->
+    <!-- Thin Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="24dp"
+        android:alpha="0.12"
+        android:background="?attr/colorOnSurface" />
+
+    <!-- Close Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnOk"
         style="@style/Widget.Material3.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
         android:backgroundTint="?attr/colorPrimary"
-        android:paddingStart="32dp"
-        android:paddingEnd="32dp"
         android:text="@string/button_close"
         android:textColor="?attr/colorOnPrimary"
+        android:textStyle="bold"
         app:cornerRadius="16dp" />
 
 </LinearLayout>

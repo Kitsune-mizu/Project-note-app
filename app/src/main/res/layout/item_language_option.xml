@@ -1,51 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Layout Item: Language Selector
-    Deskripsi: Item pilihan bahasa dengan nama, icon centang aktif, dan bendera
+    Layout Item: Language Selector (Modern)
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="56dp"
-    android:orientation="horizontal"
-    android:gravity="center_vertical"
-    android:paddingHorizontal="16dp"
-    android:layout_marginVertical="4dp"
-    android:background="@drawable/bg_language_item"
+    android:layout_height="52dp"
+    android:layout_marginVertical="3dp"
+    android:background="@drawable/bg_toolbar_btn"
     android:clickable="true"
     android:focusable="true"
+    android:gravity="center_vertical"
+    android:paddingHorizontal="14dp"
     tools:ignore="ExtraText">
 
-    <!-- Language Name Text -->
     <TextView
         android:id="@+id/tvLanguageName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textSize="16sp"
+        android:textAppearance="?attr/textAppearanceBodyLarge"
         android:textColor="?attr/colorOnSurface"
         tools:text="English" />
 
-    <!-- Active Checkmark Icon (Visible if selected) -->
     <ImageView
         android:id="@+id/iconCheck"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginEnd="8dp"
-        android:visibility="gone"
-        android:src="@drawable/ic_check_circle"
+        android:layout_marginEnd="10dp"
         android:contentDescription="@string/cd_selected_language"
+        android:src="@drawable/ic_check_circle"
+        android:visibility="gone"
         app:tint="?attr/colorPrimary" />
 
-    <!-- Language Flag Icon (Circular Shape) -->
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imgFlag"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
-        android:scaleType="centerCrop"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:contentDescription="@string/cd_language_flag"
-        app:shapeAppearanceOverlay="@style/CircleShape"
-        tools:ignore="ContentDescription" />
+        android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/CircleShape" />
 
 </LinearLayout>

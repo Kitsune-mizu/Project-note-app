@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Layout: Navigation Header
-    Deskripsi: Header drawer dengan profil, animasi, dan informasi user
+    Layout: Navigation Drawer Header (Modern)
+    Lottie: lottieProfileNav — DIPERTAHANKAN
+    Layout: foto/lottie di kiri, nama + email di kanan (horizontal)
+    Fix   : tvUserEmail selalu tampil; guest pakai @string/placeholder_guest_email
 -->
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="220dp"
+    android:layout_height="wrap_content"
     android:background="@drawable/nav_header_gradient"
-    android:padding="20dp"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:paddingTop="36dp"
+    android:paddingBottom="20dp"
     tools:ignore="ExtraText">
 
-    <!-- Background Pattern (Dekorasi Sudut Bawah) -->
+    <!-- Dekorasi pattern pojok kanan atas -->
     <ImageView
         android:id="@+id/bgPattern"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:alpha="0.2"
-        android:contentDescription="@string/cd_background_pattern"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:alpha="0.10"
+        android:contentDescription="@null"
         android:src="@drawable/ic_pattern_placeholder"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- ================= PROFILE CONTAINER ================= -->
+    <!-- ── FOTO / LOTTIE ── -->
     <FrameLayout
         android:id="@+id/profileContainer"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:clipChildren="false"
         android:clipToPadding="false"
-        android:foregroundGravity="center"
-        app:layout_constraintBottom_toTopOf="@id/userInfo"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Lottie Animation (Default Profile Animation) -->
+        <!-- Lottie default profile — DIPERTAHANKAN -->
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lottieProfileNav"
             android:layout_width="match_parent"
@@ -48,7 +48,7 @@
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/profile_animation" />
 
-        <!-- Profile Image (Akan tampil jika user memiliki foto profil) -->
+        <!-- Photo (gone by default, shown when user has photo) -->
         <ImageView
             android:id="@+id/ivProfile"
             android:layout_width="match_parent"
@@ -57,37 +57,38 @@
             android:scaleType="centerCrop"
             android:visibility="gone" />
 
-        <!-- Profile Border Overlay -->
+        <!-- Border ring overlay -->
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/profile_border" />
 
-        <!-- Online Status Indicator -->
+        <!-- Online dot -->
         <View
             android:id="@+id/onlineIndicator"
-            android:layout_width="13dp"
-            android:layout_height="9dp"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
             android:layout_gravity="bottom|end"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginBottom="1dp"
             android:background="@drawable/online_indicator"
             android:elevation="2dp" />
     </FrameLayout>
 
-    <!-- ================= USER INFORMATION ================= -->
+    <!-- ── NAMA + EMAIL ── -->
     <LinearLayout
         android:id="@+id/userInfo"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
-        android:gravity="center_horizontal"
+        android:layout_marginStart="14dp"
+        android:gravity="center_vertical"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@id/profileContainer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profileContainer">
+        app:layout_constraintStart_toEndOf="@id/profileContainer"
+        app:layout_constraintTop_toTopOf="@id/profileContainer">
 
-        <!-- Username Text -->
+        <!-- Nama / username -->
         <TextView
             android:id="@+id/tvUsername"
             android:layout_width="wrap_content"
@@ -95,22 +96,66 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@string/placeholder_name"
+            android:textAppearance="?attr/textAppearanceTitleMedium"
             android:textColor="@color/md_theme_light_onPrimary"
-            android:textSize="16sp"
             android:textStyle="bold" />
 
-        <!-- User Email Text -->
+        <!--
+            Email — SELALU tampil.
+            Guest: setText(R.string.placeholder_guest_email) dari Java.
+            Login: setText(email) dari profil.
+        -->
         <TextView
             android:id="@+id/tvUserEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:alpha="0.8"
+            android:layout_marginTop="3dp"
+            android:alpha="0.80"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@string/placeholder_email"
+            android:textAppearance="?attr/textAppearanceLabelSmall"
+            android:textColor="@color/md_theme_light_onPrimary" />
+    </LinearLayout>
+
+    <!-- ── DIVIDER ── -->
+    <View
+        android:id="@+id/headerDivider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:alpha="0.18"
+        android:background="@color/md_theme_light_onPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profileContainer" />
+
+    <!-- ── STATUS BADGE ROW ── -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="4dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerDivider">
+
+        <!-- Gemini quick-access chip -->
+        <TextView
+            android:id="@+id/tvNavGeminiChip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_badge"
+            android:drawablePadding="5dp"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="4dp"
+            android:text="@string/menu_title_gemini"
+            android:textAppearance="?attr/textAppearanceLabelSmall"
             android:textColor="@color/md_theme_light_onPrimary"
-            android:textSize="12sp" />
+            app:drawableStartCompat="@drawable/ic_gemini" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -35,4 +35,5 @@
 
     <!-- Chat Activity -->
     <color name="md_theme_light_onSurfaceVariant">#49454F</color>
+    <color name="md_theme_light_primaryContainer">#EADDFF</color>
 </resources>

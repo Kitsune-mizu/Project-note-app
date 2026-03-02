@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Color State List: nav_item_shape_color
+    Dipakai: app:itemShapeFillColor di NavigationView
+    Lokasi : res/color/nav_item_shape_color.xml
+
+    Checked (aktif)    → colorPrimaryContainer  (pill background ungu muda)
+    Default (nonaktif) → transparent            (tidak ada background)
+-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:color="?attr/colorPrimaryContainer"
+        android:state_checked="true" />
+    <item
+        android:color="@android:color/transparent" />
+</selector>

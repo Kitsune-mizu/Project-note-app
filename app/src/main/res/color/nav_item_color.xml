@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Color State List: nav_item_color
+    Dipakai: app:itemIconTint dan app:itemTextColor di NavigationView
+    Lokasi : res/color/nav_item_color.xml
+
+    Checked (aktif)  → colorPrimary
+    Default (nonaktif) → colorOnSurfaceVariant
+-->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:color="@color/md_theme_light_primary" android:state_checked="true" />
-    <item android:color="@color/md_theme_light_primary_container" android:state_pressed="true" />
-    <item android:color="@color/md_theme_light_onSurface" />
+    <item
+        android:color="?attr/colorPrimary"
+        android:state_checked="true" />
+    <item
+        android:color="?attr/colorOnSurfaceVariant" />
 </selector>

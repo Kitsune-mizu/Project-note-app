@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Menu: Note Actions
-    Deskripsi: Menu aksi untuk halaman catatan
+    Menu: menu_notifications.xml
+    Lokasi: res/menu/menu_notifications.xml
+    Deskripsi: Menu toolbar untuk screen notifikasi — icon delete di kanan
 -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="ExtraText">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- Action: Clear All Notes -->
     <item
-        android:id="@+id/action_clear_all"
+        android:id="@+id/action_delete"
         android:icon="@drawable/ic_delete"
-        android:title="@string/clear_all"
+        android:title="@string/cd_delete"
+        android:contentDescription="@string/cd_delete"
         app:iconTint="?attr/colorOnSurface"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
 
 </menu>

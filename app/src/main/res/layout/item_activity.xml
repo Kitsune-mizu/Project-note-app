@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Layout Item: Activity List
-    Deskripsi: Item tampilan untuk menampilkan aktivitas dengan ikon, judul, deskripsi, dan waktu.
+    Layout Item: Activity List (Modern)
+    Icon dibungkus container rounded untuk kesan lebih modern
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:paddingHorizontal="8dp"
-    android:paddingVertical="12dp"
-    android:background="?attr/selectableItemBackground">
+    android:paddingHorizontal="4dp"
+    android:paddingVertical="10dp">
 
-    <!-- Activity Icon -->
-    <ImageView
-        android:id="@+id/iconActivity"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:contentDescription="@string/cd_activity_icon"
-        app:srcCompat="@drawable/ic_check_circle"
-        app:tint="?attr/colorPrimary" />
+    <!-- Icon Container rounded -->
+    <FrameLayout
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:background="@drawable/bg_icon_dialog">
 
-    <!-- Container Title dan Description -->
+        <ImageView
+            android:id="@+id/iconActivity"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/cd_activity_icon"
+            app:srcCompat="@drawable/ic_check_circle"
+            app:tint="?attr/colorPrimary" />
+    </FrameLayout>
+
+    <!-- Title & Desc -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -29,36 +37,33 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <!-- Activity Title -->
         <TextView
             android:id="@+id/tvActivityTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/activity_title_placeholder"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
             android:textColor="?attr/colorOnSurface"
-            android:textSize="14sp"
             android:textStyle="bold" />
 
-        <!-- Activity Description -->
         <TextView
             android:id="@+id/tvActivityDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:text="@string/activity_description_placeholder"
-            android:textColor="?attr/colorOnSurfaceVariant"
-            android:textSize="12sp" />
+            android:textAppearance="?attr/textAppearanceLabelSmall"
+            android:textColor="?attr/colorOutline" />
 
     </LinearLayout>
 
-    <!-- Activity Time -->
+    <!-- Time -->
     <TextView
         android:id="@+id/tvActivityTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
         android:text="@string/activity_time_placeholder"
-        android:textColor="?attr/colorOnSurfaceVariant"
-        android:textSize="11sp" />
+        android:textAppearance="?attr/textAppearanceLabelSmall"
+        android:textColor="?attr/colorOutline" />
 
 </LinearLayout>

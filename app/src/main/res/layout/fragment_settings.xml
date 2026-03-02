@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Layout: Settings Screen
-    Deskripsi: Halaman pengaturan akun dan preferensi aplikasi
+    Layout: Settings Screen (Modern)
+    Header card disederhanakan, divider pakai colorOutlineVariant
 -->
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,104 +11,103 @@
     android:background="?attr/colorSurface"
     android:fillViewport="true">
 
-    <!-- Root Container -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp"
+        android:paddingBottom="24dp"
         tools:ignore="ExtraText">
 
-        <!-- ================= HEADER CARD (Settings Info) ================= -->
-        <com.google.android.material.card.MaterialCardView
+        <!-- ── HEADER ── -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="6dp"
-            app:strokeColor="@color/overlay_surface"
-            app:strokeWidth="1dp">
+            android:orientation="horizontal"
+            android:padding="24dp"
+            android:paddingBottom="12dp">
+
+            <ImageView
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:contentDescription="@string/cd_settings_icon"
+                app:srcCompat="@drawable/ic_settings"
+                app:tint="?attr/colorPrimary" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="20dp">
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-                <!-- Settings Icon -->
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:contentDescription="@string/cd_settings_icon"
-                    app:srcCompat="@drawable/ic_settings"
-                    app:tint="?attr/colorPrimary" />
-
-                <!-- Title & Description -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/settings_title"
-                        android:textColor="?attr/colorOnSurface"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="@string/settings_description"
-                        android:textColor="?attr/colorOnSurfaceVariant"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- ================= SETTINGS OPTIONS CARD ================= -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="6dp"
-            app:strokeColor="@color/overlay_surface"
-            app:strokeWidth="1dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <!-- ===== SECTION HEADER: ACCOUNT ===== -->
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="16dp"
-                    android:paddingTop="16dp"
-                    android:paddingEnd="16dp"
-                    android:paddingBottom="8dp"
-                    android:text="@string/header_account"
-                    android:textColor="?attr/colorOnSurfaceVariant"
-                    android:textSize="12sp"
+                    android:text="@string/settings_title"
+                    android:textAppearance="?attr/textAppearanceHeadlineSmall"
+                    android:textColor="?attr/colorOnSurface"
                     android:textStyle="bold" />
 
-                <!-- Profile Option -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/settings_description"
+                    android:textAppearance="?attr/textAppearanceBodySmall"
+                    android:textColor="?attr/colorOutline" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="8dp"
+            android:alpha="0.08"
+            android:background="?attr/colorOnSurface" />
+
+        <!-- ── SECTION LABEL: ACCOUNT ── -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="24dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="24dp"
+            android:paddingBottom="4dp"
+            android:text="@string/header_account"
+            android:textAppearance="?attr/textAppearanceLabelSmall"
+            android:textColor="?attr/colorPrimary"
+            android:textStyle="bold" />
+
+        <!-- ── OPTIONS CARD ── -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="2dp"
+            app:strokeColor="?attr/colorOutlineVariant"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Profile -->
                 <LinearLayout
                     android:id="@+id/layoutProfile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackground"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="16dp">
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="14dp">
 
                     <ImageView
                         android:layout_width="24dp"
@@ -128,42 +127,40 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/profile_title"
-                            android:textColor="?attr/colorOnSurface"
-                            android:textSize="16sp" />
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
+                            android:textColor="?attr/colorOnSurface" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="@string/profile_subtitle"
-                            android:textColor="?attr/colorOnSurfaceVariant"
-                            android:textSize="12sp" />
+                            android:textAppearance="?attr/textAppearanceLabelSmall"
+                            android:textColor="?attr/colorOutline" />
                     </LinearLayout>
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:contentDescription="@string/cd_next_button"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:contentDescription="@null"
                         app:srcCompat="@drawable/ic_chevron_right"
-                        app:tint="?attr/colorOnSurfaceVariant" />
+                        app:tint="?attr/colorOutline" />
                 </LinearLayout>
 
-                <!-- Divider -->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="56dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="?attr/colorOutline" />
+                <View android:layout_width="match_parent" android:layout_height="1dp"
+                    android:layout_marginStart="56dp" android:layout_marginEnd="16dp"
+                    android:alpha="0.08" android:background="?attr/colorOnSurface" />
 
-                <!-- Forgot Password Option -->
+                <!-- Forgot Password -->
                 <LinearLayout
                     android:id="@+id/layoutForgotPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackground"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="16dp">
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="14dp">
 
                     <ImageView
                         android:layout_width="24dp"
@@ -183,42 +180,40 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/forgot_password_title"
-                            android:textColor="?attr/colorOnSurface"
-                            android:textSize="16sp" />
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
+                            android:textColor="?attr/colorOnSurface" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="@string/forgot_password_subtitle"
-                            android:textColor="?attr/colorOnSurfaceVariant"
-                            android:textSize="12sp" />
+                            android:textAppearance="?attr/textAppearanceLabelSmall"
+                            android:textColor="?attr/colorOutline" />
                     </LinearLayout>
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:contentDescription="@string/cd_next_button"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:contentDescription="@null"
                         app:srcCompat="@drawable/ic_chevron_right"
-                        app:tint="?attr/colorOnSurfaceVariant" />
+                        app:tint="?attr/colorOutline" />
                 </LinearLayout>
 
-                <!-- Divider -->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="56dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="?attr/colorOutline" />
+                <View android:layout_width="match_parent" android:layout_height="1dp"
+                    android:layout_marginStart="56dp" android:layout_marginEnd="16dp"
+                    android:alpha="0.08" android:background="?attr/colorOnSurface" />
 
-                <!-- Notifications Option -->
+                <!-- Notifications (dengan Switch) -->
                 <LinearLayout
                     android:id="@+id/layoutNotifications"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackground"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="16dp">
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="14dp">
 
                     <ImageView
                         android:layout_width="24dp"
@@ -238,16 +233,16 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/notifications_title"
-                            android:textColor="?attr/colorOnSurface"
-                            android:textSize="16sp" />
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
+                            android:textColor="?attr/colorOnSurface" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="@string/notifications_subtitle"
-                            android:textColor="?attr/colorOnSurfaceVariant"
-                            android:textSize="12sp" />
+                            android:textAppearance="?attr/textAppearanceLabelSmall"
+                            android:textColor="?attr/colorOutline" />
                     </LinearLayout>
 
                     <com.google.android.material.switchmaterial.SwitchMaterial
@@ -258,22 +253,20 @@
                         android:contentDescription="@string/cd_notifications_toggle" />
                 </LinearLayout>
 
-                <!-- Divider -->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="56dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="?attr/colorOutline" />
+                <View android:layout_width="match_parent" android:layout_height="1dp"
+                    android:layout_marginStart="56dp" android:layout_marginEnd="16dp"
+                    android:alpha="0.08" android:background="?attr/colorOnSurface" />
 
-                <!-- Language Option -->
+                <!-- Language — inline agar textCurrentLanguage bisa di-findViewById -->
                 <LinearLayout
                     android:id="@+id/layoutLanguage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackground"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="16dp">
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="14dp">
 
                     <ImageView
                         android:layout_width="24dp"
@@ -293,43 +286,43 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/language_title"
-                            android:textColor="?attr/colorOnSurface"
-                            android:textSize="16sp" />
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
+                            android:textColor="?attr/colorOnSurface" />
 
+                        <!-- ID ini dipakai di SettingsFragment.java — WAJIB ADA -->
                         <TextView
                             android:id="@+id/textCurrentLanguage"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="@string/language_subtitle"
-                            android:textColor="?attr/colorOnSurfaceVariant"
-                            android:textSize="12sp" />
+                            android:textAppearance="?attr/textAppearanceLabelSmall"
+                            android:textColor="?attr/colorOutline"
+                            android:drawablePadding="6dp" />
                     </LinearLayout>
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:contentDescription="@string/cd_next_button"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:contentDescription="@null"
                         app:srcCompat="@drawable/ic_chevron_right"
-                        app:tint="?attr/colorOnSurfaceVariant" />
+                        app:tint="?attr/colorOutline" />
                 </LinearLayout>
 
-                <!-- Divider -->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="56dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="?attr/colorOutline" />
+                <View android:layout_width="match_parent" android:layout_height="1dp"
+                    android:layout_marginStart="56dp" android:layout_marginEnd="16dp"
+                    android:alpha="0.08" android:background="?attr/colorOnSurface" />
 
-                <!-- Delete Account Option -->
+                <!-- Delete Account -->
                 <LinearLayout
                     android:id="@+id/layoutDeleteAccount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackground"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="20dp">
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="16dp">
 
                     <ImageView
                         android:layout_width="24dp"
@@ -344,27 +337,25 @@
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:text="@string/action_delete_account"
+                        android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textColor="?attr/colorError"
-                        android:textSize="16sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <!-- Divider -->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="56dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="?attr/colorOutline" />
+                <View android:layout_width="match_parent" android:layout_height="1dp"
+                    android:layout_marginStart="56dp" android:layout_marginEnd="16dp"
+                    android:alpha="0.08" android:background="?attr/colorOnSurface" />
 
-                <!-- Logout Option -->
+                <!-- Logout -->
                 <LinearLayout
                     android:id="@+id/layoutLogout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackground"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="20dp">
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="16dp">
 
                     <ImageView
                         android:layout_width="24dp"
@@ -379,13 +370,12 @@
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:text="@string/logout_button"
+                        android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textColor="?attr/colorError"
-                        android:textSize="16sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
             </LinearLayout>
-
         </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>

@@ -23,7 +23,7 @@
         android:src="@drawable/gemini_icon"
         android:scaleType="fitCenter"
         android:adjustViewBounds="true"
-        android:contentDescription="Sedang memproses"/>
+        android:contentDescription="@string/loading_please_wait"/>
 
     <!-- Bubble loading — shadow merata semua sisi -->
     <com.google.android.material.card.MaterialCardView

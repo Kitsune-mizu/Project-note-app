@@ -35,8 +35,8 @@
                 android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_save_note"
-                android:tint="#6C63FF"
-                android:contentDescription="@null"/>
+                android:contentDescription="@null"
+                app:tint="#6C63FF" />
         </com.google.android.material.card.MaterialCardView>
 
         <LinearLayout
@@ -114,28 +114,17 @@
     </com.google.android.material.card.MaterialCardView>
 
     <!-- Info: konten akan disimpan apa adanya -->
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:text="@string/dialog_save_note_info"
+        android:textSize="11sp"
+        android:textColor="#BBBBCC"
         android:gravity="center_vertical"
-        android:layout_marginTop="8dp">
-
-        <ImageView
-            android:layout_width="13dp"
-            android:layout_height="13dp"
-            android:src="@drawable/ic_warning"
-            android:tint="#BBBBCC"
-            android:layout_marginEnd="5dp"
-            android:contentDescription="@null"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/dialog_save_note_info"
-            android:textSize="11sp"
-            android:textColor="#BBBBCC"/>
-    </LinearLayout>
+        android:drawableStart="@drawable/ic_warning"
+        android:drawablePadding="5dp"
+        app:drawableTint="#BBBBCC"/>
 
     <!-- Tombol aksi -->
     <LinearLayout

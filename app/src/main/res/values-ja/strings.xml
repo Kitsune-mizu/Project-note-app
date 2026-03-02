@@ -1,43 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">アルファノート</string>
 
-    <!-- Java -->
-    <!-- User Session -->
-    <string name="notification_channel_user_activities">ユーザーアクティビティ</string>
-    <string name="activity_login_title">ログイン成功</string>
-    <string name="activity_login_message">アカウントへのログインに成功しました。</string>
-    <string name="activity_logout_title">ログアウト済み</string>
-    <string name="activity_logout_message">アカウントから正常にログアウトしました。</string>
-    <string name="activity_profile_update_title">プロフィール更新</string>
-    <string name="activity_profile_update_message">プロフィール情報が正常に更新されました。</string>
-    <string name="activity_account_deleted_title">アカウント削除</string>
-    <string name="activity_account_deleted_message">アカウント削除が正常に処理されました。</string>
+    <string name="app_name">Alpha Note</string>
 
-    <!-- Forgot Password -->
-    <string name="username_error_message">ユーザー名は大文字＋数字を含み、6文字以上である必要があります。</string>
-    <string name="password_error_message">パスワードは文字＋数字を含み、8文字以上である必要があります。</string>
-    <string name="field_required">この項目は必須です。</string>
-    <string name="new_password_same_error">新しいパスワードは古いパスワードと同じにできません。</string>
-    <string name="error_fix_fields">フィールドのエラーを修正してください。</string>
-    <string name="success_password_changed">パスワードが正常に変更されました。ログインできます。</string>
-    <string name="incorrect_old_password">古いパスワードまたは認証情報が正しくありません。</string>
-    <string name="username_not_found">システム内でユーザー名が見つかりません。</string>
+    <!-- ══════════════════════════════════════════════════════════════
+         スプラッシュ画面
+    ══════════════════════════════════════════════════════════════ -->
+    <string name="splash_tagline">メモ・追跡・活動管理をかんたんに</string>
+    <string name="splash_version">v2.0.0.26</string>
+    <string name="flag_desc">国旗</string>
+    <string name="hello_message">こんにちは！</string>
 
-    <!-- Login Activity -->
+    <!-- ══════════════════════════════════════════════════════════════
+         認証 — ログイン
+    ══════════════════════════════════════════════════════════════ -->
+    <string name="welcome_back">おかえりなさい</string>
+    <string name="please_sign_in">アカウントにサインインしてください</string>
+    <string name="username_hint">ユーザー名</string>
+    <string name="password_hint">パスワード</string>
+    <string name="remember_me">ログイン状態を保持する</string>
+    <string name="forgot_password">パスワードをお忘れですか？</string>
+    <string name="sign_in_button">サインイン</string>
+    <string name="dont_have_account_signup">アカウントをお持ちでない方は登録</string>
+
     <string name="username_required">ユーザー名は必須です。</string>
     <string name="password_required">パスワードは必須です。</string>
-    <string name="username_format_error">ユーザー名は大文字＋数字を含み、6文字以上である必要があります。</string>
-    <string name="password_format_error">パスワードは文字＋数字を含み、8文字以上である必要があります。</string>
-    <string name="incorrect_password">パスワードが正しくありません。もう一度お試しください。</string>
+    <string name="username_format_error">ユーザー名は大文字＋数字を含む6文字以上が必要です。</string>
+    <string name="password_format_error">パスワードは英字＋数字を含む8文字以上が必要です。</string>
+    <string name="incorrect_password">パスワードが間違っています。もう一度お試しください。</string>
 
-    <!-- Signup Activity -->
+    <!-- ══════════════════════════════════════════════════════════════
+         認証 — 新規登録
+    ══════════════════════════════════════════════════════════════ -->
+    <string name="create_account_title">アカウント作成</string>
+    <string name="fill_details_to_sign_up">登録に必要な情報を入力してください</string>
+    <string name="confirm_password_hint">パスワード確認</string>
+    <string name="sign_up_button">登録</string>
+    <string name="already_have_account_signin">すでにアカウントをお持ちの方はサインイン</string>
+
     <string name="error_fix_fields_signup">上記のエラーを修正してください。</string>
-    <string name="success_signup">サインアップ成功！ログインしてください。</string>
-    <string name="error_username_taken">ユーザー名は既に使用されています。別のものを選択してください。</string>
+    <string name="success_signup">登録完了！サインインしてください。</string>
+    <string name="error_username_taken">このユーザー名は既に使用されています。別のものを選んでください。</string>
     <string name="confirm_password_error_message">パスワードが一致しません。</string>
-    <string name="username_already_exists">ユーザー名は既に存在します。別のものを選択してください。</string>
+    <string name="username_already_exists">このユーザー名は既に存在します。別のものを選んでください。</string>
 
-    <!-- Home Fragment -->
+    <!-- ══════════════════════════════════════════════════════════════
+         認証 — パスワード変更
+    ══════════════════════════════════════════════════════════════ -->
+    <string name="change_password">パスワード変更</string>
+    <string name="enter_old_and_new_password">現在のパスワードと新しいパスワードを入力してください</string>
+    <string name="old_password">現在のパスワード</string>
+    <string name="new_password">新しいパスワード</string>
+    <string name="change_password_button">パスワードを変更する</string>
+    <string name="username">ユーザー名</string>
+
+    <string name="username_error_message">ユーザー名は大文字＋数字を含む6文字以上が必要です。</string>
+    <string name="password_error_message">パスワードは英字＋数字を含む8文字以上が必要です。</string>
+    <string name="field_required">このフィールドは必須です。</string>
+    <string name="new_password_same_error">新しいパスワードは現在のパスワードと同じにできません。</string>
+    <string name="error_fix_fields">フィールドのエラーを修正してください。</string>
+    <string name="success_password_changed">パスワードを変更しました。サインインできます。</string>
+    <string name="incorrect_old_password">現在のパスワードが間違っているか、認証情報が無効です。</string>
+    <string name="username_not_found">このユーザー名はシステムに存在しません。</string>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         ホーム
+    ══════════════════════════════════════════════════════════════ -->
     <string name="menu_title_home">ホーム</string>
     <string name="title_guest">ゲスト</string>
     <string name="greeting_morning">おはようございます</string>
@@ -45,348 +73,364 @@
     <string name="greeting_evening">こんばんは</string>
     <string name="greeting_night">おやすみなさい</string>
     <string name="active_days_format">%d日間アクティブ</string>
+    <string name="active_days_count">7日間アクティブ</string>
+    <string name="placeholder_username">山田 太郎</string>
+    <string name="placeholder_datetime">月曜日, 2024年1月1日 • 10:30 AM</string>
+    <string name="header_recent_activity">最近のアクティビティ</string>
+    <string name="button_view_all">すべて見る</string>
+    <string name="empty_state_no_activity">アクティビティはありません</string>
+    <string name="header_your_notes">あなたのメモ</string>
+    <string name="empty_state_no_notes">メモはありません</string>
     <string name="time_just_now">たった今</string>
     <string name="time_minutes_ago">%d分前</string>
     <string name="time_hours_ago">%d時間前</string>
     <string name="time_days_ago">%d日前</string>
-    <string name="dialog_exit_title">アプリケーション終了</string>
-    <string name="dialog_exit_message">アプリケーションを閉じてもよろしいですか？</string>
+    <string name="dialog_exit_title">アプリを終了</string>
+    <string name="dialog_exit_message">アプリを閉じてよろしいですか？</string>
     <string name="action_exit">終了</string>
     <string name="action_cancel">キャンセル</string>
-    <string name="toast_home_updated">データが更新されました。</string>
+    <string name="toast_home_updated">データを更新しました。</string>
 
-    <!-- Main Activity -->
+    <!-- ══════════════════════════════════════════════════════════════
+         メモ
+    ══════════════════════════════════════════════════════════════ -->
+    <string name="search_notes_hint">メモを検索…</string>
+    <string name="cd_add_new_note">新しいメモを追加</string>
+    <string name="cd_cancel_selection">選択をキャンセル</string>
+    <string name="selection_count_placeholder">0件選択中</string>
+    <string name="cd_select_all">すべて選択</string>
+    <string name="cd_pin_notes">メモをピン留め</string>
+    <string name="cd_delete_notes">メモを削除</string>
+    <string name="toast_pinned">ピン留めしました</string>
+    <string name="toast_unpinned">ピン留めを解除しました</string>
+    <string name="toast_deleted">削除しました</string>
+    <string name="selection_count_format">%d件選択中</string>
+    <string name="dialog_delete_multiple_title">メモを削除</string>
+    <string name="dialog_delete_multiple_msg">選択したメモを削除しますか？</string>
+    <string name="placeholder_no_title">（タイトルなし）</string>
+
+    <!-- ── メモ編集 ── -->
+    <string name="metadata_format">最終更新: %1$s | 文字数: %2$d</string>
+    <string name="toast_note_deleted">メモを削除しました</string>
+    <string name="toast_note_saved">保存しました</string>
+    <string name="toast_no_changes">保存する変更はありません</string>
+    <string name="toast_alarm_permission_prompt">設定で正確なアラームの権限を許可してください</string>
+    <string name="toast_reminder_failed">リマインダーを設定できませんでした</string>
+    <string name="toast_reminder_set">リマインダーを設定しました</string>
+    <string name="toast_image_failed">画像の作成に失敗しました</string>
+    <string name="share_chooser_title">メモ画像を共有</string>
+    <string name="dialog_delete_note_title">メモを削除</string>
+    <string name="dialog_delete_note_msg">完全に削除しますか？</string>
+
+    <!-- ── メモアイテム ── -->
+    <string name="note_title_placeholder">メモのタイトル</string>
+    <string name="note_content_placeholder">メモ…</string>
+    <string name="note_date_placeholder">1月1日, 10:00</string>
+    <string name="cd_select_note">メモを選択</string>
+    <string name="cd_note_pinned">ピン留めインジケーター</string>
+
+    <!-- ── エディタツールバー ── -->
+    <string name="cd_back">戻る</string>
+    <string name="cd_delete">削除</string>
+    <string name="cd_share">共有</string>
+    <string name="cd_menu">メニュー</string>
+    <string name="cd_undo">元に戻す</string>
+    <string name="cd_redo">やり直す</string>
+    <string name="cd_save">保存</string>
+    <string name="title_hint">タイトル</string>
+    <string name="metadata_placeholder">2025年1月1日, 12:00 | 0文字</string>
+    <string name="content_hint">入力を開始…</string>
+    <string name="cd_text_color">文字色</string>
+    <string name="cd_highlight">ハイライト</string>
+    <string name="cd_bold">太字</string>
+    <string name="cd_italic">斜体</string>
+    <string name="cd_underline">下線</string>
+    <string name="cd_strikethrough">打ち消し線</string>
+    <string name="cd_bullet_list">箇条書き</string>
+    <string name="cd_align_left">左揃え</string>
+    <string name="cd_align_center">中央揃え</string>
+    <string name="cd_align_right">右揃え</string>
+    <string name="cd_size_up">文字を大きくする</string>
+    <string name="cd_size_down">文字を小さくする</string>
+
+    <!-- ── メモメニュー ── -->
+    <string name="action_reminder_text">リマインダー</string>
+    <string name="cd_action_reminder">リマインダーを設定</string>
+    <string name="action_share_note">メモを共有</string>
+    <string name="cd_action_share">メモを共有</string>
+    <string name="action_delete_note">メモを削除</string>
+    <string name="cd_action_delete">メモを削除</string>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         GEMINI AI チャット
+    ══════════════════════════════════════════════════════════════ -->
+    <string name="gemini_ai">Gemini</string>
+    <string name="fab_try_gemini">Gemini AIを試す</string>
+    <string name="cd_open_gemini">Gemini AIを開く</string>
+    <string name="gemini_greeting">こんにちは！私はGemini AIです 👋</string>
+    <string name="gemini_suggestion">何でも聞いてください — コード、アイデア、リサーチ、雑談も！</string>
+
+    <!-- ── チップ ── -->
+    <string name="chip_idea">💡 アイデアを手伝う</string>
+    <string name="chip_code">🛠️ コードを手伝う</string>
+    <string name="chip_write">✍️ 文章を手伝う</string>
+    <string name="chip_research">🔍 リサーチを手伝う</string>
+
+    <!-- ── 入力 ── -->
+    <string name="input_hint_message">何でも聞いてください…</string>
+
+    <!-- ── サイドバー ── -->
+    <string name="sidebar_usage_limit">本日の残り: —/1500</string>
+    <string name="sidebar_new_chat">新しいチャット</string>
+    <string name="sidebar_chat_history">チャット履歴</string>
+    <string name="sidebar_powered_by">Gemini 2.5 Flash 搭載</string>
+    <string name="sidebar_free_tier_info">無料プラン: 15回/分 · 1500回/日</string>
+
+    <!-- ── バブルアクション ── -->
+    <string name="cd_ai_avatar">AIアイコン</string>
+    <string name="cd_copy_message">メッセージをコピー</string>
+    <string name="action_save_as_note">メモとして保存</string>
+    <string name="toast_copied">テキストをクリップボードにコピーしました</string>
+    <string name="bubble_chat">チャットバブル</string>
+    <string name="option">オプション</string>
+    <string name="new_name">新しい名前…</string>
+    <string name="action_rename">名前変更</string>
+    <string name="action_retry">再試行</string>
+
+    <!-- ── メモとして保存ダイアログ ── -->
+    <string name="dialog_save_note_title">メモとして保存</string>
+    <string name="dialog_save_note_subtitle">AIの返答をメモに保存します</string>
+    <string name="hint_note_title">メモのタイトル…</string>
+    <string name="dialog_save_note_info">コンテンツはそのまま保存されます（プレーンテキスト）</string>
+    <string name="action_save_note">保存</string>
+    <string name="note_from_gemini_default_title">Gemini AIからのメモ</string>
+    <string name="toast_note_saved_from_ai">メモを保存しました！ ✓</string>
+
+    <!-- ── エラーメッセージ ── -->
+    <string name="error_connection">接続に失敗しました。インターネットを確認してください。\n(%1$s)</string>
+    <string name="error_rate_limit">リクエスト数の上限に達しました。しばらくしてからお試しください。</string>
+    <string name="error_parse">AI応答の処理に失敗しました。</string>
+    <string name="error_unknown">不明なエラー</string>
+    <string name="error_http">HTTP %1$d</string>
+    <string name="error_prefix">エラー: %1$s</string>
+
+    <!-- ── 使用カウンター ── -->
+    <string name="usage_remaining">本日の残り: %1$d/%2$d</string>
+
+    <!-- ── コンテンツ説明 ── -->
+    <string name="cd_gemini_ai_logo">Gemini AIロゴ</string>
+    <string name="cd_gemini_icon">Geminiアイコン</string>
+    <string name="cd_new_chat">新しいチャット</string>
+    <string name="cd_send_message">メッセージを送信</string>
+
+    <!-- ── ダイアログ ── -->
+    <string name="dialog_not_logged_in_title">ログインしていません</string>
+    <string name="dialog_not_logged_in_msg">チャット機能を使用するには、先にログインしてください。</string>
+    <string name="dialog_rate_limit_title">1日の上限に達しました</string>
+    <string name="dialog_rate_limit_msg">Gemini無料プランの15回/分の上限を超えました。\nしばらく待ってから再試行してください。</string>
+    <string name="dialog_rate_limit_message">Gemini API無料プランの1日1,500リクエスト上限に達しました。\n\n上限は深夜0時（UTC+0）にリセットされます。</string>
+    <string name="dialog_rate_limit_info_header">Gemini API 無料プラン:</string>
+    <string name="dialog_rate_limit_info_detail">• 1分あたり15リクエスト (RPM)\n• 1分あたり1,000,000トークン (TPM)\n• 1日あたり1,500リクエスト (RPD)</string>
+    <string name="dialog_btn_understood">わかりました</string>
+    <string name="cd_warning_icon">警告アイコン</string>
+    <string name="dialog_delete_chat_title">チャットを削除しますか？</string>
+    <string name="dialog_delete_chat_message">このチャットは完全に削除され、復元できません。</string>
+    <string name="cd_delete_icon">削除アイコン</string>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         プロフィール
+    ══════════════════════════════════════════════════════════════ -->
     <string name="menu_title_profile">プロフィール</string>
-    <string name="menu_title_settings">設定</string>
-    <string name="footer_text">AIで作成 © 2025 Kitsune</string>
-    <string name="logout_title">ログアウト確認</string>
-    <string name="logout_message">ログアウトしてもよろしいですか？</string>
-    <string name="logout">ログアウト</string>
-
-    <!-- Profile Fragment -->
     <string name="default_username">新規ユーザー</string>
     <string name="default_birthday">未設定</string>
     <string name="default_location">タップして場所を設定</string>
-    <string name="field_full_name">フルネーム</string>
+    <string name="field_full_name">氏名</string>
     <string name="field_email">メール</string>
     <string name="field_birthday">生年月日</string>
     <string name="field_location">場所</string>
     <string name="edit_dialog_title">%sを編集</string>
     <string name="edit_dialog_hint">新しい%sを入力</string>
     <string name="action_save">保存</string>
-    <string name="error_saving_data">データの保存に失敗しました。再試行してください。</string>
-    <string name="error_crop_image">画像のクロップに失敗しました。</string>
-    <string name="toast_profile_updated">プロフィールが更新されました。</string>
+    <string name="error_saving_data">データの保存に失敗しました。もう一度お試しください。</string>
+    <string name="error_crop_image">画像のトリミングに失敗しました。</string>
+    <string name="toast_profile_updated">プロフィールを更新しました。</string>
     <string name="activity_profile_updated_title">プロフィール更新</string>
     <string name="activity_profile_updated_desc">プロフィール情報が更新されました。</string>
+    <string name="cd_profile_background">プロフィール背景</string>
+    <string name="cd_profile_animation">プロフィールアニメーション</string>
+    <string name="cd_profile_picture">プロフィール画像</string>
+    <string name="cd_edit_profile_button">プロフィール画像を編集</string>
+    <string name="cd_edit_background_button">背景画像を編集</string>
+    <string name="placeholder_email">john.doe@example.com</string>
+    <string name="header_personal_info">個人情報</string>
 
-    <!-- Settings Fragment -->
+    <!-- ── プロフィール情報アイテム ── -->
+    <string name="placeholder_name">山田 太郎</string>
+    <string name="cd_full_name_value">氏名の値</string>
+    <string name="cd_edit_full_name">氏名を編集</string>
+    <string name="cd_email_value">メールの値</string>
+    <string name="cd_edit_email">メールを編集</string>
+    <string name="placeholder_birthday">1990年1月1日</string>
+    <string name="cd_birthday_value">生年月日の値</string>
+    <string name="cd_edit_birthday">生年月日を編集</string>
+    <string name="placeholder_location">東京, 日本</string>
+    <string name="cd_location_value">場所の値</string>
+    <string name="cd_edit_location">場所を編集</string>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         設定
+    ══════════════════════════════════════════════════════════════ -->
+    <string name="menu_title_settings">設定</string>
+    <string name="settings_title">設定</string>
+    <string name="settings_description">アプリの設定を管理する</string>
+    <string name="cd_settings_icon">設定アイコン</string>
+    <string name="header_account">アカウント</string>
+    <string name="profile_title">プロフィール</string>
+    <string name="profile_subtitle">プロフィールを確認・編集する</string>
+    <string name="cd_profile_icon">プロフィールアイコン</string>
+    <string name="cd_next_button">次へボタンまたはアクションインジケーター</string>
+    <string name="forgot_password_title">パスワードをお忘れですか</string>
+    <string name="forgot_password_subtitle">安全にパスワードをリセットする</string>
+    <string name="cd_forgot_password">パスワード忘れアイコン</string>
+    <string name="notifications_subtitle">アプリの通知を有効または無効にする</string>
+    <string name="cd_notifications_icon">通知アイコン</string>
+    <string name="cd_notifications_toggle">通知のオン/オフ切り替え</string>
+    <string name="language_title">アプリの言語</string>
+    <string name="language_subtitle">アプリの表示言語を設定する</string>
+    <string name="cd_language_icon">言語アイコン</string>
+    <string name="action_delete_account">アカウントを削除</string>
+    <string name="cd_delete_account">アカウントを削除</string>
+    <string name="logout_button">ログアウト</string>
+    <string name="cd_logout_icon">ログアウトアイコン</string>
+    <string name="action_open_settings">設定を開く</string>
+    <string name="action_logout">ログアウト</string>
+    <string name="action_next">次へ</string>
+    <string name="action_delete">削除</string>
+    <string name="dialog_permission_title">権限が必要です</string>
+    <string name="dialog_notification_permission_msg">この機能を有効にするには、アプリ設定で通知を許可してください。</string>
+    <string name="dialog_logout_title">ログアウト確認</string>
+    <string name="dialog_logout_msg">本当にログアウトしますか？</string>
+    <string name="warn_delete_title_1">⚠ 警告: 永続的な操作</string>
+    <string name="warn_delete_msg_1">アカウントの削除は永続的です。すべてのデータが失われ、復元できません。</string>
+    <string name="warn_delete_title_2">⚠ 警告: データ消失</string>
+    <string name="warn_delete_msg_2">このアカウントに関連するすべてのメモ、アクティビティ、設定が完全に削除されます。</string>
+    <string name="warn_delete_title_3">⚠ 警告: 最後のステップ</string>
+    <string name="warn_delete_msg_3">この警告の後、最終確認が表示されます。慎重に進んでください。</string>
+    <string name="dialog_delete_title">最終確認</string>
+    <string name="dialog_delete_msg">これが最後のステップです。本当にアカウントを削除しますか？</string>
+    <string name="toast_notifications_enabled">通知を有効にしました。</string>
+    <string name="toast_notifications_disabled">通知を無効にしました。</string>
+    <string name="toast_account_deleted">アカウントを削除しました。</string>
+    <string name="toast_delete_failed">アカウントの削除に失敗しました。もう一度お試しください。</string>
+
+    <!-- ── 言語 ── -->
     <string name="lang_english">英語</string>
     <string name="lang_indonesia">インドネシア語</string>
     <string name="lang_japanese">日本語</string>
-    <string name="lang_korean">韓国語</string>
+    <string name="lang_korean">한국어</string>
     <string-array name="language_names">
         <item>@string/lang_english</item>
         <item>@string/lang_indonesia</item>
         <item>@string/lang_japanese</item>
         <item>@string/lang_korean</item>
     </string-array>
-    <string name="action_open_settings">設定を開く</string>
-    <string name="action_logout">ログアウト</string>
-    <string name="action_next">次へ</string>
-    <string name="action_delete">削除</string>
-    <string name="dialog_permission_title">権限が必要です</string>
-    <string name="dialog_notification_permission_msg">この機能を有効にするには、アプリ設定で通知を有効にしてください。</string>
-    <string name="dialog_logout_title">ログアウト確認</string>
-    <string name="dialog_logout_msg">ログアウトしてもよろしいですか？</string>
-    <string name="warn_delete_title_1">⚠ 警告：永久な操作</string>
-    <string name="warn_delete_msg_1">アカウントの削除は永久です。すべてのデータが失われ、復元できません。</string>
-    <string name="warn_delete_title_2">⚠ 警告：データ損失</string>
-    <string name="warn_delete_msg_2">このアカウントに関連するすべてのメモ、アクティビティ、保存された設定が永久に消去されます。</string>
-    <string name="warn_delete_title_3">⚠ 警告：最終ステップ</string>
-    <string name="warn_delete_msg_3">この警告の後、最終確認が表示されます。注意して進めてください。</string>
-    <string name="dialog_delete_title">最終確認</string>
-    <string name="dialog_delete_msg">これが最後のステップです。本当にアカウントを削除してもよろしいですか？</string>
-    <string name="toast_notifications_enabled">通知が有効になりました。</string>
-    <string name="toast_notifications_disabled">通知が無効になりました。</string>
-    <string name="toast_account_deleted">アカウントが正常に削除されました。</string>
-    <string name="toast_delete_failed">アカウント削除に失敗しました。もう一度お試しください。</string>
+    <string name="dialog_language_title">言語を選択</string>
+    <string name="cd_selected_language">選択言語のチェックマークアイコン</string>
+    <string name="cd_language_flag">言語の国旗アイコン</string>
 
-    <!-- Map Fragment -->
+    <!-- ══════════════════════════════════════════════════════════════
+         マップ
+    ══════════════════════════════════════════════════════════════ -->
     <string name="map_title">場所を選択</string>
     <string name="selected_location">選択した場所</string>
-    <string name="loading_location">場所の名前を読み込み中 &#8230;</string>
+    <string name="loading_location">場所の名前を読み込み中…</string>
     <string name="unknown_location">不明な場所</string>
     <string name="unknown_location_api">不明</string>
     <string name="failed_load_location">場所の名前の読み込みに失敗しました。</string>
-    <string name="location_permission_denied">位置情報権限が拒否されました。</string>
-    <string name="select_location_prompt">まず地図上で場所を選択してください。</string>
-    <string name="gps_unavailable">GPS位置情報が利用できません。</string>
+    <string name="location_permission_denied">位置情報の権限が拒否されました。</string>
+    <string name="select_location_prompt">まずマップで場所を選択してください。</string>
+    <string name="gps_unavailable">GPSの位置情報が利用できません。</string>
     <string name="failed_get_location">現在地の取得に失敗しました。</string>
-    <string name="turn_on_gps_prompt">GPS位置情報サービスをオンにしてください。</string>
-    <string name="zoom_in_for_address">住所を表示するには拡大してください</string>
-
-    <!-- Edit Note Activity -->
-    <string name="metadata_format">最終更新：%1$s | 長さ：%2$d文字</string>
-    <string name="toast_note_deleted">メモを削除しました</string>
-    <string name="toast_note_saved">保存しました</string>
-    <string name="toast_no_changes">保存する変更がありません</string>
-    <string name="toast_alarm_permission_prompt">設定で正確なアラーム権限を許可してください</string>
-    <string name="toast_reminder_failed">リマインダーのスケジュール設定ができません</string>
-    <string name="toast_reminder_set">リマインダーを設定しました</string>
-    <string name="toast_image_failed">画像の生成に失敗しました</string>
-    <string name="share_chooser_title">メモ画像を共有</string>
-    <string name="dialog_delete_note_title">メモ削除</string>
-    <string name="dialog_delete_note_msg">永久に削除しますか？</string>
-
-    <!-- Note Activity -->
-    <string name="search_notes_hint">メモを検索 &#8230;</string>
-    <string name="toast_pinned">固定しました</string>
-    <string name="toast_unpinned">固定を解除しました</string>
-    <string name="toast_deleted">削除しました</string>
-    <string name="selection_count_format">%d件選択</string>
-    <string name="dialog_delete_multiple_title">メモ削除</string>
-    <string name="dialog_delete_multiple_msg">選択したメモを削除しますか？</string>
-
-    <!-- Note Adapter -->
-    <string name="placeholder_no_title">（タイトルなし）</string>
-
-    <!-- Reminder Receiver -->
-    <string name="notification_default_title">メモリマインダー</string>
-    <string name="notification_alert_title">リマインダーアラート</string>
-    <string name="notification_channel_name">メモリマインダー通知</string>
-    <string name="notification_channel_desc">メモリマインダー通知用チャネル</string>
-
-    <!-- Notification Activity -->
-    <string name="notifications_title">通知</string>
-    <string name="action_clear_all">すべてクリア</string>
-
-    <!-- Notification Adapter-->
-    <string name="dialog_delete_notif_title">通知削除</string>
-    <string name="dialog_delete_notif_message">この通知を削除しますか？</string>
-
-    <!-- Dialog Utils-->
-    <string name="cancel">キャンセル</string>
-
-    <!-- XML-->
-    <!-- Activity Edit Note-->
-    <string name="cd_back">戻る</string>
-    <string name="cd_delete">削除</string>
-    <string name="cd_share">共有</string>
-    <string name="cd_menu">メニュー</string>
-    <string name="cd_undo">元に戻す</string>
-    <string name="cd_redo">やり直し</string>
-    <string name="cd_save">保存</string>
-    <string name="title_hint">タイトル</string>
-    <string name="metadata_placeholder">2025年1月1日 12:00 | 0文字</string>
-    <string name="content_hint">入力開始 &#8230;</string>
-    <string name="cd_text_color">文字色</string>
-    <string name="cd_highlight">ハイライト</string>
-    <string name="cd_bold">太字</string>
-    <string name="cd_italic">斜体</string>
-    <string name="cd_underline">下線</string>
-    <string name="cd_strikethrough">取り消し線</string>
-    <string name="cd_bullet_list">箇条書き</string>
-    <string name="cd_align_left">左揃え</string>
-    <string name="cd_align_center">中央揃え</string>
-    <string name="cd_align_right">右揃え</string>
-    <string name="cd_size_up">文字サイズ拡大</string>
-    <string name="cd_size_down">文字サイズ縮小</string>
-
-    <!-- Activity Forgot Password-->
-    <string name="change_password">パスワード変更</string>
-    <string name="enter_old_and_new_password">古いパスワードと新しいパスワードを入力</string>
-    <string name="old_password">古いパスワード</string>
-    <string name="new_password">新しいパスワード</string>
-    <string name="change_password_button">パスワード変更</string>
-    <string name="username">ユーザー名</string>
-
-    <!-- Activity Login -->
-    <string name="welcome_back">おかえりなさい</string>
-    <string name="please_sign_in">アカウントにサインインしてください</string>
-    <string name="username_hint">ユーザー名</string>
-    <string name="password_hint">パスワード</string>
-    <string name="remember_me">ログイン状態を保持</string>
-    <string name="forgot_password">パスワードをお忘れですか？</string>
-    <string name="sign_in_button">サインイン</string>
-    <string name="dont_have_account_signup">アカウントをお持ちでないですか？ サインアップ</string>
-
-    <!-- Activity Note -->
-    <string name="cd_add_new_note">新規メモ追加</string>
-    <string name="cd_cancel_selection">選択キャンセル</string>
-    <string name="selection_count_placeholder">0件選択</string>
-    <string name="cd_select_all">すべて選択</string>
-    <string name="cd_pin_notes">メモを固定</string>
-    <string name="cd_delete_notes">メモ削除</string>
-
-    <!-- Activity Signup -->
-    <string name="create_account_title">アカウント作成</string>
-    <string name="fill_details_to_sign_up">サインアップするには詳細を入力してください</string>
-    <string name="confirm_password_hint">パスワード確認</string>
-    <string name="sign_up_button">サインアップ</string>
-    <string name="already_have_account_signin">既にアカウントをお持ちですか？ サインイン</string>
-
-    <!-- Activity Splash -->
-    <string name="flag_desc">国旗</string>
-    <string name="hello_message">こんにちは！</string>
-
-    <!-- Bottom-sheet language -->
-    <string name="dialog_language_title">言語を選択</string>
-
-    <!-- Dialog Confirm -->
-    <string name="dialog_title_confirmation">確認</string>
-    <string name="dialog_message_are_you_sure">よろしいですか？</string>
-    <string name="button_no">いいえ</string>
-    <string name="button_yes">はい</string>
-
-    <!-- Dialog Info -->
-    <string name="dialog_title_information">情報</string>
-    <string name="dialog_message_notification">通知メッセージ。</string>
-    <string name="button_close">閉じる</string>
-
-    <!-- Dialog Input -->
-    <string name="dialog_title_edit_data">データ編集</string>
-    <string name="input_hint_enter_new_text">新しいテキストを入力</string>
-    <string name="button_cancel">キャンセル</string>
-    <string name="button_save">保存</string>
-
-    <!-- Home Fragment -->
-    <string name="active_days_count">7日間アクティブ</string>
-    <string name="placeholder_username">ジョン・ドウ</string>
-    <string name="placeholder_datetime">2024年1月1日（月） • 午前10時30分</string>
-    <string name="header_recent_activity">最近のアクティビティ</string>
-    <string name="button_view_all">すべて表示</string>
-    <string name="empty_state_no_activity">アクティビティはまだありません</string>
-    <string name="header_your_notes">あなたのメモ</string>
-    <string name="empty_state_no_notes">メモはまだありません</string>
-
-    <!-- Map Fragment -->
-    <string name="search_hint">場所または通り名を検索 &#8230;</string>
-    <string name="determining_location">場所を特定中 &#8230;</string>
-    <string name="my_location">場所</string>
+    <string name="turn_on_gps_prompt">GPS位置情報サービスを有効にしてください。</string>
+    <string name="zoom_in_for_address">住所を見るにはズームインしてください</string>
+    <string name="search_hint">場所または通り名を検索…</string>
+    <string name="determining_location">位置情報を取得中…</string>
+    <string name="my_location">現在地</string>
     <string name="select_location">場所を選択</string>
 
-    <!-- Profile Fragment -->
-    <string name="cd_profile_background">プロフィール背景</string>
-    <string name="cd_profile_animation">プロフィールアニメーション</string>
-    <string name="cd_profile_picture">プロフィール画像</string>
-    <string name="cd_edit_profile_button">プロフィール画像編集</string>
-    <string name="cd_edit_background_button">背景画像編集</string>
-    <string name="placeholder_email">john.doe@example.com</string>
-    <string name="header_personal_info">個人情報</string>
+    <!-- ══════════════════════════════════════════════════════════════
+         通知 / アクティビティログ
+    ══════════════════════════════════════════════════════════════ -->
+    <string name="notification_channel_user_activities">ユーザーアクティビティ</string>
+    <string name="notifications_title">アクティビティ</string>
+    <string name="action_clear_all">すべて消去</string>
+    <string name="clear_all">すべて消去</string>
+    <string name="empty_state_no_activity_subtitle">まだアクティビティが記録されていません。\nアクティビティはここに表示されます。</string>
+    <string name="dialog_delete_notif_title">通知を削除</string>
+    <string name="dialog_delete_notif_message">この通知を削除しますか？</string>
+    <string name="notification_channel_name">メモリマインダー通知</string>
+    <string name="notification_channel_desc">メモのリマインダー通知チャンネル</string>
+    <string name="notification_default_title">メモのリマインダー</string>
+    <string name="notification_alert_title">リマインダーアラート</string>
 
-    <!-- Settings Fragment -->
-    <string name="settings_title">設定</string>
-    <string name="settings_description">アプリケーション設定を管理</string>
-    <string name="cd_settings_icon">設定アイコン</string>
-    <string name="header_account">アカウント</string>
-    <string name="profile_title">プロフィール</string>
-    <string name="profile_subtitle">プロフィールの表示と編集</string>
-    <string name="cd_profile_icon">プロフィールアイコン</string>
-    <string name="cd_next_button">次へボタンまたはアクションインジケーター</string>
-    <string name="forgot_password_title">パスワードをお忘れですか</string>
-    <string name="forgot_password_subtitle">パスワードを安全にリセット</string>
-    <string name="cd_forgot_password">パスワード忘れアイコン</string>
-    <string name="notifications_subtitle">アプリ通知の有効/無効</string>
-    <string name="cd_notifications_icon">通知アイコン</string>
-    <string name="cd_notifications_toggle">通知のオン/オフ切り替え</string>
-    <string name="language_title">アプリ言語</string>
-    <string name="language_subtitle">アプリ表示言語を設定</string>
-    <string name="cd_language_icon">言語アイコン</string>
-    <string name="action_delete_account">アカウント削除</string>
-    <string name="cd_delete_account">アカウント削除</string>
-    <string name="logout_button">ログアウト</string>
-    <string name="cd_logout_icon">ログアウトアイコン</string>
+    <!-- ── アクティビティログエントリ ── -->
+    <string name="activity_login_title">ログイン成功</string>
+    <string name="activity_login_message">アカウントへのサインインに成功しました。</string>
+    <string name="activity_logout_title">ログアウトしました</string>
+    <string name="activity_logout_message">アカウントからサインアウトしました。</string>
+    <string name="activity_profile_update_title">プロフィール更新</string>
+    <string name="activity_profile_update_message">プロフィール情報が正常に更新されました。</string>
+    <string name="activity_account_deleted_title">アカウント削除</string>
+    <string name="activity_account_deleted_message">アカウントの削除が正常に処理されました。</string>
+    <string name="activity_new_chat_title">新しいチャット作成</string>
+    <string name="activity_new_chat_message">Gemini AIとの新しいチャットセッションを開始しました</string>
+    <string name="activity_chat_deleted_title">チャット削除</string>
+    <string name="activity_chat_deleted_message">チャットセッションが削除されました</string>
 
-    <!-- Item Activity -->
+    <!-- ── アクティビティアイテム ── -->
     <string name="cd_activity_icon">アクティビティアイコン</string>
     <string name="activity_title_placeholder">アクティビティタイトル</string>
-    <string name="activity_description_placeholder">アクティビティ説明</string>
+    <string name="activity_description_placeholder">アクティビティの説明</string>
     <string name="activity_time_placeholder">2分前</string>
 
-    <!-- Item Language Option -->
-    <string name="cd_selected_language">選択済み言語チェックアイコン</string>
-    <string name="cd_language_flag">言語フラグアイコン</string>
-
-    <!-- Item Note -->
-    <string name="note_title_placeholder">メモタイトル</string>
-    <string name="note_content_placeholder">メモ &#8230;</string>
-    <string name="note_date_placeholder">1月1日 10:00</string>
-    <string name="cd_select_note">メモ選択</string>
-    <string name="cd_note_pinned">メモ固定インジケーター</string>
-
-    <!-- Item Profile Info -->
-    <string name="placeholder_name">ジョン・ドウ</string>
-    <string name="cd_full_name_value">フルネーム値</string>
-    <string name="cd_edit_full_name">フルネーム編集</string>
-    <string name="cd_email_value">メール値</string>
-    <string name="cd_edit_email">メール編集</string>
-    <string name="placeholder_birthday">1990年1月1日</string>
-    <string name="cd_birthday_value">生年月日値</string>
-    <string name="cd_edit_birthday">生年月日編集</string>
-    <string name="placeholder_location">ニューヨーク、アメリカ</string>
-    <string name="cd_location_value">場所値</string>
-    <string name="cd_edit_location">場所編集</string>
-
-    <!-- Layout Menu Note -->
-    <string name="action_reminder_text">リマインダー</string>
-    <string name="cd_action_reminder">リマインダー設定</string>
-    <string name="action_share_note">メモ共有</string>
-    <string name="cd_action_share">メモ共有</string>
-    <string name="action_delete_note">メモ削除</string>
-    <string name="cd_action_delete">メモ削除</string>
-
-    <!-- Nav Header -->
-    <string name="cd_background_pattern">背景パターン</string>
-    <string name="cd_profile_image">ナビゲーションヘッダーのプロフィール画像</string>
-
-    <!-- Menu Notifications -->
-    <string name="clear_all">すべてクリア</string>
-
-    <!-- Nav Menu Main -->
+    <!-- ══════════════════════════════════════════════════════════════
+         ナビゲーション
+    ══════════════════════════════════════════════════════════════ -->
     <string name="menu_section_preferences">設定</string>
     <string name="menu_title_notifications">通知</string>
     <string name="menu_section_account">アカウント</string>
     <string name="menu_title_logout">ログアウト</string>
+    <string name="menu_title_gemini">Gemini AI</string>
+    <string name="menu_section_tools">ツール</string>
+    <string name="menu_title_notes">メモ</string>
+    <string name="cd_background_pattern">背景パターン</string>
+    <string name="cd_profile_image">ナビゲーションヘッダーのプロフィール画像</string>
 
-    <!-- ── Chat Activity Log Strings ─────────────────────────────────────────── -->
-    <string name="fab_try_gemini">Gemini AIを試す</string>
-    <string name="cd_open_gemini">Gemini AIを開く</string>
+    <!-- ══════════════════════════════════════════════════════════════
+         一般
+    ══════════════════════════════════════════════════════════════ -->
+    <string name="text_with_countdown">%1$s (%2$d)</string>
+    <string name="footer_text">AIで作成 © 2026 Kitsune - Powered By GeminiAI</string>
+    <string name="logout_title">ログアウト確認</string>
+    <string name="logout_message">本当にログアウトしますか？</string>
+    <string name="logout">ログアウト</string>
+    <string name="cancel">キャンセル</string>
 
-    <string name="action_retry">再試行</string>
+    <!-- ── 共通ダイアログ ── -->
+    <string name="dialog_title_delete">すべてのアクティビティを削除しますか？</string>
+    <string name="dialog_message_delete_activity">このアイテムは完全に削除され、復元できません。</string>
+    <string name="button_delete">削除</string>
+    <string name="dialog_title_confirmation">確認</string>
+    <string name="dialog_message_are_you_sure">続行してよろしいですか？\nこの操作は取り消せません。</string>
+    <string name="button_no">いいえ</string>
+    <string name="dialog_title_information">情報</string>
+    <string name="dialog_message_notification">現在、新しいメッセージはありません。</string>
+    <string name="button_close">閉じる</string>
+    <string name="dialog_title_edit_data">データを編集</string>
+    <string name="input_hint_enter_new_text">新しいテキストを入力</string>
+    <string name="button_cancel">キャンセル</string>
+    <string name="button_save">保存</string>
+    <string name="button_yes">はい</string>
+    <string name="loading_please_wait">しばらくお待ちください…</string>
 
-    <string name="cd_ai_avatar">AIアイコン</string>
-    <string name="cd_copy_message">メッセージをコピー</string>
-    <string name="action_save_as_note">メモとして保存</string>
-    <string name="toast_copied">クリップボードにコピーしました</string>
-
-    <string name="dialog_save_note_title">メモに保存</string>
-    <string name="dialog_save_note_subtitle">AIの回答をメモに保存します</string>
-    <string name="hint_note_title">メモのタイトル…</string>
-    <string name="dialog_save_note_info">コンテンツはプレーンテキストとして保存されます</string>
-    <string name="action_save_note">保存</string>
-
-    <string name="note_from_gemini_default_title">Gemini AIからのメモ</string>
-    <string name="toast_note_saved_from_ai">メモを保存しました！ ✓</string>
-
-    <string name="error_connection">接続に失敗しました。ネットワークを確認してください。\n(%1$s)</string>
-    <string name="error_rate_limit">リクエスト制限に達しました。しばらくしてから再試行してください。</string>
-    <string name="error_parse">AIの応答を処理できませんでした。</string>
-    <string name="error_unknown">不明なエラー</string>
-    <string name="error_http">HTTP %1$d</string>
-    <string name="error_prefix">エラー: %1$s</string>
-
-    <string name="usage_remaining">本日の残り: %1$d/%2$d</string>
-
-    <string name="dialog_rate_limit_title">リクエスト過多</string>
-    <string name="dialog_rate_limit_msg">1分あたりの制限（15回）を超えました (Gemini Free Tier)。\nしばらく待ってから再度お試しください。</string>
-    <string name="dialog_not_logged_in_title">未ログイン</string>
-    <string name="dialog_not_logged_in_msg">チャット機能を利用するには、まずログインしてください。</string>
-
-    <string name="action_rename">名前変更</string>
-
-    <string name="activity_new_chat_title">新しいチャット作成</string>
-    <string name="activity_new_chat_message">Gemini AIとの新しい対話セッションを開始しました</string>
-    <string name="activity_chat_deleted_title">チャット削除</string>
-    <string name="activity_chat_deleted_message">対話セッションが削除されました</string>
 </resources>

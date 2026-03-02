@@ -128,12 +128,24 @@ public class SettingsFragment extends Fragment implements
         String lang = UserSession.getInstance().getLanguage();
         int flagRes, textRes;
 
-        switch (lang) {
-            case "id": flagRes = R.drawable.flag_id;     textRes = R.string.lang_indonesia; break;
-            case "ja": flagRes = R.drawable.flag_ja;     textRes = R.string.lang_japanese;  break;
-            case "ko": flagRes = R.drawable.flag_ko;     textRes = R.string.lang_korean;    break;
-            default:   flagRes = R.drawable.flag_globe;  textRes = R.string.lang_english;   break;
-        }
+        textRes = switch (lang) {
+            case "id" -> {
+                flagRes = R.drawable.flag_id;
+                yield R.string.lang_indonesia;
+            }
+            case "ja" -> {
+                flagRes = R.drawable.flag_ja;
+                yield R.string.lang_japanese;
+            }
+            case "ko" -> {
+                flagRes = R.drawable.flag_ko;
+                yield R.string.lang_korean;
+            }
+            default -> {
+                flagRes = R.drawable.flag_globe;
+                yield R.string.lang_english;
+            }
+        };
 
         Drawable flag = ContextCompat.getDrawable(requireContext(), flagRes);
         int size = (int) (textCurrentLanguage.getLineHeight() * 1.2f);
@@ -273,11 +285,21 @@ public class SettingsFragment extends Fragment implements
      */
     private void showWarningStep(int step) {
         String title = "", msg = "";
-        switch (step) {
-            case 1: title = getString(R.string.warn_delete_title_1); msg = getString(R.string.warn_delete_msg_1); break;
-            case 2: title = getString(R.string.warn_delete_title_2); msg = getString(R.string.warn_delete_msg_2); break;
-            case 3: title = getString(R.string.warn_delete_title_3); msg = getString(R.string.warn_delete_msg_3); break;
-        }
+        msg = switch (step) {
+            case 1 -> {
+                title = getString(R.string.warn_delete_title_1);
+                yield getString(R.string.warn_delete_msg_1);
+            }
+            case 2 -> {
+                title = getString(R.string.warn_delete_title_2);
+                yield getString(R.string.warn_delete_msg_2);
+            }
+            case 3 -> {
+                title = getString(R.string.warn_delete_title_3);
+                yield getString(R.string.warn_delete_msg_3);
+            }
+            default -> msg;
+        };
 
         DialogUtils.showCountdownDialog(
                 requireContext(), title, msg,

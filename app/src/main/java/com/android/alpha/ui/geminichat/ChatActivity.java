@@ -29,7 +29,6 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.alpha.BuildConfig;
 import com.android.alpha.R;
 import com.android.alpha.data.session.UserSession;
 import com.android.alpha.ui.notes.Note;
@@ -71,16 +70,10 @@ public class ChatActivity extends AppCompatActivity
     private static final String TAG = "ChatActivity";
 
     // ── Gemini API ────────────────────────────────────────────────────────────
-    // Ambil API key dari BuildConfig (hasil dari local.properties)
-    private static final String GEMINI_API_KEY = BuildConfig.GEMINI_API_KEY;
-
-    // URL Gemini 2.5 Flash
+    private static final String GEMINI_API_KEY = "YOUR_GEMINI_API_KEY_HERE";
     private static final String GEMINI_API_URL =
-            "https://generativelanguage.googleapis.com/v1beta/models/"
-                    + "gemini-2.5-flash:generateContent?key="
+            "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key="
                     + GEMINI_API_KEY;
-
-    // Batas harian (internal app limit, bukan limit resmi Google)
     private static final int DAILY_LIMIT = 1500;
 
     // ── UI ────────────────────────────────────────────────────────────────────
@@ -252,7 +245,7 @@ public class ChatActivity extends AppCompatActivity
             // Buat dan simpan Note baru via NoteViewModel
             Note note = new Note();
             note.setTitle(title.isEmpty() ? getString(R.string.note_from_gemini_default_title) : title);
-            note.setContent(MarkdownFormatter.toPlainNote(content));
+            note.setContent(MarkdownFormatter.toEditNoteHtml(content));
             noteViewModel.saveNote(this, note);
 
             Toast.makeText(this,

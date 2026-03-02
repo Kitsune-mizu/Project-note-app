@@ -12,7 +12,7 @@
     <ImageView
         android:layout_width="18dp"
         android:layout_height="18dp"
-        android:contentDescription="bubble chat"
+        android:contentDescription="@string/bubble_chat"
         android:src="@drawable/ic_chat_bubble"
         app:tint="#BBBBCC" />
 
@@ -34,7 +34,7 @@
         android:layout_height="36dp"
         android:src="@drawable/ic_more_vert"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="Opsi"
+        android:contentDescription="@string/option"
         app:tint="#BBBBCC" />
 
 </LinearLayout>

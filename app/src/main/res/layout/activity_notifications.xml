@@ -1,69 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Layout: Activity Notifications Screen
+    Layout: Activity Notifications Screen (Modern)
     Deskripsi: Menampilkan daftar aktivitas/notifikasi dengan empty state
+    - navigationIcon  : tombol back (kiri)
+    - menu            : icon delete (kanan) → res/menu/menu_notifications.xml
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
     android:orientation="vertical"
-    android:background="?android:windowBackground"
     tools:ignore="ExtraText">
 
-    <!-- ================= MATERIAL 3 TOOLBAR ================= -->
+    <!-- ================= TOOLBAR ================= -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:title="@string/notifications_title"
-        android:titleTextColor="?attr/colorOnPrimary"
-        app:titleCentered="true" />
+        android:background="?attr/colorSurface"
+        android:elevation="0dp"
+        app:navigationIcon="@drawable/ic_back"
+        app:navigationIconTint="?attr/colorOnSurface"
+        app:menu="@menu/menu_notifications" />
 
-    <!-- ================= RECYCLERVIEW LIST ================= -->
-    <!-- Menampilkan daftar aktivitas/notifikasi -->
+    <!-- ================= HEADER TITLE ================= -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="16dp"
+        android:text="@string/notifications_title"
+        android:textAppearance="?attr/textAppearanceHeadlineMedium"
+        android:textColor="?attr/colorOnSurface"
+        android:textStyle="bold" />
+
+    <!-- Subtle divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:alpha="0.08"
+        android:background="?attr/colorOnSurface" />
+
+    <!-- ================= RECYCLERVIEW ================= -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvActivities"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:clipToPadding="false"
-        android:padding="8dp"
-        android:scrollbars="vertical" />
+        android:padding="12dp"
+        android:scrollbars="none" />
 
-    <!-- ================= EMPTY STATE (LOTTIE) ================= -->
-    <!-- Ditampilkan ketika tidak ada data aktivitas -->
+    <!-- ================= EMPTY STATE ================= -->
     <LinearLayout
         android:id="@+id/emptyActivity"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="20dp"
+        android:paddingHorizontal="32dp"
         android:visibility="gone">
 
         <!-- Lottie Animation -->
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lottieEmpty"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/empty_activity" />
 
-        <!-- Empty State Text -->
+        <!-- Empty Title -->
         <TextView
             android:id="@+id/tvEmptyText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
             android:text="@string/empty_state_no_activity"
-            android:textColor="@color/md_theme_light_onBackground"
-            android:textSize="16sp"
+            android:textAppearance="?attr/textAppearanceTitleMedium"
+            android:textColor="?attr/colorOnSurface"
             android:textStyle="bold" />
+
+        <!-- Empty Subtitle -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:lineSpacingMultiplier="1.5"
+            android:text="@string/empty_state_no_activity_subtitle"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:textColor="?attr/colorOutline" />
 
     </LinearLayout>
 

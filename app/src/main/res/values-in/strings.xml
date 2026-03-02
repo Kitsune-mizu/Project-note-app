@@ -1,19 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">Alpha Note</string>
 
-    <!-- Java -->
-    <!-- User Session -->
-    <string name="notification_channel_user_activities">Aktivitas Pengguna</string>
-    <string name="activity_login_title">Login Berhasil</string>
-    <string name="activity_login_message">Anda berhasil masuk ke akun Anda.</string>
-    <string name="activity_logout_title">Telah Logout</string>
-    <string name="activity_logout_message">Anda berhasil keluar dari akun Anda.</string>
-    <string name="activity_profile_update_title">Profil Diperbarui</string>
-    <string name="activity_profile_update_message">Informasi profil Anda berhasil diperbarui.</string>
-    <string name="activity_account_deleted_title">Akun Dihapus</string>
-    <string name="activity_account_deleted_message">Penghapusan akun berhasil diproses.</string>
+    <!-- ══════════════════════════════════════════════════════════════
+         SPLASH SCREEN
+    ══════════════════════════════════════════════════════════════ -->
+    <string name="splash_tagline">Catat, lacak, dan kelola aktivitasmu</string>
+    <string name="splash_version">v2.0.0.26</string>
+    <string name="flag_desc">Bendera negara</string>
+    <string name="hello_message">Halo!</string>
 
-    <!-- Forgot Password -->
+    <!-- ══════════════════════════════════════════════════════════════
+         AUTH — LOGIN
+    ══════════════════════════════════════════════════════════════ -->
+    <string name="welcome_back">Selamat Datang Kembali</string>
+    <string name="please_sign_in">Silakan masuk ke akun Anda</string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="remember_me">Ingat saya</string>
+    <string name="forgot_password">Lupa Password?</string>
+    <string name="sign_in_button">Masuk</string>
+    <string name="dont_have_account_signup">Tidak punya akun? Daftar</string>
+
+    <string name="username_required">Username wajib diisi.</string>
+    <string name="password_required">Password wajib diisi.</string>
+    <string name="username_format_error">Username harus mengandung huruf kapital + angka, minimal 6 karakter.</string>
+    <string name="password_format_error">Password harus mengandung huruf + angka, minimal 8 karakter.</string>
+    <string name="incorrect_password">Password salah. Silakan coba lagi.</string>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         AUTH — SIGN UP
+    ══════════════════════════════════════════════════════════════ -->
+    <string name="create_account_title">Buat Akun</string>
+    <string name="fill_details_to_sign_up">Harap isi detail untuk mendaftar</string>
+    <string name="confirm_password_hint">Konfirmasi Password</string>
+    <string name="sign_up_button">Daftar</string>
+    <string name="already_have_account_signin">Sudah punya akun? Masuk</string>
+
+    <string name="error_fix_fields_signup">Harap perbaiki kesalahan di atas.</string>
+    <string name="success_signup">Pendaftaran Berhasil! Silakan masuk.</string>
+    <string name="error_username_taken">Username sudah digunakan, silakan pilih yang lain.</string>
+    <string name="confirm_password_error_message">Password tidak cocok.</string>
+    <string name="username_already_exists">Username sudah ada. Silakan pilih yang berbeda.</string>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         AUTH — FORGOT / CHANGE PASSWORD
+    ══════════════════════════════════════════════════════════════ -->
+    <string name="change_password">Ubah Password</string>
+    <string name="enter_old_and_new_password">Masukkan password lama dan password baru</string>
+    <string name="old_password">Password Lama</string>
+    <string name="new_password">Password Baru</string>
+    <string name="change_password_button">Ubah Password</string>
+    <string name="username">Username</string>
+
     <string name="username_error_message">Username harus mengandung huruf kapital + angka, minimal 6 karakter.</string>
     <string name="password_error_message">Password harus mengandung huruf + angka, minimal 8 karakter.</string>
     <string name="field_required">Kolom ini wajib diisi.</string>
@@ -23,21 +63,9 @@
     <string name="incorrect_old_password">Password lama salah atau kredensial tidak valid.</string>
     <string name="username_not_found">Username tidak ditemukan dalam sistem.</string>
 
-    <!-- Login Activity -->
-    <string name="username_required">Username wajib diisi.</string>
-    <string name="password_required">Password wajib diisi.</string>
-    <string name="username_format_error">Username harus mengandung huruf kapital + angka, minimal 6 karakter.</string>
-    <string name="password_format_error">Password harus mengandung huruf + angka, minimal 8 karakter.</string>
-    <string name="incorrect_password">Password salah. Silakan coba lagi.</string>
-
-    <!-- Signup Activity -->
-    <string name="error_fix_fields_signup">Harap perbaiki kesalahan di atas.</string>
-    <string name="success_signup">Pendaftaran Berhasil! Silakan masuk.</string>
-    <string name="error_username_taken">Username sudah digunakan, silakan pilih yang lain.</string>
-    <string name="confirm_password_error_message">Password tidak cocok.</string>
-    <string name="username_already_exists">Username sudah ada. Silakan pilih yang berbeda.</string>
-
-    <!-- Home Fragment -->
+    <!-- ══════════════════════════════════════════════════════════════
+         HOME
+    ══════════════════════════════════════════════════════════════ -->
     <string name="menu_title_home">Beranda</string>
     <string name="title_guest">Tamu</string>
     <string name="greeting_morning">Selamat Pagi</string>
@@ -45,6 +73,14 @@
     <string name="greeting_evening">Selamat Sore</string>
     <string name="greeting_night">Selamat Malam</string>
     <string name="active_days_format">Aktif selama %d hari</string>
+    <string name="active_days_count">7 hari aktif</string>
+    <string name="placeholder_username">John Doe</string>
+    <string name="placeholder_datetime">Senin, 1 Januari 2024 • 10:30 AM</string>
+    <string name="header_recent_activity">Aktivitas Terbaru</string>
+    <string name="button_view_all">Lihat Semua</string>
+    <string name="empty_state_no_activity">Belum ada aktivitas</string>
+    <string name="header_your_notes">Catatan Anda</string>
+    <string name="empty_state_no_notes">Belum ada catatan</string>
     <string name="time_just_now">Baru saja</string>
     <string name="time_minutes_ago">%d menit yang lalu</string>
     <string name="time_hours_ago">%d jam yang lalu</string>
@@ -55,15 +91,156 @@
     <string name="action_cancel">Batal</string>
     <string name="toast_home_updated">Data diperbarui.</string>
 
-    <!-- Main Activity -->
-    <string name="menu_title_profile">Profil</string>
-    <string name="menu_title_settings">Pengaturan</string>
-    <string name="footer_text">Dibuat dengan AI © 2025 Kitsune</string>
-    <string name="logout_title">Konfirmasi Logout</string>
-    <string name="logout_message">Apakah Anda yakin ingin logout?</string>
-    <string name="logout">Log Out</string>
+    <!-- ══════════════════════════════════════════════════════════════
+         CATATAN
+    ══════════════════════════════════════════════════════════════ -->
+    <string name="search_notes_hint">Cari catatan&#8230;</string>
+    <string name="cd_add_new_note">Tambah Catatan Baru</string>
+    <string name="cd_cancel_selection">Batal Pilihan</string>
+    <string name="selection_count_placeholder">0 Dipilih</string>
+    <string name="cd_select_all">Pilih Semua</string>
+    <string name="cd_pin_notes">Sematan Catatan</string>
+    <string name="cd_delete_notes">Hapus Catatan</string>
+    <string name="toast_pinned">Disematkan</string>
+    <string name="toast_unpinned">Tidak disematkan</string>
+    <string name="toast_deleted">Dihapus</string>
+    <string name="selection_count_format">%d Dipilih</string>
+    <string name="dialog_delete_multiple_title">Hapus Catatan</string>
+    <string name="dialog_delete_multiple_msg">Hapus catatan terpilih?</string>
+    <string name="placeholder_no_title">(Tanpa Judul)</string>
 
-    <!-- Profile Fragment -->
+    <!-- ── Edit Catatan ── -->
+    <string name="metadata_format">Terakhir diubah: %1$s | Panjang: %2$d karakter</string>
+    <string name="toast_note_deleted">Catatan dihapus</string>
+    <string name="toast_note_saved">Disimpan</string>
+    <string name="toast_no_changes">Tidak ada perubahan untuk disimpan</string>
+    <string name="toast_alarm_permission_prompt">Izinkan izin alarm tepat waktu di pengaturan</string>
+    <string name="toast_reminder_failed">Tidak dapat menjadwalkan pengingat</string>
+    <string name="toast_reminder_set">Pengingat diatur</string>
+    <string name="toast_image_failed">Gagal membuat gambar</string>
+    <string name="share_chooser_title">Bagikan Gambar Catatan</string>
+    <string name="dialog_delete_note_title">Hapus Catatan</string>
+    <string name="dialog_delete_note_msg">Hapus permanen?</string>
+
+    <!-- ── Item Catatan ── -->
+    <string name="note_title_placeholder">Judul Catatan</string>
+    <string name="note_content_placeholder">Catatan&#8230;</string>
+    <string name="note_date_placeholder">01 Jan, 10:00</string>
+    <string name="cd_select_note">Pilih Catatan</string>
+    <string name="cd_note_pinned">Indikator Catatan Disematkan</string>
+
+    <!-- ── Toolbar Editor Catatan ── -->
+    <string name="cd_back">Kembali</string>
+    <string name="cd_delete">Hapus</string>
+    <string name="cd_share">Bagikan</string>
+    <string name="cd_menu">Menu</string>
+    <string name="cd_undo">Undo</string>
+    <string name="cd_redo">Redo</string>
+    <string name="cd_save">Simpan</string>
+    <string name="title_hint">Judul</string>
+    <string name="metadata_placeholder">01 Jan 2025, 12:00 | 0 karakter</string>
+    <string name="content_hint">Mulai mengetik&#8230;</string>
+    <string name="cd_text_color">Warna Teks</string>
+    <string name="cd_highlight">Sorotan</string>
+    <string name="cd_bold">Tebal</string>
+    <string name="cd_italic">Miring</string>
+    <string name="cd_underline">Garis Bawah</string>
+    <string name="cd_strikethrough">Coret</string>
+    <string name="cd_bullet_list">Daftar Poin</string>
+    <string name="cd_align_left">Rata Kiri</string>
+    <string name="cd_align_center">Rata Tengah</string>
+    <string name="cd_align_right">Rata Kanan</string>
+    <string name="cd_size_up">Perbesar Teks</string>
+    <string name="cd_size_down">Perkecil Teks</string>
+
+    <!-- ── Menu Catatan ── -->
+    <string name="action_reminder_text">Pengingat</string>
+    <string name="cd_action_reminder">Atur Pengingat</string>
+    <string name="action_share_note">Bagikan Catatan</string>
+    <string name="cd_action_share">Bagikan Catatan</string>
+    <string name="action_delete_note">Hapus Catatan</string>
+    <string name="cd_action_delete">Hapus Catatan</string>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         GEMINI AI CHAT
+    ══════════════════════════════════════════════════════════════ -->
+    <string name="gemini_ai">Gemini</string>
+    <string name="fab_try_gemini">Coba Gemini AI</string>
+    <string name="cd_open_gemini">Buka Gemini AI</string>
+    <string name="gemini_greeting">Halo! Saya Gemini AI 👋</string>
+    <string name="gemini_suggestion">Tanya saya apa saja — kode, ide, riset, atau sekadar ngobrol!</string>
+
+    <!-- ── Chip ── -->
+    <string name="chip_idea">💡 Bantu ide</string>
+    <string name="chip_code">🛠️ Bantu kode</string>
+    <string name="chip_write">✍️ Bantu nulis</string>
+    <string name="chip_research">🔍 Bantu riset</string>
+
+    <!-- ── Input ── -->
+    <string name="input_hint_message">Tanya apa saja&#8230;</string>
+
+    <!-- ── Sidebar ── -->
+    <string name="sidebar_usage_limit">Sisa hari ini: —/1500</string>
+    <string name="sidebar_new_chat">Chat Baru</string>
+    <string name="sidebar_chat_history">Riwayat Chat</string>
+    <string name="sidebar_powered_by">Powered by Gemini 2.5 Flash</string>
+    <string name="sidebar_free_tier_info">Free Tier: 15 req/menit · 1500 req/hari</string>
+
+    <!-- ── Aksi Balon ── -->
+    <string name="cd_ai_avatar">Ikon AI</string>
+    <string name="cd_copy_message">Salin pesan</string>
+    <string name="action_save_as_note">Jadikan Catatan</string>
+    <string name="toast_copied">Teks disalin ke clipboard</string>
+    <string name="bubble_chat">Balon Obrolan</string>
+    <string name="option">Opsi</string>
+    <string name="new_name">Nama Baru&#8230;</string>
+    <string name="action_rename">Rename</string>
+    <string name="action_retry">Coba Lagi</string>
+
+    <!-- ── Dialog Simpan sebagai Catatan ── -->
+    <string name="dialog_save_note_title">Simpan sebagai Catatan</string>
+    <string name="dialog_save_note_subtitle">Respon AI akan disimpan ke Notes</string>
+    <string name="hint_note_title">Judul catatan&#8230;</string>
+    <string name="dialog_save_note_info">Konten akan disimpan apa adanya (plain text)</string>
+    <string name="action_save_note">Simpan</string>
+    <string name="note_from_gemini_default_title">Catatan dari Gemini AI</string>
+    <string name="toast_note_saved_from_ai">Catatan berhasil disimpan! ✓</string>
+
+    <!-- ── Pesan Error ── -->
+    <string name="error_connection">Koneksi gagal. Periksa internet Anda.\n(%1$s)</string>
+    <string name="error_rate_limit">Batas permintaan/menit tercapai. Coba lagi sebentar.</string>
+    <string name="error_parse">Gagal memproses respons AI.</string>
+    <string name="error_unknown">Error tidak diketahui</string>
+    <string name="error_http">HTTP %1$d</string>
+    <string name="error_prefix">Error: %1$s</string>
+
+    <!-- ── Penghitung Penggunaan ── -->
+    <string name="usage_remaining">Sisa hari ini: %1$d/%2$d</string>
+
+    <!-- ── Deskripsi Konten ── -->
+    <string name="cd_gemini_ai_logo">Logo Gemini AI</string>
+    <string name="cd_gemini_icon">Ikon Gemini</string>
+    <string name="cd_new_chat">Chat baru</string>
+    <string name="cd_send_message">Kirim pesan</string>
+
+    <!-- ── Dialog ── -->
+    <string name="dialog_not_logged_in_title">Belum Login</string>
+    <string name="dialog_not_logged_in_msg">Silakan login terlebih dahulu untuk menggunakan fitur chat.</string>
+    <string name="dialog_rate_limit_title">Batas Harian Tercapai</string>
+    <string name="dialog_rate_limit_msg">Anda melebihi 15 permintaan/menit (Gemini Free Tier).\nTunggu sebentar lalu coba lagi.</string>
+    <string name="dialog_rate_limit_message">Anda telah mencapai batas 1.500 permintaan per hari untuk Gemini API Free Tier.\n\nBatas akan direset pada tengah malam (UTC+0).</string>
+    <string name="dialog_rate_limit_info_header">Gemini API Free Tier:</string>
+    <string name="dialog_rate_limit_info_detail">• 15 permintaan per menit (RPM)\n• 1.000.000 token per menit (TPM)\n• 1.500 permintaan per hari (RPD)</string>
+    <string name="dialog_btn_understood">Mengerti</string>
+    <string name="cd_warning_icon">Ikon peringatan</string>
+    <string name="dialog_delete_chat_title">Hapus Chat?</string>
+    <string name="dialog_delete_chat_message">Chat ini akan dihapus secara permanen dan tidak dapat dipulihkan.</string>
+    <string name="cd_delete_icon">Ikon hapus</string>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         PROFIL
+    ══════════════════════════════════════════════════════════════ -->
+    <string name="menu_title_profile">Profil</string>
     <string name="default_username">Pengguna Baru</string>
     <string name="default_birthday">Belum diatur</string>
     <string name="default_location">Ketuk untuk atur lokasi</string>
@@ -79,194 +256,6 @@
     <string name="toast_profile_updated">Profil diperbarui.</string>
     <string name="activity_profile_updated_title">Profil Diperbarui</string>
     <string name="activity_profile_updated_desc">Informasi profil Anda telah diperbarui.</string>
-
-    <!-- Settings Fragment -->
-    <string name="lang_english">Inggris</string>
-    <string name="lang_indonesia">Indonesia</string>
-    <string name="lang_japanese">日本語</string>
-    <string name="lang_korean">한국어</string>
-    <string-array name="language_names">
-        <item>@string/lang_english</item>
-        <item>@string/lang_indonesia</item>
-        <item>@string/lang_japanese</item>
-        <item>@string/lang_korean</item>
-    </string-array>
-    <string name="action_open_settings">Buka Pengaturan</string>
-    <string name="action_logout">Logout</string>
-    <string name="action_next">Berikutnya</string>
-    <string name="action_delete">Hapus</string>
-    <string name="dialog_permission_title">Izin Diperlukan</string>
-    <string name="dialog_notification_permission_msg">Harap aktifkan notifikasi di pengaturan aplikasi untuk mengaktifkan fitur ini.</string>
-    <string name="dialog_logout_title">Konfirmasi Logout</string>
-    <string name="dialog_logout_msg">Apakah Anda yakin ingin logout?</string>
-    <string name="warn_delete_title_1">⚠ Peringatan: Aksi Permanen</string>
-    <string name="warn_delete_msg_1">Menghapus akun Anda bersifat permanen. Semua data akan hilang dan tidak dapat dipulihkan.</string>
-    <string name="warn_delete_title_2">⚠ Peringatan: Kehilangan Data</string>
-    <string name="warn_delete_msg_2">Semua catatan, aktivitas, dan preferensi yang terkait dengan akun ini akan dihapus permanen.</string>
-    <string name="warn_delete_title_3">⚠ Peringatan: Langkah Terakhir</string>
-    <string name="warn_delete_msg_3">Setelah peringatan ini, Anda akan melihat konfirmasi terakhir. Lanjutkan dengan hati-hati.</string>
-    <string name="dialog_delete_title">Konfirmasi Terakhir</string>
-    <string name="dialog_delete_msg">Ini adalah langkah terakhir. Apakah Anda benar-benar yakin ingin menghapus akun Anda?</string>
-    <string name="toast_notifications_enabled">Notifikasi diaktifkan.</string>
-    <string name="toast_notifications_disabled">Notifikasi dinonaktifkan.</string>
-    <string name="toast_account_deleted">Akun berhasil dihapus.</string>
-    <string name="toast_delete_failed">Gagal menghapus akun. Silakan coba lagi.</string>
-
-    <!-- Map Fragment -->
-    <string name="map_title">Pilih Lokasi</string>
-    <string name="selected_location">Lokasi Terpilih</string>
-    <string name="loading_location">Memuat nama lokasi &#8230;</string>
-    <string name="unknown_location">Lokasi Tidak Dikenal</string>
-    <string name="unknown_location_api">Tidak Dikenal</string>
-    <string name="failed_load_location">Gagal memuat nama lokasi.</string>
-    <string name="location_permission_denied">Izin lokasi ditolak.</string>
-    <string name="select_location_prompt">Harap pilih lokasi di peta terlebih dahulu.</string>
-    <string name="gps_unavailable">Lokasi GPS tidak tersedia.</string>
-    <string name="failed_get_location">Gagal mendapatkan lokasi saat ini.</string>
-    <string name="turn_on_gps_prompt">Harap aktifkan layanan lokasi GPS Anda.</string>
-    <string name="zoom_in_for_address">Perbesar untuk melihat alamat</string>
-
-    <!-- Edit Note Activity -->
-    <string name="metadata_format">Terakhir diubah: %1$s | Panjang: %2$d karakter</string>
-    <string name="toast_note_deleted">Catatan dihapus</string>
-    <string name="toast_note_saved">Disimpan</string>
-    <string name="toast_no_changes">Tidak ada perubahan untuk disimpan</string>
-    <string name="toast_alarm_permission_prompt">Izinkan izin alarm tepat waktu di pengaturan</string>
-    <string name="toast_reminder_failed">Tidak dapat menjadwalkan pengingat</string>
-    <string name="toast_reminder_set">Pengingat diatur</string>
-    <string name="toast_image_failed">Gagal membuat gambar</string>
-    <string name="share_chooser_title">Bagikan Gambar Catatan</string>
-    <string name="dialog_delete_note_title">Hapus Catatan</string>
-    <string name="dialog_delete_note_msg">Hapus permanen?</string>
-
-    <!-- Note Activity -->
-    <string name="search_notes_hint">Cari catatan &#8230;</string>
-    <string name="toast_pinned">Disematkan</string>
-    <string name="toast_unpinned">Tidak disematkan</string>
-    <string name="toast_deleted">Dihapus</string>
-    <string name="selection_count_format">%d Dipilih</string>
-    <string name="dialog_delete_multiple_title">Hapus Catatan</string>
-    <string name="dialog_delete_multiple_msg">Hapus catatan terpilih?</string>
-
-    <!-- Note Adapter -->
-    <string name="placeholder_no_title">(Tanpa Judul)</string>
-
-    <!-- Reminder Receiver -->
-    <string name="notification_default_title">Pengingat Catatan</string>
-    <string name="notification_alert_title">Peringatan Pengingat</string>
-    <string name="notification_channel_name">Notifikasi Pengingat Catatan</string>
-    <string name="notification_channel_desc">Saluran untuk notifikasi pengingat catatan</string>
-
-    <!-- Notification Activity -->
-    <string name="notifications_title">Notifikasi</string>
-    <string name="action_clear_all">Hapus Semua</string>
-
-    <!-- Notification Adapter-->
-    <string name="dialog_delete_notif_title">Hapus Notifikasi</string>
-    <string name="dialog_delete_notif_message">Apakah Anda ingin menghapus notifikasi ini?</string>
-
-    <!-- Dialog Utils-->
-    <string name="cancel">Batal</string>
-
-    <!-- XML-->
-    <!-- Activity Edit Note-->
-    <string name="cd_back">Kembali</string>
-    <string name="cd_delete">Hapus</string>
-    <string name="cd_share">Bagikan</string>
-    <string name="cd_menu">Menu</string>
-    <string name="cd_undo">Undo</string>
-    <string name="cd_redo">Redo</string>
-    <string name="cd_save">Simpan</string>
-    <string name="title_hint">Judul</string>
-    <string name="metadata_placeholder">01 Jan 2025, 12:00 | 0 karakter</string>
-    <string name="content_hint">Mulai mengetik &#8230;</string>
-    <string name="cd_text_color">Warna Teks</string>
-    <string name="cd_highlight">Sorotan</string>
-    <string name="cd_bold">Tebal</string>
-    <string name="cd_italic">Miring</string>
-    <string name="cd_underline">Garis Bawah</string>
-    <string name="cd_strikethrough">Coret</string>
-    <string name="cd_bullet_list">Daftar Poin</string>
-    <string name="cd_align_left">Rata Kiri</string>
-    <string name="cd_align_center">Rata Tengah</string>
-    <string name="cd_align_right">Rata Kanan</string>
-    <string name="cd_size_up">Perbesar Teks</string>
-    <string name="cd_size_down">Perkecil Teks</string>
-
-    <!-- Activity Forgot Password-->
-    <string name="change_password">Ubah Password</string>
-    <string name="enter_old_and_new_password">Masukkan password lama dan password baru</string>
-    <string name="old_password">Password Lama</string>
-    <string name="new_password">Password Baru</string>
-    <string name="change_password_button">Ubah Password</string>
-    <string name="username">Username</string>
-
-    <!-- Activity Login -->
-    <string name="welcome_back">Selamat Datang Kembali</string>
-    <string name="please_sign_in">Silakan masuk ke akun Anda</string>
-    <string name="username_hint">Username</string>
-    <string name="password_hint">Password</string>
-    <string name="remember_me">Ingat saya</string>
-    <string name="forgot_password">Lupa Password?</string>
-    <string name="sign_in_button">Masuk</string>
-    <string name="dont_have_account_signup">Tidak punya akun? Daftar</string>
-
-    <!-- Activity Note -->
-    <string name="cd_add_new_note">Tambah Catatan Baru</string>
-    <string name="cd_cancel_selection">Batal Pilihan</string>
-    <string name="selection_count_placeholder">0 Dipilih</string>
-    <string name="cd_select_all">Pilih Semua</string>
-    <string name="cd_pin_notes">Sematan Catatan</string>
-    <string name="cd_delete_notes">Hapus Catatan</string>
-
-    <!-- Activity Signup -->
-    <string name="create_account_title">Buat Akun</string>
-    <string name="fill_details_to_sign_up">Harap isi detail untuk mendaftar</string>
-    <string name="confirm_password_hint">Konfirmasi Password</string>
-    <string name="sign_up_button">Daftar</string>
-    <string name="already_have_account_signin">Sudah punya akun? Masuk</string>
-
-    <!-- Activity Splash -->
-    <string name="flag_desc">Bendera negara</string>
-    <string name="hello_message">Halo!</string>
-
-    <!-- Bottom-sheet language -->
-    <string name="dialog_language_title">Pilih Bahasa</string>
-
-    <!-- Dialog Confirm -->
-    <string name="dialog_title_confirmation">Konfirmasi</string>
-    <string name="dialog_message_are_you_sure">Apakah Anda yakin?</string>
-    <string name="button_no">Tidak</string>
-    <string name="button_yes">Ya</string>
-
-    <!-- Dialog Info -->
-    <string name="dialog_title_information">Informasi</string>
-    <string name="dialog_message_notification">Pesan notifikasi.</string>
-    <string name="button_close">Tutup</string>
-
-    <!-- Dialog Input -->
-    <string name="dialog_title_edit_data">Edit Data</string>
-    <string name="input_hint_enter_new_text">Masukkan teks baru</string>
-    <string name="button_cancel">Batal</string>
-    <string name="button_save">Simpan</string>
-
-    <!-- Home Fragment -->
-    <string name="active_days_count">7 hari aktif</string>
-    <string name="placeholder_username">John Doe</string>
-    <string name="placeholder_datetime">Senin, 1 Januari 2024 • 10:30 AM</string>
-    <string name="header_recent_activity">Aktivitas Terbaru</string>
-    <string name="button_view_all">Lihat Semua</string>
-    <string name="empty_state_no_activity">Belum ada aktivitas</string>
-    <string name="header_your_notes">Catatan Anda</string>
-    <string name="empty_state_no_notes">Belum ada catatan</string>
-
-    <!-- Map Fragment -->
-    <string name="search_hint">Cari lokasi atau nama jalan &#8230;</string>
-    <string name="determining_location">Menentukan lokasi &#8230;</string>
-    <string name="my_location">lokasi</string>
-    <string name="select_location">Pilih Lokasi</string>
-
-    <!-- Profile Fragment -->
     <string name="cd_profile_background">Latar Belakang Profil</string>
     <string name="cd_profile_animation">Animasi Profil</string>
     <string name="cd_profile_picture">Foto Profil</string>
@@ -275,7 +264,23 @@
     <string name="placeholder_email">john.doe@example.com</string>
     <string name="header_personal_info">Informasi Pribadi</string>
 
-    <!-- Settings Fragment -->
+    <!-- ── Item Info Profil ── -->
+    <string name="placeholder_name">John Doe</string>
+    <string name="cd_full_name_value">Nilai Nama Lengkap</string>
+    <string name="cd_edit_full_name">Edit Nama Lengkap</string>
+    <string name="cd_email_value">Nilai Email</string>
+    <string name="cd_edit_email">Edit Email</string>
+    <string name="placeholder_birthday">1 Januari 1990</string>
+    <string name="cd_birthday_value">Nilai Tanggal Lahir</string>
+    <string name="cd_edit_birthday">Edit Tanggal Lahir</string>
+    <string name="placeholder_location">New York, USA</string>
+    <string name="cd_location_value">Nilai Lokasi</string>
+    <string name="cd_edit_location">Edit Lokasi</string>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         PENGATURAN
+    ══════════════════════════════════════════════════════════════ -->
+    <string name="menu_title_settings">Pengaturan</string>
     <string name="settings_title">Pengaturan</string>
     <string name="settings_description">Kelola preferensi aplikasi Anda</string>
     <string name="cd_settings_icon">Ikon pengaturan</string>
@@ -297,107 +302,135 @@
     <string name="cd_delete_account">Hapus Akun</string>
     <string name="logout_button">Logout</string>
     <string name="cd_logout_icon">Ikon logout</string>
+    <string name="action_open_settings">Buka Pengaturan</string>
+    <string name="action_logout">Logout</string>
+    <string name="action_next">Berikutnya</string>
+    <string name="action_delete">Hapus</string>
+    <string name="dialog_permission_title">Izin Diperlukan</string>
+    <string name="dialog_notification_permission_msg">Harap aktifkan notifikasi di pengaturan aplikasi untuk mengaktifkan fitur ini.</string>
+    <string name="dialog_logout_title">Konfirmasi Logout</string>
+    <string name="dialog_logout_msg">Apakah Anda yakin ingin logout?</string>
+    <string name="warn_delete_title_1">⚠ Peringatan: Aksi Permanen</string>
+    <string name="warn_delete_msg_1">Menghapus akun Anda bersifat permanen. Semua data akan hilang dan tidak dapat dipulihkan.</string>
+    <string name="warn_delete_title_2">⚠ Peringatan: Kehilangan Data</string>
+    <string name="warn_delete_msg_2">Semua catatan, aktivitas, dan preferensi yang terkait dengan akun ini akan dihapus permanen.</string>
+    <string name="warn_delete_title_3">⚠ Peringatan: Langkah Terakhir</string>
+    <string name="warn_delete_msg_3">Setelah peringatan ini, Anda akan melihat konfirmasi terakhir. Lanjutkan dengan hati-hati.</string>
+    <string name="dialog_delete_title">Konfirmasi Terakhir</string>
+    <string name="dialog_delete_msg">Ini adalah langkah terakhir. Apakah Anda benar-benar yakin ingin menghapus akun Anda?</string>
+    <string name="toast_notifications_enabled">Notifikasi diaktifkan.</string>
+    <string name="toast_notifications_disabled">Notifikasi dinonaktifkan.</string>
+    <string name="toast_account_deleted">Akun berhasil dihapus.</string>
+    <string name="toast_delete_failed">Gagal menghapus akun. Silakan coba lagi.</string>
 
-    <!-- Item Activity -->
+    <!-- ── Bahasa ── -->
+    <string name="lang_english">Inggris</string>
+    <string name="lang_indonesia">Indonesia</string>
+    <string name="lang_japanese">日本語</string>
+    <string name="lang_korean">한국어</string>
+    <string-array name="language_names">
+        <item>@string/lang_english</item>
+        <item>@string/lang_indonesia</item>
+        <item>@string/lang_japanese</item>
+        <item>@string/lang_korean</item>
+    </string-array>
+    <string name="dialog_language_title">Pilih Bahasa</string>
+    <string name="cd_selected_language">Ikon centang bahasa terpilih</string>
+    <string name="cd_language_flag">Ikon bendera bahasa</string>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         PETA
+    ══════════════════════════════════════════════════════════════ -->
+    <string name="map_title">Pilih Lokasi</string>
+    <string name="selected_location">Lokasi Terpilih</string>
+    <string name="loading_location">Memuat nama lokasi&#8230;</string>
+    <string name="unknown_location">Lokasi Tidak Dikenal</string>
+    <string name="unknown_location_api">Tidak Dikenal</string>
+    <string name="failed_load_location">Gagal memuat nama lokasi.</string>
+    <string name="location_permission_denied">Izin lokasi ditolak.</string>
+    <string name="select_location_prompt">Harap pilih lokasi di peta terlebih dahulu.</string>
+    <string name="gps_unavailable">Lokasi GPS tidak tersedia.</string>
+    <string name="failed_get_location">Gagal mendapatkan lokasi saat ini.</string>
+    <string name="turn_on_gps_prompt">Harap aktifkan layanan lokasi GPS Anda.</string>
+    <string name="zoom_in_for_address">Perbesar untuk melihat alamat</string>
+    <string name="search_hint">Cari lokasi atau nama jalan&#8230;</string>
+    <string name="determining_location">Menentukan lokasi&#8230;</string>
+    <string name="my_location">lokasi</string>
+    <string name="select_location">Pilih Lokasi</string>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         NOTIFIKASI / LOG AKTIVITAS
+    ══════════════════════════════════════════════════════════════ -->
+    <string name="notification_channel_user_activities">Aktivitas Pengguna</string>
+    <string name="notifications_title">Aktivitas</string>
+    <string name="action_clear_all">Hapus Semua</string>
+    <string name="clear_all">Hapus Semua</string>
+    <string name="empty_state_no_activity_subtitle">Belum ada aktivitas yang tercatat.\nAktivitas kamu akan muncul di sini.</string>
+    <string name="dialog_delete_notif_title">Hapus Notifikasi</string>
+    <string name="dialog_delete_notif_message">Apakah Anda ingin menghapus notifikasi ini?</string>
+    <string name="notification_channel_name">Notifikasi Pengingat Catatan</string>
+    <string name="notification_channel_desc">Saluran untuk notifikasi pengingat catatan</string>
+    <string name="notification_default_title">Pengingat Catatan</string>
+    <string name="notification_alert_title">Peringatan Pengingat</string>
+
+    <!-- ── Entri Log Aktivitas ── -->
+    <string name="activity_login_title">Login Berhasil</string>
+    <string name="activity_login_message">Anda berhasil masuk ke akun Anda.</string>
+    <string name="activity_logout_title">Telah Logout</string>
+    <string name="activity_logout_message">Anda berhasil keluar dari akun Anda.</string>
+    <string name="activity_profile_update_title">Profil Diperbarui</string>
+    <string name="activity_profile_update_message">Informasi profil Anda berhasil diperbarui.</string>
+    <string name="activity_account_deleted_title">Akun Dihapus</string>
+    <string name="activity_account_deleted_message">Penghapusan akun berhasil diproses.</string>
+    <string name="activity_new_chat_title">Chat Baru Dibuat</string>
+    <string name="activity_new_chat_message">Anda memulai sesi percakapan baru dengan Gemini AI</string>
+    <string name="activity_chat_deleted_title">Chat Dihapus</string>
+    <string name="activity_chat_deleted_message">Sebuah sesi percakapan telah dihapus</string>
+
+    <!-- ── Item Aktivitas ── -->
     <string name="cd_activity_icon">Ikon aktivitas</string>
     <string name="activity_title_placeholder">Judul Aktivitas</string>
     <string name="activity_description_placeholder">Deskripsi aktivitas</string>
     <string name="activity_time_placeholder">2 menit lalu</string>
 
-    <!-- Item Language Option -->
-    <string name="cd_selected_language">Ikon centang bahasa terpilih</string>
-    <string name="cd_language_flag">Ikon bendera bahasa</string>
-
-    <!-- Item Note -->
-    <string name="note_title_placeholder">Judul Catatan</string>
-    <string name="note_content_placeholder">Catatan &#8230;</string>
-    <string name="note_date_placeholder">01 Jan, 10:00</string>
-    <string name="cd_select_note">Pilih Catatan</string>
-    <string name="cd_note_pinned">Indikator Catatan Disematkan</string>
-
-    <!-- Item Profile Info -->
-    <string name="placeholder_name">John Doe</string>
-    <string name="cd_full_name_value">Nilai Nama Lengkap</string>
-    <string name="cd_edit_full_name">Edit Nama Lengkap</string>
-    <string name="cd_email_value">Nilai Email</string>
-    <string name="cd_edit_email">Edit Email</string>
-    <string name="placeholder_birthday">1 Januari 1990</string>
-    <string name="cd_birthday_value">Nilai Tanggal Lahir</string>
-    <string name="cd_edit_birthday">Edit Tanggal Lahir</string>
-    <string name="placeholder_location">New York, USA</string>
-    <string name="cd_location_value">Nilai Lokasi</string>
-    <string name="cd_edit_location">Edit Lokasi</string>
-
-    <!-- Layout Menu Note -->
-    <string name="action_reminder_text">Pengingat</string>
-    <string name="cd_action_reminder">Atur Pengingat</string>
-    <string name="action_share_note">Bagikan Catatan</string>
-    <string name="cd_action_share">Bagikan Catatan</string>
-    <string name="action_delete_note">Hapus Catatan</string>
-    <string name="cd_action_delete">Hapus Catatan</string>
-
-    <!-- Nav Header -->
-    <string name="cd_background_pattern">Pola latar belakang</string>
-    <string name="cd_profile_image">Gambar profil di header navigasi</string>
-
-    <!-- Menu Notifications -->
-    <string name="clear_all">Hapus Semua</string>
-
-    <!-- Nav Menu Main -->
+    <!-- ══════════════════════════════════════════════════════════════
+         NAVIGASI
+    ══════════════════════════════════════════════════════════════ -->
     <string name="menu_section_preferences">Preferensi</string>
     <string name="menu_title_notifications">Notifikasi</string>
     <string name="menu_section_account">Akun</string>
     <string name="menu_title_logout">Logout</string>
+    <string name="menu_title_gemini">Gemini AI</string>
+    <string name="menu_section_tools">Tools</string>
+    <string name="menu_title_notes">Catatan</string>
+    <string name="cd_background_pattern">Pola latar belakang</string>
+    <string name="cd_profile_image">Gambar profil di header navigasi</string>
 
-    <!-- ── Chat Activity Log Strings ─────────────────────────────────────────── -->
-    <!-- ── FAB Gemini Extended ──────────────────────────────────────────────── -->
-    <string name="fab_try_gemini">Try Gemini AI</string>
-    <string name="cd_open_gemini">Buka Gemini AI</string>
+    <!-- ══════════════════════════════════════════════════════════════
+         UMUM
+    ══════════════════════════════════════════════════════════════ -->
+    <string name="text_with_countdown">%1$s (%2$d)</string>
+    <string name="footer_text">Dibuat dengan AI © 2026 Kitsune - Didukung Oleh GeminiAI</string>
+    <string name="logout_title">Konfirmasi Logout</string>
+    <string name="logout_message">Apakah Anda yakin ingin logout?</string>
+    <string name="logout">Log Out</string>
+    <string name="cancel">Batal</string>
 
-    <!-- ── Error retry ──────────────────────────────────────────────────────── -->
-    <string name="action_retry">Coba Lagi</string>
-
-    <!-- ── Bubble AI actions ──────────────────────────────────────────────── -->
-    <string name="cd_ai_avatar">Ikon AI</string>
-    <string name="cd_copy_message">Salin pesan</string>
-    <string name="action_save_as_note">Jadikan Catatan</string>
-    <string name="toast_copied">Teks disalin ke clipboard</string>
-
-    <!-- ── Dialog Save as Note ────────────────────────────────────────────── -->
-    <string name="dialog_save_note_title">Simpan sebagai Catatan</string>
-    <string name="dialog_save_note_subtitle">Respon AI akan disimpan ke Notes</string>
-    <string name="hint_note_title">Judul catatan…</string>
-    <string name="dialog_save_note_info">Konten akan disimpan apa adanya (plain text)</string>
-    <string name="action_save_note">Simpan</string>
-
-    <!-- ── Note dari Gemini ───────────────────────────────────────────────── -->
-    <string name="note_from_gemini_default_title">Catatan dari Gemini AI</string>
-    <string name="toast_note_saved_from_ai">Catatan berhasil disimpan! ✓</string>
-
-    <!-- ── Error messages ────────────────────────────────────────────────── -->
-    <string name="error_connection">Koneksi gagal. Periksa internet Anda.\n(%1$s)</string>
-    <string name="error_rate_limit">Batas permintaan/menit tercapai. Coba lagi sebentar.</string>
-    <string name="error_parse">Gagal memproses respons AI.</string>
-    <string name="error_unknown">Error tidak diketahui</string>
-    <string name="error_http">HTTP %1$d</string>
-    <string name="error_prefix">Error: %1$s</string>
-
-    <!-- ── Usage counter ──────────────────────────────────────────────────── -->
-    <string name="usage_remaining">Sisa hari ini: %1$d/%2$d</string>
-
-    <!-- ── Dialogs chat ────────────────────────────────────────────────────── -->
-    <string name="dialog_rate_limit_title">Terlalu Banyak Permintaan</string>
-    <string name="dialog_rate_limit_msg">Anda melebihi 15 permintaan/menit (Gemini Free Tier).\nTunggu sebentar lalu coba lagi.</string>
-    <string name="dialog_not_logged_in_title">Belum Login</string>
-    <string name="dialog_not_logged_in_msg">Silakan login terlebih dahulu untuk menggunakan fitur chat.</string>
-
-    <!-- ── History popup ───────────────────────────────────────────────────── -->
-    <string name="action_rename">Rename</string>
-
-    <!-- ── Activity log ────────────────────────────────────────────────────── -->
-    <string name="activity_new_chat_title">Chat Baru Dibuat</string>
-    <string name="activity_new_chat_message">Anda memulai sesi percakapan baru dengan Gemini AI</string>
-    <string name="activity_chat_deleted_title">Chat Dihapus</string>
-    <string name="activity_chat_deleted_message">Sebuah sesi percakapan telah dihapus</string>
+    <!-- ── Dialog Umum ── -->
+    <string name="dialog_title_delete">Hapus Semua Aktivitas?</string>
+    <string name="dialog_message_delete_activity">Item ini akan dihapus secara permanen dan tidak dapat dikembalikan.</string>
+    <string name="button_delete">Hapus</string>
+    <string name="dialog_title_confirmation">Konfirmasi</string>
+    <string name="dialog_message_are_you_sure">Apakah Anda yakin ingin melanjutkan?\nTindakan ini tidak dapat dibatalkan.</string>
+    <string name="button_no">Tidak</string>
+    <string name="dialog_title_information">Informasi</string>
+    <string name="dialog_message_notification">Tidak ada pesan baru saat ini.</string>
+    <string name="button_close">Tutup</string>
+    <string name="dialog_title_edit_data">Edit Data</string>
+    <string name="input_hint_enter_new_text">Masukkan teks baru</string>
+    <string name="button_cancel">Batal</string>
+    <string name="button_save">Simpan</string>
+    <string name="button_yes">Ya</string>
+    <string name="loading_please_wait">Mohon tunggu&#8230;</string>
 
 </resources>

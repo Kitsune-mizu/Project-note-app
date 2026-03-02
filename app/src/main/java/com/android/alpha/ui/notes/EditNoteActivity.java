@@ -135,10 +135,26 @@ public class EditNoteActivity extends AppCompatActivity {
     // =========================================================================
 
     /** Menginisialisasi semua komponen UI dan listener dasar. */
+    @SuppressLint("ObsoleteSdkInt")
     private void initViews() {
+
         etTitle   = findViewById(R.id.et_title);
         etContent = findViewById(R.id.et_content);
         tvMetadata = findViewById(R.id.tv_metadata);
+        // Aktifkan autocorrect + spell check untuk semua bahasa umum
+        etTitle.setInputType(
+                android.text.InputType.TYPE_CLASS_TEXT |
+                        android.text.InputType.TYPE_TEXT_FLAG_CAP_SENTENCES |
+                        android.text.InputType.TYPE_TEXT_FLAG_AUTO_CORRECT);
+        etContent.setInputType(
+                android.text.InputType.TYPE_CLASS_TEXT |
+                        android.text.InputType.TYPE_TEXT_FLAG_CAP_SENTENCES |
+                        android.text.InputType.TYPE_TEXT_FLAG_AUTO_CORRECT |
+                        android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+        etTitle.setImeOptions(android.view.inputmethod.EditorInfo.IME_FLAG_NO_EXTRACT_UI);
+        // Hint IME agar keyboard otomatis menyesuaikan bahasa aktif sistem (EN/ID/dll)
+        etContent.setImeHintLocales(android.os.LocaleList.getDefault());
+        etTitle.setImeHintLocales(android.os.LocaleList.getDefault());
 
         layoutDefaultActions = findViewById(R.id.layout_default_actions);
         layoutInputActions   = findViewById(R.id.layout_input_actions);

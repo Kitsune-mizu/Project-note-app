@@ -1,5 +1,6 @@
 package com.android.alpha.ui.geminichat;
 
+import android.annotation.SuppressLint;
 import android.graphics.Typeface;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -23,6 +24,7 @@ public class MarkdownFormatter {
     private static final int BULLET_GAP = 16;
 
     /** Untuk ditampilkan di bubble chat (Spannable dengan format visual). */
+    @SuppressLint("NewApi")
     public static SpannableStringBuilder toSpannable(String raw) {
         SpannableStringBuilder sb = new SpannableStringBuilder();
         String[] lines = raw.split("\n");
@@ -31,7 +33,8 @@ public class MarkdownFormatter {
             String trimmed = line.trim();
 
             if (trimmed.isEmpty()) {
-                if (sb.length() > 0 && sb.charAt(sb.length() - 1) != '\n') {
+                // Baris kosong: tambah satu newline sebagai spacer antar paragraf
+                if (!sb.isEmpty() && sb.charAt(sb.length() - 1) != '\n') {
                     sb.append("\n");
                 }
                 continue;
@@ -39,57 +42,49 @@ public class MarkdownFormatter {
 
             int lineStart = sb.length();
 
-            // Heading
+            // ── Heading: ## atau # ────────────────────────────────────────────
             if (trimmed.startsWith("## ") || trimmed.startsWith("# ")) {
                 String text = trimmed.replaceFirst("^##? ", "").trim();
                 text = stripInlineBold(text);
-
                 sb.append(text);
                 int end = sb.length();
-
                 sb.setSpan(new StyleSpan(Typeface.BOLD), lineStart, end,
                         Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 sb.setSpan(new RelativeSizeSpan(1.1f), lineStart, end,
                         Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
                 sb.append("\n");
 
-                // Bullet
-            } else if (trimmed.startsWith("* ")
-                    || trimmed.startsWith("- ")
+                // ── Bullet: *, -, atau • ──────────────────────────────────────────
+            } else if (trimmed.startsWith("* ") || trimmed.startsWith("- ")
                     || trimmed.startsWith("• ")) {
-
                 String text = trimmed.substring(2).trim();
                 int bulletStart = sb.length();
-
                 appendWithInlineBold(sb, text);
-
                 int end = sb.length();
                 sb.setSpan(new BulletSpan(BULLET_GAP), bulletStart, end,
                         Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
                 sb.append("\n");
 
-                // Numbered list
+                // ── Numbered list: 1. 2. dst ──────────────────────────────────────
             } else if (trimmed.matches("^\\d+\\.\\s+.*")) {
-
+                // Ambil nomor + konten
                 int dotIdx = trimmed.indexOf('.');
                 String number = trimmed.substring(0, dotIdx + 1);
-                String text = stripInlineBold(trimmed.substring(dotIdx + 1).trim());
-
+                String text = trimmed.substring(dotIdx + 1).trim();
+                text = stripInlineBold(text);
                 sb.append(number).append("  ").append(text);
                 sb.append("\n");
 
-                // Paragraf biasa
+                // ── Paragraf biasa ────────────────────────────────────────────────
             } else {
+                // Inline bold **teks**
                 appendWithInlineBold(sb, trimmed);
                 sb.append("\n");
             }
         }
 
         // Hapus trailing newline berlebih
-        while (sb.length() > 1
-                && sb.charAt(sb.length() - 1) == '\n'
+        while (sb.length() > 1 && sb.charAt(sb.length() - 1) == '\n'
                 && sb.charAt(sb.length() - 2) == '\n') {
             sb.delete(sb.length() - 1, sb.length());
         }
@@ -132,7 +127,51 @@ public class MarkdownFormatter {
         return sb.toString().trim();
     }
 
-    // ── Helpers ───────────────────────────────────────────────────────────────
+    /**
+     * Mengonversi markdown Gemini ke format HTML yang kompatibel dengan
+     * EditNoteActivity (tag <p style="text-align:..."> + <b>, <i>, <u>).
+     * Heading → <b> bold besar, bullet → • plain, numbered → tetap.
+     */
+    public static String toEditNoteHtml(String raw) {
+        StringBuilder sb = new StringBuilder();
+        String[] lines = raw.split("\n");
+        boolean lastWasEmpty = false;
+
+        for (String line : lines) {
+            String trimmed = line.trim();
+
+            if (trimmed.isEmpty()) {
+                if (!lastWasEmpty) sb.append("<p></p>");
+                lastWasEmpty = true;
+                continue;
+            }
+            lastWasEmpty = false;
+
+            if (trimmed.startsWith("## ") || trimmed.startsWith("# ")) {
+                String text = trimmed.replaceFirst("^##? ", "").trim();
+                sb.append("<p><b>").append(escapeHtml(stripMarkdownBold(text))).append("</b></p>");
+            } else if (trimmed.startsWith("* ") || trimmed.startsWith("- ") || trimmed.startsWith("• ")) {
+                String text = trimmed.substring(2).trim();
+                sb.append("<p>• ").append(inlineBoldToHtml(text)).append("</p>");
+            } else if (trimmed.matches("^\\d+\\.\\s+.*")) {
+                sb.append("<p>").append(inlineBoldToHtml(trimmed)).append("</p>");
+            } else {
+                sb.append("<p>").append(inlineBoldToHtml(trimmed)).append("</p>");
+            }
+        }
+        return sb.toString();
+    }
+
+    /** Konversi **bold** ke tag <b> HTML */
+    private static String inlineBoldToHtml(String text) {
+        return escapeHtml(text)
+                .replaceAll("\\*\\*(.+?)\\*\\*", "<b>$1</b>")
+                .replaceAll("\\*(.+?)\\*", "<i>$1</i>");
+    }
+
+    private static String escapeHtml(String text) {
+        return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
+    }
 
     /** Proses inline **bold** — tambahkan teks ke sb dengan StyleSpan. */
     private static void appendWithInlineBold(SpannableStringBuilder sb, String text) {

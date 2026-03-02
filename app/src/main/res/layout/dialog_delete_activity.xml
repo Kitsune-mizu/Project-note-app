@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Layout: Custom Edit Dialog (Modern)
-    Deskripsi: Dialog edit data modern dengan input field dan tombol aksi
+    Layout: Dialog Delete Activity (Modern)
+    Deskripsi: Popup konfirmasi hapus item aktivitas/notifikasi
+    Tombol delete menggunakan colorError agar terasa "destruktif"
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -14,45 +15,32 @@
 
     <!-- Dialog Title -->
     <TextView
-        android:id="@+id/tvDialogTitle"
+        android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:paddingBottom="20dp"
-        android:text="@string/dialog_title_edit_data"
+        android:paddingBottom="10dp"
+        android:text="@string/dialog_title_delete"
         android:textAppearance="?attr/textAppearanceTitleLarge"
         android:textColor="?attr/colorOnSurface"
         android:textStyle="bold" />
 
-    <!-- Input Field -->
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+    <!-- Dialog Message -->
+    <TextView
+        android:id="@+id/tvMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/input_hint_enter_new_text"
-        app:boxCornerRadiusBottomEnd="14dp"
-        app:boxCornerRadiusBottomStart="14dp"
-        app:boxCornerRadiusTopEnd="14dp"
-        app:boxCornerRadiusTopStart="14dp"
-        app:boxStrokeColor="?attr/colorOutline"
-        app:hintTextColor="?attr/colorPrimary">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:maxLines="1"
-            android:paddingTop="14dp"
-            android:paddingBottom="14dp" />
-
-    </com.google.android.material.textfield.TextInputLayout>
+        android:gravity="center"
+        android:lineSpacingMultiplier="1.5"
+        android:paddingBottom="24dp"
+        android:text="@string/dialog_message_delete_activity"
+        android:textAppearance="?attr/textAppearanceBodyMedium"
+        android:textColor="?attr/colorOnSurfaceVariant" />
 
     <!-- Thin Divider -->
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="24dp"
         android:layout_marginBottom="24dp"
         android:alpha="0.12"
         android:background="?attr/colorOnSurface" />
@@ -77,17 +65,17 @@
             app:cornerRadius="16dp"
             app:strokeColor="?attr/colorOutlineVariant" />
 
-        <!-- Save Button -->
+        <!-- Delete Button — warna merah (colorError) -->
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnConfirm"
+            android:id="@+id/btnDelete"
             style="@style/Widget.Material3.Button"
             android:layout_width="0dp"
             android:layout_height="52dp"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:backgroundTint="?attr/colorPrimary"
-            android:text="@string/button_save"
-            android:textColor="?attr/colorOnPrimary"
+            android:backgroundTint="?attr/colorError"
+            android:text="@string/button_delete"
+            android:textColor="?attr/colorOnError"
             android:textStyle="bold"
             app:cornerRadius="16dp" />
 

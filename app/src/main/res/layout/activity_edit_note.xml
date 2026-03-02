@@ -1,25 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Layout: Note Editor Screen
-    Deskripsi: Tampilan untuk membuat dan mengedit catatan
+    Layout: Note Editor Screen (Modern)
+    Deskripsi: Tampilan untuk membuat dan mengedit catatan — upgrade modern
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/md_theme_light_surface"
+    android:background="?attr/colorSurface"
     android:focusableInTouchMode="true">
 
-    <!-- ================= HEADER CONTAINER ================= -->
+    <!-- ================= HEADER ================= -->
     <RelativeLayout
         android:id="@+id/header_container"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="?attr/colorPrimary"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        tools:ignore="ExtraText">
+        android:layout_height="64dp"
+        android:background="?attr/colorSurface"
+        android:elevation="2dp"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp">
+
+        <!-- Subtle bottom divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:alpha="0.08"
+            android:background="?attr/colorOnSurface" />
 
         <!-- Back Button -->
         <ImageButton
@@ -29,8 +36,9 @@
             android:layout_centerVertical="true"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/cd_back"
+            android:padding="12dp"
             android:src="@drawable/ic_back"
-            app:tint="?attr/colorOnPrimary" />
+            app:tint="?attr/colorOnSurface" />
 
         <!-- Default Action Buttons (Delete, Share, Menu) -->
         <LinearLayout
@@ -42,38 +50,38 @@
             android:orientation="horizontal"
             android:visibility="visible">
 
-            <!-- Delete Button -->
             <ImageButton
                 android:id="@+id/btn_delete"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/cd_delete"
+                android:padding="12dp"
                 android:visibility="gone"
-                app:tint="?attr/colorOnPrimary" />
+                app:tint="?attr/colorOnSurface" />
 
-            <!-- Share Button -->
             <ImageButton
                 android:id="@+id/btn_share"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/cd_share"
+                android:padding="12dp"
                 android:visibility="gone"
-                app:tint="?attr/colorOnPrimary" />
+                app:tint="?attr/colorOnSurface" />
 
-            <!-- Menu Button -->
             <ImageButton
                 android:id="@+id/btn_menu"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/cd_menu"
+                android:padding="12dp"
                 android:src="@drawable/ic_menu"
-                app:tint="?attr/colorOnPrimary" />
+                app:tint="?attr/colorOnSurface" />
         </LinearLayout>
 
-        <!-- Input Action Buttons (Undo, Redo, Save Manual) -->
+        <!-- Input Action Buttons (Undo, Redo, Save) -->
         <LinearLayout
             android:id="@+id/layout_input_actions"
             android:layout_width="wrap_content"
@@ -83,36 +91,46 @@
             android:orientation="horizontal"
             android:visibility="gone">
 
-            <!-- Undo Button -->
             <ImageButton
                 android:id="@+id/btn_undo"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/cd_undo"
+                android:padding="12dp"
                 android:src="@drawable/ic_undo"
-                app:tint="?attr/colorOnPrimary" />
+                app:tint="?attr/colorOnSurface" />
 
-            <!-- Redo Button -->
             <ImageButton
                 android:id="@+id/btn_redo"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/cd_redo"
+                android:padding="12dp"
                 android:src="@drawable/ic_redo"
-                app:tint="?attr/colorOnPrimary" />
+                app:tint="?attr/colorOnSurface" />
 
-            <!-- Manual Save Button -->
-            <ImageButton
+            <!-- Save Button — pakai MaterialButton agar bisa diberi warna accent -->
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_save_manual"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="8dp"
                 android:contentDescription="@string/cd_save"
-                android:padding="6dp"
-                android:src="@drawable/ic_save"
-                app:tint="?attr/colorOnPrimary" />
+                android:minWidth="0dp"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:text="@string/cd_save"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:cornerRadius="12dp"
+                app:icon="@drawable/ic_save"
+                app:iconSize="16dp"
+                app:iconPadding="4dp" />
+
         </LinearLayout>
 
     </RelativeLayout>
@@ -124,7 +142,11 @@
         android:layout_height="match_parent"
         android:layout_above="@id/keyboard_toolbar"
         android:layout_below="@id/header_container"
-        android:padding="16dp">
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="16dp"
+        android:clipToPadding="false">
 
         <LinearLayout
             android:id="@+id/note_root_layout"
@@ -132,30 +154,42 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Title Input Field -->
+            <!-- Title Input -->
             <EditText
                 android:id="@+id/et_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
                 android:autofillHints=""
                 android:background="@null"
                 android:hint="@string/title_hint"
                 android:inputType="textMultiLine"
-                android:layout_marginBottom="4dp"
-                android:textSize="22sp"
+                android:lineSpacingMultiplier="1.2"
+                android:textColor="?attr/colorOnSurface"
+                android:textColorHint="?attr/colorOutline"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
-            <!-- Metadata Text (Tanggal / Info lainnya) -->
+            <!-- Metadata -->
             <TextView
                 android:id="@+id/tv_metadata"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:layout_marginBottom="16dp"
                 android:text="@string/metadata_placeholder"
-                android:textColor="?attr/colorOnSurface"
+                android:textColor="?attr/colorOutline"
                 android:textSize="12sp" />
 
-            <!-- Main Content Input Field -->
+            <!-- Thin divider between metadata and content -->
+            <View
+                android:layout_width="32dp"
+                android:layout_height="2dp"
+                android:layout_marginBottom="16dp"
+                android:background="?attr/colorPrimary"
+                android:alpha="0.4" />
+
+            <!-- Content Input -->
             <EditText
                 android:id="@+id/et_content"
                 android:layout_width="match_parent"
@@ -165,8 +199,10 @@
                 android:gravity="top|start"
                 android:hint="@string/content_hint"
                 android:inputType="textMultiLine|textCapSentences"
-                android:lineSpacingMultiplier="1.2"
+                android:lineSpacingMultiplier="1.6"
                 android:minHeight="300dp"
+                android:textColor="?attr/colorOnSurface"
+                android:textColorHint="?attr/colorOutline"
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -179,36 +215,34 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/keyboard_toolbar"
         android:layout_below="@id/header_container"
-        android:background="#000000"
+        android:background="?attr/colorSurface"
         android:orientation="vertical"
         android:padding="24dp"
         android:visibility="gone">
 
-        <!-- Share Title -->
         <TextView
             android:id="@+id/share_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <!-- Share Date -->
         <TextView
             android:id="@+id/share_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="8dp"
-            android:textColor="@android:color/black"
+            android:textColor="?attr/colorOutline"
             android:textSize="12sp" />
 
-        <!-- Share Content -->
         <TextView
             android:id="@+id/share_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:textColor="#FFFFFF"
+            android:lineSpacingMultiplier="1.6"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -218,140 +252,173 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="?attr/colorSecondary"
-        android:elevation="4dp"
+        android:background="@drawable/bg_keyboard_toolbar"
+        android:elevation="8dp"
         android:fillViewport="true">
 
         <LinearLayout
             android:id="@+id/keyboard_toolbar_layout"
             android:layout_width="wrap_content"
-            android:layout_height="48dp"
+            android:layout_height="52dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingHorizontal="4dp">
+            android:paddingHorizontal="8dp">
 
             <!-- Text Color -->
             <ImageButton
                 android:id="@+id/action_text_color"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
+                android:background="@drawable/bg_toolbar_btn"
                 android:contentDescription="@string/cd_text_color"
-                android:src="@drawable/ic_text_color" />
+                android:padding="9dp"
+                android:src="@drawable/ic_text_color"
+                app:tint="?attr/colorOnSurfaceVariant" />
 
             <!-- Highlight -->
             <ImageButton
                 android:id="@+id/action_highlight"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
+                android:background="@drawable/bg_toolbar_btn"
                 android:contentDescription="@string/cd_highlight"
-                android:src="@drawable/ic_text_highlight" />
+                android:padding="9dp"
+                android:src="@drawable/ic_text_highlight"
+                app:tint="?attr/colorOnSurfaceVariant" />
 
-            <!-- Spacer -->
+            <!-- Divider -->
             <View
-                android:layout_width="8dp"
-                android:layout_height="match_parent" />
+                android:layout_width="1dp"
+                android:layout_height="24dp"
+                android:layout_marginHorizontal="6dp"
+                android:alpha="0.15"
+                android:background="?attr/colorOnSurface" />
 
             <!-- Bold -->
             <ImageButton
                 android:id="@+id/action_bold"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
+                android:background="@drawable/bg_toolbar_btn"
                 android:contentDescription="@string/cd_bold"
-                android:src="@drawable/ic_text_bold" />
+                android:padding="9dp"
+                android:src="@drawable/ic_text_bold"
+                app:tint="?attr/colorOnSurfaceVariant" />
 
             <!-- Italic -->
             <ImageButton
                 android:id="@+id/action_italic"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
+                android:background="@drawable/bg_toolbar_btn"
                 android:contentDescription="@string/cd_italic"
-                android:src="@drawable/ic_text_italic" />
+                android:padding="9dp"
+                android:src="@drawable/ic_text_italic"
+                app:tint="?attr/colorOnSurfaceVariant" />
 
             <!-- Underline -->
             <ImageButton
                 android:id="@+id/action_underline"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
+                android:background="@drawable/bg_toolbar_btn"
                 android:contentDescription="@string/cd_underline"
-                android:src="@drawable/ic_text_underline" />
+                android:padding="9dp"
+                android:src="@drawable/ic_text_underline"
+                app:tint="?attr/colorOnSurfaceVariant" />
 
             <!-- Strikethrough -->
             <ImageButton
                 android:id="@+id/action_strike"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
+                android:background="@drawable/bg_toolbar_btn"
                 android:contentDescription="@string/cd_strikethrough"
-                android:src="@drawable/ic_text_strikethrough" />
+                android:padding="9dp"
+                android:src="@drawable/ic_text_strikethrough"
+                app:tint="?attr/colorOnSurfaceVariant" />
 
-            <!-- Spacer -->
+            <!-- Divider -->
             <View
-                android:layout_width="8dp"
-                android:layout_height="match_parent" />
+                android:layout_width="1dp"
+                android:layout_height="24dp"
+                android:layout_marginHorizontal="6dp"
+                android:alpha="0.15"
+                android:background="?attr/colorOnSurface" />
 
             <!-- Bullet List -->
             <ImageButton
                 android:id="@+id/action_bullet_list"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
+                android:background="@drawable/bg_toolbar_btn"
                 android:contentDescription="@string/cd_bullet_list"
-                android:src="@drawable/ic_text_list_bulleted" />
+                android:padding="9dp"
+                android:src="@drawable/ic_text_list_bulleted"
+                app:tint="?attr/colorOnSurfaceVariant" />
 
             <!-- Align Left -->
             <ImageButton
                 android:id="@+id/action_align_left"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
+                android:background="@drawable/bg_toolbar_btn"
                 android:contentDescription="@string/cd_align_left"
-                android:src="@drawable/ic_text_align_left" />
+                android:padding="9dp"
+                android:src="@drawable/ic_text_align_left"
+                app:tint="?attr/colorOnSurfaceVariant" />
 
             <!-- Align Center -->
             <ImageButton
                 android:id="@+id/action_align_center"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
+                android:background="@drawable/bg_toolbar_btn"
                 android:contentDescription="@string/cd_align_center"
-                android:src="@drawable/ic_text_align_center" />
+                android:padding="9dp"
+                android:src="@drawable/ic_text_align_center"
+                app:tint="?attr/colorOnSurfaceVariant" />
 
             <!-- Align Right -->
             <ImageButton
                 android:id="@+id/action_align_right"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
+                android:background="@drawable/bg_toolbar_btn"
                 android:contentDescription="@string/cd_align_right"
-                android:src="@drawable/ic_text_align_right" />
+                android:padding="9dp"
+                android:src="@drawable/ic_text_align_right"
+                app:tint="?attr/colorOnSurfaceVariant" />
 
-            <!-- Spacer -->
+            <!-- Divider -->
             <View
-                android:layout_width="8dp"
-                android:layout_height="match_parent" />
+                android:layout_width="1dp"
+                android:layout_height="24dp"
+                android:layout_marginHorizontal="6dp"
+                android:alpha="0.15"
+                android:background="?attr/colorOnSurface" />
 
             <!-- Increase Text Size -->
             <ImageButton
                 android:id="@+id/action_size_up"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
+                android:background="@drawable/bg_toolbar_btn"
                 android:contentDescription="@string/cd_size_up"
-                android:src="@drawable/ic_text_increase" />
+                android:padding="9dp"
+                android:src="@drawable/ic_text_increase"
+                app:tint="?attr/colorOnSurfaceVariant" />
 
             <!-- Decrease Text Size -->
             <ImageButton
                 android:id="@+id/action_size_down"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
+                android:background="@drawable/bg_toolbar_btn"
                 android:contentDescription="@string/cd_size_down"
-                android:src="@drawable/ic_text_decrease" />
+                android:padding="9dp"
+                android:src="@drawable/ic_text_decrease"
+                app:tint="?attr/colorOnSurfaceVariant" />
 
         </LinearLayout>
     </HorizontalScrollView>

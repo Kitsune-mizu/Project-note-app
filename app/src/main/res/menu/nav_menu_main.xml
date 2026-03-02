@@ -1,72 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Navigation Drawer Menu
-    Deskripsi: Struktur menu navigasi utama aplikasi
+    Navigation Drawer Menu (Modern)
+    ──────────────────────────────────────────────────────────────────
+    HIGHLIGHT AKTIF
+    Setiap group navigasi pakai checkableBehavior="single".
+    Warna highlight dikontrol sepenuhnya dari NavigationView:
+      app:itemIconTint        → @color/nav_item_color  (state list)
+      app:itemTextColor       → @color/nav_item_color  (state list)
+      app:itemShapeFillColor  → @color/nav_item_shape_color (state list)
+    Dari Java: panggil setMenuChecked(menu, activeId) tiap ganti fragment.
+
+    GEMINI
+    Ditambahkan di group TOOLS bersama Notifications.
+    Membuka ChatActivity — bukan fragment, tidak perlu highlight.
+    Tetap checkable=single agar ikut styling NavigationView.
+
+    LOGOUT
+    Di group terpisah dengan checkableBehavior="none" agar tidak
+    pernah terlihat "terpilih" karena bukan navigasi ke fragment.
+    ──────────────────────────────────────────────────────────────────
 -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- ================= MAIN MENU GROUP ================= -->
+    <!-- ── MAIN ── -->
     <group
         android:id="@+id/main_group"
         android:checkableBehavior="single"
         tools:ignore="ExtraText">
 
-        <!-- Navigation: Home -->
         <item
             android:id="@+id/nav_home"
+            android:checked="true"
             android:icon="@drawable/ic_home"
-            android:title="@string/menu_title_home"
-            app:iconPadding="8dp"
-            app:iconTint="@color/nav_item_color" />
+            android:title="@string/menu_title_home" />
 
-        <!-- Navigation: Profile -->
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_person"
-            android:title="@string/menu_title_profile"
-            app:iconPadding="8dp"
-            app:iconTint="@color/nav_item_color" />
+            android:title="@string/menu_title_profile" />
 
     </group>
 
-    <!-- ================= PREFERENCES SECTION ================= -->
-    <item android:title="@string/menu_section_preferences">
+    <!-- ── TOOLS ── -->
+    <item android:title="@string/menu_section_tools">
         <menu>
             <group android:checkableBehavior="single">
 
-                <!-- Navigation: Notifications -->
+                <!-- Notes: membuka NoteActivity -->
+                <item
+                    android:id="@+id/nav_notes"
+                    android:icon="@drawable/ic_notes"
+                    android:title="@string/menu_title_notes" />
+
+                <!--
+                    Gemini: membuka ChatActivity.
+                    Icon @drawable/ic_gemini — bisa pakai ic_star / ic_sparkle
+                    jika belum punya dedicated drawable.
+                -->
+                <item
+                    android:id="@+id/nav_gemini"
+                    android:icon="@drawable/ic_gemini"
+                    android:title="@string/menu_title_gemini" />
+
                 <item
                     android:id="@+id/nav_notifications"
                     android:icon="@drawable/ic_notifications"
-                    android:title="@string/menu_title_notifications"
-                    app:iconPadding="8dp"
-                    app:iconTint="@color/nav_item_color" />
-
-                <!-- Navigation: Settings -->
-                <item
-                    android:id="@+id/nav_settings"
-                    android:icon="@drawable/ic_settings"
-                    android:title="@string/menu_title_settings"
-                    app:iconPadding="8dp"
-                    app:iconTint="@color/nav_item_color" />
+                    android:title="@string/menu_title_notifications" />
 
             </group>
         </menu>
     </item>
 
-    <!-- ================= ACCOUNT SECTION ================= -->
-    <item android:title="@string/menu_section_account">
+    <!-- ── PREFERENCES ── -->
+    <item android:title="@string/menu_section_preferences">
         <menu>
             <group android:checkableBehavior="single">
 
-                <!-- Navigation: Logout -->
+                <item
+                    android:id="@+id/nav_settings"
+                    android:icon="@drawable/ic_settings"
+                    android:title="@string/menu_title_settings" />
+
+            </group>
+        </menu>
+    </item>
+
+    <!-- ── ACCOUNT ── -->
+    <!--
+        checkableBehavior="none" → logout tidak pernah ter-highlight.
+        Warna merah dikerjakan programmatic di colorLogoutItem().
+    -->
+    <item android:title="@string/menu_section_account">
+        <menu>
+            <group android:checkableBehavior="none">
+
                 <item
                     android:id="@+id/nav_logout"
                     android:icon="@drawable/ic_logout"
-                    android:title="@string/menu_title_logout"
-                    app:iconPadding="8dp" />
+                    android:title="@string/menu_title_logout" />
 
             </group>
         </menu>

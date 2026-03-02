@@ -1,175 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">알파 노트</string>
 
-    <!-- Java -->
-    <!-- User Session -->
-    <string name="notification_channel_user_activities">사용자 활동</string>
-    <string name="activity_login_title">로그인 성공</string>
-    <string name="activity_login_message">계정에 성공적으로 로그인했습니다.</string>
-    <string name="activity_logout_title">로그아웃됨</string>
-    <string name="activity_logout_message">계정에서 성공적으로 로그아웃했습니다.</string>
-    <string name="activity_profile_update_title">프로필 업데이트</string>
-    <string name="activity_profile_update_message">프로필 정보가 성공적으로 업데이트되었습니다.</string>
-    <string name="activity_account_deleted_title">계정 삭제</string>
-    <string name="activity_account_deleted_message">계정 삭제가 성공적으로 처리되었습니다.</string>
+    <string name="app_name">Alpha Note</string>
 
-    <!-- Forgot Password -->
-    <string name="username_error_message">사용자 이름은 대문자+숫자를 포함하고, 최소 6자 이상이어야 합니다.</string>
-    <string name="password_error_message">비밀번호는 문자+숫자를 포함하고, 최소 8자 이상이어야 합니다.</string>
-    <string name="field_required">이 필드는 필수입니다.</string>
-    <string name="new_password_same_error">새 비밀번호는 이전 비밀번호와 같을 수 없습니다.</string>
-    <string name="error_fix_fields">필드의 오류를 수정하세요.</string>
-    <string name="success_password_changed">비밀번호가 성공적으로 변경되었습니다. 이제 로그인할 수 있습니다.</string>
-    <string name="incorrect_old_password">이전 비밀번호가 잘못되었거나 자격 증명이 유효하지 않습니다.</string>
-    <string name="username_not_found">시스템에서 사용자 이름을 찾을 수 없습니다.</string>
+    <!-- ══════════════════════════════════════════════════════════════
+         스플래시 화면
+    ══════════════════════════════════════════════════════════════ -->
+    <string name="splash_tagline">메모하고, 추적하고, 활동을 관리하세요</string>
+    <string name="splash_version">v2.0.0.26</string>
+    <string name="flag_desc">국기</string>
+    <string name="hello_message">안녕하세요!</string>
 
-    <!-- Login Activity -->
+    <!-- ══════════════════════════════════════════════════════════════
+         인증 — 로그인
+    ══════════════════════════════════════════════════════════════ -->
+    <string name="welcome_back">다시 오셨군요</string>
+    <string name="please_sign_in">계정에 로그인해 주세요</string>
+    <string name="username_hint">사용자 이름</string>
+    <string name="password_hint">비밀번호</string>
+    <string name="remember_me">로그인 상태 유지</string>
+    <string name="forgot_password">비밀번호를 잊으셨나요?</string>
+    <string name="sign_in_button">로그인</string>
+    <string name="dont_have_account_signup">계정이 없으신가요? 회원가입</string>
+
     <string name="username_required">사용자 이름은 필수입니다.</string>
     <string name="password_required">비밀번호는 필수입니다.</string>
-    <string name="username_format_error">사용자 이름은 대문자+숫자를 포함하고, 최소 6자 이상이어야 합니다.</string>
-    <string name="password_format_error">비밀번호는 문자+숫자를 포함하고, 최소 8자 이상이어야 합니다.</string>
-    <string name="incorrect_password">비밀번호가 올바르지 않습니다. 다시 시도하세요.</string>
+    <string name="username_format_error">사용자 이름은 대문자+숫자를 포함한 6자 이상이어야 합니다.</string>
+    <string name="password_format_error">비밀번호는 영문+숫자를 포함한 8자 이상이어야 합니다.</string>
+    <string name="incorrect_password">비밀번호가 틀렸습니다. 다시 시도해 주세요.</string>
 
-    <!-- Signup Activity -->
-    <string name="error_fix_fields_signup">위의 오류를 수정하세요.</string>
-    <string name="success_signup">회원가입 성공! 로그인하세요.</string>
-    <string name="error_username_taken">사용자 이름이 이미 사용 중입니다. 다른 것을 선택하세요.</string>
+    <!-- ══════════════════════════════════════════════════════════════
+         인증 — 회원가입
+    ══════════════════════════════════════════════════════════════ -->
+    <string name="create_account_title">계정 만들기</string>
+    <string name="fill_details_to_sign_up">회원가입에 필요한 정보를 입력해 주세요</string>
+    <string name="confirm_password_hint">비밀번호 확인</string>
+    <string name="sign_up_button">회원가입</string>
+    <string name="already_have_account_signin">이미 계정이 있으신가요? 로그인</string>
+
+    <string name="error_fix_fields_signup">위의 오류를 수정해 주세요.</string>
+    <string name="success_signup">회원가입 완료! 로그인해 주세요.</string>
+    <string name="error_username_taken">이미 사용 중인 사용자 이름입니다. 다른 이름을 선택해 주세요.</string>
     <string name="confirm_password_error_message">비밀번호가 일치하지 않습니다.</string>
-    <string name="username_already_exists">사용자 이름이 이미 존재합니다. 다른 것을 선택하세요.</string>
+    <string name="username_already_exists">이미 존재하는 사용자 이름입니다. 다른 이름을 선택해 주세요.</string>
 
-    <!-- Home Fragment -->
+    <!-- ══════════════════════════════════════════════════════════════
+         인증 — 비밀번호 변경
+    ══════════════════════════════════════════════════════════════ -->
+    <string name="change_password">비밀번호 변경</string>
+    <string name="enter_old_and_new_password">현재 비밀번호와 새 비밀번호를 입력해 주세요</string>
+    <string name="old_password">현재 비밀번호</string>
+    <string name="new_password">새 비밀번호</string>
+    <string name="change_password_button">비밀번호 변경</string>
+    <string name="username">사용자 이름</string>
+
+    <string name="username_error_message">사용자 이름은 대문자+숫자를 포함한 6자 이상이어야 합니다.</string>
+    <string name="password_error_message">비밀번호는 영문+숫자를 포함한 8자 이상이어야 합니다.</string>
+    <string name="field_required">이 필드는 필수입니다.</string>
+    <string name="new_password_same_error">새 비밀번호는 현재 비밀번호와 같을 수 없습니다.</string>
+    <string name="error_fix_fields">필드의 오류를 수정해 주세요.</string>
+    <string name="success_password_changed">비밀번호가 변경되었습니다. 이제 로그인할 수 있습니다.</string>
+    <string name="incorrect_old_password">현재 비밀번호가 틀렸거나 인증 정보가 유효하지 않습니다.</string>
+    <string name="username_not_found">시스템에서 사용자 이름을 찾을 수 없습니다.</string>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         홈
+    ══════════════════════════════════════════════════════════════ -->
     <string name="menu_title_home">홈</string>
     <string name="title_guest">게스트</string>
-    <string name="greeting_morning">좋은 아침</string>
-    <string name="greeting_afternoon">좋은 점심</string>
-    <string name="greeting_evening">좋은 저녁</string>
-    <string name="greeting_night">좋은 밤</string>
-    <string name="active_days_format">%d일 동안 활동 중</string>
-    <string name="time_just_now">방금</string>
+    <string name="greeting_morning">좋은 아침이에요</string>
+    <string name="greeting_afternoon">안녕하세요</string>
+    <string name="greeting_evening">좋은 저녁이에요</string>
+    <string name="greeting_night">잘 자요</string>
+    <string name="active_days_format">%d일째 활동 중</string>
+    <string name="active_days_count">7일 활동</string>
+    <string name="placeholder_username">홍 길동</string>
+    <string name="placeholder_datetime">월요일, 2024년 1월 1일 • 오전 10:30</string>
+    <string name="header_recent_activity">최근 활동</string>
+    <string name="button_view_all">모두 보기</string>
+    <string name="empty_state_no_activity">아직 활동이 없습니다</string>
+    <string name="header_your_notes">내 메모</string>
+    <string name="empty_state_no_notes">아직 메모가 없습니다</string>
+    <string name="time_just_now">방금 전</string>
     <string name="time_minutes_ago">%d분 전</string>
     <string name="time_hours_ago">%d시간 전</string>
     <string name="time_days_ago">%d일 전</string>
-    <string name="dialog_exit_title">애플리케이션 종료</string>
-    <string name="dialog_exit_message">애플리케이션을 닫으시겠습니까?</string>
+    <string name="dialog_exit_title">앱 종료</string>
+    <string name="dialog_exit_message">앱을 종료하시겠습니까?</string>
     <string name="action_exit">종료</string>
     <string name="action_cancel">취소</string>
-    <string name="toast_home_updated">데이터가 새로고침되었습니다.</string>
+    <string name="toast_home_updated">데이터가 업데이트되었습니다.</string>
 
-    <!-- Main Activity -->
-    <string name="menu_title_profile">프로필</string>
-    <string name="menu_title_settings">설정</string>
-    <string name="footer_text">AI로 제작 © 2025 Kitsune</string>
-    <string name="logout_title">로그아웃 확인</string>
-    <string name="logout_message">로그아웃하시겠습니까?</string>
-    <string name="logout">로그아웃</string>
+    <!-- ══════════════════════════════════════════════════════════════
+         메모
+    ══════════════════════════════════════════════════════════════ -->
+    <string name="search_notes_hint">메모 검색…</string>
+    <string name="cd_add_new_note">새 메모 추가</string>
+    <string name="cd_cancel_selection">선택 취소</string>
+    <string name="selection_count_placeholder">0개 선택됨</string>
+    <string name="cd_select_all">모두 선택</string>
+    <string name="cd_pin_notes">메모 고정</string>
+    <string name="cd_delete_notes">메모 삭제</string>
+    <string name="toast_pinned">고정되었습니다</string>
+    <string name="toast_unpinned">고정 해제되었습니다</string>
+    <string name="toast_deleted">삭제되었습니다</string>
+    <string name="selection_count_format">%d개 선택됨</string>
+    <string name="dialog_delete_multiple_title">메모 삭제</string>
+    <string name="dialog_delete_multiple_msg">선택한 메모를 삭제하시겠습니까?</string>
+    <string name="placeholder_no_title">（제목 없음）</string>
 
-    <!-- Profile Fragment -->
-    <string name="default_username">새 사용자</string>
-    <string name="default_birthday">설정되지 않음</string>
-    <string name="default_location">탭하여 위치 설정</string>
-    <string name="field_full_name">전체 이름</string>
-    <string name="field_email">이메일</string>
-    <string name="field_birthday">생일</string>
-    <string name="field_location">위치</string>
-    <string name="edit_dialog_title">%s 편집</string>
-    <string name="edit_dialog_hint">새 %s 입력</string>
-    <string name="action_save">저장</string>
-    <string name="error_saving_data">데이터 저장에 실패했습니다. 다시 시도하세요.</string>
-    <string name="error_crop_image">이미지 자르기에 실패했습니다.</string>
-    <string name="toast_profile_updated">프로필이 새로고침되었습니다.</string>
-    <string name="activity_profile_updated_title">프로필 업데이트</string>
-    <string name="activity_profile_updated_desc">프로필 정보가 업데이트되었습니다.</string>
-
-    <!-- Settings Fragment -->
-    <string name="lang_english">영어</string>
-    <string name="lang_indonesia">인도네시아어</string>
-    <string name="lang_japanese">일본어</string>
-    <string name="lang_korean">한국어</string>
-    <string-array name="language_names">
-        <item>@string/lang_english</item>
-        <item>@string/lang_indonesia</item>
-        <item>@string/lang_japanese</item>
-        <item>@string/lang_korean</item>
-    </string-array>
-    <string name="action_open_settings">설정 열기</string>
-    <string name="action_logout">로그아웃</string>
-    <string name="action_next">다음</string>
-    <string name="action_delete">삭제</string>
-    <string name="dialog_permission_title">권한 필요</string>
-    <string name="dialog_notification_permission_msg">이 기능을 켜려면 앱 설정에서 알림을 활성화하세요.</string>
-    <string name="dialog_logout_title">로그아웃 확인</string>
-    <string name="dialog_logout_msg">로그아웃하시겠습니까?</string>
-    <string name="warn_delete_title_1">⚠ 경고: 영구적 조치</string>
-    <string name="warn_delete_msg_1">계정 삭제는 영구적입니다. 모든 데이터가 손실되며 복구할 수 없습니다.</string>
-    <string name="warn_delete_title_2">⚠ 경고: 데이터 손실</string>
-    <string name="warn_delete_msg_2">이 계정과 연결된 모든 노트, 활동 및 저장된 설정이 영구적으로 삭제됩니다.</string>
-    <string name="warn_delete_title_3">⚠ 경고: 최종 단계</string>
-    <string name="warn_delete_msg_3">이 경고 후 최종 확인이 표시됩니다. 주의하여 진행하세요.</string>
-    <string name="dialog_delete_title">최종 확인</string>
-    <string name="dialog_delete_msg">이것이 마지막 단계입니다. 정말로 계정을 삭제하시겠습니까?</string>
-    <string name="toast_notifications_enabled">알림이 활성화되었습니다.</string>
-    <string name="toast_notifications_disabled">알림이 비활성화되었습니다.</string>
-    <string name="toast_account_deleted">계정이 성공적으로 삭제되었습니다.</string>
-    <string name="toast_delete_failed">계정 삭제에 실패했습니다. 다시 시도하세요.</string>
-
-    <!-- Map Fragment -->
-    <string name="map_title">위치 선택</string>
-    <string name="selected_location">선택한 위치</string>
-    <string name="loading_location">위치 이름 로드 중 &#8230;</string>
-    <string name="unknown_location">알 수 없는 위치</string>
-    <string name="unknown_location_api">알 수 없음</string>
-    <string name="failed_load_location">위치 이름 로드에 실패했습니다.</string>
-    <string name="location_permission_denied">위치 권한이 거부되었습니다.</string>
-    <string name="select_location_prompt">먼저 지도에서 위치를 선택하세요.</string>
-    <string name="gps_unavailable">GPS 위치를 사용할 수 없습니다.</string>
-    <string name="failed_get_location">현재 위치를 가져오지 못했습니다.</string>
-    <string name="turn_on_gps_prompt">GPS 위치 서비스를 켜세요.</string>
-    <string name="zoom_in_for_address">주소를 보려면 확대하세요</string>
-
-    <!-- Edit Note Activity -->
+    <!-- ── 메모 편집 ── -->
     <string name="metadata_format">마지막 수정: %1$s | 길이: %2$d자</string>
-    <string name="toast_note_deleted">노트 삭제됨</string>
-    <string name="toast_note_saved">저장됨</string>
-    <string name="toast_no_changes">저장할 변경사항 없음</string>
-    <string name="toast_alarm_permission_prompt">설정에서 정확한 알람 권한 허용</string>
-    <string name="toast_reminder_failed">리마인더 예약 불가</string>
-    <string name="toast_reminder_set">리마인더 설정됨</string>
-    <string name="toast_image_failed">이미지 생성 실패</string>
-    <string name="share_chooser_title">노트 이미지 공유</string>
-    <string name="dialog_delete_note_title">노트 삭제</string>
-    <string name="dialog_delete_note_msg">영구적으로 삭제하시겠습니까?</string>
+    <string name="toast_note_deleted">메모가 삭제되었습니다</string>
+    <string name="toast_note_saved">저장되었습니다</string>
+    <string name="toast_no_changes">저장할 변경 사항이 없습니다</string>
+    <string name="toast_alarm_permission_prompt">설정에서 정확한 알람 권한을 허용해 주세요</string>
+    <string name="toast_reminder_failed">알림을 예약할 수 없습니다</string>
+    <string name="toast_reminder_set">알림이 설정되었습니다</string>
+    <string name="toast_image_failed">이미지 생성에 실패했습니다</string>
+    <string name="share_chooser_title">메모 이미지 공유</string>
+    <string name="dialog_delete_note_title">메모 삭제</string>
+    <string name="dialog_delete_note_msg">영구 삭제하시겠습니까?</string>
 
-    <!-- Note Activity -->
-    <string name="search_notes_hint">노트 검색 &#8230;</string>
-    <string name="toast_pinned">고정됨</string>
-    <string name="toast_unpinned">고정 해제됨</string>
-    <string name="toast_deleted">삭제됨</string>
-    <string name="selection_count_format">%d개 선택</string>
-    <string name="dialog_delete_multiple_title">노트 삭제</string>
-    <string name="dialog_delete_multiple_msg">선택한 노트를 삭제하시겠습니까?</string>
+    <!-- ── 메모 아이템 ── -->
+    <string name="note_title_placeholder">메모 제목</string>
+    <string name="note_content_placeholder">메모…</string>
+    <string name="note_date_placeholder">1월 1일, 10:00</string>
+    <string name="cd_select_note">메모 선택</string>
+    <string name="cd_note_pinned">고정 메모 표시기</string>
 
-    <!-- Note Adapter -->
-    <string name="placeholder_no_title">(제목 없음)</string>
-
-    <!-- Reminder Receiver -->
-    <string name="notification_default_title">노트 리마인더</string>
-    <string name="notification_alert_title">리마인더 알림</string>
-    <string name="notification_channel_name">노트 리마인더 알림</string>
-    <string name="notification_channel_desc">노트 리마인더 알림용 채널</string>
-
-    <!-- Notification Activity -->
-    <string name="notifications_title">알림</string>
-    <string name="action_clear_all">모두 지우기</string>
-
-    <!-- Notification Adapter-->
-    <string name="dialog_delete_notif_title">알림 삭제</string>
-    <string name="dialog_delete_notif_message">이 알림을 삭제하시겠습니까?</string>
-
-    <!-- Dialog Utils-->
-    <string name="cancel">취소</string>
-
-    <!-- XML-->
-    <!-- Activity Edit Note-->
+    <!-- ── 편집기 툴바 ── -->
     <string name="cd_back">뒤로</string>
     <string name="cd_delete">삭제</string>
     <string name="cd_share">공유</string>
@@ -178,95 +138,124 @@
     <string name="cd_redo">다시 실행</string>
     <string name="cd_save">저장</string>
     <string name="title_hint">제목</string>
-    <string name="metadata_placeholder">2025년 1월 1일 12:00 | 0자</string>
-    <string name="content_hint">입력 시작 &#8230;</string>
-    <string name="cd_text_color">텍스트 색상</string>
-    <string name="cd_highlight">강조</string>
+    <string name="metadata_placeholder">2025년 1월 1일, 12:00 | 0자</string>
+    <string name="content_hint">입력을 시작하세요…</string>
+    <string name="cd_text_color">글자 색상</string>
+    <string name="cd_highlight">하이라이트</string>
     <string name="cd_bold">굵게</string>
     <string name="cd_italic">기울임</string>
     <string name="cd_underline">밑줄</string>
     <string name="cd_strikethrough">취소선</string>
-    <string name="cd_bullet_list">글머리 기호 목록</string>
+    <string name="cd_bullet_list">글머리 기호</string>
     <string name="cd_align_left">왼쪽 정렬</string>
     <string name="cd_align_center">가운데 정렬</string>
     <string name="cd_align_right">오른쪽 정렬</string>
-    <string name="cd_size_up">텍스트 크기 증가</string>
-    <string name="cd_size_down">텍스트 크기 감소</string>
+    <string name="cd_size_up">글자 크게</string>
+    <string name="cd_size_down">글자 작게</string>
 
-    <!-- Activity Forgot Password-->
-    <string name="change_password">비밀번호 변경</string>
-    <string name="enter_old_and_new_password">이전 비밀번호와 새 비밀번호 입력</string>
-    <string name="old_password">이전 비밀번호</string>
-    <string name="new_password">새 비밀번호</string>
-    <string name="change_password_button">비밀번호 변경</string>
-    <string name="username">사용자 이름</string>
+    <!-- ── 메모 메뉴 ── -->
+    <string name="action_reminder_text">알림</string>
+    <string name="cd_action_reminder">알림 설정</string>
+    <string name="action_share_note">메모 공유</string>
+    <string name="cd_action_share">메모 공유</string>
+    <string name="action_delete_note">메모 삭제</string>
+    <string name="cd_action_delete">메모 삭제</string>
 
-    <!-- Activity Login -->
-    <string name="welcome_back">돌아오신 것을 환영합니다</string>
-    <string name="please_sign_in">계정에 로그인하세요</string>
-    <string name="username_hint">사용자 이름</string>
-    <string name="password_hint">비밀번호</string>
-    <string name="remember_me">로그인 상태 유지</string>
-    <string name="forgot_password">비밀번호를 잊으셨나요?</string>
-    <string name="sign_in_button">로그인</string>
-    <string name="dont_have_account_signup">계정이 없으신가요? 회원가입</string>
+    <!-- ══════════════════════════════════════════════════════════════
+         GEMINI AI 채팅
+    ══════════════════════════════════════════════════════════════ -->
+    <string name="gemini_ai">Gemini</string>
+    <string name="fab_try_gemini">Gemini AI 사용해보기</string>
+    <string name="cd_open_gemini">Gemini AI 열기</string>
+    <string name="gemini_greeting">안녕하세요! 저는 Gemini AI입니다 👋</string>
+    <string name="gemini_suggestion">무엇이든 물어보세요 — 코드, 아이디어, 리서치, 일상 대화까지!</string>
 
-    <!-- Activity Note -->
-    <string name="cd_add_new_note">새 노트 추가</string>
-    <string name="cd_cancel_selection">선택 취소</string>
-    <string name="selection_count_placeholder">0개 선택</string>
-    <string name="cd_select_all">모두 선택</string>
-    <string name="cd_pin_notes">노트 고정</string>
-    <string name="cd_delete_notes">노트 삭제</string>
+    <!-- ── 칩 ── -->
+    <string name="chip_idea">💡 아이디어 도움</string>
+    <string name="chip_code">🛠️ 코드 도움</string>
+    <string name="chip_write">✍️ 글쓰기 도움</string>
+    <string name="chip_research">🔍 리서치 도움</string>
 
-    <!-- Activity Signup -->
-    <string name="create_account_title">계정 생성</string>
-    <string name="fill_details_to_sign_up">회원가입하려면 세부 정보를 입력하세요</string>
-    <string name="confirm_password_hint">비밀번호 확인</string>
-    <string name="sign_up_button">회원가입</string>
-    <string name="already_have_account_signin">이미 계정이 있으신가요? 로그인</string>
+    <!-- ── 입력 ── -->
+    <string name="input_hint_message">무엇이든 물어보세요…</string>
 
-    <!-- Activity Splash -->
-    <string name="flag_desc">국기</string>
-    <string name="hello_message">안녕하세요!</string>
+    <!-- ── 사이드바 ── -->
+    <string name="sidebar_usage_limit">오늘 남은 횟수: —/1500</string>
+    <string name="sidebar_new_chat">새 채팅</string>
+    <string name="sidebar_chat_history">채팅 기록</string>
+    <string name="sidebar_powered_by">Gemini 2.5 Flash 기반</string>
+    <string name="sidebar_free_tier_info">무료 플랜: 분당 15회 · 하루 1500회</string>
 
-    <!-- Bottom-sheet language -->
-    <string name="dialog_language_title">언어 선택</string>
+    <!-- ── 버블 액션 ── -->
+    <string name="cd_ai_avatar">AI 아이콘</string>
+    <string name="cd_copy_message">메시지 복사</string>
+    <string name="action_save_as_note">메모로 저장</string>
+    <string name="toast_copied">텍스트가 클립보드에 복사되었습니다</string>
+    <string name="bubble_chat">채팅 버블</string>
+    <string name="option">옵션</string>
+    <string name="new_name">새 이름…</string>
+    <string name="action_rename">이름 변경</string>
+    <string name="action_retry">다시 시도</string>
 
-    <!-- Dialog Confirm -->
-    <string name="dialog_title_confirmation">확인</string>
-    <string name="dialog_message_are_you_sure">확실합니까?</string>
-    <string name="button_no">아니오</string>
-    <string name="button_yes">예</string>
+    <!-- ── 메모로 저장 다이얼로그 ── -->
+    <string name="dialog_save_note_title">메모로 저장</string>
+    <string name="dialog_save_note_subtitle">AI 응답이 메모에 저장됩니다</string>
+    <string name="hint_note_title">메모 제목…</string>
+    <string name="dialog_save_note_info">콘텐츠가 그대로 저장됩니다 (일반 텍스트)</string>
+    <string name="action_save_note">저장</string>
+    <string name="note_from_gemini_default_title">Gemini AI의 메모</string>
+    <string name="toast_note_saved_from_ai">메모가 성공적으로 저장되었습니다! ✓</string>
 
-    <!-- Dialog Info -->
-    <string name="dialog_title_information">정보</string>
-    <string name="dialog_message_notification">알림 메시지입니다.</string>
-    <string name="button_close">닫기</string>
+    <!-- ── 오류 메시지 ── -->
+    <string name="error_connection">연결에 실패했습니다. 인터넷을 확인하세요.\n(%1$s)</string>
+    <string name="error_rate_limit">분당 요청 한도에 도달했습니다. 잠시 후 다시 시도해 주세요.</string>
+    <string name="error_parse">AI 응답 처리에 실패했습니다.</string>
+    <string name="error_unknown">알 수 없는 오류</string>
+    <string name="error_http">HTTP %1$d</string>
+    <string name="error_prefix">오류: %1$s</string>
 
-    <!-- Dialog Input -->
-    <string name="dialog_title_edit_data">데이터 편집</string>
-    <string name="input_hint_enter_new_text">새 텍스트 입력</string>
-    <string name="button_cancel">취소</string>
-    <string name="button_save">저장</string>
+    <!-- ── 사용량 카운터 ── -->
+    <string name="usage_remaining">오늘 남은 횟수: %1$d/%2$d</string>
 
-    <!-- Home Fragment -->
-    <string name="active_days_count">7일간 활동</string>
-    <string name="placeholder_username">존 도</string>
-    <string name="placeholder_datetime">2024년 1월 1일 월요일 • 오전 10시 30분</string>
-    <string name="header_recent_activity">최근 활동</string>
-    <string name="button_view_all">모두 보기</string>
-    <string name="empty_state_no_activity">아직 활동이 없습니다</string>
-    <string name="header_your_notes">당신의 노트</string>
-    <string name="empty_state_no_notes">아직 노트가 없습니다</string>
+    <!-- ── 콘텐츠 설명 ── -->
+    <string name="cd_gemini_ai_logo">Gemini AI 로고</string>
+    <string name="cd_gemini_icon">Gemini 아이콘</string>
+    <string name="cd_new_chat">새 채팅</string>
+    <string name="cd_send_message">메시지 전송</string>
 
-    <!-- Map Fragment -->
-    <string name="search_hint">위치 또는 거리 이름 검색 &#8230;</string>
-    <string name="determining_location">위치 확인 중 &#8230;</string>
-    <string name="my_location">위치</string>
-    <string name="select_location">위치 선택</string>
+    <!-- ── 다이얼로그 ── -->
+    <string name="dialog_not_logged_in_title">로그인되지 않음</string>
+    <string name="dialog_not_logged_in_msg">채팅 기능을 사용하려면 먼저 로그인해 주세요.</string>
+    <string name="dialog_rate_limit_title">일일 한도에 도달했습니다</string>
+    <string name="dialog_rate_limit_msg">Gemini 무료 플랜의 분당 15회 한도를 초과했습니다.\n잠시 기다렸다가 다시 시도해 주세요.</string>
+    <string name="dialog_rate_limit_message">Gemini API 무료 플랜의 하루 1,500회 요청 한도에 도달했습니다.\n\n한도는 자정 (UTC+0)에 초기화됩니다.</string>
+    <string name="dialog_rate_limit_info_header">Gemini API 무료 플랜:</string>
+    <string name="dialog_rate_limit_info_detail">• 분당 15회 요청 (RPM)\n• 분당 1,000,000 토큰 (TPM)\n• 하루 1,500회 요청 (RPD)</string>
+    <string name="dialog_btn_understood">확인했습니다</string>
+    <string name="cd_warning_icon">경고 아이콘</string>
+    <string name="dialog_delete_chat_title">채팅을 삭제하시겠습니까?</string>
+    <string name="dialog_delete_chat_message">이 채팅은 영구적으로 삭제되며 복구할 수 없습니다.</string>
+    <string name="cd_delete_icon">삭제 아이콘</string>
 
-    <!-- Profile Fragment -->
+    <!-- ══════════════════════════════════════════════════════════════
+         프로필
+    ══════════════════════════════════════════════════════════════ -->
+    <string name="menu_title_profile">프로필</string>
+    <string name="default_username">새 사용자</string>
+    <string name="default_birthday">설정되지 않음</string>
+    <string name="default_location">탭하여 위치 설정</string>
+    <string name="field_full_name">이름</string>
+    <string name="field_email">이메일</string>
+    <string name="field_birthday">생년월일</string>
+    <string name="field_location">위치</string>
+    <string name="edit_dialog_title">%s 편집</string>
+    <string name="edit_dialog_hint">새 %s 입력</string>
+    <string name="action_save">저장</string>
+    <string name="error_saving_data">데이터 저장에 실패했습니다. 다시 시도해 주세요.</string>
+    <string name="error_crop_image">이미지 자르기에 실패했습니다.</string>
+    <string name="toast_profile_updated">프로필이 업데이트되었습니다.</string>
+    <string name="activity_profile_updated_title">프로필 업데이트</string>
+    <string name="activity_profile_updated_desc">프로필 정보가 업데이트되었습니다.</string>
     <string name="cd_profile_background">프로필 배경</string>
     <string name="cd_profile_animation">프로필 애니메이션</string>
     <string name="cd_profile_picture">프로필 사진</string>
@@ -275,118 +264,173 @@
     <string name="placeholder_email">john.doe@example.com</string>
     <string name="header_personal_info">개인 정보</string>
 
-    <!-- Settings Fragment -->
+    <!-- ── 프로필 정보 아이템 ── -->
+    <string name="placeholder_name">홍 길동</string>
+    <string name="cd_full_name_value">이름 값</string>
+    <string name="cd_edit_full_name">이름 편집</string>
+    <string name="cd_email_value">이메일 값</string>
+    <string name="cd_edit_email">이메일 편집</string>
+    <string name="placeholder_birthday">1990년 1월 1일</string>
+    <string name="cd_birthday_value">생년월일 값</string>
+    <string name="cd_edit_birthday">생년월일 편집</string>
+    <string name="placeholder_location">서울, 대한민국</string>
+    <string name="cd_location_value">위치 값</string>
+    <string name="cd_edit_location">위치 편집</string>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         설정
+    ══════════════════════════════════════════════════════════════ -->
+    <string name="menu_title_settings">설정</string>
     <string name="settings_title">설정</string>
-    <string name="settings_description">애플리케이션 환경 설정 관리</string>
+    <string name="settings_description">앱 설정을 관리하세요</string>
     <string name="cd_settings_icon">설정 아이콘</string>
     <string name="header_account">계정</string>
     <string name="profile_title">프로필</string>
     <string name="profile_subtitle">프로필 보기 및 편집</string>
     <string name="cd_profile_icon">프로필 아이콘</string>
-    <string name="cd_next_button">다음 버튼 또는 작업 표시기</string>
+    <string name="cd_next_button">다음 버튼 또는 액션 표시기</string>
     <string name="forgot_password_title">비밀번호 찾기</string>
-    <string name="forgot_password_subtitle">비밀번호를 안전하게 재설정</string>
+    <string name="forgot_password_subtitle">안전하게 비밀번호를 재설정하세요</string>
     <string name="cd_forgot_password">비밀번호 찾기 아이콘</string>
-    <string name="notifications_subtitle">앱 알림 활성화 또는 비활성화</string>
+    <string name="notifications_subtitle">앱 알림 켜기 또는 끄기</string>
     <string name="cd_notifications_icon">알림 아이콘</string>
-    <string name="cd_notifications_toggle">알림 켜기/끄기 전환</string>
+    <string name="cd_notifications_toggle">알림 켜기/끄기 토글</string>
     <string name="language_title">앱 언어</string>
-    <string name="language_subtitle">앱 표시 언어 설정</string>
+    <string name="language_subtitle">앱 표시 언어를 설정하세요</string>
     <string name="cd_language_icon">언어 아이콘</string>
     <string name="action_delete_account">계정 삭제</string>
     <string name="cd_delete_account">계정 삭제</string>
     <string name="logout_button">로그아웃</string>
     <string name="cd_logout_icon">로그아웃 아이콘</string>
+    <string name="action_open_settings">설정 열기</string>
+    <string name="action_logout">로그아웃</string>
+    <string name="action_next">다음</string>
+    <string name="action_delete">삭제</string>
+    <string name="dialog_permission_title">권한 필요</string>
+    <string name="dialog_notification_permission_msg">이 기능을 활성화하려면 앱 설정에서 알림을 허용해 주세요.</string>
+    <string name="dialog_logout_title">로그아웃 확인</string>
+    <string name="dialog_logout_msg">정말로 로그아웃하시겠습니까?</string>
+    <string name="warn_delete_title_1">⚠ 경고: 영구적인 작업</string>
+    <string name="warn_delete_msg_1">계정 삭제는 영구적입니다. 모든 데이터가 손실되며 복구할 수 없습니다.</string>
+    <string name="warn_delete_title_2">⚠ 경고: 데이터 손실</string>
+    <string name="warn_delete_msg_2">이 계정과 관련된 모든 메모, 활동 및 설정이 영구적으로 삭제됩니다.</string>
+    <string name="warn_delete_title_3">⚠ 경고: 마지막 단계</string>
+    <string name="warn_delete_msg_3">이 경고 이후 최종 확인이 표시됩니다. 신중하게 진행하세요.</string>
+    <string name="dialog_delete_title">최종 확인</string>
+    <string name="dialog_delete_msg">이것이 마지막 단계입니다. 정말로 계정을 삭제하시겠습니까?</string>
+    <string name="toast_notifications_enabled">알림이 활성화되었습니다.</string>
+    <string name="toast_notifications_disabled">알림이 비활성화되었습니다.</string>
+    <string name="toast_account_deleted">계정이 성공적으로 삭제되었습니다.</string>
+    <string name="toast_delete_failed">계정 삭제에 실패했습니다. 다시 시도해 주세요.</string>
 
-    <!-- Item Activity -->
+    <!-- ── 언어 ── -->
+    <string name="lang_english">영어</string>
+    <string name="lang_indonesia">인도네시아어</string>
+    <string name="lang_japanese">日本語</string>
+    <string name="lang_korean">한국어</string>
+    <string-array name="language_names">
+        <item>@string/lang_english</item>
+        <item>@string/lang_indonesia</item>
+        <item>@string/lang_japanese</item>
+        <item>@string/lang_korean</item>
+    </string-array>
+    <string name="dialog_language_title">언어 선택</string>
+    <string name="cd_selected_language">선택된 언어 체크마크 아이콘</string>
+    <string name="cd_language_flag">언어 국기 아이콘</string>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         지도
+    ══════════════════════════════════════════════════════════════ -->
+    <string name="map_title">위치 선택</string>
+    <string name="selected_location">선택된 위치</string>
+    <string name="loading_location">위치 이름 로딩 중…</string>
+    <string name="unknown_location">알 수 없는 위치</string>
+    <string name="unknown_location_api">알 수 없음</string>
+    <string name="failed_load_location">위치 이름 로드에 실패했습니다.</string>
+    <string name="location_permission_denied">위치 권한이 거부되었습니다.</string>
+    <string name="select_location_prompt">먼저 지도에서 위치를 선택해 주세요.</string>
+    <string name="gps_unavailable">GPS 위치를 사용할 수 없습니다.</string>
+    <string name="failed_get_location">현재 위치를 가져오는 데 실패했습니다.</string>
+    <string name="turn_on_gps_prompt">GPS 위치 서비스를 활성화해 주세요.</string>
+    <string name="zoom_in_for_address">주소를 보려면 확대하세요</string>
+    <string name="search_hint">위치 또는 도로명 검색…</string>
+    <string name="determining_location">위치 확인 중…</string>
+    <string name="my_location">내 위치</string>
+    <string name="select_location">위치 선택</string>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         알림 / 활동 로그
+    ══════════════════════════════════════════════════════════════ -->
+    <string name="notification_channel_user_activities">사용자 활동</string>
+    <string name="notifications_title">활동</string>
+    <string name="action_clear_all">모두 지우기</string>
+    <string name="clear_all">모두 지우기</string>
+    <string name="empty_state_no_activity_subtitle">아직 기록된 활동이 없습니다.\n활동이 여기에 표시됩니다.</string>
+    <string name="dialog_delete_notif_title">알림 삭제</string>
+    <string name="dialog_delete_notif_message">이 알림을 삭제하시겠습니까?</string>
+    <string name="notification_channel_name">메모 알림</string>
+    <string name="notification_channel_desc">메모 알림 채널</string>
+    <string name="notification_default_title">메모 알림</string>
+    <string name="notification_alert_title">알림 경고</string>
+
+    <!-- ── 활동 로그 항목 ── -->
+    <string name="activity_login_title">로그인 성공</string>
+    <string name="activity_login_message">계정에 성공적으로 로그인했습니다.</string>
+    <string name="activity_logout_title">로그아웃됨</string>
+    <string name="activity_logout_message">계정에서 성공적으로 로그아웃했습니다.</string>
+    <string name="activity_profile_update_title">프로필 업데이트</string>
+    <string name="activity_profile_update_message">프로필 정보가 성공적으로 업데이트되었습니다.</string>
+    <string name="activity_account_deleted_title">계정 삭제</string>
+    <string name="activity_account_deleted_message">계정 삭제가 성공적으로 처리되었습니다.</string>
+    <string name="activity_new_chat_title">새 채팅 생성</string>
+    <string name="activity_new_chat_message">Gemini AI와 새로운 채팅 세션을 시작했습니다</string>
+    <string name="activity_chat_deleted_title">채팅 삭제</string>
+    <string name="activity_chat_deleted_message">채팅 세션이 삭제되었습니다</string>
+
+    <!-- ── 활동 아이템 ── -->
     <string name="cd_activity_icon">활동 아이콘</string>
     <string name="activity_title_placeholder">활동 제목</string>
     <string name="activity_description_placeholder">활동 설명</string>
     <string name="activity_time_placeholder">2분 전</string>
 
-    <!-- Item Language Option -->
-    <string name="cd_selected_language">선택한 언어 체크 아이콘</string>
-    <string name="cd_language_flag">언어 깃발 아이콘</string>
-
-    <!-- Item Note -->
-    <string name="note_title_placeholder">노트 제목</string>
-    <string name="note_content_placeholder">노트 &#8230;</string>
-    <string name="note_date_placeholder">1월 1일 10:00</string>
-    <string name="cd_select_note">노트 선택</string>
-    <string name="cd_note_pinned">노트 고정 표시기</string>
-
-    <!-- Item Profile Info -->
-    <string name="placeholder_name">존 도</string>
-    <string name="cd_full_name_value">전체 이름 값</string>
-    <string name="cd_edit_full_name">전체 이름 편집</string>
-    <string name="cd_email_value">이메일 값</string>
-    <string name="cd_edit_email">이메일 편집</string>
-    <string name="placeholder_birthday">1990년 1월 1일</string>
-    <string name="cd_birthday_value">생일 값</string>
-    <string name="cd_edit_birthday">생일 편집</string>
-    <string name="placeholder_location">뉴욕, 미국</string>
-    <string name="cd_location_value">위치 값</string>
-    <string name="cd_edit_location">위치 편집</string>
-
-    <!-- Layout Menu Note -->
-    <string name="action_reminder_text">리마인더</string>
-    <string name="cd_action_reminder">리마인더 설정</string>
-    <string name="action_share_note">노트 공유</string>
-    <string name="cd_action_share">노트 공유</string>
-    <string name="action_delete_note">노트 삭제</string>
-    <string name="cd_action_delete">노트 삭제</string>
-
-    <!-- Nav Header -->
-    <string name="cd_background_pattern">배경 패턴</string>
-    <string name="cd_profile_image">네비게이션 헤더의 프로필 이미지</string>
-
-    <!-- Menu Notifications -->
-    <string name="clear_all">모두 지우기</string>
-
-    <!-- Nav Menu Main -->
-    <string name="menu_section_preferences">환경 설정</string>
+    <!-- ══════════════════════════════════════════════════════════════
+         내비게이션
+    ══════════════════════════════════════════════════════════════ -->
+    <string name="menu_section_preferences">환경설정</string>
     <string name="menu_title_notifications">알림</string>
     <string name="menu_section_account">계정</string>
     <string name="menu_title_logout">로그아웃</string>
+    <string name="menu_title_gemini">Gemini AI</string>
+    <string name="menu_section_tools">도구</string>
+    <string name="menu_title_notes">메모</string>
+    <string name="cd_background_pattern">배경 패턴</string>
+    <string name="cd_profile_image">내비게이션 헤더의 프로필 이미지</string>
 
-    <!-- ── Chat Activity Log Strings ─────────────────────────────────────────── -->
-    <string name="fab_try_gemini">Gemini AI 체험하기</string>
-    <string name="cd_open_gemini">Gemini AI 열기</string>
+    <!-- ══════════════════════════════════════════════════════════════
+         일반
+    ══════════════════════════════════════════════════════════════ -->
+    <string name="text_with_countdown">%1$s (%2$d)</string>
+    <string name="footer_text">AI로 제작됨 © 2026 Kitsune - Powered By GeminiAI</string>
+    <string name="logout_title">로그아웃 확인</string>
+    <string name="logout_message">정말로 로그아웃하시겠습니까?</string>
+    <string name="logout">로그아웃</string>
+    <string name="cancel">취소</string>
 
-    <string name="action_retry">재시도</string>
+    <!-- ── 공통 다이얼로그 ── -->
+    <string name="dialog_title_delete">모든 활동을 삭제하시겠습니까?</string>
+    <string name="dialog_message_delete_activity">이 항목은 영구적으로 삭제되며 복구할 수 없습니다.</string>
+    <string name="button_delete">삭제</string>
+    <string name="dialog_title_confirmation">확인</string>
+    <string name="dialog_message_are_you_sure">계속 진행하시겠습니까?\n이 작업은 취소할 수 없습니다.</string>
+    <string name="button_no">아니요</string>
+    <string name="dialog_title_information">정보</string>
+    <string name="dialog_message_notification">현재 새 메시지가 없습니다.</string>
+    <string name="button_close">닫기</string>
+    <string name="dialog_title_edit_data">데이터 편집</string>
+    <string name="input_hint_enter_new_text">새 텍스트 입력</string>
+    <string name="button_cancel">취소</string>
+    <string name="button_save">저장</string>
+    <string name="button_yes">예</string>
+    <string name="loading_please_wait">잠시만 기다려 주세요…</string>
 
-    <string name="cd_ai_avatar">AI 아이콘</string>
-    <string name="cd_copy_message">메시지 복사</string>
-    <string name="action_save_as_note">노트로 저장</string>
-    <string name="toast_copied">클립보드에 복사되었습니다</string>
-
-    <string name="dialog_save_note_title">노트로 저장</string>
-    <string name="dialog_save_note_subtitle">AI 응답이 노트에 저장됩니다</string>
-    <string name="hint_note_title">노트 제목…</string>
-    <string name="dialog_save_note_info">콘텐츠는 일반 텍스트(Plain Text)로 저장됩니다</string>
-    <string name="action_save_note">저장</string>
-
-    <string name="note_from_gemini_default_title">Gemini AI에서 저장된 노트</string>
-    <string name="toast_note_saved_from_ai">노트 저장 완료! ✓</string>
-
-    <string name="error_connection">연결에 실패했습니다. 인터넷 상태를 확인하세요.\n(%1$s)</string>
-    <string name="error_rate_limit">요청 제한에 도달했습니다. 잠시 후 다시 시도하세요.</string>
-    <string name="error_parse">AI 응답을 처리하지 못했습니다.</string>
-    <string name="error_unknown">알 수 없는 오류</string>
-    <string name="error_http">HTTP %1$d</string>
-    <string name="error_prefix">오류: %1$s</string>
-
-    <string name="usage_remaining">오늘 남은 횟수: %1$d/%2$d</string>
-
-    <string name="dialog_rate_limit_title">요청 과다</string>
-    <string name="dialog_rate_limit_msg">분당 15회 요청 제한을 초과했습니다 (Gemini Free Tier).\n잠시 기다린 후 다시 시도해 주세요.</string>
-    <string name="dialog_not_logged_in_title">로그인 필요</string>
-    <string name="dialog_not_logged_in_msg">채팅 기능을 사용하려면 먼저 로그인해 주세요.</string>
-
-    <string name="action_rename">이름 변경</string>
-
-    <string name="activity_new_chat_title">새 채팅 생성됨</string>
-    <string name="activity_new_chat_message">Gemini AI와 새로운 대화 세션을 시작했습니다</string>
-    <string name="activity_chat_deleted_title">채팅 삭제됨</string>
-    <string name="activity_chat_deleted_message">대화 세션이 삭제되었습니다</string>
 </resources>
