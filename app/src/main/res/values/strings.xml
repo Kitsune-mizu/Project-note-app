@@ -7,7 +7,7 @@
          SPLASH SCREEN
     ══════════════════════════════════════════════════════════════ -->
     <string name="splash_tagline">Note, track, and manage your activities</string>
-    <string name="splash_version">v2.0.0.26</string>
+    <string name="splash_version_format">v%s</string>
     <string name="flag_desc">Country flag</string>
     <string name="hello_message">Hello!</string>
 

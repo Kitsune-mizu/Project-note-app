@@ -7,7 +7,7 @@
          スプラッシュ画面
     ══════════════════════════════════════════════════════════════ -->
     <string name="splash_tagline">メモ・追跡・活動管理をかんたんに</string>
-    <string name="splash_version">v2.0.0.26</string>
+    <string name="splash_version_format">v%s</string>
     <string name="flag_desc">国旗</string>
     <string name="hello_message">こんにちは！</string>
 

@@ -7,7 +7,7 @@
          SPLASH SCREEN
     ══════════════════════════════════════════════════════════════ -->
     <string name="splash_tagline">Catat, lacak, dan kelola aktivitasmu</string>
-    <string name="splash_version">v2.0.0.26</string>
+    <string name="splash_version_format">v%s</string>
     <string name="flag_desc">Bendera negara</string>
     <string name="hello_message">Halo!</string>
 
