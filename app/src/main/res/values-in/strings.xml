@@ -81,10 +81,6 @@
     <string name="empty_state_no_activity">Belum ada aktivitas</string>
     <string name="header_your_notes">Catatan Anda</string>
     <string name="empty_state_no_notes">Belum ada catatan</string>
-    <string name="time_just_now">Baru saja</string>
-    <string name="time_minutes_ago">%d menit yang lalu</string>
-    <string name="time_hours_ago">%d jam yang lalu</string>
-    <string name="time_days_ago">%d hari yang lalu</string>
     <string name="dialog_exit_title">Keluar Aplikasi</string>
     <string name="dialog_exit_message">Apakah Anda yakin ingin menutup aplikasi?</string>
     <string name="action_exit">Keluar</string>
@@ -187,7 +183,6 @@
     <string name="sidebar_free_tier_info">Free Tier: 15 req/menit · 1500 req/hari</string>
 
     <!-- ── Aksi Balon ── -->
-    <string name="cd_ai_avatar">Ikon AI</string>
     <string name="cd_copy_message">Salin pesan</string>
     <string name="action_save_as_note">Jadikan Catatan</string>
     <string name="toast_copied">Teks disalin ke clipboard</string>
@@ -288,7 +283,6 @@
     <string name="profile_title">Profil</string>
     <string name="profile_subtitle">Lihat dan edit profil Anda</string>
     <string name="cd_profile_icon">Ikon profil</string>
-    <string name="cd_next_button">Tombol berikutnya atau indikator aksi</string>
     <string name="forgot_password_title">Lupa Password</string>
     <string name="forgot_password_subtitle">Atur ulang password Anda dengan aman</string>
     <string name="cd_forgot_password">Ikon lupa password</string>
@@ -343,16 +337,13 @@
     ══════════════════════════════════════════════════════════════ -->
     <string name="map_title">Pilih Lokasi</string>
     <string name="selected_location">Lokasi Terpilih</string>
-    <string name="loading_location">Memuat nama lokasi&#8230;</string>
     <string name="unknown_location">Lokasi Tidak Dikenal</string>
     <string name="unknown_location_api">Tidak Dikenal</string>
-    <string name="failed_load_location">Gagal memuat nama lokasi.</string>
     <string name="location_permission_denied">Izin lokasi ditolak.</string>
     <string name="select_location_prompt">Harap pilih lokasi di peta terlebih dahulu.</string>
     <string name="gps_unavailable">Lokasi GPS tidak tersedia.</string>
     <string name="failed_get_location">Gagal mendapatkan lokasi saat ini.</string>
     <string name="turn_on_gps_prompt">Harap aktifkan layanan lokasi GPS Anda.</string>
-    <string name="zoom_in_for_address">Perbesar untuk melihat alamat</string>
     <string name="search_hint">Cari lokasi atau nama jalan&#8230;</string>
     <string name="determining_location">Menentukan lokasi&#8230;</string>
     <string name="my_location">lokasi</string>
@@ -363,8 +354,6 @@
     ══════════════════════════════════════════════════════════════ -->
     <string name="notification_channel_user_activities">Aktivitas Pengguna</string>
     <string name="notifications_title">Aktivitas</string>
-    <string name="action_clear_all">Hapus Semua</string>
-    <string name="clear_all">Hapus Semua</string>
     <string name="empty_state_no_activity_subtitle">Belum ada aktivitas yang tercatat.\nAktivitas kamu akan muncul di sini.</string>
     <string name="dialog_delete_notif_title">Hapus Notifikasi</string>
     <string name="dialog_delete_notif_message">Apakah Anda ingin menghapus notifikasi ini?</string>
@@ -403,7 +392,6 @@
     <string name="menu_title_gemini">Gemini AI</string>
     <string name="menu_section_tools">Tools</string>
     <string name="menu_title_notes">Catatan</string>
-    <string name="cd_background_pattern">Pola latar belakang</string>
     <string name="cd_profile_image">Gambar profil di header navigasi</string>
 
     <!-- ══════════════════════════════════════════════════════════════

@@ -81,10 +81,6 @@
     <string name="empty_state_no_activity">No activity yet</string>
     <string name="header_your_notes">Your Notes</string>
     <string name="empty_state_no_notes">No notes yet</string>
-    <string name="time_just_now">Just now</string>
-    <string name="time_minutes_ago">%d minutes ago</string>
-    <string name="time_hours_ago">%d hours ago</string>
-    <string name="time_days_ago">%d days ago</string>
     <string name="dialog_exit_title">Exit App</string>
     <string name="dialog_exit_message">Are you sure you want to close the app?</string>
     <string name="action_exit">Exit</string>
@@ -187,7 +183,6 @@
     <string name="sidebar_free_tier_info">Free Tier: 15 req/min · 1500 req/day</string>
 
     <!-- ── Bubble actions ── -->
-    <string name="cd_ai_avatar">AI Icon</string>
     <string name="cd_copy_message">Copy message</string>
     <string name="action_save_as_note">Save as Note</string>
     <string name="toast_copied">Text copied to clipboard</string>
@@ -287,7 +282,6 @@
     <string name="profile_title">Profile</string>
     <string name="profile_subtitle">View and edit your profile</string>
     <string name="cd_profile_icon">Profile Icon</string>
-    <string name="cd_next_button">Next button or action indicator</string>
     <string name="forgot_password_title">Forgot Password</string>
     <string name="forgot_password_subtitle">Reset your password securely</string>
     <string name="cd_forgot_password">Forgot password icon</string>
@@ -342,16 +336,13 @@
     ══════════════════════════════════════════════════════════════ -->
     <string name="map_title">Select Location</string>
     <string name="selected_location">Selected Location</string>
-    <string name="loading_location">Loading location name…</string>
     <string name="unknown_location">Unknown Location</string>
     <string name="unknown_location_api">Unknown</string>
-    <string name="failed_load_location">Failed to load location name.</string>
     <string name="location_permission_denied">Location permission denied.</string>
     <string name="select_location_prompt">Please select a location on the map first.</string>
     <string name="gps_unavailable">GPS location is not available.</string>
     <string name="failed_get_location">Failed to get current location.</string>
     <string name="turn_on_gps_prompt">Please enable GPS location services.</string>
-    <string name="zoom_in_for_address">Zoom in to see address</string>
     <string name="search_hint">Search location or street name…</string>
     <string name="determining_location">Determining location…</string>
     <string name="my_location">location</string>
@@ -362,8 +353,6 @@
     ══════════════════════════════════════════════════════════════ -->
     <string name="notification_channel_user_activities">User Activities</string>
     <string name="notifications_title">Activity</string>
-    <string name="action_clear_all">Clear All</string>
-    <string name="clear_all">Clear All</string>
     <string name="empty_state_no_activity_subtitle">No activity recorded yet.\nYour activities will appear here.</string>
     <string name="dialog_delete_notif_title">Delete Notification</string>
     <string name="dialog_delete_notif_message">Do you want to delete this notification?</string>
@@ -402,7 +391,6 @@
     <string name="menu_title_gemini">Gemini AI</string>
     <string name="menu_section_tools">Tools</string>
     <string name="menu_title_notes">Notes</string>
-    <string name="cd_background_pattern">Background pattern</string>
     <string name="cd_profile_image">Profile image in navigation header</string>
 
     <!-- ══════════════════════════════════════════════════════════════

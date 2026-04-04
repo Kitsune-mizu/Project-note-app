@@ -111,7 +111,6 @@
                 android:layout_marginTop="32dp">
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chipIdea"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/chip_idea"
@@ -123,7 +122,6 @@
                     app:chipStrokeWidth="1dp" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chipCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/chip_code"
@@ -142,7 +140,6 @@
                 android:layout_marginTop="8dp">
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chipWrite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/chip_write"
@@ -154,7 +151,6 @@
                     app:chipStrokeWidth="1dp" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chipResearch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/chip_research"
@@ -238,7 +234,6 @@
 
     <!-- ── SIDEBAR ── -->
     <LinearLayout
-        android:id="@+id/sidebarContent"
         android:layout_width="300dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"

@@ -29,19 +29,8 @@
     </style>
 
     <!-- Dialog login -->
-    <style name="LoginDialogTheme" parent="Theme.Material3.DayNight.Dialog.Alert">
-        <item name="android:backgroundDimEnabled">true</item>
-        <item name="android:windowCloseOnTouchOutside">true</item>
-        <item name="android:windowMinWidthMajor">80%</item>
-        <item name="android:windowMinWidthMinor">80%</item>
-        <item name="android:background">@drawable/rounded_dialog_login</item>
-    </style>
 
     <!-- Nav & image -->
-    <style name="OvalImage">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">50%</item>
-    </style>
 
     <style name="CircleShape">
         <item name="cornerFamily">rounded</item>
@@ -72,32 +61,10 @@
         <item name="android:padding">12dp</item>
         <item name="android:tint">#616161</item> </style>
 
-    <style name="FormatIconStyle">
-        <item name="android:layout_width">48dp</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
-        <item name="android:padding">12dp</item>
-        <item name="android:tint">#424242</item> </style>
-
-    <style name="VerticalDivider">
-        <item name="android:layout_width">1dp</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:background">#E0E0E0</item>
-        <item name="android:layout_marginTop">8dp</item>
-        <item name="android:layout_marginBottom">8dp</item>
-    </style>
-
     <!-- Menu Note-->
     <!-- Corner radius untuk popup -->
-    <style name="ShapeAppearance.PopupMenu" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">12dp</item>
-    </style>
 
     <!-- Material PopupMenu style -->
-    <style name="Widget.App.PopupMenu" parent="Widget.Material3.PopupMenu">
-        <item name="shapeAppearance">@style/ShapeAppearance.PopupMenu</item>
-    </style>
 
     <!-- Base Application Theme ChatAI -->
     <style name="Theme.GeminiChat" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -120,11 +87,4 @@
     </style>
 
     <!-- item massage -->
-    <style name="CustomCardShape">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSizeTopLeft">4dp</item>
-        <item name="cornerSizeTopRight">18dp</item>
-        <item name="cornerSizeBottomLeft">18dp</item>
-        <item name="cornerSizeBottomRight">18dp</item>
-    </style>
 </resources>

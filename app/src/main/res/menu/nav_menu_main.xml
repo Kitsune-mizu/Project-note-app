@@ -25,7 +25,6 @@
 
     <!-- ── MAIN ── -->
     <group
-        android:id="@+id/main_group"
         android:checkableBehavior="single"
         tools:ignore="ExtraText">
 

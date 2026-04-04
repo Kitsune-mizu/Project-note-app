@@ -40,7 +40,6 @@
                     sehingga posisinya selalu di pojok kanan atas tanpa risiko overlap.
                 -->
                 <FrameLayout
-                    android:id="@+id/cardProfileBg"
                     android:layout_width="match_parent"
                     android:layout_height="280dp"
                     android:background="@drawable/profile_bg_layer">

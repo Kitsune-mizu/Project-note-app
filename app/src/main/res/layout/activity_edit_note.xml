@@ -137,7 +137,6 @@
 
     <!-- ================= MAIN CONTENT AREA ================= -->
     <ScrollView
-        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/keyboard_toolbar"
@@ -149,7 +148,6 @@
         android:clipToPadding="false">
 
         <LinearLayout
-            android:id="@+id/note_root_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -257,7 +255,6 @@
         android:fillViewport="true">
 
         <LinearLayout
-            android:id="@+id/keyboard_toolbar_layout"
             android:layout_width="wrap_content"
             android:layout_height="52dp"
             android:gravity="center_vertical"

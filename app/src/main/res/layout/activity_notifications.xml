@@ -68,7 +68,6 @@
 
         <!-- Lottie Animation -->
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/lottieEmpty"
             android:layout_width="160dp"
             android:layout_height="160dp"
             app:lottie_autoPlay="true"
@@ -77,7 +76,6 @@
 
         <!-- Empty Title -->
         <TextView
-            android:id="@+id/tvEmptyText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
