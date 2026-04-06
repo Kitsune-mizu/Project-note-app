@@ -2,18 +2,20 @@ package com.android.alpha.ui.notifications;
 
 import android.app.Dialog;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -67,9 +69,33 @@ public class NotificationActivity extends AppCompatActivity {
 
     // --- UI Setup ---
 
+    private int getAttrColor(int attr) {
+        TypedValue tv = new TypedValue();
+        getTheme().resolveAttribute(attr, tv, true);
+        return tv.data;
+    }
+
+    private Typeface getFont() {
+        try {
+            return androidx.core.content.res.ResourcesCompat.getFont(
+                    this, R.font.linottesemibold);
+        } catch (Exception e) {
+            return Typeface.DEFAULT;
+        }
+    }
+
     private void setupToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Typeface tf = getFont();
+
+        for (int i = 0; i < toolbar.getChildCount(); i++) {
+            View v = toolbar.getChildAt(i);
+            if (v instanceof TextView) {
+                ((TextView) v).setTypeface(tf);
+            }
+        }
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -77,7 +103,7 @@ public class NotificationActivity extends AppCompatActivity {
         }
 
         Objects.requireNonNull(toolbar.getNavigationIcon())
-                .setTint(ContextCompat.getColor(this, R.color.md_theme_light_onSurface));
+                .setTint(getAttrColor(R.attr.text_color));
     }
 
     private void setupRecyclerView() {

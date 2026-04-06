@@ -7,14 +7,14 @@
     android:gravity="center_vertical"
     android:paddingStart="20dp"
     android:paddingEnd="8dp"
-    android:background="?attr/selectableItemBackground">
+    android:background="?attr/color_1">
 
     <ImageView
         android:layout_width="18dp"
         android:layout_height="18dp"
         android:contentDescription="@string/bubble_chat"
         android:src="@drawable/ic_chat_bubble"
-        app:tint="#BBBBCC" />
+        app:tint="?attr/text_color" />
 
     <TextView
         android:id="@+id/historyTitle"
@@ -24,7 +24,8 @@
         android:paddingStart="12dp"
         android:paddingEnd="8dp"
         android:textSize="14sp"
-        android:textColor="#2D2D3A"
+        android:fontFamily="@font/linottesemibold"
+        android:textColor="?attr/text_color"
         android:maxLines="1"
         android:ellipsize="end"/>
 
@@ -33,8 +34,8 @@
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:src="@drawable/ic_more_vert"
-        android:background="?attr/selectableItemBackgroundBorderless"
+        android:background="?attr/color_1"
         android:contentDescription="@string/option"
-        app:tint="#BBBBCC" />
+        app:tint="?attr/text_color" />
 
 </LinearLayout>

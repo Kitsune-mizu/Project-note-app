@@ -16,7 +16,7 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         app:cardCornerRadius="32dp"
-        app:cardBackgroundColor="#FFEEEE"
+        app:cardBackgroundColor="?attr/color_2"
         app:cardElevation="0dp">
 
         <ImageView
@@ -25,7 +25,7 @@
             android:layout_gravity="center"
             android:contentDescription="@string/cd_delete_icon"
             android:src="@drawable/ic_delete"
-            app:tint="#E53935" />
+            app:tint="?attr/color_error" />
     </com.google.android.material.card.MaterialCardView>
 
     <TextView
@@ -35,16 +35,18 @@
         android:text="@string/dialog_delete_chat_title"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="#1A1A2E"
-        android:fontFamily="sans-serif-medium" />
+        android:textColor="?attr/text_color"
+        android:fontFamily="@font/linottesemibold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/dialog_delete_chat_message"
+        android:fontFamily="@font/linottesemibold"
         android:textSize="14sp"
-        android:textColor="#6A6A7E"
+        android:textColor="?attr/text_color"
+        android:alpha="0.6"
         android:gravity="center"
         android:lineSpacingMultiplier="1.4" />
 
@@ -62,11 +64,11 @@
             android:layout_weight="1"
             android:layout_marginEnd="8dp"
             android:text="@string/button_cancel"
-            android:textColor="#6C63FF"
+            android:fontFamily="@font/linottesemibold"
+            android:textColor="?attr/text_color"
             android:textSize="14sp"
-            app:backgroundTint="#F0F0F8"
             app:cornerRadius="24dp"
-            app:strokeColor="#6C63FF"
+            app:strokeColor="?attr/text_color"
             app:strokeWidth="1dp" />
 
         <com.google.android.material.button.MaterialButton
@@ -76,8 +78,10 @@
             android:layout_weight="1"
             android:layout_marginStart="8dp"
             android:text="@string/button_delete"
+            android:textColor="?attr/color_1"
+            android:fontFamily="@font/linottesemibold"
             android:textSize="14sp"
-            app:backgroundTint="#E53935"
+            app:backgroundTint="?attr/color_error"
             app:cornerRadius="24dp" />
 
     </LinearLayout>

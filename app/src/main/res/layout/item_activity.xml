@@ -7,7 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground"
+    android:background="?attr/color_1"
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:paddingHorizontal="4dp"
@@ -26,7 +26,7 @@
             android:layout_gravity="center"
             android:contentDescription="@string/cd_activity_icon"
             app:srcCompat="@drawable/ic_check_circle"
-            app:tint="?attr/colorPrimary" />
+            app:tint="?attr/text_color" />
     </FrameLayout>
 
     <!-- Title & Desc -->
@@ -42,8 +42,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/activity_title_placeholder"
+            android:fontFamily="@font/linottesemibold"
             android:textAppearance="?attr/textAppearanceBodyMedium"
-            android:textColor="?attr/colorOnSurface"
+            android:textColor="?attr/text_color"
             android:textStyle="bold" />
 
         <TextView
@@ -52,8 +53,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:text="@string/activity_description_placeholder"
+            android:fontFamily="@font/linottesemibold"
             android:textAppearance="?attr/textAppearanceLabelSmall"
-            android:textColor="?attr/colorOutline" />
+            android:textColor="?attr/text_color"
+            android:alpha="0.6"/>
 
     </LinearLayout>
 
@@ -63,7 +66,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/activity_time_placeholder"
+        android:fontFamily="@font/linottesemibold"
         android:textAppearance="?attr/textAppearanceLabelSmall"
-        android:textColor="?attr/colorOutline" />
+        android:textColor="?attr/text_color" />
 
 </LinearLayout>

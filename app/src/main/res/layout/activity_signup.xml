@@ -8,7 +8,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface"
+    android:background="?attr/color_1"
     android:fillViewport="true">
 
     <LinearLayout
@@ -36,7 +36,8 @@
             android:layout_marginTop="16dp"
             android:text="@string/create_account_title"
             android:textAppearance="?attr/textAppearanceHeadlineSmall"
-            android:textColor="?attr/colorOnSurface"
+            android:textColor="?attr/text_color"
+            android:fontFamily="@font/linottebold"
             android:textStyle="bold" />
 
         <!-- ── Subtitle ── -->
@@ -47,8 +48,10 @@
             android:layout_marginTop="6dp"
             android:layout_marginBottom="32dp"
             android:text="@string/fill_details_to_sign_up"
+            android:fontFamily="@font/linottesemibold"
             android:textAppearance="?attr/textAppearanceBodyMedium"
-            android:textColor="?attr/colorOutline" />
+            android:textColor="?attr/text_color"
+            android:alpha="0.6"/>
 
         <!-- ── Form Fields ── -->
         <LinearLayout
@@ -67,23 +70,25 @@
                 app:boxCornerRadiusBottomStart="14dp"
                 app:boxCornerRadiusTopEnd="14dp"
                 app:boxCornerRadiusTopStart="14dp"
-                app:boxStrokeColor="?attr/colorPrimary"
+                app:boxStrokeColor="?attr/text_color"
                 app:endIconMode="clear_text"
-                app:endIconTint="?attr/colorPrimary"
-                app:hintTextColor="?attr/colorPrimary"
+                app:endIconTint="?attr/text_color"
+                app:hintTextColor="?attr/color_4"
+                app:boxBackgroundColor="@color/white"
                 app:startIconDrawable="@drawable/ic_person"
-                app:startIconTint="?attr/colorPrimary">
+                app:startIconTint="?attr/color_4">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etUsernameSignUp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/username_hint"
+                    android:fontFamily="@font/linottesemibold"
                     android:inputType="text"
                     android:paddingTop="16dp"
                     android:paddingBottom="16dp"
-                    android:textColor="?attr/colorOnSurface"
-                    android:textColorHint="?attr/colorOnSurfaceVariant" />
+                    android:textColor="?attr/text_color"
+                    android:textColorHint="?attr/text_color" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Username Error -->
@@ -93,7 +98,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:text="@string/username_error_message"
-                android:textColor="?attr/colorError"
+                android:fontFamily="@font/linottesemibold"
+                android:textColor="?attr/color_error"
                 android:textSize="12sp"
                 android:visibility="gone" />
 
@@ -107,23 +113,25 @@
                 app:boxCornerRadiusBottomStart="14dp"
                 app:boxCornerRadiusTopEnd="14dp"
                 app:boxCornerRadiusTopStart="14dp"
-                app:boxStrokeColor="?attr/colorPrimary"
+                app:boxStrokeColor="?attr/text_color"
                 app:endIconMode="password_toggle"
-                app:endIconTint="?attr/colorPrimary"
-                app:hintTextColor="?attr/colorPrimary"
+                app:endIconTint="?attr/color_4"
+                app:hintTextColor="?attr/color_4"
+                app:boxBackgroundColor="@color/white"
                 app:startIconDrawable="@drawable/ic_lock"
-                app:startIconTint="?attr/colorPrimary">
+                app:startIconTint="?attr/color_4">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPasswordSignUp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/password_hint"
+                    android:fontFamily="@font/linottesemibold"
                     android:inputType="textPassword"
                     android:paddingTop="16dp"
                     android:paddingBottom="16dp"
-                    android:textColor="?attr/colorOnSurface"
-                    android:textColorHint="?attr/colorOnSurfaceVariant" />
+                    android:textColor="?attr/text_color"
+                    android:textColorHint="?attr/text_color" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Password Error -->
@@ -133,7 +141,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:text="@string/password_error_message"
-                android:textColor="?attr/colorError"
+                android:fontFamily="@font/linottesemibold"
+                android:textColor="?attr/color_error"
                 android:textSize="12sp"
                 android:visibility="gone" />
 
@@ -147,23 +156,25 @@
                 app:boxCornerRadiusBottomStart="14dp"
                 app:boxCornerRadiusTopEnd="14dp"
                 app:boxCornerRadiusTopStart="14dp"
-                app:boxStrokeColor="?attr/colorPrimary"
+                app:boxStrokeColor="?attr/text_color"
                 app:endIconMode="password_toggle"
-                app:endIconTint="?attr/colorPrimary"
-                app:hintTextColor="?attr/colorPrimary"
+                app:endIconTint="?attr/color_4"
+                app:boxBackgroundColor="@color/white"
+                app:hintTextColor="?attr/color_4"
                 app:startIconDrawable="@drawable/ic_lock"
-                app:startIconTint="?attr/colorPrimary">
+                app:startIconTint="?attr/color_4">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etConfirmPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/confirm_password_hint"
+                    android:fontFamily="@font/linottesemibold"
                     android:inputType="textPassword"
                     android:paddingTop="16dp"
                     android:paddingBottom="16dp"
-                    android:textColor="?attr/colorOnSurface"
-                    android:textColorHint="?attr/colorOnSurfaceVariant" />
+                    android:textColor="?attr/text_color"
+                    android:textColorHint="?attr/text_color" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Confirm Password Error -->
@@ -173,7 +184,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:text="@string/confirm_password_error_message"
-                android:textColor="?attr/colorError"
+                android:fontFamily="@font/linottesemibold"
+                android:textColor="?attr/color_error"
                 android:textSize="12sp"
                 android:visibility="gone" />
 
@@ -184,11 +196,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
                 android:text="@string/sign_up_button"
+                android:fontFamily="@font/linottebold"
                 android:textAllCaps="false"
-                android:textColor="?attr/colorOnPrimary"
+                android:textColor="?attr/text_color"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                app:backgroundTint="?attr/colorPrimary"
+                app:backgroundTint="?attr/color_4"
                 app:cornerRadius="14dp" />
 
             <!-- Login Link -->
@@ -199,8 +212,9 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="24dp"
                 android:text="@string/already_have_account_signin"
+                android:fontFamily="@font/linottesemibold"
                 android:textAppearance="?attr/textAppearanceBodyMedium"
-                android:textColor="?attr/colorPrimary"
+                android:textColor="?attr/text_color"
                 android:textStyle="bold" />
 
         </LinearLayout>

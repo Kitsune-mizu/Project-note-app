@@ -2,6 +2,7 @@ package com.android.alpha.ui.auth;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -80,6 +81,25 @@ public class LoginActivity extends AppCompatActivity {
         LottieAnimationView lottie = findViewById(R.id.lottieAnimationView);
         lottie.setAnimation(R.raw.login_animation);
         lottie.playAnimation();
+
+        Typeface tf = getFont();
+
+        etUsername.setTypeface(tf);
+        etPassword.setTypeface(tf);
+
+        btnLogin.setTypeface(tf);
+        tvSignUp.setTypeface(tf);
+        tvForgotPassword.setTypeface(tf);
+        cbRememberMe.setTypeface(tf);
+    }
+
+    private Typeface getFont() {
+        try {
+            return androidx.core.content.res.ResourcesCompat.getFont(
+                    this, R.font.linottesemibold);
+        } catch (Exception e) {
+            return Typeface.DEFAULT;
+        }
     }
 
     // ══════════════════════════════════════════════════════════════════════════

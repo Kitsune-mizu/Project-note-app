@@ -8,7 +8,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface"
+    android:background="?attr/color_1"
     android:fillViewport="true">
 
     <LinearLayout
@@ -36,8 +36,9 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:text="@string/welcome_back"
+            android:fontFamily="@font/linottebold"
             android:textAppearance="?attr/textAppearanceHeadlineSmall"
-            android:textColor="?attr/colorOnSurface"
+            android:textColor="?attr/text_color"
             android:textStyle="bold" />
 
         <!-- ── Subtitle ── -->
@@ -48,8 +49,10 @@
             android:layout_marginTop="6dp"
             android:layout_marginBottom="32dp"
             android:text="@string/please_sign_in"
+            android:fontFamily="@font/linottesemibold"
             android:textAppearance="?attr/textAppearanceBodyMedium"
-            android:textColor="?attr/colorOutline" />
+            android:textColor="?attr/text_color"
+            android:alpha="0.6"/>
 
         <!-- ── Form Fields ── -->
         <LinearLayout
@@ -68,24 +71,26 @@
                 app:boxCornerRadiusBottomStart="14dp"
                 app:boxCornerRadiusTopEnd="14dp"
                 app:boxCornerRadiusTopStart="14dp"
-                app:boxStrokeColor="?attr/colorPrimary"
+                app:boxStrokeColor="?attr/text_color"
                 app:endIconMode="clear_text"
-                app:endIconTint="?attr/colorPrimary"
+                app:endIconTint="?attr/text_color"
                 app:errorEnabled="true"
-                app:hintTextColor="?attr/colorPrimary"
+                app:hintTextColor="?attr/color_4"
                 app:startIconDrawable="@drawable/ic_person"
-                app:startIconTint="?attr/colorPrimary">
+                app:boxBackgroundColor="@color/white"
+                app:startIconTint="?attr/text_color">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etUsername"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/username_hint"
+                    android:fontFamily="@font/linottesemibold"
                     android:inputType="text"
                     android:paddingTop="16dp"
                     android:paddingBottom="16dp"
-                    android:textColor="?attr/colorOnSurface"
-                    android:textColorHint="?attr/colorOnSurfaceVariant" />
+                    android:textColor="?attr/text_color"
+                    android:textColorHint="?attr/text_color" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Password -->
@@ -99,24 +104,26 @@
                 app:boxCornerRadiusBottomStart="14dp"
                 app:boxCornerRadiusTopEnd="14dp"
                 app:boxCornerRadiusTopStart="14dp"
-                app:boxStrokeColor="?attr/colorPrimary"
+                app:boxStrokeColor="?attr/text_color"
                 app:endIconMode="password_toggle"
-                app:endIconTint="?attr/colorPrimary"
+                app:endIconTint="?attr/color_4"
                 app:errorEnabled="true"
-                app:hintTextColor="?attr/colorPrimary"
+                app:hintTextColor="?attr/color_4"
                 app:startIconDrawable="@drawable/ic_lock"
-                app:startIconTint="?attr/colorPrimary">
+                app:startIconTint="?attr/color_4"
+                app:boxBackgroundColor="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/password_hint"
+                    android:fontFamily="@font/linottesemibold"
                     android:inputType="textPassword"
                     android:paddingTop="16dp"
                     android:paddingBottom="16dp"
-                    android:textColor="?attr/colorOnSurface"
-                    android:textColorHint="?attr/colorOnSurfaceVariant" />
+                    android:textColor="?attr/text_color"
+                    android:textColorHint="?attr/text_color" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Remember Me & Forgot Password -->
@@ -133,15 +140,17 @@
                     android:layout_height="wrap_content"
                     android:focusable="false"
                     android:focusableInTouchMode="false"
-                    app:buttonTint="?attr/colorPrimary" />
+                    app:buttonTint="?attr/text_color" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
                     android:text="@string/remember_me"
+                    android:fontFamily="@font/linottesemibold"
                     android:textAppearance="?attr/textAppearanceBodySmall"
-                    android:textColor="?attr/colorOnSurfaceVariant" />
+                    android:textColor="?attr/text_color"
+                    android:alpha="0.8"/>
 
                 <TextView
                     android:id="@+id/tvForgotPassword"
@@ -150,8 +159,9 @@
                     android:layout_weight="1"
                     android:gravity="end"
                     android:text="@string/forgot_password"
+                    android:fontFamily="@font/linottesemibold"
                     android:textAppearance="?attr/textAppearanceBodySmall"
-                    android:textColor="?attr/colorPrimary"
+                    android:textColor="?attr/text_color"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -162,13 +172,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
                 android:text="@string/sign_in_button"
+                android:fontFamily="@font/linottebold"
                 android:textAllCaps="false"
-                android:textColor="?attr/colorOnPrimary"
+                android:textColor="?attr/text_color"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                app:backgroundTint="?attr/colorPrimary"
+                app:backgroundTint="?attr/color_4"
                 app:cornerRadius="14dp"
-                app:rippleColor="?attr/colorOnPrimary" />
+                app:rippleColor="?attr/text_color" />
 
             <!-- Sign Up Link -->
             <TextView
@@ -178,8 +189,9 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="24dp"
                 android:text="@string/dont_have_account_signup"
+                android:fontFamily="@font/linottesemibold"
                 android:textAppearance="?attr/textAppearanceBodyMedium"
-                android:textColor="?attr/colorPrimary"
+                android:textColor="?attr/text_color"
                 android:textStyle="bold" />
 
         </LinearLayout>

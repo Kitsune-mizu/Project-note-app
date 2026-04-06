@@ -7,26 +7,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface"
-    android:focusableInTouchMode="true">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="?attr/color_1"
+    android:focusableInTouchMode="true"
+    tools:openDrawer="start">
 
     <!-- ================= HEADER ================= -->
     <RelativeLayout
         android:id="@+id/header_container"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="?attr/colorSurface"
+        android:background="?attr/color_2"
         android:elevation="2dp"
         android:paddingStart="4dp"
         android:paddingEnd="4dp">
-
-        <!-- Subtle bottom divider -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:alpha="0.08"
-            android:background="?attr/colorOnSurface" />
 
         <!-- Back Button -->
         <ImageButton
@@ -38,7 +32,7 @@
             android:contentDescription="@string/cd_back"
             android:padding="12dp"
             android:src="@drawable/ic_back"
-            app:tint="?attr/colorOnSurface" />
+            app:tint="?attr/text_color" />
 
         <!-- Default Action Buttons (Delete, Share, Menu) -->
         <LinearLayout
@@ -58,7 +52,7 @@
                 android:contentDescription="@string/cd_delete"
                 android:padding="12dp"
                 android:visibility="gone"
-                app:tint="?attr/colorOnSurface" />
+                app:tint="?attr/text_color" />
 
             <ImageButton
                 android:id="@+id/btn_share"
@@ -68,7 +62,7 @@
                 android:contentDescription="@string/cd_share"
                 android:padding="12dp"
                 android:visibility="gone"
-                app:tint="?attr/colorOnSurface" />
+                app:tint="?attr/text_color" />
 
             <ImageButton
                 android:id="@+id/btn_menu"
@@ -78,7 +72,7 @@
                 android:contentDescription="@string/cd_menu"
                 android:padding="12dp"
                 android:src="@drawable/ic_menu"
-                app:tint="?attr/colorOnSurface" />
+                app:tint="?attr/text_color" />
         </LinearLayout>
 
         <!-- Input Action Buttons (Undo, Redo, Save) -->
@@ -99,7 +93,7 @@
                 android:contentDescription="@string/cd_undo"
                 android:padding="12dp"
                 android:src="@drawable/ic_undo"
-                app:tint="?attr/colorOnSurface" />
+                app:tint="?attr/text_color" />
 
             <ImageButton
                 android:id="@+id/btn_redo"
@@ -109,7 +103,7 @@
                 android:contentDescription="@string/cd_redo"
                 android:padding="12dp"
                 android:src="@drawable/ic_redo"
-                app:tint="?attr/colorOnSurface" />
+                app:tint="?attr/text_color" />
 
             <!-- Save Button — pakai MaterialButton agar bisa diberi warna accent -->
             <com.google.android.material.button.MaterialButton
@@ -129,7 +123,8 @@
                 app:cornerRadius="12dp"
                 app:icon="@drawable/ic_save"
                 app:iconSize="16dp"
-                app:iconPadding="4dp" />
+                app:iconPadding="4dp"
+                app:tint="?attr/text_color"/>
 
         </LinearLayout>
 
@@ -163,10 +158,12 @@
                 android:hint="@string/title_hint"
                 android:inputType="textMultiLine"
                 android:lineSpacingMultiplier="1.2"
-                android:textColor="?attr/colorOnSurface"
-                android:textColorHint="?attr/colorOutline"
+                android:textColor="?attr/text_color"
+                android:textColorHint="?attr/text_color"
                 android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:alpha="0.6"
+                android:fontFamily="@font/linottebold"/>
 
             <!-- Metadata -->
             <TextView
@@ -176,16 +173,17 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="16dp"
                 android:text="@string/metadata_placeholder"
-                android:textColor="?attr/colorOutline"
-                android:textSize="12sp" />
+                android:textColor="?attr/text_color"
+                android:textSize="12sp"
+                android:fontFamily="@font/linottesemibold"/>
 
             <!-- Thin divider between metadata and content -->
             <View
                 android:layout_width="32dp"
                 android:layout_height="2dp"
                 android:layout_marginBottom="16dp"
-                android:background="?attr/colorPrimary"
-                android:alpha="0.4" />
+                android:background="?attr/text_color"
+                android:alpha="0.6" />
 
             <!-- Content Input -->
             <EditText
@@ -199,9 +197,11 @@
                 android:inputType="textMultiLine|textCapSentences"
                 android:lineSpacingMultiplier="1.6"
                 android:minHeight="300dp"
-                android:textColor="?attr/colorOnSurface"
-                android:textColorHint="?attr/colorOutline"
-                android:textSize="16sp" />
+                android:textColor="?attr/text_color"
+                android:textColorHint="?attr/text_color"
+                android:textSize="16sp"
+                android:fontFamily="@font/linottesemibold"
+                android:alpha="0.6"/>
 
         </LinearLayout>
     </ScrollView>
@@ -213,7 +213,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/keyboard_toolbar"
         android:layout_below="@id/header_container"
-        android:background="?attr/colorSurface"
+        android:background="?attr/color_1"
         android:orientation="vertical"
         android:padding="24dp"
         android:visibility="gone">
@@ -222,7 +222,7 @@
             android:id="@+id/share_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="?attr/colorOnSurface"
+            android:textColor="?attr/text_color"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -231,7 +231,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="8dp"
-            android:textColor="?attr/colorOutline"
+            android:textColor="?attr/text_color"
             android:textSize="12sp" />
 
         <TextView
@@ -240,7 +240,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:lineSpacingMultiplier="1.6"
-            android:textColor="?attr/colorOnSurface"
+            android:textColor="?attr/text_color"
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -270,7 +270,7 @@
                 android:contentDescription="@string/cd_text_color"
                 android:padding="9dp"
                 android:src="@drawable/ic_text_color"
-                app:tint="?attr/colorOnSurfaceVariant" />
+                app:tint="?attr/text_color" />
 
             <!-- Highlight -->
             <ImageButton
@@ -281,7 +281,7 @@
                 android:contentDescription="@string/cd_highlight"
                 android:padding="9dp"
                 android:src="@drawable/ic_text_highlight"
-                app:tint="?attr/colorOnSurfaceVariant" />
+                app:tint="?attr/text_color" />
 
             <!-- Divider -->
             <View
@@ -289,7 +289,7 @@
                 android:layout_height="24dp"
                 android:layout_marginHorizontal="6dp"
                 android:alpha="0.15"
-                android:background="?attr/colorOnSurface" />
+                android:background="?attr/text_color" />
 
             <!-- Bold -->
             <ImageButton
@@ -300,7 +300,7 @@
                 android:contentDescription="@string/cd_bold"
                 android:padding="9dp"
                 android:src="@drawable/ic_text_bold"
-                app:tint="?attr/colorOnSurfaceVariant" />
+                app:tint="?attr/text_color" />
 
             <!-- Italic -->
             <ImageButton
@@ -311,7 +311,7 @@
                 android:contentDescription="@string/cd_italic"
                 android:padding="9dp"
                 android:src="@drawable/ic_text_italic"
-                app:tint="?attr/colorOnSurfaceVariant" />
+                app:tint="?attr/text_color" />
 
             <!-- Underline -->
             <ImageButton
@@ -322,7 +322,7 @@
                 android:contentDescription="@string/cd_underline"
                 android:padding="9dp"
                 android:src="@drawable/ic_text_underline"
-                app:tint="?attr/colorOnSurfaceVariant" />
+                app:tint="?attr/text_color" />
 
             <!-- Strikethrough -->
             <ImageButton
@@ -333,7 +333,7 @@
                 android:contentDescription="@string/cd_strikethrough"
                 android:padding="9dp"
                 android:src="@drawable/ic_text_strikethrough"
-                app:tint="?attr/colorOnSurfaceVariant" />
+                app:tint="?attr/text_color" />
 
             <!-- Divider -->
             <View
@@ -341,7 +341,7 @@
                 android:layout_height="24dp"
                 android:layout_marginHorizontal="6dp"
                 android:alpha="0.15"
-                android:background="?attr/colorOnSurface" />
+                android:background="?attr/text_color" />
 
             <!-- Bullet List -->
             <ImageButton
@@ -352,7 +352,7 @@
                 android:contentDescription="@string/cd_bullet_list"
                 android:padding="9dp"
                 android:src="@drawable/ic_text_list_bulleted"
-                app:tint="?attr/colorOnSurfaceVariant" />
+                app:tint="?attr/text_color" />
 
             <!-- Align Left -->
             <ImageButton
@@ -363,7 +363,7 @@
                 android:contentDescription="@string/cd_align_left"
                 android:padding="9dp"
                 android:src="@drawable/ic_text_align_left"
-                app:tint="?attr/colorOnSurfaceVariant" />
+                app:tint="?attr/text_color" />
 
             <!-- Align Center -->
             <ImageButton
@@ -374,7 +374,7 @@
                 android:contentDescription="@string/cd_align_center"
                 android:padding="9dp"
                 android:src="@drawable/ic_text_align_center"
-                app:tint="?attr/colorOnSurfaceVariant" />
+                app:tint="?attr/text_color" />
 
             <!-- Align Right -->
             <ImageButton
@@ -385,7 +385,7 @@
                 android:contentDescription="@string/cd_align_right"
                 android:padding="9dp"
                 android:src="@drawable/ic_text_align_right"
-                app:tint="?attr/colorOnSurfaceVariant" />
+                app:tint="?attr/text_color" />
 
             <!-- Divider -->
             <View
@@ -393,7 +393,7 @@
                 android:layout_height="24dp"
                 android:layout_marginHorizontal="6dp"
                 android:alpha="0.15"
-                android:background="?attr/colorOnSurface" />
+                android:background="?attr/text_color" />
 
             <!-- Increase Text Size -->
             <ImageButton
@@ -404,7 +404,7 @@
                 android:contentDescription="@string/cd_size_up"
                 android:padding="9dp"
                 android:src="@drawable/ic_text_increase"
-                app:tint="?attr/colorOnSurfaceVariant" />
+                app:tint="?attr/text_color" />
 
             <!-- Decrease Text Size -->
             <ImageButton
@@ -415,7 +415,7 @@
                 android:contentDescription="@string/cd_size_down"
                 android:padding="9dp"
                 android:src="@drawable/ic_text_decrease"
-                app:tint="?attr/colorOnSurfaceVariant" />
+                app:tint="?attr/text_color" />
 
         </LinearLayout>
     </HorizontalScrollView>

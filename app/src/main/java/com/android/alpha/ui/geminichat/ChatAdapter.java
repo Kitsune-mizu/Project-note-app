@@ -3,6 +3,7 @@ package com.android.alpha.ui.geminichat;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,6 +73,15 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.messages = messages;
     }
 
+    private static Typeface getFont(Context ctx) {
+        try {
+            return androidx.core.content.res.ResourcesCompat.getFont(
+                    ctx, R.font.linottesemibold);
+        } catch (Exception e) {
+            return Typeface.DEFAULT;
+        }
+    }
+
     // ══════════════════════════════════════════════════════════════════════════
     // ADAPTER OVERRIDES
     // ══════════════════════════════════════════════════════════════════════════
@@ -126,6 +136,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         void bind(ChatMessage msg) {
             text.setText(msg.getText());
+            text.setTypeface(getFont(itemView.getContext()));
         }
     }
 
@@ -143,9 +154,10 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         void bind(ChatMessage msg, OnSaveNoteListener saveNoteListener) {
-            // Tampilkan dengan format rapi (bold, bullet, heading, numbered list)
             messageText.setText(MarkdownFormatter.toSpannable(msg.getText()));
             messageText.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
+
+            messageText.setTypeface(getFont(itemView.getContext()));
 
             // ── Tombol Salin ──────────────────────────────────────────────────
             btnCopy.setOnClickListener(v -> {
@@ -228,6 +240,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         void bind(ChatMessage msg, OnRetryListener retryListener) {
             text.setText(msg.getText());
+            text.setTypeface(getFont(itemView.getContext())); 
             if (retryListener != null) {
                 btnRetry.setVisibility(View.VISIBLE);
                 btnRetry.setOnClickListener(v -> retryListener.onRetry());

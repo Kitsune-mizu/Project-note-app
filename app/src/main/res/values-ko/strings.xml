@@ -332,6 +332,11 @@
     <string name="cd_selected_language">선택된 언어 체크마크 아이콘</string>
     <string name="cd_language_flag">언어 국기 아이콘</string>
 
+    <string name="dialog_theme_title">테마 선택</string>
+    <string name="theme_light">라이트 모드</string>
+    <string name="theme_dark">다크 모드</string>
+    <string name="theme_system">시스템 기본값</string>
+
     <!-- ══════════════════════════════════════════════════════════════
          지도
     ══════════════════════════════════════════════════════════════ -->

@@ -332,6 +332,11 @@
     <string name="cd_selected_language">選択言語のチェックマークアイコン</string>
     <string name="cd_language_flag">言語の国旗アイコン</string>
 
+    <string name="dialog_theme_title">テーマを選択</string>
+    <string name="theme_light">ライトモード</string>
+    <string name="theme_dark">ダークモード</string>
+    <string name="theme_system">システムのデフォルト</string>
+
     <!-- ══════════════════════════════════════════════════════════════
          マップ
     ══════════════════════════════════════════════════════════════ -->

@@ -1,36 +1,31 @@
 <resources>
-    <!-- Vivid Pastel Blue-Pink Theme -->
-    <color name="md_theme_light_primary">#5BA9FF</color> <!-- Biru kuat -->
-    <color name="md_theme_light_onPrimary">#DEE3FF</color>
-    <color name="md_theme_light_primary_container">#90C9FF</color>
+        <!-- Warna Utama Light Mode -->
+        <color name="color_1">#F8FAFC</color>
+        <color name="color_2">#D9EAFD</color>
+        <color name="color_3">#BCCCDC</color>
+        <color name="color_4">#9AA6B2</color>
 
-    <color name="md_theme_light_secondary">#7BB6FF</color> <!-- Biru terang -->
-    <color name="md_theme_light_onSecondary">#DEE3FF</color>
-    <color name="md_theme_light_secondary_container">#A2D2FF</color>
+        <!-- Warna Utama Dark Mode -->
+        <color name="color_1_dark">#1F2937</color>
+        <color name="color_2_dark">#374151</color>
+        <color name="color_3_dark">#4B5563</color>
+        <color name="color_4_dark">#6B7280</color>
 
-    <color name="md_theme_light_tertiary">#FF91B5</color> <!-- Pink vivid -->
-    <color name="md_theme_light_onTertiary">#DEE3FF</color>
-    <color name="md_theme_light_tertiary_container">#FFAFCA</color>
+        <!-- Warna Teks -->
+        <color name="text_light">#1F2937</color>
+        <color name="text_dark">#F9FAFB</color>
 
-    <color name="md_theme_light_background">#DEE3FF</color> <!-- Gantikan putih -->
-    <color name="md_theme_light_onBackground">#1C304F</color>
+        <!-- Warna Standar -->
+        <color name="white">@color/color_1</color>
+        <color name="black">#000000</color>
 
-    <color name="md_theme_light_surface">#DEE3FF</color>
-    <color name="md_theme_light_onSurface">#1C304F</color>
+        <color name="color_error">#E43F5A</color>
+        <color name="color_green">#58C27D</color>
+        <color name="color_yellow">#FFDE42</color>
+        <color name="color_blue">#53CBF3</color>
 
-    <!-- Warna error dan success disesuaikan agar lebih vivid -->
-    <color name="md_theme_light_error">#E43F5A</color> <!-- Merah tegas tapi masih pastel -->
-    <color name="md_theme_light_onError">#DEE3FF</color>
-
-    <color name="green">#58C27D</color> <!-- Hijau vivid tapi lembut -->
-
-    <!-- Badge gradient -->
-    <color name="badge_start">#A2D2FF</color>
-    <color name="badge_end">#90C9FF</color>
-
-    <!-- Overlay / semi-transparent surface -->
-
-    <!-- Chat Activity -->
-    <color name="md_theme_light_onSurfaceVariant">#49454F</color>
-    <color name="md_theme_light_primaryContainer">#EADDFF</color>
+        <color name="color_error_night">#E43F5A</color>
+        <color name="color_green_night">#58C27D</color>
+        <color name="color_yellow_night">#FFDE42</color>
+        <color name="color_blue_night">#53CBF3</color>
 </resources>

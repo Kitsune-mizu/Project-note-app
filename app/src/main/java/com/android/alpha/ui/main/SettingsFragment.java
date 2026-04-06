@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.*;
@@ -17,6 +18,7 @@ import android.widget.*;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.*;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.*;
@@ -39,6 +41,7 @@ public class SettingsFragment extends Fragment implements
     // ─── UI COMPONENTS ─────────────────────────────────────────────────────────
     private SwitchMaterial switchNotifications;
     private TextView       textCurrentLanguage;
+    private TextView       textCurrentTheme;
 
     // ─── UTILITIES ─────────────────────────────────────────────────────────────
     private SharedPreferences          prefs;
@@ -57,6 +60,15 @@ public class SettingsFragment extends Fragment implements
         return inflater.inflate(R.layout.fragment_settings, container, false);
     }
 
+    private Typeface getFont() {
+        try {
+            return androidx.core.content.res.ResourcesCompat.getFont(
+                    requireContext(), R.font.linottesemibold);
+        } catch (Exception e) {
+            return Typeface.DEFAULT;
+        }
+    }
+
     /** Binds views, loads saved settings, and wires up all click and switch listeners. */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -65,10 +77,19 @@ public class SettingsFragment extends Fragment implements
         prefs               = requireContext().getSharedPreferences("app_settings", Context.MODE_PRIVATE);
         switchNotifications = view.findViewById(R.id.switchNotifications);
         textCurrentLanguage = view.findViewById(R.id.textCurrentLanguage);
+        textCurrentTheme = view.findViewById(R.id.textCurrentTheme);
+        textCurrentTheme.setTypeface(getFont());
 
         setupPermissionLauncher();
         loadSettings();
         setupClickListeners(view);
+
+        Typeface tf = getFont();
+
+        textCurrentLanguage.setTypeface(tf);
+        switchNotifications.setTypeface(tf);
+
+        loadTheme();
     }
 
     /** Refreshes the language display and re-checks system notification status on resume. */
@@ -102,6 +123,7 @@ public class SettingsFragment extends Fragment implements
         view.findViewById(R.id.layoutLogout).setOnClickListener(v -> showLogoutConfirmation());
         view.findViewById(R.id.layoutDeleteAccount).setOnClickListener(v -> showDeleteAccountWarnings());
         view.findViewById(R.id.layoutLanguage).setOnClickListener(v -> showLanguageDialog());
+        view.findViewById(R.id.layoutTheme).setOnClickListener(v -> showThemeDialog());
 
         switchNotifications.setOnCheckedChangeListener((button, checked) -> {
             if (!checked) { disableNotifications(); return; }
@@ -153,7 +175,8 @@ public class SettingsFragment extends Fragment implements
 
         textCurrentLanguage.setText(getString(textRes));
         textCurrentLanguage.setCompoundDrawables(null, null, flag, null);
-        textCurrentLanguage.setCompoundDrawablePadding(12);
+        int padding = (int) (12 * getResources().getDisplayMetrics().density);
+        textCurrentLanguage.setCompoundDrawablePadding(padding);
     }
 
     // ══════════════════════════════════════════════════════════════════════════
@@ -339,6 +362,121 @@ public class SettingsFragment extends Fragment implements
                 },
                 null
         );
+    }
+
+    // ══════════════════════════════════════════════════════════════════════════
+    // Theme SETTINGS
+    // ══════════════════════════════════════════════════════════════════════════
+
+    private void showThemeDialog() {
+        String[] modes = {"light", "dark", "system"};
+        int[] icons = {
+                R.drawable.ic_light_mode,
+                R.drawable.ic_dark_mode,
+                R.drawable.ic_settings
+        };
+
+        int[] names = {
+                R.string.theme_light,
+                R.string.theme_dark,
+                R.string.theme_system
+        };
+
+        var dialog = new com.google.android.material.bottomsheet.BottomSheetDialog(
+                requireContext(), R.style.ModernBottomSheetDialog);
+
+        View sheet = LayoutInflater.from(requireContext())
+                .inflate(R.layout.bottomsheet_theme_picker, new FrameLayout(requireContext()), false);
+
+        ViewGroup container = sheet.findViewById(R.id.themeContainer);
+        LayoutInflater inflater = LayoutInflater.from(requireContext());
+
+        String current = prefs.getString("theme_mode", "system");
+
+        for (int i = 0; i < names.length; i++) {
+            View item = inflater.inflate(R.layout.item_theme_option, container, false);
+
+            ((TextView) item.findViewById(R.id.tvThemeName))
+                    .setText(getString(names[i]));
+
+            ((ImageView) item.findViewById(R.id.iconTheme))
+                    .setImageResource(icons[i]);
+
+            if (modes[i].equals(current)) {
+                item.findViewById(R.id.iconCheck).setVisibility(View.VISIBLE);
+            }
+
+            int index = i;
+            item.setOnClickListener(v -> {
+                setThemeMode(modes[index]);
+                dialog.dismiss();
+            });
+
+            container.addView(item);
+        }
+
+        dialog.setContentView(sheet);
+        dialog.show();
+    }
+
+    private void loadTheme() {
+        String mode = prefs.getString("theme_mode", "system");
+
+        switch (mode) {
+            case "light":
+                androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(
+                        androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO);
+                break;
+
+            case "dark":
+                androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(
+                        androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES);
+                break;
+
+            default:
+                androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(
+                        androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                break;
+        }
+
+        updateThemeText();
+    }
+
+    private void updateThemeText() {
+        String mode = prefs.getString("theme_mode", "system");
+
+        switch (mode) {
+            case "light":
+                textCurrentTheme.setText(getString(R.string.theme_light));
+                break;
+            case "dark":
+                textCurrentTheme.setText(getString(R.string.theme_dark));
+                break;
+            default:
+                textCurrentTheme.setText(getString(R.string.theme_system));
+                break;
+        }
+    }
+
+    private void setThemeMode(String mode) {
+        prefs.edit().putString("theme_mode", mode).apply();
+
+        switch (mode) {
+            case "light":
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                break;
+
+            case "dark":
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                break;
+
+            default:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                break;
+        }
+
+        updateThemeText();
+        requireActivity().recreate();
     }
 
     // ══════════════════════════════════════════════════════════════════════════

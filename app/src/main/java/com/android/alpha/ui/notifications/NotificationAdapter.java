@@ -2,7 +2,9 @@ package com.android.alpha.ui.notifications;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,12 +91,38 @@ public class NotificationAdapter extends ListAdapter<ActivityItem, NotificationA
     }
 
     // --- Binding Helpers ---
+    private static Typeface getFont(Context ctx) {
+        try {
+            return androidx.core.content.res.ResourcesCompat.getFont(
+                    ctx, R.font.linottesemibold);
+        } catch (Exception e) {
+            return Typeface.DEFAULT;
+        }
+    }
+
+    private static int getAttrColor(Context ctx, int attr) {
+        TypedValue tv = new TypedValue();
+        ctx.getTheme().resolveAttribute(attr, tv, true);
+        return tv.data;
+    }
 
     /** Isi waktu, judul, deskripsi, ikon, dan warna ikon pada ViewHolder */
     private void bindTextAndIcon(@NonNull ViewHolder holder, Context context, ActivityItem item) {
+        Typeface tf = getFont(context);
+        int color = getAttrColor(context, R.attr.text_color);
+
         holder.tvTime.setText(formatTimestamp(item.getTimestamp()));
         holder.tvTitle.setText(getSafeString(context, item.getTitleResId()));
         holder.tvDesc.setText(getSafeString(context, item.getDescriptionResId()));
+
+        // (font + color)
+        holder.tvTime.setTypeface(tf);
+        holder.tvTitle.setTypeface(tf);
+        holder.tvDesc.setTypeface(tf);
+
+        holder.tvTime.setTextColor(color);
+        holder.tvTitle.setTextColor(color);
+        holder.tvDesc.setTextColor(color);
 
         holder.ivIcon.setImageResource(safeIcon(context, item.getIconRes()));
 
@@ -193,6 +221,12 @@ public class NotificationAdapter extends ListAdapter<ActivityItem, NotificationA
             tvDesc  = itemView.findViewById(R.id.tvActivityDesc);
             tvTime  = itemView.findViewById(R.id.tvActivityTime);
             ivIcon  = itemView.findViewById(R.id.iconActivity);
+
+            Typeface tf = getFont(itemView.getContext());
+
+            tvTitle.setTypeface(tf);
+            tvDesc.setTypeface(tf);
+            tvTime.setTypeface(tf);
         }
     }
 }

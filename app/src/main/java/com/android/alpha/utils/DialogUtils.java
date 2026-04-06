@@ -2,6 +2,7 @@ package com.android.alpha.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.LayoutInflater;
@@ -24,6 +25,15 @@ public class DialogUtils {
     /** Callback untuk dialog yang membutuhkan input teks dari pengguna */
     public interface DialogCallback {
         void onConfirm(String inputText);
+    }
+
+    private static Typeface getFont(Context ctx) {
+        try {
+            return androidx.core.content.res.ResourcesCompat.getFont(
+                    ctx, R.font.linottesemibold);
+        } catch (Exception e) {
+            return Typeface.DEFAULT;
+        }
     }
 
     // --- Dialog Factory ---
@@ -71,6 +81,13 @@ public class DialogUtils {
         btnPositive.setText(positiveText);
         btnNegative.setText(negativeText);
 
+        Typeface tf = getFont(context);
+
+        tvTitle.setTypeface(tf);
+        tvMessage.setTypeface(tf);
+        btnPositive.setTypeface(tf);
+        btnNegative.setTypeface(tf);
+
         btnPositive.setOnClickListener(v -> {
             if (onConfirm != null) onConfirm.run();
             dialog.dismiss();
@@ -112,6 +129,13 @@ public class DialogUtils {
         btnConfirm.setText(positiveText);
         btnCancel.setText(negativeText);
 
+        Typeface tf = getFont(context);
+
+        tvTitle.setTypeface(tf);
+        etInput.setTypeface(tf);
+        btnConfirm.setTypeface(tf);
+        btnCancel.setTypeface(tf);
+
         btnConfirm.setOnClickListener(v -> {
             if (callback != null) callback.onConfirm(etInput.getText().toString());
             dialog.dismiss();
@@ -144,6 +168,12 @@ public class DialogUtils {
         tvTitle.setText(title);
         tvMessage.setText(message);
         btnOk.setText(buttonText);
+
+        Typeface tf = getFont(context);
+
+        tvTitle.setTypeface(tf);
+        tvMessage.setTypeface(tf);
+        btnOk.setTypeface(tf);
 
         btnOk.setOnClickListener(v -> {
             if (onClose != null) onClose.run();
@@ -180,6 +210,13 @@ public class DialogUtils {
         tvMessage.setText(message);
         btnNegative.setText(negativeText);
         btnPositive.setEnabled(false);
+
+        Typeface tf = getFont(context);
+
+        tvTitle.setTypeface(tf);
+        tvMessage.setTypeface(tf);
+        btnPositive.setTypeface(tf);
+        btnNegative.setTypeface(tf);
 
         // Countdown: perbarui label tombol setiap detik, aktifkan setelah hitungan selesai
         Handler handler = new Handler(Looper.getMainLooper());

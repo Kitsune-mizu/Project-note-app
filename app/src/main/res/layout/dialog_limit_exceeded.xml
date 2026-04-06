@@ -16,7 +16,7 @@
         android:layout_width="72dp"
         android:layout_height="72dp"
         app:cardCornerRadius="36dp"
-        app:cardBackgroundColor="#FFF3E0"
+        app:cardBackgroundColor="?attr/color_2"
         app:cardElevation="0dp">
 
         <ImageView
@@ -35,16 +35,18 @@
         android:text="@string/dialog_rate_limit_title"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="#1A1A2E"
-        android:fontFamily="sans-serif-medium" />
+        android:textColor="?attr/text_color"
+        android:fontFamily="@font/linottesemibold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/dialog_rate_limit_message"
+        android:fontFamily="@font/linottesemibold"
+        android:alpha="0.6"
         android:textSize="14sp"
-        android:textColor="#5A5A6E"
+        android:textColor="?attr/text_color"
         android:gravity="center"
         android:lineSpacingMultiplier="1.5" />
 
@@ -61,17 +63,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/dialog_rate_limit_info_header"
+            android:fontFamily="@font/linottesemibold"
             android:textSize="12sp"
             android:textStyle="bold"
-            android:textColor="#1A1A2E" />
+            android:textColor="?attr/text_color" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:text="@string/dialog_rate_limit_info_detail"
+            android:fontFamily="@font/linottesemibold"
             android:textSize="12sp"
-            android:textColor="#5A5A6E"
+            android:textColor="?attr/text_color"
             android:lineSpacingMultiplier="1.4" />
     </LinearLayout>
 
@@ -81,8 +85,10 @@
         android:layout_height="50dp"
         android:layout_marginTop="24dp"
         android:text="@string/dialog_btn_understood"
+        android:textColor="?attr/text_color"
+        android:fontFamily="@font/linottesemibold"
         android:textSize="15sp"
-        app:backgroundTint="#6C63FF"
+        app:backgroundTint="?attr/color_4"
         app:cornerRadius="25dp" />
 
 </LinearLayout>

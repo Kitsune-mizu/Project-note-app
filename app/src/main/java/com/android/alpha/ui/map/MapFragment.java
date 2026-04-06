@@ -3,6 +3,7 @@ package com.android.alpha.ui.map;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -88,6 +89,15 @@ public class MapFragment extends Fragment {
     private OnLocationSelectedListener listener;
     private Runnable                  reverseRunnable;
 
+    private Typeface getFont() {
+        try {
+            return androidx.core.content.res.ResourcesCompat.getFont(
+                    requireContext(), R.font.linottesemibold);
+        } catch (Exception e) {
+            return Typeface.DEFAULT;
+        }
+    }
+
     // ─── CACHE ─────────────────────────────────────────────────────────────────
     private final Map<String, CacheEntry> locationCache = new HashMap<>();
 
@@ -169,6 +179,11 @@ public class MapFragment extends Fragment {
         rvSuggestions         = rootView.findViewById(R.id.rvSuggestions);
         shimmerLayout         = rootView.findViewById(R.id.shimmerLocation);
         fusedLocationClient   = LocationServices.getFusedLocationProviderClient(requireActivity());
+
+        Typeface tf = getFont();
+
+        etSearch.setTypeface(tf);
+        tvLocationName.setTypeface(tf);
     }
 
     /** Applies the current app language and sets the activity title for this screen. */

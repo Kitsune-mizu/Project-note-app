@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -11,8 +12,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,7 +28,6 @@ import com.android.alpha.ui.auth.LoginActivity;
 import com.android.alpha.ui.main.MainActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -55,16 +55,21 @@ public class SplashActivity extends AppCompatActivity {
     private static final int LOCATION_PERMISSION_REQUEST = 101;
     private static final int REQUEST_CHECK_SETTINGS      = 102;
 
-    private FrameLayout         flagContainer;
-    private ImageView           imgFlag;
-    private TextView            tvGreeting;
+    // Phase 1 Views
     private LottieAnimationView lottieAnimationView;
+
+    // Phase 2 Views
+    private LinearLayout greetingContainer;
+    private ImageView    imgFlag;
+    private TextView     tvGreeting;
 
     private FusedLocationProviderClient fusedLocationClient;
     private LocationCallback            locationCallback;
     private LocationRequest             locationRequest;
 
     private String lastCountry = "";
+    private boolean isFlagLoaded = false;
+    private boolean isGreetingReady = false;
 
     private final Handler handler = new Handler();
 
@@ -81,18 +86,34 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void initViews() {
+        // Phase 1
         lottieAnimationView = findViewById(R.id.lottieAnimationView);
-        flagContainer       = findViewById(R.id.flagContainer);
-        imgFlag             = findViewById(R.id.imgFlag);
-        tvGreeting          = findViewById(R.id.tvGreeting);
-        tvGreeting.setTypeface(ResourcesCompat.getFont(this, R.font.montserrat));
+
+        // Phase 2
+        greetingContainer = findViewById(R.id.greetingContainer);
+        imgFlag           = findViewById(R.id.imgFlag);
+        tvGreeting        = findViewById(R.id.tvGreeting);
+
+        // pakai font global
+        Typeface tf = getFont();
+        tvGreeting.setTypeface(tf);
 
         TextView tvVersion = findViewById(R.id.tvVersion);
         if (tvVersion != null) {
+            tvVersion.setTypeface(tf);
             try {
-                String v = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+                String v = getPackageManager()
+                        .getPackageInfo(getPackageName(), 0).versionName;
                 tvVersion.setText(getString(R.string.splash_version_format, v));
             } catch (Exception ignored) {}
+        }
+    }
+
+    private Typeface getFont() {
+        try {
+            return ResourcesCompat.getFont(this, R.font.linottesemibold);
+        } catch (Exception e) {
+            return Typeface.DEFAULT;
         }
     }
 
@@ -112,7 +133,7 @@ public class SplashActivity extends AppCompatActivity {
         finish();
     }
 
-    // ── Cek izin lokasi ────────────────────────────────────────────────────────
+    // ── Location Permission ────────────────────────────────────────────────────
 
     private void checkLocationPermission() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -121,16 +142,12 @@ public class SplashActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     LOCATION_PERMISSION_REQUEST);
         } else {
-            checkLocationSettings();   // izin sudah ada → cek GPS aktif
+            checkLocationSettings();
         }
     }
 
-    // ── Cek & minta GPS aktif (seperti Google Maps) ────────────────────────────
+    // ── GPS Settings Check ─────────────────────────────────────────────────────
 
-    /**
-     * Menggunakan LocationSettingsRequest dari Google Play Services.
-     * Jika GPS mati, muncul dialog sistem "Aktifkan lokasi?" tanpa masuk ke Settings.
-     */
     private void checkLocationSettings() {
         locationRequest = new LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 4000)
                 .setMinUpdateIntervalMillis(2000)
@@ -139,18 +156,14 @@ public class SplashActivity extends AppCompatActivity {
 
         LocationSettingsRequest settingsRequest = new LocationSettingsRequest.Builder()
                 .addLocationRequest(locationRequest)
-                .setAlwaysShow(true)   // selalu tampilkan dialog meski user pernah menolak
+                .setAlwaysShow(true)
                 .build();
 
         SettingsClient client = LocationServices.getSettingsClient(this);
         client.checkLocationSettings(settingsRequest)
-                .addOnSuccessListener(this, response -> {
-                    // GPS sudah aktif → langsung mulai update
-                    startRealtimeLocationUpdates();
-                })
+                .addOnSuccessListener(this, response -> startRealtimeLocationUpdates())
                 .addOnFailureListener(this, e -> {
                     if (e instanceof ResolvableApiException) {
-                        // Tampilkan dialog "Aktifkan lokasi?" bawaan sistem
                         try {
                             ((ResolvableApiException) e).startResolutionForResult(
                                     this, REQUEST_CHECK_SETTINGS);
@@ -159,7 +172,6 @@ public class SplashActivity extends AppCompatActivity {
                             getNetworkLocationFallback();
                         }
                     } else {
-                        // Tidak bisa diselesaikan → fallback
                         getNetworkLocationFallback();
                     }
                 });
@@ -170,10 +182,8 @@ public class SplashActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CHECK_SETTINGS) {
             if (resultCode == RESULT_OK) {
-                // User mengaktifkan GPS
                 startRealtimeLocationUpdates();
             } else {
-                // User menolak → fallback IP
                 getNetworkLocationFallback();
             }
         }
@@ -186,13 +196,13 @@ public class SplashActivity extends AppCompatActivity {
         if (requestCode == LOCATION_PERMISSION_REQUEST
                 && grantResults.length > 0
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            checkLocationSettings();   // izin baru diberikan → cek GPS
+            checkLocationSettings();
         } else {
             getNetworkLocationFallback();
         }
     }
 
-    // ── Location updates ───────────────────────────────────────────────────────
+    // ── Location Updates ───────────────────────────────────────────────────────
 
     @SuppressLint("MissingPermission")
     private void startRealtimeLocationUpdates() {
@@ -210,7 +220,7 @@ public class SplashActivity extends AppCompatActivity {
         fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, getMainLooper());
     }
 
-    // ── Geolocation processing ─────────────────────────────────────────────────
+    // ── Geolocation Processing ─────────────────────────────────────────────────
 
     private void handleLocation(Location location) {
         double lat = location.getLatitude();
@@ -239,7 +249,7 @@ public class SplashActivity extends AppCompatActivity {
         countryCode = countryCode.toLowerCase(Locale.ROOT);
         if (!countryCode.equals(lastCountry)) {
             lastCountry = countryCode;
-            showFlagSequence(countryCode);
+            preloadFlagAndGreeting(countryCode);
         }
     }
 
@@ -282,44 +292,127 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
-    // ── UI ─────────────────────────────────────────────────────────────────────
+    // ── Preload & Display ──────────────────────────────────────────────────────
 
-    private void showFlagSequence(String countryCode) {
+    /**
+     * CRITICAL: Preload flag and greeting BEFORE transitioning from Phase 1 to Phase 2
+     * This ensures smooth display without delays
+     */
+    private void preloadFlagAndGreeting(String countryCode) {
+        isFlagLoaded = false;
+        isGreetingReady = false;
+
         String flagUrl = "https://flagcdn.com/w320/" + countryCode + ".png";
+        String greeting = getManualGreeting(countryCode);
 
-        fadeOut(lottieAnimationView, () -> {
-            flagContainer.setVisibility(View.VISIBLE);
+        // Prepare greeting text (instant)
+        tvGreeting.setText(greeting);
+        isGreetingReady = true;
 
-            int size = (int) (tvGreeting.getLineHeight() * 1.2f);
-            RequestOptions options = new RequestOptions()
-                    .override(size, size)
-                    .transform(new RoundedCorners(size / 4));
+        // Preload flag image with Glide
+        int size = 200; // Match XML layout size
+        RequestOptions options = new RequestOptions()
+                .override(size, (int)(size * 0.665f)) // 200x133
+                .transform(new RoundedCorners(12));
 
-            Glide.with(this)
-                    .load(flagUrl)
-                    .apply(options)
-                    .transition(DrawableTransitionOptions.withCrossFade(800))
-                    .into(imgFlag);
+        Glide.with(this)
+                .load(flagUrl)
+                .apply(options)
+                .listener(new com.bumptech.glide.request.RequestListener<>() {
+                    @Override
+                    public boolean onLoadFailed(
+                            @androidx.annotation.Nullable com.bumptech.glide.load.engine.GlideException e,
+                            Object model,
+                            com.bumptech.glide.request.target.Target<android.graphics.drawable.Drawable> target,
+                            boolean isFirstResource) {
+                        Log.e(TAG, "Flag load failed", e);
+                        // Even on failure, continue with transition
+                        isFlagLoaded = true;
+                        checkAndTransitionToPhase2();
+                        return false;
+                    }
 
-            fadeIn(imgFlag, () ->
-                    new Thread(() -> {
-                        String greeting = getManualGreeting(countryCode);
-                        runOnUiThread(() -> animateGreetingChange(greeting));
-                    }).start());
-        });
+                    @Override
+                    public boolean onResourceReady(
+                            android.graphics.drawable.Drawable resource,
+                            Object model,
+                            com.bumptech.glide.request.target.Target<android.graphics.drawable.Drawable> target,
+                            com.bumptech.glide.load.DataSource dataSource,
+                            boolean isFirstResource) {
+                        isFlagLoaded = true;
+                        checkAndTransitionToPhase2();
+                        return false;
+                    }
+                })
+                .into(imgFlag);
     }
 
-    private void animateGreetingChange(String newText) {
-        tvGreeting.animate().cancel();
-        tvGreeting.setAlpha(0f);
+    /**
+     * Only transition to Phase 2 when BOTH flag and greeting are ready
+     */
+    private void checkAndTransitionToPhase2() {
+        if (isFlagLoaded && isGreetingReady) {
+            handler.post(this::transitionToPhase2);
+        }
+    }
+
+    /**
+     * Smooth transition from Phase 1 (Lottie) to Phase 2 (Flag + Greeting)
+     */
+    private void transitionToPhase2() {
+        // Fade out Lottie animation
+        lottieAnimationView.animate()
+                .alpha(0f)
+                .setDuration(400)
+                .withEndAction(() -> {
+                    lottieAnimationView.setVisibility(View.GONE);
+                    showGreetingSequence();
+                })
+                .start();
+    }
+
+    /**
+     * Display flag first, then greeting
+     */
+    private void showGreetingSequence() {
+        // Show container
+        greetingContainer.setVisibility(View.VISIBLE);
+        greetingContainer.setAlpha(0f);
+
+        // Step 1: Fade in FLAG first
+        imgFlag.setVisibility(View.VISIBLE);
+        imgFlag.setAlpha(0f);
+        imgFlag.setScaleX(0.8f);
+        imgFlag.setScaleY(0.8f);
+
+        imgFlag.animate()
+                .alpha(1f)
+                .scaleX(1f)
+                .scaleY(1f)
+                .setDuration(600)
+                .withStartAction(() -> greetingContainer.animate().alpha(1f).setDuration(600).start())
+                .withEndAction(this::showGreetingText)
+                .start();
+    }
+
+    /**
+     * Step 2: Show greeting text after flag appears
+     */
+    private void showGreetingText() {
         tvGreeting.setVisibility(View.VISIBLE);
-        tvGreeting.setText(newText);
+        tvGreeting.setAlpha(0f);
+        tvGreeting.setTranslationY(20f);
+
         tvGreeting.animate()
                 .alpha(1f)
-                .setDuration(600)
+                .translationY(0f)
+                .setDuration(500)
+                .setStartDelay(200)
                 .withEndAction(() -> handler.postDelayed(this::goNext, 2000))
                 .start();
     }
+
+    // ── Greeting Messages ──────────────────────────────────────────────────────
 
     private String getManualGreeting(String countryCode) {
         return switch (countryCode.toLowerCase()) {
@@ -361,19 +454,5 @@ public class SplashActivity extends AppCompatActivity {
             case "et" -> "Selam!";
             default -> "Hello!";
         };
-    }
-
-    private void fadeIn(View view, Runnable endAction) {
-        view.setAlpha(0f);
-        view.setVisibility(View.VISIBLE);
-        view.animate().alpha(1f).setDuration(800).withEndAction(endAction).start();
-    }
-
-    private void fadeOut(View view, Runnable endAction) {
-        view.animate().alpha(0f).setDuration(600)
-                .withEndAction(() -> {
-                    view.setVisibility(View.GONE);
-                    if (endAction != null) endAction.run();
-                }).start();
     }
 }

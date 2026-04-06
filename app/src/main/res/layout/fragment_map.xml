@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            app:boxBackgroundColor="?attr/colorSurface"
+            app:boxBackgroundColor="?attr/color_3"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusBottomStart="16dp"
             app:boxCornerRadiusTopEnd="16dp"
@@ -39,7 +39,7 @@
             app:boxStrokeWidth="0dp"
             app:hintEnabled="false"
             app:startIconDrawable="@drawable/ic_search_location"
-            app:startIconTint="?attr/colorPrimary">
+            app:startIconTint="?attr/text_color">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etSearch"
@@ -48,11 +48,12 @@
                 android:autofillHints="postalAddress"
                 android:background="@null"
                 android:hint="@string/search_hint"
+                android:fontFamily="@font/linottesemibold"
                 android:inputType="text"
                 android:paddingTop="14dp"
                 android:paddingBottom="14dp"
-                android:textColor="?attr/colorOnSurface"
-                android:textColorHint="?attr/colorOutline" />
+                android:textColor="?attr/text_color"
+                android:textColorHint="?attr/text_color" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Suggestions RecyclerView -->
@@ -86,8 +87,11 @@
                 android:gravity="start|center_vertical"
                 android:paddingVertical="14dp"
                 android:text="@string/determining_location"
+                android:fontFamily="@font/linottesemibold"
                 android:textAppearance="?attr/textAppearanceBodyMedium"
-                android:textColor="?attr/colorOnSurface" />
+                android:textColor="?attr/text_color"
+                app:strokeColor="?attr/text_color"/>
+
         </com.facebook.shimmer.ShimmerFrameLayout>
 
     </LinearLayout>
@@ -112,9 +116,13 @@
             android:layout_marginEnd="6dp"
             android:layout_weight="1"
             android:text="@string/my_location"
+            android:textColor="?attr/text_color"
+            android:fontFamily="@font/linottesemibold"
             android:textStyle="bold"
+            android:backgroundTint="?attr/color_4"
             app:cornerRadius="14dp"
             app:icon="@drawable/ic_location"
+            app:iconTint="?attr/text_color"
             app:iconPadding="6dp"
             app:iconSize="18dp" />
 
@@ -125,10 +133,12 @@
             android:layout_height="48dp"
             android:layout_marginEnd="6dp"
             android:layout_weight="1"
+            android:textColor="?attr/text_color"
             android:text="@string/button_cancel"
+            android:fontFamily="@font/linottesemibold"
             android:textStyle="bold"
             app:cornerRadius="14dp"
-            app:strokeColor="?attr/colorOutlineVariant" />
+            app:strokeColor="?attr/text_color" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnConfirm"
@@ -136,9 +146,10 @@
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_weight="1"
-            android:backgroundTint="?attr/colorPrimary"
+            android:backgroundTint="?attr/color_4"
             android:text="@string/select_location"
-            android:textColor="?attr/colorOnPrimary"
+            android:fontFamily="@font/linottesemibold"
+            android:textColor="?attr/text_color"
             android:textStyle="bold"
             app:cornerRadius="14dp" />
 

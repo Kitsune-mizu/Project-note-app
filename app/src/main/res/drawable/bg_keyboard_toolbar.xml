@@ -15,7 +15,7 @@
     <!-- Main surface -->
     <item android:top="1dp">
         <shape android:shape="rectangle">
-            <solid android:color="?attr/colorSurfaceVariant" />
+            <solid android:color="?attr/color_3" />
             <corners
                 android:topLeftRadius="16dp"
                 android:topRightRadius="16dp" />

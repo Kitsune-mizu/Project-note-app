@@ -15,10 +15,10 @@
     android:descendantFocusability="blocksDescendants"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackground"
-    app:cardBackgroundColor="?attr/colorSurfaceContainerHighest"
+    app:cardBackgroundColor="?attr/color_2"
     app:cardCornerRadius="18dp"
     app:cardElevation="0dp"
-    app:strokeColor="?attr/colorOutlineVariant"
+    app:strokeColor="?attr/color_4"
     app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,7 +40,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="?attr/colorPrimary" />
+            app:tint="?attr/text_color" />
 
         <ImageView
             android:id="@+id/iv_note_pin"
@@ -51,7 +51,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="?attr/colorPrimary" />
+            app:tint="?attr/text_color" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -71,8 +71,9 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="@string/note_title_placeholder"
+                android:fontFamily="@font/linottesemibold"
                 android:textAppearance="?attr/textAppearanceTitleMedium"
-                android:textColor="?attr/colorOnSurface"
+                android:textColor="?attr/text_color"
                 android:textStyle="bold" />
 
             <TextView
@@ -84,8 +85,10 @@
                 android:lineSpacingMultiplier="1.4"
                 android:maxLines="3"
                 android:text="@string/note_content_placeholder"
+                android:fontFamily="@font/linottesemibold"
                 android:textAppearance="?attr/textAppearanceBodySmall"
-                android:textColor="?attr/colorOnSurfaceVariant" />
+                android:textColor="?attr/text_color"
+                android:alpha="0.6"/>
 
             <TextView
                 android:id="@+id/tv_note_date"
@@ -93,8 +96,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/note_date_placeholder"
+                android:fontFamily="@font/linottesemibold"
                 android:textAppearance="?attr/textAppearanceLabelSmall"
-                android:textColor="?attr/colorOutline" />
+                android:textColor="?attr/text_color" />
 
         </LinearLayout>
 

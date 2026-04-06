@@ -1,0 +1,23 @@
+<resources>
+    <!-- Theme Light Mode -->
+    <style name="AppTheme" parent="Theme.Material3.Light.NoActionBar">
+
+        <!-- Warna Utama (Cukup 4 warna ini saja) -->
+        <item name="color_1">@color/color_1_dark</item>
+        <item name="color_2">@color/color_2_dark</item>
+        <item name="color_3">@color/color_3_dark</item>
+        <item name="color_4">@color/color_4_dark</item>
+
+        <!-- Warna Teks -->
+        <item name="text_color">@color/text_dark</item>
+
+        <item name="color_error">@color/color_error_night</item>
+        <item name="color_green">@color/color_green_night</item>
+        <item name="color_yellow">@color/color_yellow_night</item>
+        <item name="color_blue">@color/color_blue_night</item>
+
+        <!-- Background aplikasi -->
+        <item name="android:colorBackground">@color/color_1_dark</item>
+
+    </style>
+</resources>

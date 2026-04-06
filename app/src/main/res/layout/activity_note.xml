@@ -4,61 +4,59 @@
     Deskripsi: Menampilkan daftar catatan dengan fitur pencarian,
     mode seleksi, dan tombol tambah catatan.
 -->
-<!--
-    PERUBAHAN:
-    - fab_gemini diganti ExtendedFloatingActionButton (teks + icon gemini_icon.png)
-    - Muncul extended (teks tampil) setiap masuk ke halaman, lalu shrink setelah 2.5 detik
-    - Tooltip dihapus karena teks sudah ada di dalam FAB
-    - FAB container diberi padding agar shadow tidak terpotong
-    - SearchView diganti MaterialCardView agar tampil seperti search bar dengan shadow merata
-    - Search card seluruh area bisa diklik (clickable + focusable)
-    - SearchView mengisi hingga ujung kanan card (rounded mengikuti card)
--->
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/md_theme_light_surface">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="?attr/color_1"
+    tools:openDrawer="start">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/md_theme_light_surface"
+        android:background="?attr/color_2"
         app:elevation="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_scrollFlags="scroll|enterAlwaysCollapsed|exitUntilCollapsed"
-            tools:ignore="ExtraText">
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed|exitUntilCollapsed">
 
-            <!--
-                Search Bar: satu kesatuan — SearchView langsung
-                dengan background drawable rounded pill + elevation via layer.
-                Tidak ada card terpisah, tidak ada tumpukan view.
-            -->
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/search_view"
+            <!-- Search Bar Container -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="52dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="10dp"
-                android:background="@drawable/bg_search_bar"
-                android:elevation="4dp"
-                android:iconifiedByDefault="false"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                app:closeIcon="@drawable/transparent_icon"
-                app:searchHintIcon="@drawable/transparent_icon"
-                app:searchIcon="@drawable/ic_search_note"
-                app:iconifiedByDefault="false"
-                app:queryBackground="@android:color/transparent"
-                app:queryHint="@string/search_notes_hint"/>
+                app:cardCornerRadius="26dp"
+                app:cardElevation="4dp"
+                app:cardMaxElevation="4dp"
+                app:strokeColor="?attr/color_2"
+                app:strokeWidth="0.1dp"
+                app:cardBackgroundColor="?attr/color_3">
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/search_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:background="@null"
+                    android:iconifiedByDefault="false"
+                    android:queryBackground="@android:color/transparent"
+                    app:iconifiedByDefault="false"
+                    app:queryHint="@string/search_notes_hint"
+                    app:searchIcon="@drawable/ic_search_note"
+                    app:closeIcon="@drawable/transparent_icon"
+                    app:searchHintIcon="@null"
+                    app:submitBackground="@android:color/transparent"
+                    app:defaultQueryHint="@string/search_notes_hint"
+                    android:fontFamily="@font/linottesemibold"/>
+
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -69,12 +67,7 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-    <!--
-        FAB Group: masing-masing FAB dibungkus MaterialCardView
-        dengan style shadow identik seperti search bar
-        (cardElevation=4dp, cardMaxElevation=4dp, stroke, cornerRadius)
-        agar shadow merata atas bawah kiri kanan tanpa terpotong.
-    -->
+    <!-- FAB Group -->
 
     <!-- Card wrapper: FAB Tambah Note -->
     <com.google.android.material.card.MaterialCardView
@@ -88,7 +81,7 @@
         app:cardBackgroundColor="@null"
         app:cardElevation="4dp"
         app:cardMaxElevation="4dp"
-        app:strokeColor="#E8E8F0"
+        app:strokeColor="?attr/color_2"
         app:strokeWidth="1dp">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -97,8 +90,8 @@
             android:layout_height="wrap_content"
             android:contentDescription="@string/cd_add_new_note"
             android:src="@drawable/ic_add"
-            app:backgroundTint="?attr/colorPrimary"
-            app:tint="?attr/colorOnPrimary"
+            app:backgroundTint="?attr/color_4"
+            app:tint="?attr/text_color"
             app:elevation="0dp"
             app:maxImageSize="24dp"/>
     </com.google.android.material.card.MaterialCardView>
@@ -115,7 +108,7 @@
         app:cardBackgroundColor="@null"
         app:cardElevation="4dp"
         app:cardMaxElevation="4dp"
-        app:strokeColor="#E8E8F0"
+        app:strokeColor="?attr/color_2"
         app:strokeWidth="1dp">
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -123,12 +116,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/fab_try_gemini"
-            android:textColor="#FFFFFF"
+            android:fontFamily="@font/linottesemibold"
+            android:textStyle="bold"
+            android:textColor="?attr/text_color"
             android:textSize="13sp"
             app:icon="@drawable/gemini_icon"
             app:iconSize="22dp"
             app:iconTint="@null"
-            app:backgroundTint="#1A1A2E"
+            app:backgroundTint="?attr/color_3"
             app:elevation="0dp"
             android:contentDescription="@string/cd_open_gemini"/>
     </com.google.android.material.card.MaterialCardView>
@@ -138,7 +133,7 @@
         android:id="@+id/selection_mode_header"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="?attr/colorPrimary"
+        android:background="?attr/color_2"
         android:elevation="4dp"
         android:visibility="gone">
 
@@ -150,7 +145,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/cd_cancel_selection"
             android:src="@drawable/ic_close"
-            app:tint="?attr/colorOnPrimary"/>
+            app:tint="?attr/text_color"/>
 
         <TextView
             android:id="@+id/tv_selection_count"
@@ -161,7 +156,8 @@
             android:layout_toEndOf="@id/action_cancel_selection"
             android:layout_toStartOf="@id/action_select_all"
             android:text="@string/selection_count_placeholder"
-            android:textColor="?attr/colorOnPrimary"
+            android:fontFamily="@font/linottesemibold"
+            android:textColor="?attr/text_color"
             android:textSize="18sp"
             android:textStyle="bold"/>
 
@@ -173,7 +169,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/cd_select_all"
             android:src="@drawable/ic_select_all"
-            app:tint="?attr/colorOnPrimary"/>
+            app:tint="?attr/text_color"/>
     </RelativeLayout>
 
     <!-- Selection Mode Action Bar -->
@@ -182,7 +178,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="?attr/colorSurface"
+        android:background="?attr/color_2"
         android:baselineAligned="false"
         android:elevation="8dp"
         android:orientation="horizontal"
@@ -195,7 +191,7 @@
             android:layout_weight="1"
             android:contentDescription="@string/cd_pin_notes"
             android:src="@drawable/ic_pin_outline"
-            app:tint="?attr/colorOnSurface"/>
+            app:tint="?attr/text_color"/>
 
         <ImageButton
             android:id="@+id/action_delete"
@@ -203,7 +199,7 @@
             android:layout_weight="1"
             android:contentDescription="@string/cd_delete_notes"
             android:src="@drawable/ic_delete"
-            app:tint="?attr/colorError"/>
+            app:tint="?attr/color_error"/>
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

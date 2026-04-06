@@ -11,7 +11,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/nav_header_gradient"
+    android:background="?attr/color_3"
     android:paddingStart="20dp"
     android:paddingEnd="20dp"
     android:paddingTop="36dp"
@@ -93,8 +93,9 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@string/placeholder_name"
+            android:fontFamily="@font/linottesemibold"
             android:textAppearance="?attr/textAppearanceTitleMedium"
-            android:textColor="@color/md_theme_light_onPrimary"
+            android:textColor="?attr/text_color"
             android:textStyle="bold" />
 
         <!--
@@ -111,8 +112,9 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@string/placeholder_email"
+            android:fontFamily="@font/linottesemibold"
             android:textAppearance="?attr/textAppearanceLabelSmall"
-            android:textColor="@color/md_theme_light_onPrimary" />
+            android:textColor="?attr/text_color" />
     </LinearLayout>
 
     <!-- ── DIVIDER ── -->
@@ -122,7 +124,7 @@
         android:layout_height="1dp"
         android:layout_marginTop="16dp"
         android:alpha="0.18"
-        android:background="@color/md_theme_light_onPrimary"
+        android:background="@color/color_4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/profileContainer" />
@@ -148,9 +150,9 @@
             android:paddingHorizontal="10dp"
             android:paddingVertical="4dp"
             android:text="@string/menu_title_gemini"
+            android:fontFamily="@font/linottesemibold"
             android:textAppearance="?attr/textAppearanceLabelSmall"
-            android:textColor="@color/md_theme_light_onPrimary"
-            app:drawableStartCompat="@drawable/ic_gemini" />
+            android:textColor="?attr/text_color"/>
 
     </LinearLayout>
 

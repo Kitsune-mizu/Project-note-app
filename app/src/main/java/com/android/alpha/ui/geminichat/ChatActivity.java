@@ -3,11 +3,13 @@ package com.android.alpha.ui.geminichat;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
@@ -22,7 +24,6 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.DiffUtil;
@@ -93,8 +94,6 @@ public class ChatActivity extends AppCompatActivity
     private ImageButton       menuButton;
     private ImageButton       newChatButton;
     private ImageView         aiIconView;
-    private TextView          greetingText;
-    private TextView          suggestionText;
     private TextView          usageLimitText;
 
     // ── Data ──────────────────────────────────────────────────────────────────
@@ -147,6 +146,21 @@ public class ChatActivity extends AppCompatActivity
     protected void onDestroy() {
         super.onDestroy();
         userSession.removeListener();
+    }
+
+    private int getAttrColor(int attr) {
+        TypedValue tv = new TypedValue();
+        getTheme().resolveAttribute(attr, tv, true);
+        return tv.data;
+    }
+
+    private Typeface getFont() {
+        try {
+            return androidx.core.content.res.ResourcesCompat.getFont(
+                    this, R.font.linottesemibold);
+        } catch (Exception e) {
+            return Typeface.DEFAULT;
+        }
     }
 
     // ── Back press ────────────────────────────────────────────────────────────
@@ -278,10 +292,13 @@ public class ChatActivity extends AppCompatActivity
         menuButton          = findViewById(R.id.menuButton);
         newChatButton       = findViewById(R.id.newChatButton);
         aiIconView          = findViewById(R.id.aiIconView);
-        greetingText        = findViewById(R.id.greetingText);
-        suggestionText      = findViewById(R.id.suggestionText);
         usageLimitText      = findViewById(R.id.usageLimitText);
         updateUsageDisplay();
+
+        Typeface tf = getFont();
+
+        messageInput.setTypeface(tf);
+        usageLimitText.setTypeface(tf);
     }
 
     private void setupAdapters() {
@@ -369,15 +386,6 @@ public class ChatActivity extends AppCompatActivity
         floatAnim.setRepeatCount(ObjectAnimator.INFINITE);
         floatAnim.setRepeatMode(ObjectAnimator.REVERSE);
         new Handler().postDelayed(floatAnim::start, 900);
-
-        if (greetingText != null) {
-            greetingText.setAlpha(0f); greetingText.setTranslationY(30f);
-            greetingText.animate().alpha(1f).translationY(0f).setDuration(600).setStartDelay(400).start();
-        }
-        if (suggestionText != null) {
-            suggestionText.setAlpha(0f); suggestionText.setTranslationY(20f);
-            suggestionText.animate().alpha(1f).translationY(0f).setDuration(600).setStartDelay(700).start();
-        }
     }
 
     // ══════════════════════════════════════════════════════════════════════════
@@ -546,8 +554,11 @@ public class ChatActivity extends AppCompatActivity
         if (usageLimitText == null) return;
         int remaining = DAILY_LIMIT - sessionManager.getDailyCount();
         usageLimitText.setText(getString(R.string.usage_remaining, remaining, DAILY_LIMIT));
-        usageLimitText.setTextColor(ContextCompat.getColor(this,
-                remaining < 100 ? R.color.md_theme_light_error : R.color.md_theme_light_onSurfaceVariant));
+        usageLimitText.setTextColor(
+                remaining < 100
+                        ? getAttrColor(R.attr.color_error)
+                        : getAttrColor(R.attr.text_color)
+        );
     }
 
     // ══════════════════════════════════════════════════════════════════════════

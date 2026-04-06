@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.os.Looper;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.*;
 import android.widget.*;
 
@@ -156,6 +158,15 @@ public class MainActivity extends AppCompatActivity
 
     private void setupToolbar() { setSupportActionBar(toolbar); }
 
+    private Typeface getAppFont() {
+        try {
+            return androidx.core.content.res.ResourcesCompat.getFont(
+                    this, R.font.linottesemibold); // ttf / otf aman
+        } catch (Exception e) {
+            return Typeface.DEFAULT;
+        }
+    }
+
     // ══════════════════════════════════════════════════════════════════════════
     // NAVIGATION DRAWER
     // ══════════════════════════════════════════════════════════════════════════
@@ -164,8 +175,14 @@ public class MainActivity extends AppCompatActivity
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         Drawable menuIcon = ContextCompat.getDrawable(this, R.drawable.ic_menu);
-        if (menuIcon != null)
-            menuIcon.setTint(ContextCompat.getColor(this, R.color.md_theme_light_onSurface));
+
+        if (menuIcon != null) {
+            TypedValue typedValue = new TypedValue();
+            getTheme().resolveAttribute(R.attr.text_color, typedValue, true);
+            menuIcon.setTint(typedValue.data);
+        }
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(menuIcon);
 
         navigationView.setNavigationItemSelectedListener(this);
@@ -204,8 +221,14 @@ public class MainActivity extends AppCompatActivity
         TextView footer = new TextView(this);
         footer.setText(getString(R.string.footer_text));
         footer.setTextSize(12);
-        footer.setTextColor(
-                ContextCompat.getColor(this, R.color.md_theme_light_onSurface));
+
+        // font
+        footer.setTypeface(getAppFont());
+
+        TypedValue typedValue = new TypedValue();
+        getTheme().resolveAttribute(R.attr.text_color, typedValue, true);
+        footer.setTextColor(typedValue.data);
+
         footer.setGravity(Gravity.CENTER);
         footer.setPadding(0, 40, 0, 40);
 
@@ -214,6 +237,7 @@ public class MainActivity extends AppCompatActivity
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         params.gravity = Gravity.BOTTOM;
         footer.setLayoutParams(params);
+
         navigationView.addView(footer);
     }
 
@@ -308,6 +332,14 @@ public class MainActivity extends AppCompatActivity
         } else if (f == null) {
             // Tidak ada fragment → default ke Home
             getSupportActionBar().setTitle(R.string.menu_title_home);
+            Typeface tf = getAppFont();
+
+            for (int i = 0; i < toolbar.getChildCount(); i++) {
+                View v = toolbar.getChildAt(i);
+                if (v instanceof TextView) {
+                    ((TextView) v).setTypeface(tf);
+                }
+            }
         }
 
         highlightActiveMenu(f);
@@ -430,6 +462,10 @@ public class MainActivity extends AppCompatActivity
 
             tvUsername.setText(fullName);
             tvUserEmail.setText(email);
+            Typeface tf = getAppFont();
+
+            tvUsername.setTypeface(tf);
+            tvUserEmail.setTypeface(tf);
 
             if (!photo.isEmpty()) {
                 ivProfile.setVisibility(View.VISIBLE);

@@ -3,10 +3,11 @@ package com.android.alpha.ui.notes;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.view.Gravity;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,7 +18,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.core.content.ContextCompat;
+import androidx.core.graphics.ColorUtils;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,6 +53,7 @@ public class NoteActivity extends AppCompatActivity
     private RelativeLayout               selectionModeHeader;
     private TextView                     tvSelectionCount;
     private SearchView                   searchView;
+    private View                         appBarLayout;
 
     private final Handler handler = new Handler(Looper.getMainLooper());
     private enum MultiAction { PIN, DELETE }
@@ -114,6 +116,7 @@ public class NoteActivity extends AppCompatActivity
         selectionModeHeader    = findViewById(R.id.selection_mode_header);
         tvSelectionCount       = findViewById(R.id.tv_selection_count);
         searchView             = findViewById(R.id.search_view);
+        appBarLayout           = findViewById(R.id.app_bar_layout);
     }
 
     private void setupRecyclerView() {
@@ -238,6 +241,7 @@ public class NoteActivity extends AppCompatActivity
         int vis = active ? View.GONE : View.VISIBLE;
         cardFabGemini.setVisibility(vis);
         cardFabAddNote.setVisibility(vis);
+        appBarLayout.setVisibility(vis);  // TAMBAHKAN INI - sembunyikan search bar
         selectionModeHeader.setVisibility(active ? View.VISIBLE : View.GONE);
         selectionModeActionBar.setVisibility(active ? View.VISIBLE : View.GONE);
     }
@@ -250,35 +254,72 @@ public class NoteActivity extends AppCompatActivity
 
     // ── SearchView styling ────────────────────────────────────────────────────
 
+    private int getAttrColor(int attr) {
+        TypedValue typedValue = new TypedValue();
+        getTheme().resolveAttribute(attr, typedValue, true);
+        return typedValue.data;
+    }
+
     private void setupSearchView() {
         searchView.post(() -> {
-            View searchPlate = searchView.findViewById(androidx.appcompat.R.id.search_plate);
-            if (searchPlate != null)
-                searchPlate.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_search_rounded));
 
-            android.widget.EditText et =
-                    searchView.findViewById(androidx.appcompat.R.id.search_src_text);
-            if (et != null) {
-                et.setBackground(null);
-                et.setHint(getString(R.string.search_notes_hint));
-                et.setHintTextColor(ContextCompat.getColor(this, R.color.md_theme_light_onSurface));
-                et.setTextColor(ContextCompat.getColor(this, R.color.md_theme_light_onBackground));
+            // ── Remove default underline / background
+            View searchPlate = searchView.findViewById(androidx.appcompat.R.id.search_plate);
+            if (searchPlate != null) {
+                searchPlate.setBackground(null);
             }
 
-            ImageView searchIcon = searchView.findViewById(androidx.appcompat.R.id.search_mag_icon);
+            // ── EditText (input + placeholder)
+            android.widget.EditText et =
+                    searchView.findViewById(androidx.appcompat.R.id.search_src_text);
+
+            if (et != null) {
+
+                // Load font (support TTF / OTF)
+                Typeface tf;
+                try {
+                    tf = androidx.core.content.res.ResourcesCompat.getFont(
+                            this, R.font.linottesemibold);
+                } catch (Exception e) {
+                    tf = Typeface.DEFAULT; // fallback biar gak crash
+                }
+
+                if (tf != null) {
+                    et.setTypeface(tf);
+                }
+
+                // Style text + hint
+                et.setBackground(null);
+                et.setHint(getString(R.string.search_notes_hint));
+
+                int textColor = getAttrColor(R.attr.text_color);
+
+                et.setTextColor(textColor);
+                et.setHintTextColor(ColorUtils.setAlphaComponent(textColor, 153)); // 60%
+
+                et.setTextSize(14); // opsional biar konsisten
+            }
+
+            // ── Search icon
+            ImageView searchIcon =
+                    searchView.findViewById(androidx.appcompat.R.id.search_mag_icon);
+
             if (searchIcon != null) {
                 searchIcon.setImageResource(R.drawable.ic_search_note);
                 searchIcon.setColorFilter(
-                        ContextCompat.getColor(this, R.color.md_theme_light_onSurface),
-                        PorterDuff.Mode.SRC_IN);
-                int sizePx = (int) (40 * getResources().getDisplayMetrics().density + 0.5f);
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(sizePx, sizePx);
-                params.gravity = Gravity.CENTER_VERTICAL;
-                searchIcon.setLayoutParams(params);
+                        getAttrColor(R.attr.text_color),
+                        PorterDuff.Mode.SRC_IN
+                );
             }
 
-            ImageView closeIcon = searchView.findViewById(androidx.appcompat.R.id.search_close_btn);
-            if (closeIcon != null) closeIcon.setImageResource(R.drawable.transparent_icon);
+            // ── Remove close icon (no ghost click)
+            ImageView closeIcon =
+                    searchView.findViewById(androidx.appcompat.R.id.search_close_btn);
+
+            if (closeIcon != null) {
+                closeIcon.setVisibility(View.GONE);
+                closeIcon.setEnabled(false);
+            }
         });
     }
 }

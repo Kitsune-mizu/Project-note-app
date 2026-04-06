@@ -26,7 +26,7 @@
             android:layout_width="42dp"
             android:layout_height="42dp"
             app:cardCornerRadius="21dp"
-            app:cardBackgroundColor="#EEF2FF"
+            app:cardBackgroundColor="?attr/color_2"
             app:cardElevation="0dp"
             android:layout_marginEnd="12dp">
 
@@ -49,42 +49,53 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/dialog_save_note_title"
+                android:fontFamily="@font/linottesemibold"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="#1A1A2E"/>
+                android:textColor="?attr/text_color"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/dialog_save_note_subtitle"
+                android:fontFamily="@font/linottesemibold"
                 android:textSize="12sp"
-                android:textColor="#9090B0"
-                android:layout_marginTop="2dp"/>
+                android:textColor="?attr/text_color"
+                android:layout_marginTop="2dp"
+                android:alpha="0.6"/>
+
         </LinearLayout>
     </LinearLayout>
 
     <!-- Input judul catatan -->
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/hint_note_title"
-        app:boxCornerRadiusTopStart="12dp"
-        app:boxCornerRadiusTopEnd="12dp"
-        app:boxCornerRadiusBottomStart="12dp"
-        app:boxCornerRadiusBottomEnd="12dp"
-        app:boxBackgroundColor="#F5F5FC"
-        app:boxStrokeColor="#6C63FF"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        app:boxCornerRadiusBottomEnd="14dp"
+        app:boxCornerRadiusBottomStart="14dp"
+        app:boxCornerRadiusTopEnd="14dp"
+        app:boxCornerRadiusTopStart="14dp"
+        app:boxStrokeColor="?attr/text_color"
+        app:boxBackgroundColor="@color/white"
+        app:strokeColor="?attr/text_color"
+        app:hintTextColor="?attr/text_color"
+        app:expandedHintEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/inputNoteTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:textColor="#1A1A2E"
+            android:maxLines="1"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
             android:singleLine="true"
             android:imeOptions="actionDone"
-            android:inputType="textCapSentences"/>
+            android:inputType="textCapSentences"
+            android:textColor="?attr/text_color"
+            android:textColorHint="?attr/text_color"
+            android:fontFamily="@font/linottesemibold"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Preview isi respon (scrollable) -->
@@ -93,9 +104,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         app:cardCornerRadius="12dp"
-        app:cardBackgroundColor="#F8F8FF"
+        app:cardBackgroundColor="?attr/color_2"
         app:cardElevation="0dp"
-        app:strokeColor="#EAEAF5"
+        app:strokeColor="?attr/text_color"
         app:strokeWidth="1dp">
 
         <ScrollView
@@ -108,7 +119,8 @@
                 android:layout_height="wrap_content"
                 android:padding="12dp"
                 android:textSize="12.5sp"
-                android:textColor="#5A5A7A"
+                android:textColor="?attr/text_color"
+                android:fontFamily="@font/linottesemibold"
                 android:lineSpacingMultiplier="1.4"/>
         </ScrollView>
     </com.google.android.material.card.MaterialCardView>
@@ -119,12 +131,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/dialog_save_note_info"
+        android:fontFamily="@font/linottesemibold"
         android:textSize="11sp"
-        android:textColor="#BBBBCC"
+        android:textColor="?attr/text_color"
         android:gravity="center_vertical"
         android:drawablePadding="5dp"
+        android:alpha="0.6"
         app:drawableStartCompat="@drawable/ic_warning"
-        app:drawableTint="#BBBBCC"/>
+        app:drawableTint="?attr/text_color"/>
 
     <!-- Tombol aksi -->
     <LinearLayout
@@ -139,11 +153,12 @@
             android:layout_height="46dp"
             android:layout_weight="1"
             android:text="@string/action_cancel"
+            android:fontFamily="@font/linottesemibold"
             android:textSize="13sp"
             android:layout_marginEnd="8dp"
-            app:backgroundTint="#EFEFFA"
+            android:textColor="?attr/text_color"
+            app:strokeColor="?attr/text_color"
             app:cornerRadius="23dp"
-            android:textColor="#6C63FF"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
 
         <com.google.android.material.button.MaterialButton
@@ -152,9 +167,11 @@
             android:layout_height="46dp"
             android:layout_weight="1"
             android:text="@string/action_save_note"
+            android:fontFamily="@font/linottesemibold"
             android:textSize="13sp"
             android:layout_marginStart="8dp"
-            app:backgroundTint="#6C63FF"
+            android:textColor="?attr/text_color"
+            app:backgroundTint="?attr/color_4"
             app:cornerRadius="23dp"/>
 
     </LinearLayout>

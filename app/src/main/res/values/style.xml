@@ -1,0 +1,25 @@
+<resources>
+
+    <!-- ITEM TEXT (menu biasa) -->
+    <style name="NavItemText">
+        <item name="android:fontFamily">@font/linottesemibold</item>
+    </style>
+
+    <!-- SECTION TITLE (Tools, dll) -->
+    <style name="NavSectionText">
+        <item name="android:fontFamily">@font/linottesemibold</item>
+        <item name="android:textColor">?attr/text_color</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <!-- NAVIGATION VIEW GLOBAL -->
+    <style name="AppNavigationView">
+        <item name="itemIconTint">@color/nav_item_color</item>
+        <item name="itemTextColor">@color/nav_item_color</item>
+        <item name="itemShapeFillColor">@color/nav_item_shape_color</item>
+        <item name="itemTextAppearance">@style/NavItemText</item>
+        <item name="subheaderTextAppearance">@style/NavSectionText</item>
+    </style>
+
+</resources>

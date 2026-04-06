@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Layout: Loading View (Modern)
-    Deskripsi: Tampilan loading menggunakan Lottie animation dengan background modern
+    Layout: Loading View (8-Bit Game Style)
+    Deskripsi: Tampilan loading dengan animasi bubble meletus bergaya 8-bit retro game
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,7 +10,7 @@
     android:background="@drawable/loading_background"
     android:padding="28dp">
 
-    <!-- Lottie Animation (Loading Indicator) -->
+    <!-- 8-Bit Bubble Pop Animation -->
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieLoading"
         android:layout_width="88dp"

@@ -27,6 +27,7 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.*;
 import android.text.util.Linkify;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -39,7 +40,6 @@ import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -106,8 +106,8 @@ public class EditNoteActivity extends AppCompatActivity {
     private boolean bulletMode = false;
     private String originalTitle = "";
     private String originalContent = "";
-    private int currentTextColor = Color.BLACK;
-    private int currentHighlightColor = Color.YELLOW;
+    private int currentTextColor;
+    private int currentHighlightColor;
 
     // --- Utilitas ---
     private final Gson gson = new Gson();
@@ -160,6 +160,15 @@ public class EditNoteActivity extends AppCompatActivity {
         layoutDefaultActions = findViewById(R.id.layout_default_actions);
         layoutInputActions   = findViewById(R.id.layout_input_actions);
 
+        currentTextColor = getAttrColor(R.attr.text_color);
+        currentHighlightColor = getAttrColor(R.attr.color_yellow);
+
+        Typeface tf = getFont();
+
+        etTitle.setTypeface(tf);
+        etContent.setTypeface(tf);
+        tvMetadata.setTypeface(tf);
+
         btnDelete     = findViewById(R.id.btn_delete);
         btnShare      = findViewById(R.id.btn_share);
         btnUndo       = findViewById(R.id.btn_undo);
@@ -191,7 +200,7 @@ public class EditNoteActivity extends AppCompatActivity {
                 etContent.setMovementMethod(LinkMovementMethod.getInstance());
             }
         });
-        etContent.setLinkTextColor(Color.BLUE);
+        etContent.setLinkTextColor(getAttrColor(R.attr.color_blue));
 
         // Tampilkan cursor & keyboard saat fokus/klik
         etContent.setOnFocusChangeListener((v, hasFocus) -> {
@@ -241,6 +250,21 @@ public class EditNoteActivity extends AppCompatActivity {
 
         pushUndoSnapshot();
         updateMetadata();
+    }
+
+    private int getAttrColor(int attr) {
+        TypedValue tv = new TypedValue();
+        getTheme().resolveAttribute(attr, tv, true);
+        return tv.data;
+    }
+
+    private Typeface getFont() {
+        try {
+            return androidx.core.content.res.ResourcesCompat.getFont(
+                    this, R.font.linottesemibold);
+        } catch (Exception e) {
+            return Typeface.DEFAULT;
+        }
     }
 
     // =========================================================================
@@ -701,8 +725,8 @@ public class EditNoteActivity extends AppCompatActivity {
         sDate.setText(new SimpleDateFormat("MMM dd, yyyy, HH:mm", Locale.getDefault())
                 .format(new Date(currentNote.getTimestamp())));
 
-        int bgColor   = ContextCompat.getColor(this, R.color.md_theme_light_onPrimary);
-        int textColor = ContextCompat.getColor(this, R.color.md_theme_light_onBackground);
+        int bgColor   = getAttrColor(R.attr.color_1);
+        int textColor = getAttrColor(R.attr.text_color);
         container.setPadding(48, 48, 48, 48);
         container.setBackgroundColor(bgColor);
         sTitle.setTextColor(textColor);

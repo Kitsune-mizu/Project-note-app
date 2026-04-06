@@ -29,8 +29,9 @@
         android:paddingHorizontal="20dp"
         android:paddingBottom="8dp"
         android:text="@string/dialog_language_title"
+        android:fontFamily="@font/linottesemibold"
         android:textAppearance="?attr/textAppearanceTitleMedium"
-        android:textColor="?attr/colorOnSurface"
+        android:textColor="?attr/text_color"
         android:textStyle="bold" />
 
     <!-- Thin divider -->
@@ -39,7 +40,7 @@
         android:layout_height="1dp"
         android:layout_marginBottom="8dp"
         android:alpha="0.08"
-        android:background="?attr/colorOnSurface" />
+        android:background="?attr/text_color" />
 
     <!-- Language List -->
     <LinearLayout

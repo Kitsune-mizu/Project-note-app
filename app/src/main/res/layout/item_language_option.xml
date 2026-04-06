@@ -8,7 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="52dp"
     android:layout_marginVertical="3dp"
-    android:background="@drawable/bg_toolbar_btn"
+    android:background="?attr/color_1"
     android:clickable="true"
     android:focusable="true"
     android:gravity="center_vertical"
@@ -20,8 +20,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:fontFamily="@font/linottesemibold"
         android:textAppearance="?attr/textAppearanceBodyLarge"
-        android:textColor="?attr/colorOnSurface"
+        android:textColor="?attr/text_color"
         tools:text="English" />
 
     <ImageView
@@ -32,7 +33,7 @@
         android:contentDescription="@string/cd_selected_language"
         android:src="@drawable/ic_check_circle"
         android:visibility="gone"
-        app:tint="?attr/colorPrimary" />
+        app:tint="?attr/text_color" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imgFlag"

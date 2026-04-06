@@ -62,6 +62,7 @@
                 android:paddingTop="12dp"
                 android:paddingEnd="14dp"
                 android:paddingBottom="8dp"
+                android:fontFamily="@font/linottesemibold"
                 android:textColor="#C62828"
                 android:textSize="13.5sp"
                 app:drawableStartCompat="@drawable/ic_warning"
@@ -98,7 +99,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
-                    android:fontFamily="sans-serif-medium"
+                    android:fontFamily="@font/linottesemibold"
                     android:text="@string/action_retry"
                     android:textColor="#E53935"
                     android:textSize="12sp" />

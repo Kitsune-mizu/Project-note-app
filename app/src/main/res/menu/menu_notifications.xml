@@ -11,8 +11,9 @@
         android:id="@+id/action_delete"
         android:icon="@drawable/ic_delete"
         android:title="@string/cd_delete"
+        android:fontFamily="@font/linottesemibold"
         android:contentDescription="@string/cd_delete"
-        app:iconTint="?attr/colorOnSurface"
+        app:iconTint="?attr/text_color"
         app:showAsAction="always" />
 
 </menu>

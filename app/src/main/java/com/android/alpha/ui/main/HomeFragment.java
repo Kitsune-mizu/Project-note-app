@@ -1,6 +1,7 @@
 package com.android.alpha.ui.main;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -161,6 +162,24 @@ public class HomeFragment extends Fragment implements
         tvViewAllNotes         = view.findViewById(R.id.tvViewAllNotes);
         recyclerViewNotes      = view.findViewById(R.id.recyclerViewNotes);
         emptyNotes             = view.findViewById(R.id.emptyNotes);
+
+        Typeface tf = getFont();
+
+        tvGreeting.setTypeface(tf);
+        tvUsername.setTypeface(tf);
+        tvDateTime.setTypeface(tf);
+        tvActiveDays.setTypeface(tf);
+        tvViewAll.setTypeface(tf);
+        tvViewAllNotes.setTypeface(tf);
+    }
+
+    private Typeface getFont() {
+        try {
+            return androidx.core.content.res.ResourcesCompat.getFont(
+                    requireContext(), R.font.linottesemibold);
+        } catch (Exception e) {
+            return Typeface.DEFAULT;
+        }
     }
 
     /** Sets up the Lottie animation, pull-to-refresh, back press, and click listeners. */

@@ -9,8 +9,8 @@
 -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:color="?attr/colorPrimary"
+        android:color="?attr/text_color"
         android:state_checked="true" />
     <item
-        android:color="?attr/colorOnSurfaceVariant" />
+        android:color="?attr/text_color" />
 </selector>

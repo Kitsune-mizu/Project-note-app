@@ -332,6 +332,11 @@
     <string name="cd_selected_language">Ikon centang bahasa terpilih</string>
     <string name="cd_language_flag">Ikon bendera bahasa</string>
 
+    <string name="dialog_theme_title">Pilih Tema</string>
+    <string name="theme_light">Mode Terang</string>
+    <string name="theme_dark">Mode Gelap</string>
+    <string name="theme_system">Default Sistem</string>
+
     <!-- ══════════════════════════════════════════════════════════════
          PETA
     ══════════════════════════════════════════════════════════════ -->

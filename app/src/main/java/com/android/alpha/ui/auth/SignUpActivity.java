@@ -1,6 +1,7 @@
 package com.android.alpha.ui.auth;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -65,6 +66,28 @@ public class SignUpActivity extends AppCompatActivity {
         tvConfirmPasswordError = findViewById(R.id.tvConfirmPasswordError);
 
         loadingDialog = new LoadingDialog(this);
+
+        Typeface tf = getFont();
+
+        etUsername.setTypeface(tf);
+        etPassword.setTypeface(tf);
+        etConfirmPassword.setTypeface(tf);
+
+        btnSignUp.setTypeface(tf);
+        tvLoginLink.setTypeface(tf);
+
+        tvUsernameError.setTypeface(tf);
+        tvPasswordError.setTypeface(tf);
+        tvConfirmPasswordError.setTypeface(tf);
+    }
+
+    private Typeface getFont() {
+        try {
+            return androidx.core.content.res.ResourcesCompat.getFont(
+                    this, R.font.linottesemibold);
+        } catch (Exception e) {
+            return Typeface.DEFAULT;
+        }
     }
 
     /** Finds and starts the Lottie sign-up animation. */

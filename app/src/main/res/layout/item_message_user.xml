@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardCornerRadius="20dp"
-        app:cardBackgroundColor="#6C63FF"
+        app:cardBackgroundColor="?attr/color_3"
         app:cardElevation="2dp"
         android:layout_gravity="end">
 
@@ -24,7 +24,8 @@
             android:maxWidth="260dp"
             android:paddingHorizontal="16dp"
             android:paddingVertical="10dp"
-            android:textColor="#FFFFFF"
+            android:fontFamily="@font/linottesemibold"
+            android:textColor="?attr/text_color"
             android:textSize="15sp"
             android:lineSpacingMultiplier="1.4"/>
 

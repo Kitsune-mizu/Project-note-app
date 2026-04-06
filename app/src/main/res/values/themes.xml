@@ -1,34 +1,24 @@
 <resources>
-
-    <!-- Tema utama aplikasi -->
+    <!-- Theme Light Mode -->
     <style name="AppTheme" parent="Theme.Material3.Light.NoActionBar">
-        <!-- Core colors -->
-        <item name="colorPrimary">@color/md_theme_light_primary</item>
-        <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>
-        <item name="colorPrimaryContainer">@color/md_theme_light_primary_container</item>
 
-        <item name="colorSecondary">@color/md_theme_light_secondary</item>
-        <item name="colorOnSecondary">@color/md_theme_light_onSecondary</item>
-        <item name="colorSecondaryContainer">@color/md_theme_light_secondary_container</item>
+        <!-- Warna Utama (Cukup 4 warna ini saja) -->
+        <item name="color_1">@color/color_1</item>
+        <item name="color_2">@color/color_2</item>
+        <item name="color_3">@color/color_3</item>
+        <item name="color_4">@color/color_4</item>
 
-        <item name="colorTertiary">@color/md_theme_light_tertiary</item>
-        <item name="colorOnTertiary">@color/md_theme_light_onTertiary</item>
-        <item name="colorTertiaryContainer">@color/md_theme_light_tertiary_container</item>
+        <!-- Warna Teks -->
+        <item name="text_color">@color/text_light</item>
 
-        <item name="colorSurface">@color/md_theme_light_surface</item>
-        <item name="colorOnSurface">@color/md_theme_light_onSurface</item>
+        <item name="color_error">@color/color_error</item>
+        <item name="color_green">@color/color_green</item>
+        <item name="color_yellow">@color/color_yellow</item>
+        <item name="color_blue">@color/color_blue</item>
 
-        <item name="android:windowBackground">@color/md_theme_light_background</item>
-        <item name="colorOnBackground">@color/md_theme_light_onBackground</item>
-
-        <item name="colorError">@color/md_theme_light_error</item>
-        <item name="colorOnError">@color/md_theme_light_onError</item>
-
-        <!-- Font default -->
-        <item name="android:fontFamily">sans-serif</item>
+        <!-- Background aplikasi -->
+        <item name="android:colorBackground">@color/color_1</item>
     </style>
-
-    <!-- Dialog login -->
 
     <!-- Nav & image -->
 
@@ -61,11 +51,6 @@
         <item name="android:padding">12dp</item>
         <item name="android:tint">#616161</item> </style>
 
-    <!-- Menu Note-->
-    <!-- Corner radius untuk popup -->
-
-    <!-- Material PopupMenu style -->
-
     <!-- Base Application Theme ChatAI -->
     <style name="Theme.GeminiChat" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">#6C63FF</item>
@@ -85,6 +70,4 @@
         <item name="colorPrimary">#6C63FF</item>
         <item name="colorAccent">#6C63FF</item>
     </style>
-
-    <!-- item massage -->
 </resources>

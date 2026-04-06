@@ -331,6 +331,12 @@
     <string name="cd_selected_language">Selected language checkmark icon</string>
     <string name="cd_language_flag">Language flag icon</string>
 
+    <!-- ── Theme ── -->
+    <string name="dialog_theme_title">Choose Theme</string>
+    <string name="theme_light">Light Mode</string>
+    <string name="theme_dark">Dark Mode</string>
+    <string name="theme_system">System Default</string>
+
     <!-- ══════════════════════════════════════════════════════════════
          MAP
     ══════════════════════════════════════════════════════════════ -->

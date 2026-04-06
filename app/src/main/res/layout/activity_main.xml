@@ -21,7 +21,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.main.MainActivity"
-    tools:ignore="ExtraText">
+    tools:ignore="ExtraText"
+    tools:openDrawer="start">
 
     <!-- ── MAIN CONTENT ── -->
     <LinearLayout
@@ -33,24 +34,25 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorSurface"
+            android:background="?attr/color_2"
             android:elevation="0dp"
-            app:navigationIconTint="?attr/colorOnSurface"
+            app:navigationIconTint="?attr/text_color"
             app:popupTheme="@style/ThemeOverlay.Material3.Light"
-            app:titleTextColor="?attr/colorOnSurface" />
+            app:titleTextColor="?attr/text_color"
+            android:fontFamily="@font/linottebold"/>
 
         <!-- Divider tipis di bawah toolbar -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:alpha="0.08"
-            android:background="?attr/colorOnSurface" />
+            android:background="?attr/text_color" />
 
         <FrameLayout
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?attr/colorSurface" />
+            android:background="?attr/color_1" />
 
     </LinearLayout>
 
@@ -60,12 +62,9 @@
         android:layout_width="300dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="?attr/colorSurface"
+        android:background="?attr/color_1"
+        style="@style/AppNavigationView"
         app:headerLayout="@layout/nav_header"
-        app:itemIconTint="@color/nav_item_color"
-        app:itemRippleColor="?attr/colorPrimaryContainer"
-        app:itemShapeFillColor="@color/nav_item_shape_color"
-        app:itemTextColor="@color/nav_item_color"
-        app:menu="@menu/nav_menu_main" />
+        app:menu="@menu/nav_menu_main"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

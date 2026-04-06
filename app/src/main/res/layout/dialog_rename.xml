@@ -13,33 +13,35 @@
         android:text="@string/action_rename"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="#1A1A2E"
-        android:fontFamily="sans-serif-medium"/>
+        android:textColor="?attr/text_color"
+        android:fontFamily="@font/linottesemibold"/>
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:boxCornerRadiusTopStart="14dp"
-        app:boxCornerRadiusTopEnd="14dp"
-        app:boxCornerRadiusBottomStart="14dp"
+        android:hint="@string/input_hint_enter_new_text"
         app:boxCornerRadiusBottomEnd="14dp"
-        app:boxBackgroundColor="#F4F4FC"
-        app:boxStrokeColor="#6C63FF"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        app:boxCornerRadiusBottomStart="14dp"
+        app:boxCornerRadiusTopEnd="14dp"
+        app:boxCornerRadiusTopStart="14dp"
+        app:boxStrokeColor="?attr/text_color"
+        app:boxBackgroundColor="@color/white"
+        app:strokeColor="?attr/text_color"
+        app:hintTextColor="?attr/text_color"
+        app:expandedHintEnabled="true">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/renameInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/new_name"
-            android:textSize="15sp"
-            android:textColor="#1A1A2E"
             android:inputType="text"
-            android:autofillHints="name"
             android:maxLines="1"
-            android:imeOptions="actionDone"
-            android:padding="14dp"/>
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp"
+            android:textColor="?attr/text_color"
+            android:textColorHint="?attr/text_color"
+            android:fontFamily="@font/linottesemibold"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
@@ -54,11 +56,12 @@
             android:layout_height="48dp"
             android:layout_weight="1"
             android:text="@string/button_cancel"
+            android:fontFamily="@font/linottesemibold"
             android:textSize="14sp"
             android:layout_marginEnd="8dp"
-            app:backgroundTint="#F0F0F8"
+            android:textColor="?attr/text_color"
+            app:strokeColor="?attr/text_color"
             app:cornerRadius="24dp"
-            android:textColor="#6C63FF"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
 
         <com.google.android.material.button.MaterialButton
@@ -67,9 +70,11 @@
             android:layout_height="48dp"
             android:layout_weight="1"
             android:text="@string/button_save"
+            android:textColor="?attr/text_color"
+            android:fontFamily="@font/linottesemibold"
             android:textSize="14sp"
             android:layout_marginStart="8dp"
-            app:backgroundTint="#6C63FF"
+            app:backgroundTint="?attr/color_4"
             app:cornerRadius="24dp"/>
 
     </LinearLayout>

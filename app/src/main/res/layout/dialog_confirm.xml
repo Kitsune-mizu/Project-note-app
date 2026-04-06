@@ -20,8 +20,9 @@
         android:gravity="center"
         android:paddingBottom="10dp"
         android:text="@string/dialog_title_confirmation"
+        android:fontFamily="@font/linottesemibold"
         android:textAppearance="?attr/textAppearanceTitleLarge"
-        android:textColor="?attr/colorOnSurface"
+        android:textColor="?attr/text_color"
         android:textStyle="bold" />
 
     <!-- Dialog Message -->
@@ -33,8 +34,10 @@
         android:lineSpacingMultiplier="1.5"
         android:paddingBottom="24dp"
         android:text="@string/dialog_message_are_you_sure"
+        android:fontFamily="@font/linottesemibold"
         android:textAppearance="?attr/textAppearanceBodyMedium"
-        android:textColor="?attr/colorOnSurfaceVariant" />
+        android:textColor="?attr/text_color"
+        android:alpha="0.6"/>
 
     <!-- Thin Divider -->
     <View
@@ -42,7 +45,7 @@
         android:layout_height="1dp"
         android:layout_marginBottom="24dp"
         android:alpha="0.12"
-        android:background="?attr/colorOnSurface" />
+        android:background="?attr/text_color" />
 
     <!-- Action Buttons -->
     <LinearLayout
@@ -60,9 +63,12 @@
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:text="@string/button_no"
+            android:textColor="?attr/text_color"
+            android:fontFamily="@font/linottesemibold"
             android:textStyle="bold"
             app:cornerRadius="16dp"
-            app:strokeColor="?attr/colorOutlineVariant" />
+            app:strokeColor="?attr/text_color"
+            android:alpha="0.6"/>
 
         <!-- Positive Button (Yes) -->
         <com.google.android.material.button.MaterialButton
@@ -72,9 +78,10 @@
             android:layout_height="52dp"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:backgroundTint="?attr/colorPrimary"
+            android:backgroundTint="?attr/color_4"
             android:text="@string/button_yes"
-            android:textColor="?attr/colorOnPrimary"
+            android:fontFamily="@font/linottesemibold"
+            android:textColor="?attr/text_color"
             android:textStyle="bold"
             app:cornerRadius="16dp" />
 

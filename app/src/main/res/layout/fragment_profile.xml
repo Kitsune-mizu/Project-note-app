@@ -12,7 +12,7 @@
     android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface"
+    android:background="?attr/color_1"
     android:clipToPadding="false"
     android:fitsSystemWindows="true">
 
@@ -104,10 +104,10 @@
                                 android:layout_marginBottom="-7dp"
                                 android:contentDescription="@string/cd_edit_profile_button"
                                 android:src="@drawable/ic_edit"
-                                app:backgroundTint="?attr/colorPrimary"
+                                app:backgroundTint="?attr/color_4"
                                 app:fabCustomSize="32dp"
                                 app:maxImageSize="16dp"
-                                app:tint="?attr/colorOnPrimary"
+                                app:tint="?attr/text_color"
                                 app:useCompatPadding="true" />
 
                         </RelativeLayout>
@@ -117,8 +117,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/placeholder_name"
+                            android:fontFamily="@font/linottesemibold"
                             android:textAppearance="?attr/textAppearanceHeadlineSmall"
-                            android:textColor="@color/md_theme_light_onPrimary"
+                            android:textColor="?attr/text_color"
                             android:textStyle="bold" />
 
                         <TextView
@@ -128,7 +129,8 @@
                             android:layout_marginTop="4dp"
                             android:alpha="0.85"
                             android:text="@string/placeholder_email"
-                            android:textColor="@color/md_theme_light_onPrimary"
+                            android:fontFamily="@font/linottesemibold"
+                            android:textColor="?attr/text_color"
                             android:textSize="14sp" />
                     </LinearLayout>
 
@@ -146,10 +148,10 @@
                         android:layout_margin="12dp"
                         android:contentDescription="@string/cd_edit_background_button"
                         android:src="@drawable/ic_edit"
-                        app:backgroundTint="?attr/colorPrimary"
+                        app:backgroundTint="?attr/color_4"
                         app:fabCustomSize="32dp"
                         app:maxImageSize="16dp"
-                        app:tint="?attr/colorOnPrimary"
+                        app:tint="?attr/text_color"
                         app:useCompatPadding="true" />
 
                 </FrameLayout>
@@ -161,14 +163,15 @@
                     android:layout_margin="16dp"
                     app:cardCornerRadius="20dp"
                     app:cardElevation="2dp"
-                    app:strokeColor="?attr/colorOutlineVariant"
+                    app:strokeColor="?attr/color_4"
                     app:strokeWidth="1dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="20dp">
+                        android:padding="20dp"
+                        android:background="?attr/color_2">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -176,11 +179,12 @@
                             android:layout_marginBottom="12dp"
                             android:drawablePadding="10dp"
                             android:text="@string/header_personal_info"
+                            android:fontFamily="@font/linottesemibold"
                             android:textAppearance="?attr/textAppearanceTitleMedium"
-                            android:textColor="?attr/colorOnSurface"
+                            android:textColor="?attr/text_color"
                             android:textStyle="bold"
                             app:drawableStartCompat="@drawable/ic_person_info"
-                            app:drawableTint="?attr/colorPrimary" />
+                            app:drawableTint="?attr/text_color" />
 
                         <include
                             layout="@layout/item_profile_info"
@@ -198,7 +202,7 @@
             android:id="@+id/shimmerLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?attr/colorSurface"
+            android:background="?attr/text_color"
             android:visibility="gone"
             app:shimmer_auto_start="false"
             app:shimmer_duration="1000">
@@ -214,18 +218,18 @@
                     android:layout_width="140dp"
                     android:layout_height="140dp"
                     android:layout_marginBottom="16dp"
-                    android:background="?attr/colorSurfaceVariant" />
+                    android:background="?attr/color_3" />
 
                 <View
                     android:layout_width="160dp"
                     android:layout_height="18dp"
                     android:layout_marginBottom="10dp"
-                    android:background="?attr/colorSurfaceVariant" />
+                    android:background="?attr/color_3" />
 
                 <View
                     android:layout_width="120dp"
                     android:layout_height="14dp"
-                    android:background="?attr/colorSurfaceVariant" />
+                    android:background="?attr/color_3" />
 
             </LinearLayout>
         </com.facebook.shimmer.ShimmerFrameLayout>

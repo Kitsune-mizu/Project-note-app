@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Layout: Splash Screen (Modern)
-    Lottie: lottieAnimationView — DIPERTAHANKAN
-    Perubahan:
-    - Background gradient dari drawable agar tidak flat
-    - Lottie diposisikan di tengah layar secara vertikal
-    - App name + tagline ditambahkan di bawah Lottie
-    - flagContainer & tvGreeting tetap ada (visibility="gone" seperti semula)
-    - Bottom bar: versi app + branding kecil di paling bawah
+    Layout: Splash Screen - TWO PHASES
+
+    PHASE 1 (Startup): Lottie + Loading + Version
+    PHASE 2 (Location Detected): Flag + Greeting
+
+    Flag & greeting will be pre-loaded before transition to ensure smooth display
 -->
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -15,102 +13,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_primary"
-    tools:context=".ui.splash.SplashActivity"
-    tools:ignore="ExtraText">
+    android:background="?attr/color_3"
+    tools:context=".ui.splash.SplashActivity">
 
-    <!-- ── LOTTIE SPLASH ANIMATION — DIPERTAHANKAN ── -->
+    <!-- ══════════════════════════════════════════════════════════════════ -->
+    <!-- PHASE 1: STARTUP - Lottie Animation -->
+    <!-- ══════════════════════════════════════════════════════════════════ -->
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieAnimationView"
         android:layout_width="280dp"
         android:layout_height="280dp"
-        app:layout_constraintBottom_toTopOf="@id/contentGroup"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:layout_constraintVertical_bias="0.45"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/splash_animation" />
 
-    <!-- ── APP NAME + TAGLINE (di bawah Lottie) ── -->
+    <!-- ══════════════════════════════════════════════════════════════════ -->
+    <!-- PHASE 2: LOCATION DETECTED - Flag + Greeting -->
+    <!-- ══════════════════════════════════════════════════════════════════ -->
     <LinearLayout
-        android:id="@+id/contentGroup"
+        android:id="@+id/greetingContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lottieAnimationView"
-        app:layout_constraintBottom_toTopOf="@id/flagContainer">
-
-        <!-- Nama Aplikasi -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:textAppearance="?attr/textAppearanceHeadlineMedium"
-            android:textColor="@color/md_theme_light_onPrimary"
-            android:textStyle="bold"
-            android:letterSpacing="0.03" />
-
-        <!-- Tagline / Subtitle -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:text="@string/splash_tagline"
-            android:textAppearance="?attr/textAppearanceBodyMedium"
-            android:textColor="@color/md_theme_light_onPrimary"
-            android:alpha="0.75"
-            android:gravity="center" />
-
-    </LinearLayout>
-
-    <!-- ── FLAG & GREETING CONTAINER (logika tetap sama) ── -->
-    <FrameLayout
-        android:id="@+id/flagContainer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/bottomBar"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/contentGroup">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Flag Image -->
+        <!-- Flag Image (will appear first) -->
         <ImageView
             android:id="@+id/imgFlag"
-            android:layout_width="150dp"
-            android:layout_height="100dp"
+            android:layout_width="200dp"
+            android:layout_height="133dp"
             android:adjustViewBounds="true"
             android:contentDescription="@string/flag_desc"
-            android:layout_gravity="center"
             android:scaleType="centerCrop"
-            android:visibility="gone" />
+            android:visibility="invisible" />
 
-        <!-- Greeting Text -->
+        <!-- Greeting Text (will appear after flag) -->
         <TextView
             android:id="@+id/tvGreeting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_marginTop="110dp"
+            android:layout_marginTop="32dp"
             android:gravity="center"
-            android:paddingTop="24dp"
             android:text="@string/hello_message"
-            android:textAppearance="?attr/textAppearanceHeadlineSmall"
-            android:textColor="@color/md_theme_light_onPrimary"
+            android:fontFamily="@font/linottesemibold"
+            android:textAppearance="?attr/textAppearanceHeadlineMedium"
+            android:textColor="?attr/text_color"
             android:textStyle="bold"
-            android:visibility="gone" />
+            android:visibility="invisible" />
 
-    </FrameLayout>
+    </LinearLayout>
 
-    <!-- ── BOTTOM BAR: Loading indicator + versi ── -->
+    <!-- ══════════════════════════════════════════════════════════════════ -->
+    <!-- BOTTOM BAR: Loading indicator + Version (always visible) -->
+    <!-- ══════════════════════════════════════════════════════════════════ -->
     <LinearLayout
         android:id="@+id/bottomBar"
         android:layout_width="wrap_content"
@@ -124,23 +89,24 @@
 
         <!-- Loading Dots -->
         <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/loadingIndicator"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:indeterminate="true"
-            app:indicatorColor="@color/md_theme_light_onPrimary"
-            app:trackColor="#40FFFFFF"
+            app:indicatorColor="?attr/color_yellow"
+            app:trackColor="?attr/color_2"
             app:trackCornerRadius="4dp"
             app:trackThickness="3dp" />
 
-        <!-- Versi Aplikasi -->
+        <!-- App Version -->
         <TextView
             android:id="@+id/tvVersion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:textAppearance="?attr/textAppearanceLabelSmall"
-            android:textColor="@color/md_theme_light_onPrimary"
-            android:alpha="0.5" />
+            android:textColor="?attr/text_color"
+            android:alpha="0.6" />
 
     </LinearLayout>
 

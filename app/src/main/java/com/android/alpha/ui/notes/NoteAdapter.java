@@ -1,8 +1,10 @@
 package com.android.alpha.ui.notes;
 
-import android.graphics.Color;
+import android.content.Context;
+import android.graphics.Typeface;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +39,21 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
     public interface OnSelectionModeListener {
         void onSelectionModeChange(boolean active);
         void onSelectionCountChange(int count);
+    }
+
+    private static Typeface getFont(Context ctx) {
+        try {
+            return androidx.core.content.res.ResourcesCompat.getFont(
+                    ctx, R.font.linottesemibold);
+        } catch (Exception e) {
+            return Typeface.DEFAULT;
+        }
+    }
+
+    private static int getAttrColor(Context ctx, int attr) {
+        TypedValue tv = new TypedValue();
+        ctx.getTheme().resolveAttribute(attr, tv, true);
+        return tv.data;
     }
 
     // --- Fields ---
@@ -181,9 +198,15 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         // Aktifkan deteksi URL pada subtitle
         Linkify.addLinks(h.sub, Linkify.WEB_URLS);
         h.sub.setMovementMethod(LinkMovementMethod.getInstance());
-        h.sub.setLinkTextColor(Color.BLUE);
+        h.sub.setLinkTextColor(getAttrColor(h.itemView.getContext(), R.attr.color_blue));
 
         h.date.setVisibility(View.VISIBLE);
+
+        Typeface tf = getFont(h.itemView.getContext());
+
+        h.title.setTypeface(tf);
+        h.sub.setTypeface(tf);
+        h.date.setTypeface(tf);
     }
 
     /** Tampilkan atau sembunyikan ikon pin sesuai status catatan */

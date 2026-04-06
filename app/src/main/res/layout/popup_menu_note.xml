@@ -8,7 +8,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="180dp"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_dialog_rounded"
+    android:background="@drawable/bg_menu_history"
     android:orientation="vertical"
     android:padding="8dp"
     tools:ignore="ExtraText">
@@ -30,15 +30,16 @@
             android:layout_height="20dp"
             android:contentDescription="@string/cd_action_reminder"
             android:src="@drawable/ic_reminder"
-            app:tint="?attr/colorOnSurface" />
+            app:tint="?attr/text_color" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="@string/action_reminder_text"
+            android:fontFamily="@font/linottesemibold"
             android:textAppearance="?attr/textAppearanceBodyMedium"
-            android:textColor="?attr/colorOnSurface" />
+            android:textColor="?attr/text_color" />
     </LinearLayout>
 
     <!-- Share -->
@@ -58,15 +59,16 @@
             android:layout_height="20dp"
             android:contentDescription="@string/cd_action_share"
             android:src="@drawable/ic_share"
-            app:tint="?attr/colorOnSurface" />
+            app:tint="?attr/text_color" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="@string/action_share_note"
+            android:fontFamily="@font/linottesemibold"
             android:textAppearance="?attr/textAppearanceBodyMedium"
-            android:textColor="?attr/colorOnSurface" />
+            android:textColor="?attr/text_color" />
     </LinearLayout>
 
     <!-- Thin divider sebelum Delete -->
@@ -74,8 +76,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginVertical="4dp"
-        android:alpha="0.1"
-        android:background="?attr/colorOnSurface" />
+        android:background="?attr/color_4" />
 
     <!-- Delete -->
     <LinearLayout
@@ -94,15 +95,16 @@
             android:layout_height="20dp"
             android:contentDescription="@string/cd_action_delete"
             android:src="@drawable/ic_delete"
-            app:tint="?attr/colorError" />
+            app:tint="?attr/color_error" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="@string/action_delete_note"
+            android:fontFamily="@font/linottesemibold"
             android:textAppearance="?attr/textAppearanceBodyMedium"
-            android:textColor="?attr/colorError"
+            android:textColor="?attr/color_error"
             android:textStyle="bold" />
     </LinearLayout>
 
