@@ -6,7 +6,6 @@
     <!-- ══════════════════════════════════════════════════════════════
          SPLASH SCREEN
     ══════════════════════════════════════════════════════════════ -->
-    <string name="splash_tagline">Note, track, and manage your activities</string>
     <string name="splash_version_format">v%s</string>
     <string name="flag_desc">Country flag</string>
     <string name="hello_message">Hello!</string>
@@ -163,14 +162,8 @@
     <string name="gemini_ai">Gemini</string>
     <string name="fab_try_gemini">Try Gemini AI</string>
     <string name="cd_open_gemini">Open Gemini AI</string>
-    <string name="gemini_greeting">Hello! I\'m Gemini AI 👋</string>
-    <string name="gemini_suggestion">Ask me anything — code, ideas, research, or just chat!</string>
 
     <!-- ── Chips ── -->
-    <string name="chip_idea">💡 Help with ideas</string>
-    <string name="chip_code">🛠️ Help with code</string>
-    <string name="chip_write">✍️ Help with writing</string>
-    <string name="chip_research">🔍 Help with research</string>
 
     <!-- ── Input ── -->
     <string name="input_hint_message">Ask anything…</string>
@@ -188,7 +181,6 @@
     <string name="toast_copied">Text copied to clipboard</string>
     <string name="bubble_chat">Chat Bubble</string>
     <string name="option">Options</string>
-    <string name="new_name">New name…</string>
     <string name="action_rename">Rename</string>
     <string name="action_retry">Retry</string>
 
@@ -214,7 +206,6 @@
 
     <!-- ── Content Descriptions ── -->
     <string name="cd_gemini_ai_logo">Gemini AI Logo</string>
-    <string name="cd_gemini_icon">Gemini Icon</string>
     <string name="cd_new_chat">New chat</string>
     <string name="cd_send_message">Send message</string>
 

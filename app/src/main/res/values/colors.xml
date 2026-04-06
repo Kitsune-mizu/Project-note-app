@@ -17,9 +17,8 @@
 
         <!-- Warna Standar -->
         <color name="white">@color/color_1</color>
-        <color name="black">#000000</color>
 
-        <color name="color_error">#E43F5A</color>
+    <color name="color_error">#E43F5A</color>
         <color name="color_green">#58C27D</color>
         <color name="color_yellow">#FFDE42</color>
         <color name="color_blue">#53CBF3</color>

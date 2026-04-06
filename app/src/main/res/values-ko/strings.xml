@@ -6,7 +6,6 @@
     <!-- ══════════════════════════════════════════════════════════════
          스플래시 화면
     ══════════════════════════════════════════════════════════════ -->
-    <string name="splash_tagline">메모하고, 추적하고, 활동을 관리하세요</string>
     <string name="splash_version_format">v%s</string>
     <string name="flag_desc">국기</string>
     <string name="hello_message">안녕하세요!</string>
@@ -163,14 +162,8 @@
     <string name="gemini_ai">Gemini</string>
     <string name="fab_try_gemini">Gemini AI 사용해보기</string>
     <string name="cd_open_gemini">Gemini AI 열기</string>
-    <string name="gemini_greeting">안녕하세요! 저는 Gemini AI입니다 👋</string>
-    <string name="gemini_suggestion">무엇이든 물어보세요 — 코드, 아이디어, 리서치, 일상 대화까지!</string>
 
     <!-- ── 칩 ── -->
-    <string name="chip_idea">💡 아이디어 도움</string>
-    <string name="chip_code">🛠️ 코드 도움</string>
-    <string name="chip_write">✍️ 글쓰기 도움</string>
-    <string name="chip_research">🔍 리서치 도움</string>
 
     <!-- ── 입력 ── -->
     <string name="input_hint_message">무엇이든 물어보세요…</string>
@@ -188,7 +181,6 @@
     <string name="toast_copied">텍스트가 클립보드에 복사되었습니다</string>
     <string name="bubble_chat">채팅 버블</string>
     <string name="option">옵션</string>
-    <string name="new_name">새 이름…</string>
     <string name="action_rename">이름 변경</string>
     <string name="action_retry">다시 시도</string>
 
@@ -214,7 +206,6 @@
 
     <!-- ── 콘텐츠 설명 ── -->
     <string name="cd_gemini_ai_logo">Gemini AI 로고</string>
-    <string name="cd_gemini_icon">Gemini 아이콘</string>
     <string name="cd_new_chat">새 채팅</string>
     <string name="cd_send_message">메시지 전송</string>
 

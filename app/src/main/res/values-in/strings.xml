@@ -6,7 +6,6 @@
     <!-- ══════════════════════════════════════════════════════════════
          SPLASH SCREEN
     ══════════════════════════════════════════════════════════════ -->
-    <string name="splash_tagline">Catat, lacak, dan kelola aktivitasmu</string>
     <string name="splash_version_format">v%s</string>
     <string name="flag_desc">Bendera negara</string>
     <string name="hello_message">Halo!</string>
@@ -163,14 +162,8 @@
     <string name="gemini_ai">Gemini</string>
     <string name="fab_try_gemini">Coba Gemini AI</string>
     <string name="cd_open_gemini">Buka Gemini AI</string>
-    <string name="gemini_greeting">Halo! Saya Gemini AI 👋</string>
-    <string name="gemini_suggestion">Tanya saya apa saja — kode, ide, riset, atau sekadar ngobrol!</string>
 
     <!-- ── Chip ── -->
-    <string name="chip_idea">💡 Bantu ide</string>
-    <string name="chip_code">🛠️ Bantu kode</string>
-    <string name="chip_write">✍️ Bantu nulis</string>
-    <string name="chip_research">🔍 Bantu riset</string>
 
     <!-- ── Input ── -->
     <string name="input_hint_message">Tanya apa saja&#8230;</string>
@@ -188,7 +181,6 @@
     <string name="toast_copied">Teks disalin ke clipboard</string>
     <string name="bubble_chat">Balon Obrolan</string>
     <string name="option">Opsi</string>
-    <string name="new_name">Nama Baru&#8230;</string>
     <string name="action_rename">Rename</string>
     <string name="action_retry">Coba Lagi</string>
 
@@ -214,7 +206,6 @@
 
     <!-- ── Deskripsi Konten ── -->
     <string name="cd_gemini_ai_logo">Logo Gemini AI</string>
-    <string name="cd_gemini_icon">Ikon Gemini</string>
     <string name="cd_new_chat">Chat baru</string>
     <string name="cd_send_message">Kirim pesan</string>
 

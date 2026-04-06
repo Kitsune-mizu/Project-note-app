@@ -6,7 +6,6 @@
     <!-- ══════════════════════════════════════════════════════════════
          スプラッシュ画面
     ══════════════════════════════════════════════════════════════ -->
-    <string name="splash_tagline">メモ・追跡・活動管理をかんたんに</string>
     <string name="splash_version_format">v%s</string>
     <string name="flag_desc">国旗</string>
     <string name="hello_message">こんにちは！</string>
@@ -163,14 +162,8 @@
     <string name="gemini_ai">Gemini</string>
     <string name="fab_try_gemini">Gemini AIを試す</string>
     <string name="cd_open_gemini">Gemini AIを開く</string>
-    <string name="gemini_greeting">こんにちは！私はGemini AIです 👋</string>
-    <string name="gemini_suggestion">何でも聞いてください — コード、アイデア、リサーチ、雑談も！</string>
 
     <!-- ── チップ ── -->
-    <string name="chip_idea">💡 アイデアを手伝う</string>
-    <string name="chip_code">🛠️ コードを手伝う</string>
-    <string name="chip_write">✍️ 文章を手伝う</string>
-    <string name="chip_research">🔍 リサーチを手伝う</string>
 
     <!-- ── 入力 ── -->
     <string name="input_hint_message">何でも聞いてください…</string>
@@ -188,7 +181,6 @@
     <string name="toast_copied">テキストをクリップボードにコピーしました</string>
     <string name="bubble_chat">チャットバブル</string>
     <string name="option">オプション</string>
-    <string name="new_name">新しい名前…</string>
     <string name="action_rename">名前変更</string>
     <string name="action_retry">再試行</string>
 
@@ -214,7 +206,6 @@
 
     <!-- ── コンテンツ説明 ── -->
     <string name="cd_gemini_ai_logo">Gemini AIロゴ</string>
-    <string name="cd_gemini_icon">Geminiアイコン</string>
     <string name="cd_new_chat">新しいチャット</string>
     <string name="cd_send_message">メッセージを送信</string>
 

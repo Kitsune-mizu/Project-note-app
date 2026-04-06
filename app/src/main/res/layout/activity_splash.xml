@@ -77,7 +77,6 @@
     <!-- BOTTOM BAR: Loading indicator + Version (always visible) -->
     <!-- ══════════════════════════════════════════════════════════════════ -->
     <LinearLayout
-        android:id="@+id/bottomBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
@@ -89,7 +88,6 @@
 
         <!-- Loading Dots -->
         <com.google.android.material.progressindicator.LinearProgressIndicator
-            android:id="@+id/loadingIndicator"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:indeterminate="true"
