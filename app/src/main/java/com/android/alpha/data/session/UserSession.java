@@ -8,11 +8,11 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.util.Log;
+import android.util.TypedValue;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import androidx.core.content.ContextCompat;
 
 import com.android.alpha.R;
 import com.android.alpha.data.local.UserStorageManager;
@@ -183,6 +183,12 @@ public class UserSession {
     private void switchToUserPrefs(String username) {
         userPrefs  = getUserPrefs(username);
         userEditor = userPrefs.edit();
+    }
+
+    private int getAttrColor(int attr) {
+        TypedValue tv = new TypedValue();
+        context.getTheme().resolveAttribute(attr, tv, true);
+        return tv.data;
     }
 
     // ══════════════════════════════════════════════════════════════════════════
@@ -395,7 +401,7 @@ public class UserSession {
                 R.string.activity_account_deleted_message,
                 System.currentTimeMillis(),
                 R.drawable.ic_delete,
-                ContextCompat.getColor(context, R.color.md_theme_light_error),
+                getAttrColor(R.attr.color_error),
                 usernameCache
         ));
 
@@ -555,7 +561,7 @@ public class UserSession {
                 titleRes, descRes,
                 System.currentTimeMillis(),
                 R.drawable.ic_login,
-                ContextCompat.getColor(context, R.color.green),
+                getAttrColor(R.attr.color_green),
                 usernameCache
         ));
     }
@@ -572,7 +578,7 @@ public class UserSession {
                 titleRes, descRes,
                 System.currentTimeMillis(),
                 R.drawable.ic_logout,
-                ContextCompat.getColor(context, R.color.md_theme_light_error),
+                getAttrColor(R.attr.color_error),
                 usernameCache
         ));
     }
@@ -589,7 +595,7 @@ public class UserSession {
                 titleRes, descRes,
                 System.currentTimeMillis(),
                 R.drawable.ic_person,
-                ContextCompat.getColor(context, R.color.md_theme_light_onPrimary),
+                getAttrColor(R.attr.color_blue),
                 usernameCache
         ));
     }

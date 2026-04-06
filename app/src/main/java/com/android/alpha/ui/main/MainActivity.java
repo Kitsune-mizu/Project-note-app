@@ -196,6 +196,11 @@ public class MainActivity extends AppCompatActivity
         updateNavHeaderProfile();
         colorLogoutItem();
         setupNotificationBadge();
+
+        Typeface tf = getAppFont();
+
+        tvUsername.setTypeface(tf);
+        tvUserEmail.setTypeface(tf);
     }
 
     @Override
@@ -212,8 +217,10 @@ public class MainActivity extends AppCompatActivity
         MenuItem logoutItem = navigationView.getMenu().findItem(R.id.nav_logout);
         if (logoutItem == null) return;
         SpannableString s = new SpannableString(logoutItem.getTitle());
-        s.setSpan(new ForegroundColorSpan(
-                ContextCompat.getColor(this, R.color.md_theme_light_error)), 0, s.length(), 0);
+        TypedValue tv = new TypedValue();
+        getTheme().resolveAttribute(R.attr.color_error, tv, true);
+
+        s.setSpan(new ForegroundColorSpan(tv.data), 0, s.length(), 0);
         logoutItem.setTitle(s);
     }
 
@@ -230,7 +237,8 @@ public class MainActivity extends AppCompatActivity
         footer.setTextColor(typedValue.data);
 
         footer.setGravity(Gravity.CENTER);
-        footer.setPadding(0, 40, 0, 40);
+        int p = (int) (40 * getResources().getDisplayMetrics().density);
+        footer.setPadding(0, p, 0, p);
 
         NavigationView.LayoutParams params = new NavigationView.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
