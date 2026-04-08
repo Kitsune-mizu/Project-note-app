@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <!-- ================= FULL NAME ================= -->
@@ -24,7 +25,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_person"
-                android:tint="?attr/text_color" />
+                app:tint="?attr/text_color" />
 
             <TextView
                 android:id="@+id/tvFullName"
@@ -45,7 +46,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_edit"
             android:contentDescription="@string/cd_edit_full_name"
-            android:tint="?attr/text_color" />
+            app:tint="?attr/text_color" />
     </LinearLayout>
 
     <!-- ================= EMAIL ================= -->
@@ -69,7 +70,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_email"
-                android:tint="?attr/text_color" />
+                app:tint="?attr/text_color" />
 
             <TextView
                 android:id="@+id/tvEmail"
@@ -90,7 +91,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_edit"
             android:contentDescription="@string/cd_edit_email"
-            android:tint="?attr/text_color" />
+            app:tint="?attr/text_color" />
     </LinearLayout>
 
     <!-- ================= BIRTHDAY ================= -->
@@ -114,7 +115,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_cake"
-                android:tint="?attr/text_color" />
+                app:tint="?attr/text_color" />
 
             <TextView
                 android:id="@+id/tvBirthday"
@@ -135,7 +136,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_edit"
             android:contentDescription="@string/cd_edit_birthday"
-            android:tint="?attr/text_color" />
+            app:tint="?attr/text_color" />
     </LinearLayout>
 
     <!-- ================= LOCATION ================= -->
@@ -159,7 +160,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_location"
-                android:tint="?attr/text_color" />
+                app:tint="?attr/text_color" />
 
             <TextView
                 android:id="@+id/tvLocation"
@@ -180,7 +181,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_edit"
             android:contentDescription="@string/cd_edit_location"
-            android:tint="?attr/text_color" />
+            app:tint="?attr/text_color" />
     </LinearLayout>
 
 </LinearLayout>
