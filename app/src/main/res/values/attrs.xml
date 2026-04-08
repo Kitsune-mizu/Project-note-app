@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="HomeCardItem">
-        <attr name="cardColor" format="color"/>
-        <attr name="actionIcon" format="reference"/>
-        <attr name="actionTitle" format="string"/>
-    </declare-styleable>
+    <!-- CUSTOM THEME ATTRIBUTES -->
+    <!-- Base Colors -->
+    <attr name="color_1" format="color|reference" />
+    <attr name="color_2" format="color|reference" />
+    <attr name="color_3" format="color|reference" />
+    <attr name="color_4" format="color|reference" />
 
-    <!-- Warna Utama -->
-    <attr name="color_1" format="color" />
-    <attr name="color_2" format="color" />
-    <attr name="color_3" format="color" />
-    <attr name="color_4" format="color" />
+    <!-- Text Color -->
+    <attr name="text_color" format="color|reference" />
 
-    <attr name="color_error" format="color" />
-    <attr name="color_green" format="color" />
-    <attr name="color_yellow" format="color" />
-    <attr name="color_blue" format="color" />
+    <!-- Accent Colors -->
+    <attr name="color_error" format="color|reference" />
+    <attr name="color_green" format="color|reference" />
+    <attr name="color_yellow" format="color|reference" />
+    <attr name="color_blue" format="color|reference" />
 
-    <!-- Warna Teks -->
-    <attr name="text_color" format="color" />
+    <!-- Shimmer Colors -->
+    <attr name="shimmer_base_color" format="color|reference" />
+    <attr name="shimmer_highlight_color" format="color|reference" />
+
 </resources>

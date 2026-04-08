@@ -252,15 +252,11 @@
 
     <!-- ── 프로필 정보 아이템 ── -->
     <string name="placeholder_name">홍 길동</string>
-    <string name="cd_full_name_value">이름 값</string>
     <string name="cd_edit_full_name">이름 편집</string>
-    <string name="cd_email_value">이메일 값</string>
     <string name="cd_edit_email">이메일 편집</string>
     <string name="placeholder_birthday">1990년 1월 1일</string>
-    <string name="cd_birthday_value">생년월일 값</string>
     <string name="cd_edit_birthday">생년월일 편집</string>
     <string name="placeholder_location">서울, 대한민국</string>
-    <string name="cd_location_value">위치 값</string>
     <string name="cd_edit_location">위치 편집</string>
 
     <!-- ══════════════════════════════════════════════════════════════

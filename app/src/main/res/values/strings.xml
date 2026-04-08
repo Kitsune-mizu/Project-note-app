@@ -251,15 +251,11 @@
 
     <!-- ── Profile Info Item ── -->
     <string name="placeholder_name">John Doe</string>
-    <string name="cd_full_name_value">Full Name Value</string>
     <string name="cd_edit_full_name">Edit Full Name</string>
-    <string name="cd_email_value">Email Value</string>
     <string name="cd_edit_email">Edit Email</string>
     <string name="placeholder_birthday">January 1, 1990</string>
-    <string name="cd_birthday_value">Date of Birth Value</string>
     <string name="cd_edit_birthday">Edit Date of Birth</string>
     <string name="placeholder_location">New York, USA</string>
-    <string name="cd_location_value">Location Value</string>
     <string name="cd_edit_location">Edit Location</string>
 
     <!-- ══════════════════════════════════════════════════════════════

@@ -50,6 +50,7 @@ import java.util.*;
  * The main home screen fragment displaying a greeting, active-days counter,
  * recent activity history, and a horizontal notes preview.
  * Implements session listeners to react to profile updates, new activities, and clears.
+ * UPDATED: Shimmer hanya muncul saat load pertama, tidak saat swipe refresh.
  */
 public class HomeFragment extends Fragment implements
         MainActivity.ToolbarTitleProvider,
@@ -80,6 +81,10 @@ public class HomeFragment extends Fragment implements
     private final Handler              handler      = new Handler(Looper.getMainLooper());
     private final SimpleDateFormat     dateFormat   =
             new SimpleDateFormat("EEEE, d MMMM yyyy • HH:mm", Locale.getDefault());
+
+    // ─── STATE ─────────────────────────────────────────────────────────────────
+    /** Flag untuk melacak apakah ini adalah load pertama kali */
+    private boolean isFirstLoad = true;
 
     // ─── LAUNCHERS ─────────────────────────────────────────────────────────────
     private ActivityResultLauncher<Intent> noteLauncher;
@@ -119,7 +124,16 @@ public class HomeFragment extends Fragment implements
         setupActivityRecycler();
         setupRecyclerView();
         setupNoteLauncher();
-        startShimmerInitialLoad(view.findViewById(R.id.scrollViewHome));
+
+        // SHIMMER HANYA SAAT LOAD PERTAMA
+        if (isFirstLoad) {
+            startShimmerInitialLoad(view.findViewById(R.id.scrollViewHome));
+            isFirstLoad = false;
+        } else {
+            // Jika bukan first load, langsung load data tanpa shimmer
+            loadAllData();
+        }
+
         handler.post(timeUpdater);
     }
 
@@ -329,6 +343,7 @@ public class HomeFragment extends Fragment implements
     /**
      * Shows the shimmer skeleton loader, then hides it and loads real data
      * after a 1.2-second delay.
+     * HANYA DIPANGGIL SAAT LOAD PERTAMA KALI.
      */
     private void startShimmerInitialLoad(View scrollView) {
         ShimmerHelper.show(shimmerLayout, scrollView);
@@ -476,14 +491,12 @@ public class HomeFragment extends Fragment implements
     // ══════════════════════════════════════════════════════════════════════════
 
     /**
-     * Handles pull-to-refresh: shows shimmer, reloads all data and notes,
-     * then hides shimmer and stops the refresh indicator.
+     * Handles pull-to-refresh: TANPA SHIMMER, langsung reload data.
+     * Shimmer hanya muncul saat load pertama kali.
      */
     @Override
     public void onRefreshRequested() {
-        View scroll = requireView().findViewById(R.id.scrollViewHome);
-        ShimmerHelper.show(shimmerLayout, scroll);
-
+        // TIDAK ADA SHIMMER saat swipe refresh
         handler.postDelayed(() -> {
             try {
                 noteViewModel.refreshNotes(requireContext());
@@ -492,9 +505,8 @@ public class HomeFragment extends Fragment implements
             } catch (Exception e) {
                 Log.e(TAG, "Refresh error", e);
             } finally {
-                ShimmerHelper.hide(shimmerLayout, scroll);
                 swipeRefreshLayout.setRefreshing(false);
             }
-        }, 1200);
+        }, 800); // Delay lebih pendek karena tidak ada shimmer
     }
 }

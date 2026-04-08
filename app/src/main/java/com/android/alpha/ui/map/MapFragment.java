@@ -287,6 +287,10 @@ public class MapFragment extends Fragment {
      * updates {@link #selectedPoint}, and triggers reverse geocoding.
      */
     private void updateMarker(GeoPoint point) {
+        if (mapView == null || getContext() == null || !isAdded()) {
+            return;
+        }
+
         if (currentMarker != null) mapView.getOverlays().remove(currentMarker);
 
         currentMarker = new Marker(mapView);
@@ -341,11 +345,16 @@ public class MapFragment extends Fragment {
                 .addOnSuccessListener(response ->
                         fusedLocationClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, null)
                                 .addOnSuccessListener(location -> {
+                                    if (!isAdded() || mapView == null) return;
                                     if (location != null) {
                                         GeoPoint point = new GeoPoint(location.getLatitude(), location.getLongitude());
-                                        updateMarker(point);
-                                        mapView.getController().setZoom(16.0);
-                                        mapView.getController().animateTo(point);
+                                        mapView.post(() -> {
+                                            if (mapView == null) return;
+
+                                            updateMarker(point);
+                                            mapView.getController().setZoom(16.0);
+                                            mapView.getController().animateTo(point);
+                                        });
                                     } else {
                                         showToast(R.string.gps_unavailable);
                                     }

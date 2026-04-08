@@ -252,15 +252,11 @@
 
     <!-- ── Item Info Profil ── -->
     <string name="placeholder_name">John Doe</string>
-    <string name="cd_full_name_value">Nilai Nama Lengkap</string>
     <string name="cd_edit_full_name">Edit Nama Lengkap</string>
-    <string name="cd_email_value">Nilai Email</string>
     <string name="cd_edit_email">Edit Email</string>
     <string name="placeholder_birthday">1 Januari 1990</string>
-    <string name="cd_birthday_value">Nilai Tanggal Lahir</string>
     <string name="cd_edit_birthday">Edit Tanggal Lahir</string>
     <string name="placeholder_location">New York, USA</string>
-    <string name="cd_location_value">Nilai Lokasi</string>
     <string name="cd_edit_location">Edit Lokasi</string>
 
     <!-- ══════════════════════════════════════════════════════════════

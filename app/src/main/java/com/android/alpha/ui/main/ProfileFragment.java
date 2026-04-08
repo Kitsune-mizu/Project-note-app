@@ -41,6 +41,7 @@ import java.util.Locale;
 /**
  * Fragment that displays and allows editing of the current user's profile,
  * including their name, email, birthday, location, profile photo, and background image.
+ * UPDATED: Shimmer hanya muncul saat load pertama, tidak saat swipe refresh.
  */
 public class ProfileFragment extends Fragment implements
         MainActivity.ToolbarTitleProvider,
@@ -60,6 +61,9 @@ public class ProfileFragment extends Fragment implements
     private View                scrollViewProfile;
 
     // ─── STATE & LAUNCHERS ─────────────────────────────────────────────────────
+
+    /** Flag untuk melacak apakah ini adalah load pertama kali */
+    private boolean isFirstLoad = true;
 
     /** Tracks whether the active crop operation is for the profile photo or background. */
     private boolean currentCropIsProfile;
@@ -89,11 +93,18 @@ public class ProfileFragment extends Fragment implements
         setupListeners();
         setupSwipeRefresh();
 
-        ShimmerHelper.show(shimmerLayout, scrollViewProfile);
-        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+        // SHIMMER HANYA SAAT LOAD PERTAMA
+        if (isFirstLoad) {
+            ShimmerHelper.show(shimmerLayout, scrollViewProfile);
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                refreshProfileData();
+                ShimmerHelper.hide(shimmerLayout, scrollViewProfile);
+            }, 1200);
+            isFirstLoad = false;
+        } else {
+            // Jika bukan first load, langsung load data tanpa shimmer
             refreshProfileData();
-            ShimmerHelper.hide(shimmerLayout, scrollViewProfile);
-        }, 1200);
+        }
 
         return v;
     }
@@ -464,17 +475,16 @@ public class ProfileFragment extends Fragment implements
     // ══════════════════════════════════════════════════════════════════════════
 
     /**
-     * Handles pull-to-refresh: shows shimmer, reloads profile data,
-     * then hides shimmer and stops the refresh indicator.
+     * Handles pull-to-refresh: TANPA SHIMMER, langsung reload data.
+     * Shimmer hanya muncul saat load pertama kali.
      */
     @Override
     public void onRefreshRequested() {
-        ShimmerHelper.show(shimmerLayout, scrollViewProfile);
+        // TIDAK ADA SHIMMER saat swipe refresh
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             refreshProfileData();
             Toast.makeText(requireContext(), R.string.toast_profile_updated, Toast.LENGTH_SHORT).show();
             swipeRefreshLayout.setRefreshing(false);
-            ShimmerHelper.hide(shimmerLayout, scrollViewProfile);
-        }, 1200);
+        }, 800); // Delay lebih pendek karena tidak ada shimmer
     }
 }

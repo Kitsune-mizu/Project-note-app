@@ -89,7 +89,7 @@ public class SettingsFragment extends Fragment implements
         textCurrentLanguage.setTypeface(tf);
         switchNotifications.setTypeface(tf);
 
-        loadTheme();
+        updateThemeText();
     }
 
     /** Refreshes the language display and re-checks system notification status on resume. */
@@ -419,29 +419,6 @@ public class SettingsFragment extends Fragment implements
         dialog.show();
     }
 
-    private void loadTheme() {
-        String mode = prefs.getString("theme_mode", "system");
-
-        switch (mode) {
-            case "light":
-                androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(
-                        androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO);
-                break;
-
-            case "dark":
-                androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(
-                        androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES);
-                break;
-
-            default:
-                androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(
-                        androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-                break;
-        }
-
-        updateThemeText();
-    }
-
     private void updateThemeText() {
         String mode = prefs.getString("theme_mode", "system");
 
@@ -476,7 +453,13 @@ public class SettingsFragment extends Fragment implements
         }
 
         updateThemeText();
-        requireActivity().recreate();
+
+        // delay biar smooth & tidak glitch
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            if (getActivity() != null) {
+                getActivity().recreate();
+            }
+        }, 100);
     }
 
     // ══════════════════════════════════════════════════════════════════════════

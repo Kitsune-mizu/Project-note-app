@@ -252,15 +252,11 @@
 
     <!-- ── プロフィール情報アイテム ── -->
     <string name="placeholder_name">山田 太郎</string>
-    <string name="cd_full_name_value">氏名の値</string>
     <string name="cd_edit_full_name">氏名を編集</string>
-    <string name="cd_email_value">メールの値</string>
     <string name="cd_edit_email">メールを編集</string>
     <string name="placeholder_birthday">1990年1月1日</string>
-    <string name="cd_birthday_value">生年月日の値</string>
     <string name="cd_edit_birthday">生年月日を編集</string>
     <string name="placeholder_location">東京, 日本</string>
-    <string name="cd_location_value">場所の値</string>
     <string name="cd_edit_location">場所を編集</string>
 
     <!-- ══════════════════════════════════════════════════════════════

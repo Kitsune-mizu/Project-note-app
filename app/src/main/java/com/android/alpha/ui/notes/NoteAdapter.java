@@ -72,8 +72,12 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
 
     // Palet warna latar belakang item catatan (berulang berdasarkan posisi)
     private final int[] noteColors = {
-            0xFFFFCDD2, 0xFFF8BBD0, 0xFFE1BEE7,
-            0xFFBBDEFB, 0xFFC8E6C9, 0xFFFFF9C4
+            0xFFFFE4E1, // soft coral
+            0xFFFFF1E6, // peach cream
+            0xFFEAF4FF, // baby blue
+            0xFFE8F8F5, // mint soft
+            0xFFF3E8FF, // lavender pastel
+            0xFFFFFBEA  // soft yellow cream
     };
 
     // --- Constructor ---
@@ -223,9 +227,26 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
 
     /** Set warna latar CardView berdasarkan posisi item (berulang dari palet) */
     private void setBackgroundColor(NoteViewHolder h, int pos) {
-        ((CardView) h.itemView).setCardBackgroundColor(noteColors[pos % noteColors.length]);
+        Context ctx = h.itemView.getContext();
+
+        if (isDarkMode(ctx)) {
+            // Mode gelap → pakai warna default dari theme XML
+            ((CardView) h.itemView).setCardBackgroundColor(
+                    getAttrColor(ctx, com.google.android.material.R.attr.colorSurface)
+            );
+        } else {
+            // Mode terang → pakai warna-warni
+            ((CardView) h.itemView).setCardBackgroundColor(
+                    noteColors[pos % noteColors.length]
+            );
+        }
     }
 
+    private boolean isDarkMode(Context context) {
+        int nightModeFlags = context.getResources().getConfiguration().uiMode
+                & android.content.res.Configuration.UI_MODE_NIGHT_MASK;
+        return nightModeFlags == android.content.res.Configuration.UI_MODE_NIGHT_YES;
+    }
     /**
      * Setup listener klik dan long-press pada item:
      * - Klik biasa: buka catatan atau toggle seleksi jika mode seleksi aktif

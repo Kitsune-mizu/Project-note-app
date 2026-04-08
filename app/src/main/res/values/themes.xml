@@ -1,73 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Theme Light Mode -->
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- LIGHT MODE THEME -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
     <style name="AppTheme" parent="Theme.Material3.Light.NoActionBar">
 
-        <!-- Warna Utama (Cukup 4 warna ini saja) -->
+        <!-- ================= CORE COLOR SYSTEM ================= -->
+        <item name="colorPrimary">@color/color_4</item>
+        <item name="colorSecondary">@color/color_3</item>
+        <item name="colorSurface">@color/color_2</item>
+        <item name="android:colorBackground">@color/color_1</item>
+
+        <!-- ================= CUSTOM COLOR ATTRIBUTES ================= -->
         <item name="color_1">@color/color_1</item>
         <item name="color_2">@color/color_2</item>
         <item name="color_3">@color/color_3</item>
         <item name="color_4">@color/color_4</item>
-
-        <!-- Warna Teks -->
         <item name="text_color">@color/text_light</item>
 
+        <!-- ================= ACCENT COLORS ================= -->
         <item name="color_error">@color/color_error</item>
         <item name="color_green">@color/color_green</item>
         <item name="color_yellow">@color/color_yellow</item>
         <item name="color_blue">@color/color_blue</item>
 
-        <!-- Background aplikasi -->
-        <item name="android:colorBackground">@color/color_1</item>
+        <!-- ================= SHIMMER COLORS ================= -->
+        <item name="shimmer_base_color">@color/shimmer_base_light</item>
+
+        <!-- ================= STATUS BAR (LIGHT MODE) ================= -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <!-- ================= NAVIGATION BAR (LIGHT MODE) ================= -->
+        <item name="android:navigationBarColor">@color/color_1</item>
+
+        <!-- ================= WINDOW PROPERTIES ================= -->
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+
     </style>
 
-    <!-- Nav & image -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- COMPONENT STYLES -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
 
-    <style name="CircleShape">
+    <style name="CircleShape" parent="ShapeAppearance.Material3.Corner.Full">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
-
-    <!-- Bottom sheet modern -->
-    <style name="ModernBottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
-        <item name="bottomSheetStyle">@style/ModernBottomSheetStyle</item>
-    </style>
-
-    <style name="ModernBottomSheetStyle" parent="Widget.Material3.BottomSheet.Modal">
-        <item name="shapeAppearanceOverlay">@style/BottomSheetShape</item>
-        <item name="backgroundTint">?attr/colorSurface</item>
-    </style>
-
-    <style name="BottomSheetShape">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSizeTopLeft">20dp</item>
-        <item name="cornerSizeTopRight">20dp</item>
-    </style>
-
 
     <style name="ActionIconStyle">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
         <item name="android:padding">12dp</item>
-        <item name="android:tint">#616161</item> </style>
-
-    <!-- Base Application Theme ChatAI -->
-    <style name="Theme.GeminiChat" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">#6C63FF</item>
-        <item name="colorPrimaryDark">#5751E0</item>
-        <item name="colorAccent">#6C63FF</item>
-        <item name="android:windowBackground">#F8F9FE</item>
-        <item name="android:statusBarColor">#FFFFFF</item>
-        <item name="android:windowLightStatusBar">true</item>
-        <item name="android:navigationBarColor">#F8F9FE</item>
+        <item name="android:tint">?attr/text_color</item>
     </style>
 
-    <!-- Rounded Dialog Style -->
-    <style name="RoundedDialog" parent="Theme.MaterialComponents.Light.Dialog">
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- DIALOG STYLES -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+    <style name="RoundedDialog" parent="Theme.Material3.Light.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowMinWidthMajor">85%</item>
         <item name="android:windowMinWidthMinor">85%</item>
-        <item name="colorPrimary">#6C63FF</item>
-        <item name="colorAccent">#6C63FF</item>
+        <item name="colorPrimary">?attr/color_4</item>
+        <item name="colorAccent">?attr/color_4</item>
+        <item name="android:backgroundTint">?attr/color_2</item>
     </style>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- BOTTOM SHEET STYLES -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+    <style name="ModernBottomSheetDialog" parent="Theme.Material3.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/ModernBottomSheetStyle</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="ModernBottomSheetStyle" parent="Widget.Material3.BottomSheet.Modal">
+        <item name="shapeAppearanceOverlay">@style/BottomSheetShape</item>
+        <item name="backgroundTint">?attr/color_2</item>
+    </style>
+
+    <style name="BottomSheetShape" parent="ShapeAppearance.Material3.Corner.Large">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">20dp</item>
+        <item name="cornerSizeTopRight">20dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+
 </resources>

@@ -4,6 +4,7 @@
     Fix 1: FAB style diganti ke Widget.MaterialComponents.FloatingActionButton
     Fix 2: fabEditBg dipindah ke FrameLayout agar tidak overlap dengan konten
     Lottie: lottieProfile — DIPERTAHANKAN
+    UPDATED: Shimmer diperbaiki dan hanya muncul saat load pertama
 -->
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -34,15 +35,10 @@
                 android:orientation="vertical">
 
                 <!-- ── PROFILE HEADER ── -->
-                <!--
-                    Fix overlap: fabEditBg TIDAK lagi di dalam RelativeLayout bersama LinearLayout.
-                    Dipindah ke FrameLayout (cardProfileBg) sebagai sibling langsung,
-                    sehingga posisinya selalu di pojok kanan atas tanpa risiko overlap.
-                -->
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="280dp"
-                    android:background="@drawable/profile_bg_layer">
+                    android:background="@drawable/gradient_primary">
 
                     <!-- Background Image -->
                     <ImageView
@@ -89,10 +85,6 @@
                                 android:layout_height="match_parent"
                                 android:background="@drawable/profile_border" />
 
-                            <!--
-                                Fix style: Widget.MaterialComponents.FloatingActionButton
-                                (bukan Widget.Material3.FloatingActionButton.Small yang tidak ada)
-                            -->
                             <com.google.android.material.floatingactionbutton.FloatingActionButton
                                 android:id="@+id/fabEditProfile"
                                 style="@style/Widget.MaterialComponents.FloatingActionButton"
@@ -134,11 +126,7 @@
                             android:textSize="14sp" />
                     </LinearLayout>
 
-                    <!--
-                        fabEditBg di sini sebagai child langsung FrameLayout.
-                        layout_gravity="top|end" memposisikannya pojok kanan atas
-                        tanpa risiko overlap dengan konten tengah.
-                    -->
+                    <!-- fabEditBg di sini sebagai child langsung FrameLayout -->
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
                         android:id="@+id/fabEditBg"
                         style="@style/Widget.MaterialComponents.FloatingActionButton"
@@ -197,39 +185,115 @@
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
-        <!-- ── SHIMMER LAYER ── -->
+        <!-- ── SHIMMER LAYER (DIPERBAIKI) ── -->
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/shimmerLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?attr/text_color"
+            android:background="@android:color/transparent"
             android:visibility="gone"
+
             app:shimmer_auto_start="false"
-            app:shimmer_duration="1000">
+            app:shimmer_base_color="?attr/color_2"
+            app:shimmer_highlight_color="?attr/color_3"
+
+            app:shimmer_duration="2400"
+            app:shimmer_repeat_mode="restart"
+            app:shimmer_direction="left_to_right"
+
+            app:shimmer_shape="linear"
+            app:shimmer_dropoff="1.0"
+            app:shimmer_intensity="0.12"
+            app:shimmer_width_ratio="1.0">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="24dp">
+                android:orientation="vertical">
 
-                <View
-                    android:layout_width="140dp"
-                    android:layout_height="140dp"
-                    android:layout_marginBottom="16dp"
-                    android:background="?attr/color_3" />
+                <!-- Skeleton: Header Background -->
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="280dp"
+                    android:background="?attr/color_4">
 
-                <View
-                    android:layout_width="160dp"
-                    android:layout_height="18dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="?attr/color_3" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="24dp">
 
-                <View
-                    android:layout_width="120dp"
-                    android:layout_height="14dp"
-                    android:background="?attr/color_3" />
+                        <!-- Skeleton Profile Picture -->
+                        <View
+                            android:layout_width="140dp"
+                            android:layout_height="140dp"
+                            android:layout_marginBottom="16dp"
+                            android:background="@drawable/shimmer_rounded" />
+
+                        <!-- Skeleton Name -->
+                        <View
+                            android:layout_width="160dp"
+                            android:layout_height="24dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/shimmer_rounded" />
+
+                        <!-- Skeleton Email -->
+                        <View
+                            android:layout_width="120dp"
+                            android:layout_height="16dp"
+                            android:background="@drawable/shimmer_rounded" />
+                    </LinearLayout>
+                </FrameLayout>
+
+                <!-- Skeleton: Personal Info Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="0dp"
+                    app:cardBackgroundColor="?attr/color_4">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <!-- Header -->
+                        <View
+                            android:layout_width="150dp"
+                            android:layout_height="20dp"
+                            android:layout_marginBottom="16dp"
+                            android:background="@drawable/shimmer_rounded" />
+
+                        <!-- Info Items -->
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:layout_marginBottom="12dp"
+                            android:background="@drawable/shimmer_rounded" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:layout_marginBottom="12dp"
+                            android:background="@drawable/shimmer_rounded" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:layout_marginBottom="12dp"
+                            android:background="@drawable/shimmer_rounded" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:background="@drawable/shimmer_rounded" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
             </LinearLayout>
         </com.facebook.shimmer.ShimmerFrameLayout>

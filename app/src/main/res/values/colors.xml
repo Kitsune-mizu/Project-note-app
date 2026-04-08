@@ -1,30 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-        <!-- Warna Utama Light Mode -->
-        <color name="color_1">#F8FAFC</color>
-        <color name="color_2">#D9EAFD</color>
-        <color name="color_3">#BCCCDC</color>
-        <color name="color_4">#9AA6B2</color>
+    <!-- ══════════════════════════════════════════════════════════════════════ -->
+    <!-- WARNA UTAMA LIGHT MODE - Fresh & Vibrant -->
+    <!-- ══════════════════════════════════════════════════════════════════════ -->
+    <color name="color_1">#FFFFFF</color>
+    <color name="color_2">#E8F4FD</color>
+    <color name="color_3">#B8D4F1</color>
+    <color name="color_4">#7BA7D8</color>
 
-        <!-- Warna Utama Dark Mode -->
-        <color name="color_1_dark">#1F2937</color>
-        <color name="color_2_dark">#374151</color>
-        <color name="color_3_dark">#4B5563</color>
-        <color name="color_4_dark">#6B7280</color>
+    <!-- ══════════════════════════════════════════════════════════════════════ -->
+    <!-- WARNA UTAMA DARK MODE - Deep & Comfortable -->
+    <!-- ══════════════════════════════════════════════════════════════════════ -->
+    <color name="color_1_dark">#0F172A</color>
+    <color name="color_2_dark">#1E293B</color>
+    <color name="color_3_dark">#334155</color>
+    <color name="color_4_dark">#475569</color>
 
-        <!-- Warna Teks -->
-        <color name="text_light">#1F2937</color>
-        <color name="text_dark">#F9FAFB</color>
+    <!-- ══════════════════════════════════════════════════════════════════════ -->
+    <!-- WARNA TEKS -->
+    <!-- ══════════════════════════════════════════════════════════════════════ -->
+    <color name="text_light">#1E293B</color>
+    <color name="text_dark">#F1F5F9</color>
 
-        <!-- Warna Standar -->
-        <color name="white">@color/color_1</color>
+    <!-- ══════════════════════════════════════════════════════════════════════ -->
+    <!-- WARNA STANDAR -->
+    <!-- ══════════════════════════════════════════════════════════════════════ -->
+    <color name="white">@color/color_1</color>
 
+    <!-- ══════════════════════════════════════════════════════════════════════ -->
+    <!-- WARNA AKSEN - LIGHT MODE -->
+    <!-- ══════════════════════════════════════════════════════════════════════ -->
     <color name="color_error">#E43F5A</color>
-        <color name="color_green">#58C27D</color>
-        <color name="color_yellow">#FFDE42</color>
-        <color name="color_blue">#53CBF3</color>
+    <color name="color_green">#10B981</color>
+    <color name="color_yellow">#F59E0B</color>
+    <color name="color_blue">#3B82F6</color>
 
-        <color name="color_error_night">#E43F5A</color>
-        <color name="color_green_night">#58C27D</color>
-        <color name="color_yellow_night">#FFDE42</color>
-        <color name="color_blue_night">#53CBF3</color>
+    <!-- ══════════════════════════════════════════════════════════════════════ -->
+    <!-- WARNA AKSEN - NIGHT MODE (Soft & Muted) -->
+    <!-- ══════════════════════════════════════════════════════════════════════ -->
+    <color name="color_error_night">#FF6B7A</color>
+    <color name="color_green_night">#6ED49C</color>
+    <color name="color_yellow_night">#FFE87C</color>
+    <color name="color_blue_night">#7DD3F5</color>
+
+    <!-- ══════════════════════════════════════════════════════════════════════ -->
+    <!-- SHIMMER COLORS -->
+    <!-- ══════════════════════════════════════════════════════════════════════ -->
+    <color name="shimmer_base_light">#EEF2F6</color>
+    <color name="shimmer_highlight_light">#F3F6FA</color>
+    <color name="shimmer_base_dark">#1E293B</color>
+    <color name="shimmer_highlight_dark">#334155</color>
 </resources>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.Material3.Dark.NoActionBar">
+
+        <!-- ================= CORE COLOR SYSTEM ================= -->
+        <item name="colorPrimary">@color/color_4_dark</item>
+        <item name="colorSecondary">@color/color_3_dark</item>
+        <item name="colorSurface">@color/color_2_dark</item>
+        <item name="android:colorBackground">@color/color_1_dark</item>
+
+        <!-- ================= CUSTOM COLOR ATTRIBUTES ================= -->
+        <item name="color_1">@color/color_1_dark</item>
+        <item name="color_2">@color/color_2_dark</item>
+        <item name="color_3">@color/color_3_dark</item>
+        <item name="color_4">@color/color_4_dark</item>
+        <item name="text_color">@color/text_dark</item>
+
+        <!-- ================= ACCENT COLORS (NIGHT) ================= -->
+        <item name="color_error">@color/color_error_night</item>
+        <item name="color_green">@color/color_green_night</item>
+        <item name="color_yellow">@color/color_yellow_night</item>
+        <item name="color_blue">@color/color_blue_night</item>
+
+        <!-- ================= SHIMMER COLORS (NIGHT) ================= -->
+        <item name="shimmer_base_color">@color/shimmer_base_dark</item>
+        <item name="shimmer_highlight_color">@color/shimmer_highlight_dark</item>
+
+        <!-- ================= STATUS BAR (DARK MODE) ================= -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+
+        <!-- ================= NAVIGATION BAR (DARK MODE) ================= -->
+        <item name="android:navigationBarColor">@color/color_1_dark</item>
+        <item name="android:windowLightNavigationBar">false</item>
+
+        <!-- ================= WINDOW PROPERTIES ================= -->
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+
+    </style>
+</resources>

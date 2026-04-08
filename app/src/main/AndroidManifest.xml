@@ -84,7 +84,7 @@
             android:name=".ui.geminichat.ChatActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize"
-            android:theme="@style/Theme.GeminiChat">
+            android:theme="@style/AppTheme">
         </activity>
     </application>
 
