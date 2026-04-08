@@ -71,14 +71,14 @@
                 app:boxCornerRadiusBottomStart="14dp"
                 app:boxCornerRadiusTopEnd="14dp"
                 app:boxCornerRadiusTopStart="14dp"
-                app:boxStrokeColor="?attr/text_color"
+                app:boxStrokeColor="?attr/color_yellow"
                 app:endIconMode="clear_text"
-                app:endIconTint="?attr/text_color"
+                app:endIconTint="?attr/color_4"
                 app:errorEnabled="true"
-                app:hintTextColor="?attr/color_4"
+                app:hintTextColor="?attr/color_yellow"
                 app:startIconDrawable="@drawable/ic_person"
-                app:boxBackgroundColor="@color/white"
-                app:startIconTint="?attr/text_color">
+                app:boxBackgroundColor="?attr/color_2"
+                app:startIconTint="?attr/color_4">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etUsername"
@@ -104,14 +104,14 @@
                 app:boxCornerRadiusBottomStart="14dp"
                 app:boxCornerRadiusTopEnd="14dp"
                 app:boxCornerRadiusTopStart="14dp"
-                app:boxStrokeColor="?attr/text_color"
+                app:boxStrokeColor="?attr/color_yellow"
                 app:endIconMode="password_toggle"
                 app:endIconTint="?attr/color_4"
                 app:errorEnabled="true"
-                app:hintTextColor="?attr/color_4"
+                app:hintTextColor="?attr/color_yellow"
                 app:startIconDrawable="@drawable/ic_lock"
                 app:startIconTint="?attr/color_4"
-                app:boxBackgroundColor="@color/white">
+                app:boxBackgroundColor="?attr/color_2">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPassword"

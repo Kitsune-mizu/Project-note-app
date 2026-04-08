@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity
 
     // ─── CONSTANTS ─────────────────────────────────────────────────────────────
     private static final int  PERMISSION_REQUEST_CODE = 101;
-    private static final long FRAGMENT_LOAD_DELAY     = 600;
-    private static final long LOGOUT_DELAY            = 1200;
+    private static final long FRAGMENT_LOAD_DELAY     = 2000;
+    private static final long LOGOUT_DELAY            = 2200;
     private final        String TAG                   = "MainActivity";
 
     // ─── UI ────────────────────────────────────────────────────────────────────
