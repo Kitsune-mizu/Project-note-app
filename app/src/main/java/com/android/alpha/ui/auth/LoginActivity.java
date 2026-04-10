@@ -77,24 +77,14 @@ public class LoginActivity extends BaseActivity {
         lottie.setAnimation(R.raw.login_animation);
         lottie.playAnimation();
 
-        Typeface tf = getFont();
-
-        etUsername.setTypeface(tf);
-        etPassword.setTypeface(tf);
-
-        btnLogin.setTypeface(tf);
-        tvSignUp.setTypeface(tf);
-        tvForgotPassword.setTypeface(tf);
-        cbRememberMe.setTypeface(tf);
-    }
-
-    private Typeface getFont() {
-        try {
-            return androidx.core.content.res.ResourcesCompat.getFont(
-                    this, R.font.linottesemibold);
-        } catch (Exception e) {
-            return Typeface.DEFAULT;
-        }
+        applyFont(
+                etUsername,
+                etPassword,
+                btnLogin,
+                tvSignUp,
+                tvForgotPassword,
+                cbRememberMe
+        );
     }
 
     // ══════════════════════════════════════════════════════════════════════════

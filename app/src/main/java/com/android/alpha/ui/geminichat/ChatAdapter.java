@@ -73,15 +73,6 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.messages = messages;
     }
 
-    private static Typeface getFont(Context ctx) {
-        try {
-            return androidx.core.content.res.ResourcesCompat.getFont(
-                    ctx, R.font.linottesemibold);
-        } catch (Exception e) {
-            return Typeface.DEFAULT;
-        }
-    }
-
     // ══════════════════════════════════════════════════════════════════════════
     // ADAPTER OVERRIDES
     // ══════════════════════════════════════════════════════════════════════════
@@ -136,7 +127,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         void bind(ChatMessage msg) {
             text.setText(msg.getText());
-            text.setTypeface(getFont(itemView.getContext()));
+            text.setTypeface(Typeface.DEFAULT);
         }
     }
 
@@ -156,8 +147,6 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         void bind(ChatMessage msg, OnSaveNoteListener saveNoteListener) {
             messageText.setText(MarkdownFormatter.toSpannable(msg.getText()));
             messageText.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
-
-            messageText.setTypeface(getFont(itemView.getContext()));
 
             // ── Tombol Salin ──────────────────────────────────────────────────
             btnCopy.setOnClickListener(v -> {
@@ -240,7 +229,6 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         void bind(ChatMessage msg, OnRetryListener retryListener) {
             text.setText(msg.getText());
-            text.setTypeface(getFont(itemView.getContext())); 
             if (retryListener != null) {
                 btnRetry.setVisibility(View.VISIBLE);
                 btnRetry.setOnClickListener(v -> retryListener.onRetry());

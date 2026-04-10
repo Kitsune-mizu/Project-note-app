@@ -3,13 +3,11 @@ package com.android.alpha.ui.main;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.*;
 import android.widget.*;
 
@@ -21,6 +19,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.android.alpha.R;
+import com.android.alpha.base.BaseActivity;
 import com.android.alpha.data.session.UserSession;
 import com.android.alpha.ui.common.Refreshable;
 import com.android.alpha.ui.notifications.ActivityItem;
@@ -143,29 +142,14 @@ public class ProfileFragment extends Fragment implements
         tvBirthday     = v.findViewById(R.id.tvBirthday);
         tvLocation     = v.findViewById(R.id.tvLocation);
 
-        Typeface tf = getFont();
-
-        tvProfileName.setTypeface(tf);
-        tvProfileEmail.setTypeface(tf);
-        tvFullName.setTypeface(tf);
-        tvEmail.setTypeface(tf);
-        tvBirthday.setTypeface(tf);
-        tvLocation.setTypeface(tf);
-    }
-
-    private int getAttrColor(int attr) {
-        TypedValue tv = new TypedValue();
-        requireContext().getTheme().resolveAttribute(attr, tv, true);
-        return tv.data;
-    }
-
-    private Typeface getFont() {
-        try {
-            return androidx.core.content.res.ResourcesCompat.getFont(
-                    requireContext(), R.font.linottesemibold);
-        } catch (Exception e) {
-            return Typeface.DEFAULT;
-        }
+        ((BaseActivity) requireActivity()).applyFont(
+                tvProfileName,
+                tvProfileEmail,
+                tvFullName,
+                tvEmail,
+                tvBirthday,
+                tvLocation
+        );
     }
 
     /** Registers the profile and background image picker launchers. */
@@ -461,7 +445,7 @@ public class ProfileFragment extends Fragment implements
                 R.string.activity_profile_updated_desc,
                 System.currentTimeMillis(),
                 R.drawable.ic_person,
-                getAttrColor(R.attr.text_color),
+                ((BaseActivity) requireActivity()).getAttrColor(R.attr.text_color),
                 data.userId
         ));
 

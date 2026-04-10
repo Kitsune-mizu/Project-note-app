@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.*;
@@ -24,6 +23,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.*;
 
 import com.android.alpha.R;
+import com.android.alpha.base.BaseActivity;
 import com.android.alpha.data.session.UserSession;
 import com.android.alpha.ui.geminichat.ChatSessionManager;
 import com.android.alpha.ui.auth.ForgotPasswordActivity;
@@ -61,15 +61,6 @@ public class SettingsFragment extends Fragment implements
         return inflater.inflate(R.layout.fragment_settings, container, false);
     }
 
-    private Typeface getFont() {
-        try {
-            return androidx.core.content.res.ResourcesCompat.getFont(
-                    requireContext(), R.font.linottesemibold);
-        } catch (Exception e) {
-            return Typeface.DEFAULT;
-        }
-    }
-
     /** Binds views, loads saved settings, and wires up all click and switch listeners. */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -79,7 +70,6 @@ public class SettingsFragment extends Fragment implements
         switchNotifications = view.findViewById(R.id.switchNotifications);
         textCurrentLanguage = view.findViewById(R.id.textCurrentLanguage);
         textCurrentTheme = view.findViewById(R.id.textCurrentTheme);
-        textCurrentTheme.setTypeface(getFont());
 
         textCurrentColorTheme = view.findViewById(R.id.textCurrentColorTheme);
         updateColorThemeText();
@@ -89,10 +79,10 @@ public class SettingsFragment extends Fragment implements
         loadSettings();
         setupClickListeners(view);
 
-        Typeface tf = getFont();
-
-        textCurrentTheme.setTypeface(tf);
-        textCurrentColorTheme.setTypeface(tf);
+        ((BaseActivity) requireActivity()).applyFont(
+                textCurrentTheme,
+                textCurrentColorTheme
+        );
 
         updateThemeText();
     }

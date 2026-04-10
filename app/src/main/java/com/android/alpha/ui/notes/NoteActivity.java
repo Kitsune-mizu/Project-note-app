@@ -7,7 +7,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,7 +15,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.graphics.ColorUtils;
 import androidx.lifecycle.ViewModelProvider;
@@ -262,12 +260,6 @@ public class NoteActivity extends BaseActivity
     }
 
     // ── SearchView styling ────────────────────────────────────────────────────
-
-    private int getAttrColor(int attr) {
-        TypedValue typedValue = new TypedValue();
-        getTheme().resolveAttribute(attr, typedValue, true);
-        return typedValue.data;
-    }
 
     private void setupSearchView() {
         searchView.post(() -> {

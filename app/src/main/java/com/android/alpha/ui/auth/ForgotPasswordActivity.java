@@ -67,26 +67,15 @@ public class ForgotPasswordActivity extends BaseActivity {
         lottie.setAnimation(R.raw.login_animation);
         lottie.playAnimation();
 
-        Typeface tf = getFont();
-
-        etUsername.setTypeface(tf);
-        etOldPassword.setTypeface(tf);
-        etNewPassword.setTypeface(tf);
-
-        tvUsernameError.setTypeface(tf);
-        tvOldPasswordError.setTypeface(tf);
-        tvNewPasswordError.setTypeface(tf);
-
-        btnChangePassword.setTypeface(tf);
-    }
-
-    private Typeface getFont() {
-        try {
-            return androidx.core.content.res.ResourcesCompat.getFont(
-                    this, R.font.linottesemibold);
-        } catch (Exception e) {
-            return Typeface.DEFAULT;
-        }
+        applyFont(
+                etUsername,
+                etOldPassword,
+                etNewPassword,
+                tvUsernameError,
+                tvOldPasswordError,
+                tvNewPasswordError,
+                btnChangePassword
+        );
     }
 
     // ══════════════════════════════════════════════════════════════════════════

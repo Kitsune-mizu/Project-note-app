@@ -1,12 +1,18 @@
 package com.android.alpha.base;
 
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.TypedValue;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.android.alpha.R;
+import com.android.alpha.utils.LoadingDialog;
 
 public class BaseActivity extends AppCompatActivity {
 
@@ -52,5 +58,30 @@ public class BaseActivity extends AppCompatActivity {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
                 break;
         }
+    }
+
+    // ================= FONT =================
+    protected Typeface getAppFont() {
+        try {
+            return ResourcesCompat.getFont(this, R.font.linottesemibold);
+        } catch (Exception e) {
+            return Typeface.DEFAULT;
+        }
+    }
+
+    public void applyFont(View... views) {
+        Typeface tf = getAppFont();
+        for (View v : views) {
+            if (v instanceof TextView) {
+                ((TextView) v).setTypeface(tf);
+            }
+        }
+    }
+
+    // ================= COLOR ATTR =================
+    public int getAttrColor(int attr) {
+        TypedValue tv = new TypedValue();
+        getTheme().resolveAttribute(attr, tv, true);
+        return tv.data;
     }
 }

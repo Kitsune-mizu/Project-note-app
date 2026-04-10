@@ -2,12 +2,10 @@ package com.android.alpha.ui.notifications;
 
 import android.app.Dialog;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,7 +14,6 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -75,37 +72,21 @@ public class NotificationActivity extends BaseActivity {
 
     // --- UI Setup ---
 
-    private int getAttrColor(int attr) {
-        TypedValue tv = new TypedValue();
-        getTheme().resolveAttribute(attr, tv, true);
-        return tv.data;
-    }
-
-    private Typeface getFont() {
-        try {
-            return androidx.core.content.res.ResourcesCompat.getFont(
-                    this, R.font.linottesemibold);
-        } catch (Exception e) {
-            return Typeface.DEFAULT;
-        }
-    }
-
     private void setupToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Typeface tf = getFont();
-
+        // Apply font ke semua TextView di toolbar
         for (int i = 0; i < toolbar.getChildCount(); i++) {
             View v = toolbar.getChildAt(i);
-            if (v instanceof TextView) {
-                ((TextView) v).setTypeface(tf);
+            if (v instanceof TextView textView) {
+                applyFont(textView);
             }
         }
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowTitleEnabled(false); // judul ditampilkan via TextView
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
 
         Objects.requireNonNull(toolbar.getNavigationIcon())

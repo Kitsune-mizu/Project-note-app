@@ -4,7 +4,6 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -17,9 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.res.ResourcesCompat;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.android.alpha.R;
@@ -95,26 +92,17 @@ public class SplashActivity extends BaseActivity {
         imgFlag           = findViewById(R.id.imgFlag);
         tvGreeting        = findViewById(R.id.tvGreeting);
 
-        // pakai font global
-        Typeface tf = getFont();
-        tvGreeting.setTypeface(tf);
-
         TextView tvVersion = findViewById(R.id.tvVersion);
+
+        // Apply font dari BaseActivity
+        applyFont(tvGreeting, tvVersion);
+
         if (tvVersion != null) {
-            tvVersion.setTypeface(tf);
             try {
                 String v = getPackageManager()
                         .getPackageInfo(getPackageName(), 0).versionName;
                 tvVersion.setText(getString(R.string.splash_version_format, v));
             } catch (Exception ignored) {}
-        }
-    }
-
-    private Typeface getFont() {
-        try {
-            return ResourcesCompat.getFont(this, R.font.linottesemibold);
-        } catch (Exception e) {
-            return Typeface.DEFAULT;
         }
     }
 

@@ -159,15 +159,6 @@ public class MainActivity extends BaseActivity
 
     private void setupToolbar() { setSupportActionBar(toolbar); }
 
-    private Typeface getAppFont() {
-        try {
-            return androidx.core.content.res.ResourcesCompat.getFont(
-                    this, R.font.linottesemibold); // ttf / otf aman
-        } catch (Exception e) {
-            return Typeface.DEFAULT;
-        }
-    }
-
     // ══════════════════════════════════════════════════════════════════════════
     // NAVIGATION DRAWER
     // ══════════════════════════════════════════════════════════════════════════
@@ -198,10 +189,7 @@ public class MainActivity extends BaseActivity
         colorLogoutItem();
         setupNotificationBadge();
 
-        Typeface tf = getAppFont();
-
-        tvUsername.setTypeface(tf);
-        tvUserEmail.setTypeface(tf);
+        applyFont(tvUsername, tvUserEmail);
     }
 
     @Override
@@ -230,8 +218,7 @@ public class MainActivity extends BaseActivity
         footer.setText(getString(R.string.footer_text));
         footer.setTextSize(12);
 
-        // font
-        footer.setTypeface(getAppFont());
+        applyFont(footer);
 
         TypedValue typedValue = new TypedValue();
         getTheme().resolveAttribute(R.attr.text_color, typedValue, true);
@@ -475,10 +462,7 @@ public class MainActivity extends BaseActivity
 
             tvUsername.setText(fullName);
             tvUserEmail.setText(email);
-            Typeface tf = getAppFont();
-
-            tvUsername.setTypeface(tf);
-            tvUserEmail.setTypeface(tf);
+            applyFont(tvUsername, tvUserEmail);
 
             if (!photo.isEmpty()) {
                 ivProfile.setVisibility(View.VISIBLE);

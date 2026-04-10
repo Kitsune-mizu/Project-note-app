@@ -3,13 +3,11 @@ package com.android.alpha.ui.geminichat;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
@@ -153,21 +151,6 @@ public class ChatActivity extends BaseActivity
         userSession.removeListener();
     }
 
-    private int getAttrColor(int attr) {
-        TypedValue tv = new TypedValue();
-        getTheme().resolveAttribute(attr, tv, true);
-        return tv.data;
-    }
-
-    private Typeface getFont() {
-        try {
-            return androidx.core.content.res.ResourcesCompat.getFont(
-                    this, R.font.linottesemibold);
-        } catch (Exception e) {
-            return Typeface.DEFAULT;
-        }
-    }
-
     // ── Back press ────────────────────────────────────────────────────────────
 
     private void setupBackPressedHandler() {
@@ -300,10 +283,10 @@ public class ChatActivity extends BaseActivity
         usageLimitText      = findViewById(R.id.usageLimitText);
         updateUsageDisplay();
 
-        Typeface tf = getFont();
-
-        messageInput.setTypeface(tf);
-        usageLimitText.setTypeface(tf);
+        applyFont(
+                messageInput,
+                usageLimitText
+        );
     }
 
     private void setupAdapters() {

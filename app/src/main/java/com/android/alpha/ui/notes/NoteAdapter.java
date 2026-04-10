@@ -1,7 +1,6 @@
 package com.android.alpha.ui.notes;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
 import android.util.TypedValue;
@@ -39,21 +38,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
     public interface OnSelectionModeListener {
         void onSelectionModeChange(boolean active);
         void onSelectionCountChange(int count);
-    }
-
-    private static Typeface getFont(Context ctx) {
-        try {
-            return androidx.core.content.res.ResourcesCompat.getFont(
-                    ctx, R.font.linottesemibold);
-        } catch (Exception e) {
-            return Typeface.DEFAULT;
-        }
-    }
-
-    private static int getAttrColor(Context ctx, int attr) {
-        TypedValue tv = new TypedValue();
-        ctx.getTheme().resolveAttribute(attr, tv, true);
-        return tv.data;
     }
 
     // --- Fields ---
@@ -202,15 +186,11 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         // Aktifkan deteksi URL pada subtitle
         Linkify.addLinks(h.sub, Linkify.WEB_URLS);
         h.sub.setMovementMethod(LinkMovementMethod.getInstance());
-        h.sub.setLinkTextColor(getAttrColor(h.itemView.getContext(), R.attr.color_blue));
+        TypedValue tv = new TypedValue();
+        h.itemView.getContext().getTheme().resolveAttribute(R.attr.color_blue, tv, true);
+        h.sub.setLinkTextColor(tv.data);
 
         h.date.setVisibility(View.VISIBLE);
-
-        Typeface tf = getFont(h.itemView.getContext());
-
-        h.title.setTypeface(tf);
-        h.sub.setTypeface(tf);
-        h.date.setTypeface(tf);
     }
 
     /** Tampilkan atau sembunyikan ikon pin sesuai status catatan */
@@ -230,12 +210,18 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         Context ctx = h.itemView.getContext();
 
         if (isDarkMode(ctx)) {
-            // Mode gelap → pakai warna default dari theme XML
-            ((CardView) h.itemView).setCardBackgroundColor(
-                    getAttrColor(ctx, com.google.android.material.R.attr.colorSurface)
+            // Mode gelap → ambil dari theme (tanpa helper method)
+            TypedValue tv = new TypedValue();
+            ctx.getTheme().resolveAttribute(
+                    com.google.android.material.R.attr.colorSurface,
+                    tv,
+                    true
             );
+
+            ((CardView) h.itemView).setCardBackgroundColor(tv.data);
+
         } else {
-            // Mode terang → pakai warna-warni
+            // Mode terang → pakai warna statis
             ((CardView) h.itemView).setCardBackgroundColor(
                     noteColors[pos % noteColors.length]
             );

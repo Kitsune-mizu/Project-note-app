@@ -27,7 +27,6 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.*;
 import android.text.util.Linkify;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -39,7 +38,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -160,11 +158,7 @@ public class EditNoteActivity extends BaseActivity {
         currentTextColor = getAttrColor(R.attr.text_color);
         currentHighlightColor = getAttrColor(R.attr.color_yellow);
 
-        Typeface tf = getFont();
-
-        etTitle.setTypeface(tf);
-        etContent.setTypeface(tf);
-        tvMetadata.setTypeface(tf);
+        applyFont(etTitle, etContent, tvMetadata);
 
         btnDelete     = findViewById(R.id.btn_delete);
         btnShare      = findViewById(R.id.btn_share);
@@ -247,21 +241,6 @@ public class EditNoteActivity extends BaseActivity {
 
         pushUndoSnapshot();
         updateMetadata();
-    }
-
-    private int getAttrColor(int attr) {
-        TypedValue tv = new TypedValue();
-        getTheme().resolveAttribute(attr, tv, true);
-        return tv.data;
-    }
-
-    private Typeface getFont() {
-        try {
-            return androidx.core.content.res.ResourcesCompat.getFont(
-                    this, R.font.linottesemibold);
-        } catch (Exception e) {
-            return Typeface.DEFAULT;
-        }
     }
 
     // =========================================================================
