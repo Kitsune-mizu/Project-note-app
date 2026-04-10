@@ -13,10 +13,6 @@
         <item name="android:colorBackground">@color/color_1</item>
 
         <!-- ================= CUSTOM COLOR ATTRIBUTES ================= -->
-        <item name="color_1">@color/color_1</item>
-        <item name="color_2">@color/color_2</item>
-        <item name="color_3">@color/color_3</item>
-        <item name="color_4">@color/color_4</item>
         <item name="text_color">@color/text_light</item>
 
         <!-- ================= ACCENT COLORS ================= -->
@@ -24,9 +20,6 @@
         <item name="color_green">@color/color_green</item>
         <item name="color_yellow">@color/color_yellow</item>
         <item name="color_blue">@color/color_blue</item>
-
-        <!-- ================= SHIMMER COLORS ================= -->
-        <item name="shimmer_base_color">@color/shimmer_base_light</item>
 
         <!-- ================= STATUS BAR (LIGHT MODE) ================= -->
         <item name="android:statusBarColor">@android:color/transparent</item>
@@ -38,6 +31,46 @@
         <!-- ================= WINDOW PROPERTIES ================= -->
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
 
+    </style>
+
+    <!-- DEFAULT (BLUE) -->
+    <style name="Theme.Alpha" parent="AppTheme">
+        <item name="color_1">@color/color_1</item>
+        <item name="color_2">@color/color_2</item>
+        <item name="color_3">@color/color_3</item>
+        <item name="color_4">@color/color_4</item>
+    </style>
+
+    <!-- PURPLE -->
+    <style name="Theme.Alpha.Purple" parent="AppTheme">
+        <item name="color_1">@color/color_1_purple</item>
+        <item name="color_2">@color/color_2_purple</item>
+        <item name="color_3">@color/color_3_purple</item>
+        <item name="color_4">@color/color_4_purple</item>
+    </style>
+
+    <!-- PINK -->
+    <style name="Theme.Alpha.Pink" parent="AppTheme">
+        <item name="color_1">@color/color_1_pink</item>
+        <item name="color_2">@color/color_2_pink</item>
+        <item name="color_3">@color/color_3_pink</item>
+        <item name="color_4">@color/color_4_pink</item>
+    </style>
+
+    <!-- GREEN -->
+    <style name="Theme.Alpha.Green" parent="AppTheme">
+        <item name="color_1">@color/color_1_green</item>
+        <item name="color_2">@color/color_2_green</item>
+        <item name="color_3">@color/color_3_green</item>
+        <item name="color_4">@color/color_4_green</item>
+    </style>
+
+    <!-- ORANGE -->
+    <style name="Theme.Alpha.Orange" parent="AppTheme">
+        <item name="color_1">@color/color_1_orange</item>
+        <item name="color_2">@color/color_2_orange</item>
+        <item name="color_3">@color/color_3_orange</item>
+        <item name="color_4">@color/color_4_orange</item>
     </style>
 
     <!-- ═══════════════════════════════════════════════════════════════════ -->

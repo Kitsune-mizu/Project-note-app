@@ -26,7 +26,6 @@ import com.android.alpha.ui.common.Refreshable;
 import com.android.alpha.ui.notifications.ActivityItem;
 import com.android.alpha.ui.map.MapFragment;
 import com.android.alpha.utils.DialogUtils;
-import com.android.alpha.utils.ShimmerHelper;
 import com.bumptech.glide.Glide;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -95,10 +94,12 @@ public class ProfileFragment extends Fragment implements
 
         // SHIMMER HANYA SAAT LOAD PERTAMA
         if (isFirstLoad) {
-            ShimmerHelper.show(shimmerLayout, scrollViewProfile);
+            shimmerLayout.setVisibility(View.VISIBLE);
+            scrollViewProfile.setVisibility(View.GONE);
             new Handler(Looper.getMainLooper()).postDelayed(() -> {
                 refreshProfileData();
-                ShimmerHelper.hide(shimmerLayout, scrollViewProfile);
+                shimmerLayout.setVisibility(View.GONE);
+                scrollViewProfile.setVisibility(View.VISIBLE);
             }, 1200);
             isFirstLoad = false;
         } else {

@@ -136,8 +136,38 @@ public class DialogUtils {
         btnConfirm.setTypeface(tf);
         btnCancel.setTypeface(tf);
 
+        btnConfirm.setEnabled(false);
+
+        etInput.addTextChangedListener(new android.text.TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String input = s.toString().trim();
+
+                boolean isValid = !input.isEmpty();
+                btnConfirm.setEnabled(isValid);
+            }
+
+            @Override
+            public void afterTextChanged(android.text.Editable s) {}
+        });
+
         btnConfirm.setOnClickListener(v -> {
-            if (callback != null) callback.onConfirm(etInput.getText().toString());
+            String input = etInput.getText().toString().trim();
+
+            if (input.isEmpty()) {
+                etInput.setError(context.getString(R.string.error_empty_input));
+                return;
+            }
+
+            if (input.split("\\s+").length < 1) {
+                etInput.setError(context.getString(R.string.error_min_one_word));
+                return;
+            }
+
+            if (callback != null) callback.onConfirm(input);
             dialog.dismiss();
         });
         btnCancel.setOnClickListener(v -> dialog.dismiss());

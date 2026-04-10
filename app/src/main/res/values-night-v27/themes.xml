@@ -22,10 +22,6 @@
         <item name="color_yellow">@color/color_yellow_night</item>
         <item name="color_blue">@color/color_blue_night</item>
 
-        <!-- ================= SHIMMER COLORS (NIGHT) ================= -->
-        <item name="shimmer_base_color">@color/shimmer_base_dark</item>
-        <item name="shimmer_highlight_color">@color/shimmer_highlight_dark</item>
-
         <!-- ================= STATUS BAR (DARK MODE) ================= -->
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">false</item>

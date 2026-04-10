@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,18 +22,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.alpha.R;
+import com.android.alpha.base.BaseActivity;
 import com.android.alpha.data.session.UserSession;
+import com.android.alpha.utils.LoadingDialog;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * Activity untuk menampilkan daftar aktivitas/notifikasi pengguna.
- * Mendukung pembaruan real-time via listener dan hapus semua notifikasi.
- */
-public class NotificationActivity extends AppCompatActivity {
+public class NotificationActivity extends BaseActivity {
 
     // --- Fields ---
 
@@ -39,6 +39,7 @@ public class NotificationActivity extends AppCompatActivity {
     private UserSession.ActivityListener activityListener;
     private RecyclerView rvActivities;
     private View emptyActivity;
+    private LoadingDialog loadingDialog;
 
     // --- Lifecycle ---
 
@@ -46,11 +47,16 @@ public class NotificationActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifications);
+        loadingDialog  = new LoadingDialog(this);
 
         setupToolbar();
         setupRecyclerView();
         loadInitialActivities();
         setupActivityListener();
+
+        loadingDialog.show();
+
+        new Handler(Looper.getMainLooper()).postDelayed(() -> loadingDialog.dismiss(), 1200); // 1.2 detik
     }
 
     @Override

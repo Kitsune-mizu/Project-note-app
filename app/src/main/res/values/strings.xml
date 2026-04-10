@@ -324,6 +324,17 @@
     <string name="theme_dark">Dark Mode</string>
     <string name="theme_system">System Default</string>
 
+    <!-- Color Theme Settings -->
+    <string name="dialog_color_theme_title">Color Theme</string>
+    <string name="color_theme_title">Color Theme</string>
+
+    <!-- Color Theme Names -->
+    <string name="color_theme_blue">Default Blue</string>
+    <string name="color_theme_purple">Purple Dream</string>
+    <string name="color_theme_pink">Pink Pastel</string>
+    <string name="color_theme_green">Green Nature</string>
+    <string name="color_theme_orange">Sunset Orange</string>
+
     <!-- ══════════════════════════════════════════════════════════════
          MAP
     ══════════════════════════════════════════════════════════════ -->
@@ -413,5 +424,8 @@
     <string name="button_save">Save</string>
     <string name="button_yes">Yes</string>
     <string name="loading_please_wait">Please wait…</string>
+
+    <string name="error_empty_input">Cannot be empty</string>
+    <string name="error_min_one_word">Must be at least 1 word</string>
 
 </resources>

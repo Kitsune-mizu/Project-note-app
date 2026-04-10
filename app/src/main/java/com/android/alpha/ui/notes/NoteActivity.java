@@ -25,9 +25,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.android.alpha.R;
+import com.android.alpha.base.BaseActivity;
 import com.android.alpha.data.session.UserSession;
 import com.android.alpha.ui.geminichat.ChatActivity;
 import com.android.alpha.utils.DialogUtils;
+import com.android.alpha.utils.LoadingDialog;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -37,7 +39,7 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class NoteActivity extends AppCompatActivity
+public class NoteActivity extends BaseActivity
         implements NoteAdapter.OnNoteClickListener, NoteAdapter.OnSelectionModeListener {
 
     private NoteAdapter   adapter;
@@ -54,6 +56,7 @@ public class NoteActivity extends AppCompatActivity
     private TextView                     tvSelectionCount;
     private SearchView                   searchView;
     private View                         appBarLayout;
+    private LoadingDialog                loadingDialog;
 
     private final Handler handler = new Handler(Looper.getMainLooper());
     private enum MultiAction { PIN, DELETE }
@@ -62,6 +65,8 @@ public class NoteActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
+        loadingDialog  = new LoadingDialog(this);
+
         initViewModel();
         initViews();
         setupSearchView();
@@ -72,6 +77,10 @@ public class NoteActivity extends AppCompatActivity
             allNotes = notes;
             applyFilter();
         });
+
+        loadingDialog.show();
+
+        new Handler(Looper.getMainLooper()).postDelayed(() -> loadingDialog.dismiss(), 1200); // 1.2 detik
     }
 
     @Override

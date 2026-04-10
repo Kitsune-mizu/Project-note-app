@@ -308,6 +308,57 @@
                         app:tint="?attr/text_color" />
                 </LinearLayout>
 
+                <!-- Color Theme (Light Mode Only) -->
+                <LinearLayout
+                    android:id="@+id/layoutColorTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/color_2"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="14dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        app:srcCompat="@drawable/ic_palette"
+                        app:tint="?attr/text_color" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/color_theme_title"
+                            android:fontFamily="@font/linottesemibold"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
+                            android:textColor="?attr/text_color" />
+
+                        <TextView
+                            android:id="@+id/textCurrentColorTheme"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="@string/color_theme_blue"
+                            android:fontFamily="@font/linottesemibold"
+                            android:textAppearance="?attr/textAppearanceLabelSmall"
+                            android:textColor="?attr/text_color"
+                            android:alpha="0.6"/>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        app:srcCompat="@drawable/ic_chevron_right"
+                        app:tint="?attr/text_color" />
+                </LinearLayout>
+
                 <!-- Language — inline agar textCurrentLanguage bisa di-findViewById -->
                 <LinearLayout
                     android:id="@+id/layoutLanguage"

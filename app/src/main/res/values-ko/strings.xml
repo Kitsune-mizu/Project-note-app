@@ -324,6 +324,14 @@
     <string name="theme_dark">다크 모드</string>
     <string name="theme_system">시스템 기본값</string>
 
+    <string name="dialog_color_theme_title">색상 테마</string>
+    <string name="color_theme_title">색상 테마</string>
+
+    <string name="color_theme_blue">기본 블루</string>
+    <string name="color_theme_purple">퍼플 드림</string>
+    <string name="color_theme_pink">핑크 파스텔</string>
+    <string name="color_theme_green">그린 네이처</string>
+    <string name="color_theme_orange">선셋 오렌지</string>
     <!-- ══════════════════════════════════════════════════════════════
          지도
     ══════════════════════════════════════════════════════════════ -->
@@ -412,5 +420,8 @@
     <string name="button_save">저장</string>
     <string name="button_yes">예</string>
     <string name="loading_please_wait">잠시만 기다려 주세요…</string>
+
+    <string name="error_empty_input">비워 둘 수 없습니다</string>
+    <string name="error_min_one_word">최소 1단어 이상이어야 합니다</string>
 
 </resources>

@@ -23,7 +23,6 @@ import android.widget.Toast;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.DiffUtil;
@@ -32,9 +31,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.alpha.BuildConfig;
 import com.android.alpha.R;
+import com.android.alpha.base.BaseActivity;
 import com.android.alpha.data.session.UserSession;
 import com.android.alpha.ui.notes.Note;
 import com.android.alpha.ui.notes.NoteViewModel;
+import com.android.alpha.utils.LoadingDialog;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONArray;
@@ -65,7 +66,7 @@ import okhttp3.Response;
  * - Tidak perlu pindah Activity — catatan disimpan di background dan
  *   Toast konfirmasi muncul.
  */
-public class ChatActivity extends AppCompatActivity
+public class ChatActivity extends BaseActivity
         implements UserSession.UserSessionListener,
         ChatAdapter.OnSaveNoteListener {              // ← BARU
 
@@ -95,7 +96,7 @@ public class ChatActivity extends AppCompatActivity
     private ImageButton       newChatButton;
     private ImageView         aiIconView;
     private TextView          usageLimitText;
-
+    private LoadingDialog     loadingDialog;
     // ── Data ──────────────────────────────────────────────────────────────────
     private ChatAdapter    chatAdapter;
     private HistoryAdapter historyAdapter;
@@ -120,6 +121,7 @@ public class ChatActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+        loadingDialog  = new LoadingDialog(this);
         userSession    = UserSession.getInstance();
         sessionManager = ChatSessionManager.getInstance(this);
 
@@ -140,6 +142,9 @@ public class ChatActivity extends AppCompatActivity
         loadSessionsForCurrentUser();
         showEmptyState();
         animateAiIcon();
+        loadingDialog.show();
+
+        new Handler(Looper.getMainLooper()).postDelayed(() -> loadingDialog.dismiss(), 1200); // 1.2 detik
     }
 
     @Override

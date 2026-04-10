@@ -319,19 +319,7 @@
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
             android:visibility="gone"
-
-            app:shimmer_auto_start="false"
-            app:shimmer_base_color="?attr/color_2"
-            app:shimmer_highlight_color="?attr/color_3"
-
-            app:shimmer_duration="2400"
-            app:shimmer_repeat_mode="restart"
-            app:shimmer_direction="left_to_right"
-
-            app:shimmer_shape="linear"
-            app:shimmer_dropoff="1.0"
-            app:shimmer_intensity="0.12"
-            app:shimmer_width_ratio="1.0">
+            app:shimmer_auto_start="false">
 
             <LinearLayout
                 android:layout_width="match_parent"

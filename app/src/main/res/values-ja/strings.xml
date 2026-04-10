@@ -324,6 +324,15 @@
     <string name="theme_dark">ダークモード</string>
     <string name="theme_system">システムのデフォルト</string>
 
+    <string name="dialog_color_theme_title">カラーテーマ</string>
+    <string name="color_theme_title">カラーテーマ</string>
+
+    <string name="color_theme_blue">デフォルトブルー</string>
+    <string name="color_theme_purple">パープルドリーム</string>
+    <string name="color_theme_pink">ピンクパステル</string>
+    <string name="color_theme_green">グリーンネイチャー</string>
+    <string name="color_theme_orange">サンセットオレンジ</string>
+
     <!-- ══════════════════════════════════════════════════════════════
          マップ
     ══════════════════════════════════════════════════════════════ -->
@@ -412,5 +421,8 @@
     <string name="button_save">保存</string>
     <string name="button_yes">はい</string>
     <string name="loading_please_wait">しばらくお待ちください…</string>
+
+    <string name="error_empty_input">空白にはできません</string>
+    <string name="error_min_one_word">少なくとも1単語必要です</string>
 
 </resources>

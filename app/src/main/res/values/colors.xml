@@ -1,12 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- ══════════════════════════════════════════════════════════════════════ -->
-    <!-- WARNA UTAMA LIGHT MODE - Fresh & Vibrant -->
+    <!-- COLOR THEMES - LIGHT MODE ONLY -->
     <!-- ══════════════════════════════════════════════════════════════════════ -->
+    <!-- Theme: Default -->
     <color name="color_1">#FFFFFF</color>
     <color name="color_2">#E8F4FD</color>
     <color name="color_3">#B8D4F1</color>
     <color name="color_4">#7BA7D8</color>
+
+    <!-- Theme: Purple Dream -->
+    <color name="color_1_purple">#FFFFFF</color>
+    <color name="color_2_purple">#F3F0FF</color>
+    <color name="color_3_purple">#DDD6FE</color>
+    <color name="color_4_purple">#A78BFA</color>
+
+    <!-- Theme: Pink Pastel -->
+    <color name="color_1_pink">#FFFFFF</color>
+    <color name="color_2_pink">#FCE7F3</color>
+    <color name="color_3_pink">#FBCFE8</color>
+    <color name="color_4_pink">#F9A8D4</color>
+
+    <!-- Theme: Green Nature -->
+    <color name="color_1_green">#FFFFFF</color>
+    <color name="color_2_green">#ECFDF5</color>
+    <color name="color_3_green">#A7F3D0</color>
+    <color name="color_4_green">#6EE7B7</color>
+
+    <!-- Theme: Sunset Orange -->
+    <color name="color_1_orange">#FFFFFF</color>
+    <color name="color_2_orange">#FFF7ED</color>
+    <color name="color_3_orange">#FED7AA</color>
+    <color name="color_4_orange">#FB923C</color>
 
     <!-- ══════════════════════════════════════════════════════════════════════ -->
     <!-- WARNA UTAMA DARK MODE - Deep & Comfortable -->
@@ -23,11 +48,6 @@
     <color name="text_dark">#F1F5F9</color>
 
     <!-- ══════════════════════════════════════════════════════════════════════ -->
-    <!-- WARNA STANDAR -->
-    <!-- ══════════════════════════════════════════════════════════════════════ -->
-    <color name="white">@color/color_1</color>
-
-    <!-- ══════════════════════════════════════════════════════════════════════ -->
     <!-- WARNA AKSEN - LIGHT MODE -->
     <!-- ══════════════════════════════════════════════════════════════════════ -->
     <color name="color_error">#E43F5A</color>
@@ -42,12 +62,4 @@
     <color name="color_green_night">#6ED49C</color>
     <color name="color_yellow_night">#FFE87C</color>
     <color name="color_blue_night">#7DD3F5</color>
-
-    <!-- ══════════════════════════════════════════════════════════════════════ -->
-    <!-- SHIMMER COLORS -->
-    <!-- ══════════════════════════════════════════════════════════════════════ -->
-    <color name="shimmer_base_light">#EEF2F6</color>
-    <color name="shimmer_highlight_light">#F3F6FA</color>
-    <color name="shimmer_base_dark">#1E293B</color>
-    <color name="shimmer_highlight_dark">#334155</color>
 </resources>

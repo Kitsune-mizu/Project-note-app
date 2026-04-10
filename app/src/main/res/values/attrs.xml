@@ -16,8 +16,4 @@
     <attr name="color_yellow" format="color|reference" />
     <attr name="color_blue" format="color|reference" />
 
-    <!-- Shimmer Colors -->
-    <attr name="shimmer_base_color" format="color|reference" />
-    <attr name="shimmer_highlight_color" format="color|reference" />
-
 </resources>

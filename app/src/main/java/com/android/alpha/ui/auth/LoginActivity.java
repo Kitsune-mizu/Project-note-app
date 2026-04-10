@@ -11,20 +11,15 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.airbnb.lottie.LottieAnimationView;
 import com.android.alpha.R;
+import com.android.alpha.base.BaseActivity;
 import com.android.alpha.data.session.UserSession;
 import com.android.alpha.ui.main.MainActivity;
 import com.android.alpha.utils.LoadingDialog;
 import com.google.android.material.textfield.TextInputLayout;
 
-/**
- * Activity that handles user login, including input validation,
- * "Remember Me" credential persistence, and navigation to sign-up or forgot-password screens.
- */
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     // ─── CONSTANTS ─────────────────────────────────────────────────────────────
     private static final String PREFS_NAME   = "login_prefs";

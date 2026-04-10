@@ -2,7 +2,7 @@
 <resources>
 
     <!-- ═══════════════════════════════════════════════════════════════════ -->
-    <!-- NIGHT MODE THEME -->
+    <!-- DARK MODE THEME (SIMPLIFIED) -->
     <!-- ═══════════════════════════════════════════════════════════════════ -->
     <style name="AppTheme" parent="Theme.Material3.Dark.NoActionBar">
 
@@ -19,48 +19,39 @@
         <item name="color_4">@color/color_4_dark</item>
         <item name="text_color">@color/text_dark</item>
 
-        <!-- ================= ACCENT COLORS (NIGHT) ================= -->
+        <!-- ================= ACCENT COLORS ================= -->
         <item name="color_error">@color/color_error_night</item>
         <item name="color_green">@color/color_green_night</item>
         <item name="color_yellow">@color/color_yellow_night</item>
         <item name="color_blue">@color/color_blue_night</item>
 
-        <!-- ================= SHIMMER COLORS (NIGHT) ================= -->
-        <item name="shimmer_base_color">@color/shimmer_base_dark</item>
-
-        <!-- ================= STATUS BAR (DARK MODE) ================= -->
+        <!-- ================= STATUS BAR ================= -->
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">false</item>
 
-        <!-- ================= NAVIGATION BAR (DARK MODE) ================= -->
+        <!-- ================= NAVIGATION BAR ================= -->
         <item name="android:navigationBarColor">@color/color_1_dark</item>
 
-        <!-- ================= WINDOW PROPERTIES ================= -->
+        <!-- ================= WINDOW ================= -->
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
 
     </style>
 
     <!-- ═══════════════════════════════════════════════════════════════════ -->
-    <!-- COMPONENT STYLES (INHERITED FROM LIGHT, AUTO-ADJUSTED) -->
-    <!-- ═══════════════════════════════════════════════════════════════════ -->
-
-    <!-- CircleShape, ActionIconStyle inherit and auto-adjust via ?attr references -->
-
-    <!-- ═══════════════════════════════════════════════════════════════════ -->
-    <!-- DIALOG STYLES (NIGHT MODE) -->
+    <!-- DIALOG -->
     <!-- ═══════════════════════════════════════════════════════════════════ -->
 
     <style name="RoundedDialog" parent="Theme.Material3.Dark.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowMinWidthMajor">85%</item>
         <item name="android:windowMinWidthMinor">85%</item>
-        <item name="colorPrimary">?attr/color_4</item>
-        <item name="colorAccent">?attr/color_4</item>
-        <item name="android:backgroundTint">?attr/color_2</item>
+        <item name="colorPrimary">@color/color_4_dark</item>
+        <item name="colorAccent">@color/color_4_dark</item>
+        <item name="android:backgroundTint">@color/color_2_dark</item>
     </style>
 
     <!-- ═══════════════════════════════════════════════════════════════════ -->
-    <!-- BOTTOM SHEET STYLES (NIGHT MODE) -->
+    <!-- BOTTOM SHEET -->
     <!-- ═══════════════════════════════════════════════════════════════════ -->
 
     <style name="ModernBottomSheetDialog" parent="Theme.Material3.Dark.BottomSheetDialog">
@@ -71,7 +62,7 @@
 
     <style name="ModernBottomSheetStyle" parent="Widget.Material3.BottomSheet.Modal">
         <item name="shapeAppearanceOverlay">@style/BottomSheetShape</item>
-        <item name="backgroundTint">?attr/color_2</item>
+        <item name="backgroundTint">@color/color_2_dark</item>
     </style>
 
     <style name="BottomSheetShape" parent="ShapeAppearance.Material3.Corner.Large">

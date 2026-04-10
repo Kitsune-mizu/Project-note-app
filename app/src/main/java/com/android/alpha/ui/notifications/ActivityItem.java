@@ -65,8 +65,7 @@ public class ActivityItem implements Parcelable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ActivityItem)) return false;
-        ActivityItem that = (ActivityItem) o;
+        if (!(o instanceof ActivityItem that)) return false;
         return timestamp        == that.timestamp
                 && iconRes          == that.iconRes
                 && color            == that.color

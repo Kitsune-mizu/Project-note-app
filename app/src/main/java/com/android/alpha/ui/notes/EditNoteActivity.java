@@ -44,6 +44,7 @@ import androidx.core.content.FileProvider;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.android.alpha.R;
+import com.android.alpha.base.BaseActivity;
 import com.android.alpha.data.session.UserSession;
 import com.android.alpha.ui.auth.LoginActivity;
 import com.android.alpha.utils.DialogUtils;
@@ -57,11 +58,7 @@ import java.util.*;
 import java.util.List;
 import java.util.ArrayList;
 
-/**
- * Activity untuk mengedit catatan dengan dukungan formatting teks lengkap,
- * undo/redo berbasis snapshot, serialisasi HTML kustom, dan pengingat alarm.
- */
-public class EditNoteActivity extends AppCompatActivity {
+public class EditNoteActivity extends BaseActivity {
 
     // --- Konstanta ---
     private static final String TAG = "EditNoteActivity";

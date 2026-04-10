@@ -42,6 +42,7 @@ public class SettingsFragment extends Fragment implements
     private SwitchMaterial switchNotifications;
     private TextView       textCurrentLanguage;
     private TextView       textCurrentTheme;
+    private TextView       textCurrentColorTheme;
 
     // ─── UTILITIES ─────────────────────────────────────────────────────────────
     private SharedPreferences          prefs;
@@ -80,14 +81,18 @@ public class SettingsFragment extends Fragment implements
         textCurrentTheme = view.findViewById(R.id.textCurrentTheme);
         textCurrentTheme.setTypeface(getFont());
 
+        textCurrentColorTheme = view.findViewById(R.id.textCurrentColorTheme);
+        updateColorThemeText();
+        updateColorThemeVisibility();
+
         setupPermissionLauncher();
         loadSettings();
         setupClickListeners(view);
 
         Typeface tf = getFont();
 
-        textCurrentLanguage.setTypeface(tf);
-        switchNotifications.setTypeface(tf);
+        textCurrentTheme.setTypeface(tf);
+        textCurrentColorTheme.setTypeface(tf);
 
         updateThemeText();
     }
@@ -124,6 +129,7 @@ public class SettingsFragment extends Fragment implements
         view.findViewById(R.id.layoutDeleteAccount).setOnClickListener(v -> showDeleteAccountWarnings());
         view.findViewById(R.id.layoutLanguage).setOnClickListener(v -> showLanguageDialog());
         view.findViewById(R.id.layoutTheme).setOnClickListener(v -> showThemeDialog());
+        view.findViewById(R.id.layoutColorTheme).setOnClickListener(v -> showColorThemeDialog());
 
         switchNotifications.setOnCheckedChangeListener((button, checked) -> {
             if (!checked) { disableNotifications(); return; }
@@ -438,26 +444,12 @@ public class SettingsFragment extends Fragment implements
     private void setThemeMode(String mode) {
         prefs.edit().putString("theme_mode", mode).apply();
 
-        switch (mode) {
-            case "light":
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                break;
-
-            case "dark":
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                break;
-
-            default:
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-                break;
-        }
-
         updateThemeText();
+        updateColorThemeVisibility();
 
-        // delay biar smooth & tidak glitch
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             if (getActivity() != null) {
-                getActivity().recreate();
+                getActivity().recreate(); // biar BaseActivity yang handle
             }
         }, 100);
     }
@@ -501,5 +493,119 @@ public class SettingsFragment extends Fragment implements
                 : new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                 .setData(Uri.parse("package:" + requireContext().getPackageName()));
         startActivity(intent);
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+// COLOR THEME SETTINGS (LIGHT MODE ONLY)
+// ══════════════════════════════════════════════════════════════════════
+
+    private void showColorThemeDialog() {
+        String[] themes = {"blue", "purple", "pink", "green", "orange"};
+        int[] names = {
+                R.string.color_theme_blue,
+                R.string.color_theme_purple,
+                R.string.color_theme_pink,
+                R.string.color_theme_green,
+                R.string.color_theme_orange
+        };
+
+        // Color previews: color_2, color_3, color_4
+        int[][] colorPreviews = {
+                {R.color.color_2, R.color.color_3, R.color.color_4}, // blue
+                {R.color.color_2_purple, R.color.color_3_purple, R.color.color_4_purple},
+                {R.color.color_2_pink, R.color.color_3_pink, R.color.color_4_pink},
+                {R.color.color_2_green, R.color.color_3_green, R.color.color_4_green},
+                {R.color.color_2_orange, R.color.color_3_orange, R.color.color_4_orange}
+        };
+
+        var dialog = new com.google.android.material.bottomsheet.BottomSheetDialog(
+                requireContext(), R.style.ModernBottomSheetDialog);
+
+        View sheet = LayoutInflater.from(requireContext())
+                .inflate(R.layout.bottomsheet_color_theme_picker, new FrameLayout(requireContext()), false);
+
+        ViewGroup container = sheet.findViewById(R.id.colorThemeContainer);
+        LayoutInflater inflater = LayoutInflater.from(requireContext());
+        String current = prefs.getString("color_theme", "blue");
+
+        for (int i = 0; i < names.length; i++) {
+            View item = inflater.inflate(R.layout.item_color_theme_option, container, false);
+
+            ((TextView) item.findViewById(R.id.tvColorThemeName))
+                    .setText(getString(names[i]));
+
+            // Set color previews
+            item.findViewById(R.id.colorPreview1)
+                    .setBackgroundColor(ContextCompat.getColor(requireContext(), colorPreviews[i][0]));
+
+            item.findViewById(R.id.colorPreview2)
+                    .setBackgroundColor(ContextCompat.getColor(requireContext(), colorPreviews[i][1]));
+
+            item.findViewById(R.id.colorPreview3)
+                    .setBackgroundColor(ContextCompat.getColor(requireContext(), colorPreviews[i][2]));
+
+            if (themes[i].equals(current)) {
+                item.findViewById(R.id.iconCheck).setVisibility(View.VISIBLE);
+            }
+
+            int index = i;
+            item.setOnClickListener(v -> {
+                setColorTheme(themes[index]);
+                dialog.dismiss();
+            });
+
+            container.addView(item);
+        }
+
+        dialog.setContentView(sheet);
+        dialog.show();
+    }
+
+    private void setColorTheme(String theme) {
+        prefs.edit().putString("color_theme", theme).apply();
+        updateColorThemeText();
+
+        // Recreate activity untuk apply warna baru
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            if (getActivity() != null) {
+                getActivity().recreate();
+            }
+        }, 100);
+    }
+
+    private void updateColorThemeText() {
+        String theme = prefs.getString("color_theme", "blue");
+
+        int nameRes = switch (theme) {
+            case "purple" -> R.string.color_theme_purple;
+            case "pink" -> R.string.color_theme_pink;
+            case "green" -> R.string.color_theme_green;
+            case "orange" -> R.string.color_theme_orange;
+            default -> R.string.color_theme_blue;
+        };
+
+        textCurrentColorTheme.setText(getString(nameRes));
+    }
+
+    private void updateColorThemeVisibility() {
+        // Show hanya jika light mode
+        String mode = prefs.getString("theme_mode", "system");
+        boolean isLight = mode.equals("light") ||
+                (mode.equals("system") && !isDarkMode());
+
+        View colorThemeLayout = requireView().findViewById(R.id.layoutColorTheme);
+        colorThemeLayout.setVisibility(isLight ? View.VISIBLE : View.GONE);
+    }
+
+    private boolean isDarkMode() {
+        int mode = AppCompatDelegate.getDefaultNightMode();
+
+        if (mode == AppCompatDelegate.MODE_NIGHT_YES) return true;
+        if (mode == AppCompatDelegate.MODE_NIGHT_NO) return false;
+
+        int currentNightMode = getResources().getConfiguration().uiMode
+                & android.content.res.Configuration.UI_MODE_NIGHT_MASK;
+
+        return currentNightMode == android.content.res.Configuration.UI_MODE_NIGHT_YES;
     }
 }

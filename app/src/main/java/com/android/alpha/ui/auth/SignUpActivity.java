@@ -13,14 +13,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.android.alpha.R;
+import com.android.alpha.base.BaseActivity;
 import com.android.alpha.data.session.UserSession;
 import com.android.alpha.utils.LoadingDialog;
 
-/**
- * Activity that handles new user registration, including real-time
- * input validation and navigation back to LoginActivity on success.
- */
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends BaseActivity {
 
     // ─── INTERFACE ─────────────────────────────────────────────────────────────
 

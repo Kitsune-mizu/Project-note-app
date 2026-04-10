@@ -23,6 +23,7 @@ import androidx.core.content.res.ResourcesCompat;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.android.alpha.R;
+import com.android.alpha.base.BaseActivity;
 import com.android.alpha.data.session.UserSession;
 import com.android.alpha.ui.auth.LoginActivity;
 import com.android.alpha.ui.main.MainActivity;
@@ -49,7 +50,7 @@ import java.util.List;
 import java.util.Locale;
 
 @SuppressLint("CustomSplashScreen")
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BaseActivity {
 
     private static final String TAG = "SplashActivity";
     private static final int LOCATION_PERMISSION_REQUEST = 101;

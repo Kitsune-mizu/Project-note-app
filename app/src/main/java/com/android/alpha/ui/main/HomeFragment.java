@@ -38,7 +38,6 @@ import com.android.alpha.ui.notifications.ActivityItem;
 import com.android.alpha.ui.notifications.NotificationActivity;
 import com.android.alpha.ui.notifications.NotificationAdapter;
 import com.android.alpha.utils.DialogUtils;
-import com.android.alpha.utils.ShimmerHelper;
 import com.facebook.shimmer.ShimmerFrameLayout;
 
 import org.json.JSONObject;
@@ -346,10 +345,13 @@ public class HomeFragment extends Fragment implements
      * HANYA DIPANGGIL SAAT LOAD PERTAMA KALI.
      */
     private void startShimmerInitialLoad(View scrollView) {
-        ShimmerHelper.show(shimmerLayout, scrollView);
+        shimmerLayout.setVisibility(View.VISIBLE);
+        scrollView.setVisibility(View.GONE);
+        // JANGAN panggil shimmerLayout.startShimmer()
         handler.postDelayed(() -> {
             loadAllData();
-            ShimmerHelper.hide(shimmerLayout, scrollView);
+            shimmerLayout.setVisibility(View.GONE);
+            scrollView.setVisibility(View.VISIBLE);
         }, 1200);
     }
 

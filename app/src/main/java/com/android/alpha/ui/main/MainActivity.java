@@ -3,7 +3,6 @@ package com.android.alpha.ui.main;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -20,8 +19,6 @@ import android.widget.*;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -31,6 +28,7 @@ import androidx.fragment.app.Fragment;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.android.alpha.R;
+import com.android.alpha.base.BaseActivity;
 import com.android.alpha.data.session.UserSession;
 import com.android.alpha.ui.notes.NoteActivity;
 import com.android.alpha.ui.geminichat.ChatActivity;
@@ -57,14 +55,15 @@ import java.util.Objects;
  * - onNavigationItemSelected() → nav_gemini membuka ChatActivity
  * - getFragmentForMenu()   → tidak berubah (Gemini bukan fragment)
  */
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         UserSession.UserSessionListener {
 
     // ─── CONSTANTS ─────────────────────────────────────────────────────────────
     private static final int  PERMISSION_REQUEST_CODE = 101;
-    private static final long FRAGMENT_LOAD_DELAY     = 2000;
-    private static final long LOGOUT_DELAY            = 2200;
+    private static final long MIN_LOADING_DURATION = 1000; // minimal loading muncul 1 detik
+    private long loadingStartTime = 0;
+    private static final long LOGOUT_DELAY            = 200;
     private final        String TAG                   = "MainActivity";
 
     // ─── UI ────────────────────────────────────────────────────────────────────
@@ -105,24 +104,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        // set theme sebelum super.onCreate
-        SharedPreferences prefs = getSharedPreferences("app_settings", MODE_PRIVATE);
-        String mode = prefs.getString("theme_mode", "system");
-
-        switch (mode) {
-            case "light":
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                break;
-
-            case "dark":
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                break;
-
-            default:
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-                break;
-        }
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -313,6 +294,8 @@ public class MainActivity extends AppCompatActivity
 
     public void showFragment(Fragment fragment, String title, boolean addToBackStack) {
         showLoading();
+        loadingStartTime = System.currentTimeMillis();
+
         handler.postDelayed(() -> {
             if (addToBackStack) {
                 getSupportFragmentManager().beginTransaction()
@@ -328,13 +311,15 @@ public class MainActivity extends AppCompatActivity
                         .commitAllowingStateLoss();
             }
 
-            // FIX 1: Panggil setelah commitAllowingStateLoss selesai via executePendingTransactions()
-            // agar fragment sudah benar-benar ada di container saat title/highlight diupdate.
             getSupportFragmentManager().executePendingTransactions();
             syncTitleAndHighlight();
 
-            loadingDialog.dismiss();
-        }, FRAGMENT_LOAD_DELAY);
+            // Hitung sisa waktu loading agar minimal MIN_LOADING_DURATION
+            long elapsed = System.currentTimeMillis() - loadingStartTime;
+            long remainingTime = Math.max(0, MIN_LOADING_DURATION - elapsed);
+
+            handler.postDelayed(() -> loadingDialog.dismiss(), remainingTime);
+        }, 300); // Delay awal lebih kecil untuk proses fragment
     }
 
     private void setupBackStackListener() {
@@ -588,7 +573,9 @@ public class MainActivity extends AppCompatActivity
             } catch (Exception e) {
                 Log.e(TAG, "Logout error: " + e.getMessage());
             }
-            loadingDialog.dismiss();
+            long elapsed = System.currentTimeMillis() - loadingStartTime;
+            long remainingTime = Math.max(0, MIN_LOADING_DURATION - elapsed);
+            handler.postDelayed(() -> loadingDialog.dismiss(), remainingTime);
         }, LOGOUT_DELAY);
     }
 
@@ -619,7 +606,12 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void showLoading() {
-        if (!loadingDialog.isShowing()) loadingDialog.show();
+        runOnUiThread(() -> {
+            if (!loadingDialog.isShowing()) {
+                loadingDialog.show();
+                loadingStartTime = System.currentTimeMillis();
+            }
+        });
     }
 
     // ══════════════════════════════════════════════════════════════════════════

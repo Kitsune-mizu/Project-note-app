@@ -10,19 +10,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.airbnb.lottie.LottieAnimationView;
 import com.android.alpha.R;
+import com.android.alpha.base.BaseActivity;
 import com.android.alpha.data.session.UserSession;
 import com.android.alpha.utils.LoadingDialog;
 import com.google.android.material.textfield.TextInputEditText;
 
-/**
- * Activity that allows a user to reset their password
- * by providing their username, old password, and a new password.
- */
-public class ForgotPasswordActivity extends AppCompatActivity {
+public class ForgotPasswordActivity extends BaseActivity {
 
     // ─── INTERFACE ─────────────────────────────────────────────────────────────
 

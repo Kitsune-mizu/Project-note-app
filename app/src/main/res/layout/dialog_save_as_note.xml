@@ -77,10 +77,9 @@
         app:boxCornerRadiusBottomStart="14dp"
         app:boxCornerRadiusTopEnd="14dp"
         app:boxCornerRadiusTopStart="14dp"
-        app:boxStrokeColor="?attr/text_color"
-        app:boxBackgroundColor="@color/white"
-        app:strokeColor="?attr/text_color"
-        app:hintTextColor="?attr/text_color"
+        app:boxStrokeColor="?attr/color_yellow"
+        app:boxBackgroundColor="?attr/color_2"
+        app:hintTextColor="?attr/color_yellow"
         app:expandedHintEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText

@@ -28,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.alpha.R;
 import com.android.alpha.data.session.UserSession;
 import com.android.alpha.ui.main.MainActivity;
+import com.android.alpha.utils.LoadingDialog;
 import com.android.alpha.utils.LocaleHelper;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.gms.location.*;
@@ -73,6 +74,7 @@ public class MapFragment extends Fragment {
     private TextView           tvLocationName;
     private RecyclerView       rvSuggestions;
     private ShimmerFrameLayout shimmerLayout;
+    private LoadingDialog      loadingDialog;
 
     // ─── LOCATION & NETWORK ────────────────────────────────────────────────────
     private FusedLocationProviderClient fusedLocationClient;
@@ -142,6 +144,14 @@ public class MapFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_map, container, false);
+
+        loadingDialog = new LoadingDialog(requireContext());
+        loadingDialog.show();
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            if (isAdded()) {
+                loadingDialog.dismiss();
+            }
+        }, 1200);
 
         initViews(rootView);
         setupToolbar();

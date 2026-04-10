@@ -324,6 +324,15 @@
     <string name="theme_dark">Mode Gelap</string>
     <string name="theme_system">Default Sistem</string>
 
+    <string name="dialog_color_theme_title">Tema Warna</string>
+    <string name="color_theme_title">Tema Warna</string>
+
+    <string name="color_theme_blue">Biru Bawaan</string>
+    <string name="color_theme_purple">Ungu Impian</string>
+    <string name="color_theme_pink">Pink Pastel</string>
+    <string name="color_theme_green">Hijau Alam</string>
+    <string name="color_theme_orange">Jingga Senja</string>
+
     <!-- ══════════════════════════════════════════════════════════════
          PETA
     ══════════════════════════════════════════════════════════════ -->
@@ -412,5 +421,8 @@
     <string name="button_save">Simpan</string>
     <string name="button_yes">Ya</string>
     <string name="loading_please_wait">Mohon tunggu&#8230;</string>
+
+    <string name="error_empty_input">Tidak boleh kosong</string>
+    <string name="error_min_one_word">Minimal harus 1 kata</string>
 
 </resources>
