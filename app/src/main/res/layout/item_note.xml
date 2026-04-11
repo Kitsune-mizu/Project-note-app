@@ -15,7 +15,7 @@
     android:descendantFocusability="blocksDescendants"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackground"
-    app:cardBackgroundColor="?attr/color_2"
+    app:cardBackgroundColor="?attr/color_3"
     app:cardCornerRadius="18dp"
     app:cardElevation="0dp"
     app:strokeColor="?attr/color_4"

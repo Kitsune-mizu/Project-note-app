@@ -30,7 +30,7 @@ import java.util.Objects;
 
 public class NotificationActivity extends BaseActivity {
 
-    // --- Fields ---
+    // ─── Variables ───────────────────────────────────────────────────────────
 
     private NotificationAdapter adapter;
     private UserSession.ActivityListener activityListener;
@@ -38,13 +38,15 @@ public class NotificationActivity extends BaseActivity {
     private View emptyActivity;
     private LoadingDialog loadingDialog;
 
-    // --- Lifecycle ---
+
+    // ─── Lifecycle ───────────────────────────────────────────────────────────
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifications);
-        loadingDialog  = new LoadingDialog(this);
+
+        loadingDialog = new LoadingDialog(this);
 
         setupToolbar();
         setupRecyclerView();
@@ -53,7 +55,7 @@ public class NotificationActivity extends BaseActivity {
 
         loadingDialog.show();
 
-        new Handler(Looper.getMainLooper()).postDelayed(() -> loadingDialog.dismiss(), 1200); // 1.2 detik
+        new Handler(Looper.getMainLooper()).postDelayed(() -> loadingDialog.dismiss(), 1200);
     }
 
     @Override
@@ -66,17 +68,18 @@ public class NotificationActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (activityListener != null)
+        if (activityListener != null) {
             UserSession.getInstance().removeActivityListener();
+        }
     }
 
-    // --- UI Setup ---
+
+    // ─── UI Setup ────────────────────────────────────────────────────────────
 
     private void setupToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // Apply font ke semua TextView di toolbar
         for (int i = 0; i < toolbar.getChildCount(); i++) {
             View v = toolbar.getChildAt(i);
             if (v instanceof TextView textView) {
@@ -89,8 +92,7 @@ public class NotificationActivity extends BaseActivity {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
 
-        Objects.requireNonNull(toolbar.getNavigationIcon())
-                .setTint(getAttrColor(R.attr.text_color));
+        Objects.requireNonNull(toolbar.getNavigationIcon()).setTint(getAttrColor(R.attr.text_color));
     }
 
     private void setupRecyclerView() {
@@ -104,16 +106,23 @@ public class NotificationActivity extends BaseActivity {
 
     private void updateEmptyState() {
         boolean isEmpty = adapter.getCurrentList().isEmpty();
-        emptyActivity.setVisibility(isEmpty ? View.VISIBLE : View.GONE);
-        rvActivities.setVisibility(isEmpty ? View.GONE : View.VISIBLE);
+        if (isEmpty) {
+            emptyActivity.setVisibility(View.VISIBLE);
+            rvActivities.setVisibility(View.GONE);
+        } else {
+            emptyActivity.setVisibility(View.GONE);
+            rvActivities.setVisibility(View.VISIBLE);
+        }
     }
 
-    // --- Data Management ---
+
+    // ─── Data Management ─────────────────────────────────────────────────────
 
     private void loadInitialActivities() {
         adapter.submitList(
                 new ArrayList<>(UserSession.getInstance().getActivities()),
-                this::updateEmptyState);
+                this::updateEmptyState
+        );
     }
 
     private void setupActivityListener() {
@@ -131,25 +140,21 @@ public class NotificationActivity extends BaseActivity {
         adapter.submitList(new ArrayList<>(), this::updateEmptyState);
     }
 
-    // --- Delete Confirmation Dialog ---
 
-    /**
-     * Tampilkan popup konfirmasi hapus semua notifikasi.
-     * Menggunakan layout dialog_delete_activity.xml.
-     */
+    // ─── Delete Confirmation Dialog ──────────────────────────────────────────
+
     private void showDeleteConfirmationDialog() {
         Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_delete_activity);
 
-        // Buat background window transparan agar rounded corner drawable terlihat
         if (dialog.getWindow() != null) {
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.getWindow().setLayout(
                     WindowManager.LayoutParams.MATCH_PARENT,
                     WindowManager.LayoutParams.WRAP_CONTENT
             );
-            // Margin kiri & kanan agar dialog tidak full width
+
             WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
             params.width = (int) (getResources().getDisplayMetrics().widthPixels * 0.88f);
             dialog.getWindow().setAttributes(params);
@@ -158,10 +163,8 @@ public class NotificationActivity extends BaseActivity {
         MaterialButton btnCancel = dialog.findViewById(R.id.btnCancel);
         MaterialButton btnDelete = dialog.findViewById(R.id.btnDelete);
 
-        // Tutup dialog tanpa aksi
         btnCancel.setOnClickListener(v -> dialog.dismiss());
 
-        // Hapus semua notifikasi lalu tutup dialog
         btnDelete.setOnClickListener(v -> {
             clearAllNotifications();
             dialog.dismiss();
@@ -170,7 +173,8 @@ public class NotificationActivity extends BaseActivity {
         dialog.show();
     }
 
-    // --- Menu & Action Handling ---
+
+    // ─── Menu & Action Handling ──────────────────────────────────────────────
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -187,7 +191,6 @@ public class NotificationActivity extends BaseActivity {
             return true;
         }
 
-        // Tampilkan dialog konfirmasi saat icon delete ditekan
         if (id == R.id.action_delete) {
             showDeleteConfirmationDialog();
             return true;

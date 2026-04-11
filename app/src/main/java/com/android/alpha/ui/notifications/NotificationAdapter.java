@@ -26,26 +26,23 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * Adapter ListAdapter untuk menampilkan daftar notifikasi/aktivitas pengguna.
- * Mendukung hapus item via long-press dengan dialog konfirmasi.
- */
 public class NotificationAdapter extends ListAdapter<ActivityItem, NotificationAdapter.ViewHolder> {
 
-    // Tag untuk logging error saat binding
+    // ─── Constants ───────────────────────────────────────────────────────────
+
     private static final String TAG = "NotificationAdapter";
 
-    // --- Constructor ---
 
-    /** Inisialisasi adapter dengan DiffCallback dan stable IDs aktif */
+    // ─── Constructor ─────────────────────────────────────────────────────────
+
     public NotificationAdapter() {
         super(DIFF_CALLBACK);
         setHasStableIds(true);
     }
 
-    // --- RecyclerView Adapter Implementation ---
 
-    /** Gunakan timestamp sebagai ID unik setiap item */
+    // ─── Adapter Overrides ───────────────────────────────────────────────────
+
     @Override
     public long getItemId(int position) {
         return getItem(position).getTimestamp();
@@ -59,10 +56,6 @@ public class NotificationAdapter extends ListAdapter<ActivityItem, NotificationA
         return new ViewHolder(view);
     }
 
-    /**
-     * Bind data item ke ViewHolder.
-     * Jika terjadi error saat binding, tampilkan UI fallback agar tampilan tetap utuh.
-     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ActivityItem item = getItem(position);
@@ -75,7 +68,6 @@ public class NotificationAdapter extends ListAdapter<ActivityItem, NotificationA
             applyFallbackUI(holder);
         }
 
-        // Long-press untuk menghapus item dengan konfirmasi dialog
         holder.itemView.setOnLongClickListener(v -> {
             DialogUtils.showConfirmDialog(
                     context,
@@ -84,14 +76,15 @@ public class NotificationAdapter extends ListAdapter<ActivityItem, NotificationA
                     context.getString(R.string.action_delete),
                     context.getString(R.string.action_cancel),
                     () -> deleteNotification(item),
-                    null);
+                    null
+            );
             return true;
         });
     }
 
-    // --- Binding Helpers ---
 
-    /** Isi waktu, judul, deskripsi, ikon, dan warna ikon pada ViewHolder */
+    // ─── Binding Helpers ─────────────────────────────────────────────────────
+
     private void bindTextAndIcon(@NonNull ViewHolder holder, Context context, ActivityItem item) {
         TypedValue tv = new TypedValue();
         context.getTheme().resolveAttribute(R.attr.text_color, tv, true);
@@ -100,8 +93,6 @@ public class NotificationAdapter extends ListAdapter<ActivityItem, NotificationA
         holder.tvTime.setText(formatTimestamp(item.getTimestamp()));
         holder.tvTitle.setText(getSafeString(context, item.getTitleResId()));
         holder.tvDesc.setText(getSafeString(context, item.getDescriptionResId()));
-
-        // (color)
 
         holder.tvTime.setTextColor(color);
         holder.tvTitle.setTextColor(color);
@@ -112,11 +103,9 @@ public class NotificationAdapter extends ListAdapter<ActivityItem, NotificationA
         try {
             holder.ivIcon.setColorFilter(item.getColor());
         } catch (Exception ignore) {
-            // Abaikan jika nilai warna tidak valid
         }
     }
 
-    /** Tampilkan UI kosong dengan ikon default jika terjadi error saat binding */
     private void applyFallbackUI(ViewHolder holder) {
         holder.tvTitle.setText("");
         holder.tvDesc.setText("");
@@ -124,14 +113,14 @@ public class NotificationAdapter extends ListAdapter<ActivityItem, NotificationA
         holder.ivIcon.setImageResource(R.drawable.ic_notification_default);
     }
 
-    // --- Utility Methods ---
 
-    /**
-     * Validasi resource ID ikon sebelum dipakai.
-     * Kembalikan ikon default jika ID tidak valid atau 0.
-     */
+    // ─── Utility Methods ─────────────────────────────────────────────────────
+
     private int safeIcon(Context context, int resId) {
-        if (resId == 0) return R.drawable.ic_notification_default;
+        if (resId == 0) {
+            return R.drawable.ic_notification_default;
+        }
+
         try {
             AppCompatResources.getDrawable(context, resId);
             return resId;
@@ -140,22 +129,17 @@ public class NotificationAdapter extends ListAdapter<ActivityItem, NotificationA
         }
     }
 
-    /**
-     * Format timestamp ke string tanggal sesuai bahasa aktif pengguna.
-     * Contoh output: "5 Jan 2025 • 14:30"
-     */
     private String formatTimestamp(long timestamp) {
         Locale locale = new Locale(UserSession.getInstance().getLanguage());
         return new SimpleDateFormat("d MMM yyyy • HH:mm", locale)
                 .format(new Date(timestamp));
     }
 
-    /**
-     * Ambil string dari resource ID dengan aman.
-     * Kembalikan string kosong jika ID 0 atau tidak ditemukan.
-     */
     private String getSafeString(Context context, int resId) {
-        if (resId == 0) return "";
+        if (resId == 0) {
+            return "";
+        }
+
         try {
             return context.getString(resId);
         } catch (Resources.NotFoundException e) {
@@ -163,7 +147,6 @@ public class NotificationAdapter extends ListAdapter<ActivityItem, NotificationA
         }
     }
 
-    /** Hapus item dari list, perbarui adapter, dan simpan perubahan ke UserSession */
     private void deleteNotification(ActivityItem item) {
         List<ActivityItem> current = new ArrayList<>(getCurrentList());
         current.remove(item);
@@ -171,39 +154,34 @@ public class NotificationAdapter extends ListAdapter<ActivityItem, NotificationA
         UserSession.getInstance().saveActivities(current);
     }
 
-    // --- DiffUtil Callback ---
 
-    /**
-     * Callback DiffUtil untuk membandingkan dua item:
-     * - areItemsTheSame: bandingkan berdasarkan timestamp (ID unik)
-     * - areContentsTheSame: bandingkan konten via equals() di ActivityItem
-     */
-    private static final DiffUtil.ItemCallback<ActivityItem> DIFF_CALLBACK =
-            new DiffUtil.ItemCallback<>() {
-                @Override
-                public boolean areItemsTheSame(@NonNull ActivityItem o, @NonNull ActivityItem n) {
-                    return o.getTimestamp() == n.getTimestamp();
-                }
+    // ─── DiffUtil Callback ───────────────────────────────────────────────────
 
-                @Override
-                public boolean areContentsTheSame(@NonNull ActivityItem o, @NonNull ActivityItem n) {
-                    return o.equals(n);
-                }
-            };
+    private static final DiffUtil.ItemCallback<ActivityItem> DIFF_CALLBACK = new DiffUtil.ItemCallback<>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull ActivityItem o, @NonNull ActivityItem n) {
+            return o.getTimestamp() == n.getTimestamp();
+        }
 
-    // --- ViewHolder ---
+        @Override
+        public boolean areContentsTheSame(@NonNull ActivityItem o, @NonNull ActivityItem n) {
+            return o.equals(n);
+        }
+    };
 
-    /** ViewHolder yang menyimpan referensi view dalam satu item notifikasi */
+
+    // ─── ViewHolder ──────────────────────────────────────────────────────────
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView  tvTitle, tvDesc, tvTime;
+        TextView tvTitle, tvDesc, tvTime;
         ImageView ivIcon;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tvActivityTitle);
-            tvDesc  = itemView.findViewById(R.id.tvActivityDesc);
-            tvTime  = itemView.findViewById(R.id.tvActivityTime);
-            ivIcon  = itemView.findViewById(R.id.iconActivity);
+            tvDesc = itemView.findViewById(R.id.tvActivityDesc);
+            tvTime = itemView.findViewById(R.id.tvActivityTime);
+            ivIcon = itemView.findViewById(R.id.iconActivity);
         }
     }
 }

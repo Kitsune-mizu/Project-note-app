@@ -36,7 +36,6 @@ import com.android.alpha.ui.geminichat.ChatSessionManager;
 import com.android.alpha.ui.auth.LoginActivity;
 import com.android.alpha.ui.notifications.NotificationActivity;
 import com.android.alpha.utils.DialogUtils;
-import com.android.alpha.utils.LoadingDialog;
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 
@@ -45,61 +44,49 @@ import org.json.JSONObject;
 import java.util.Locale;
 import java.util.Objects;
 
-/**
- * Host activity yang mengelola navigation drawer, fragment navigation,
- * toolbar title, profile header, notification badge, dan user session.
-
- * PERUBAHAN:
- * - highlightActiveMenu()  → rekursif ke sub-menu agar highlight bekerja
- * - showGuestProfile()     → email guest diisi @string/placeholder_guest_email
- * - onNavigationItemSelected() → nav_gemini membuka ChatActivity
- * - getFragmentForMenu()   → tidak berubah (Gemini bukan fragment)
- */
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         UserSession.UserSessionListener {
 
-    // ─── CONSTANTS ─────────────────────────────────────────────────────────────
-    private static final int  PERMISSION_REQUEST_CODE = 101;
-    private static final long MIN_LOADING_DURATION = 1000; // minimal loading muncul 1 detik
+    // ─── Constants & Variables ───────────────────────────────────────────────
+
+    private static final int PERMISSION_REQUEST_CODE = 101;
+    private static final long MIN_LOADING_DURATION = 1000;
+    private static final long LOGOUT_DELAY = 200;
+    private final String TAG = "MainActivity";
+
     private long loadingStartTime = 0;
-    private static final long LOGOUT_DELAY            = 200;
-    private final        String TAG                   = "MainActivity";
 
-    // ─── UI ────────────────────────────────────────────────────────────────────
-    private DrawerLayout        drawerLayout;
-    private NavigationView      navigationView;
-    private Toolbar             toolbar;
-    private ImageView           ivProfile;
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+    private Toolbar toolbar;
+    private ImageView ivProfile;
     private LottieAnimationView lottieProfileNav;
-    private TextView            tvUsername, tvUserEmail;
-    private View                notificationBadge;
+    private TextView tvUsername, tvUserEmail;
+    private View notificationBadge;
 
-    // ─── UTILS ─────────────────────────────────────────────────────────────────
-    private LoadingDialog  loadingDialog;
-    private final Handler  handler   = new Handler();
-    private float          startX;
-    private boolean        isSwiping = false;
+    private final Handler handler = new Handler(Looper.getMainLooper());
+    private float startX;
+    private boolean isSwiping = false;
 
-    // ══════════════════════════════════════════════════════════════════════════
-    // INTERFACE
-    // ══════════════════════════════════════════════════════════════════════════
+
+    // ─── Interfaces ──────────────────────────────────────────────────────────
 
     public interface ToolbarTitleProvider {
         int getToolbarTitleRes();
     }
 
-    // ══════════════════════════════════════════════════════════════════════════
-    // LIFECYCLE
-    // ══════════════════════════════════════════════════════════════════════════
+
+    // ─── Lifecycle ───────────────────────────────────────────────────────────
 
     @Override
     protected void attachBaseContext(Context newBase) {
         String lang = "en";
-        try { lang = UserSession.getInstance().getLanguage(); }
-        catch (IllegalStateException ignored) {}
-        super.attachBaseContext(
-                com.android.alpha.utils.LocaleHelper.setLocale(newBase, lang));
+        try {
+            lang = UserSession.getInstance().getLanguage();
+        } catch (IllegalStateException ignored) {
+        }
+        super.attachBaseContext(com.android.alpha.utils.LocaleHelper.setLocale(newBase, lang));
     }
 
     @Override
@@ -121,7 +108,10 @@ public class MainActivity extends BaseActivity
 
         showFragment(new HomeFragment(), "Home", false);
 
-        if (getIntent().getBooleanExtra("show_badge", false)) showNotificationBadge();
+        if (getIntent().getBooleanExtra("show_badge", false)) {
+            showNotificationBadge();
+        }
+
         requestNotificationPermission();
         session.setBadgeListener(badgeSessionListener);
     }
@@ -132,36 +122,40 @@ public class MainActivity extends BaseActivity
         applyCurrentLanguage();
         updateToolbarTitleByFragment();
 
-        Fragment fragment = getSupportFragmentManager()
-                .findFragmentById(R.id.fragment_container);
-        if (fragment instanceof HomeFragment) ((HomeFragment) fragment).refreshNotes();
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if (fragment instanceof HomeFragment) {
+            ((HomeFragment) fragment).refreshNotes();
+        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         UserSession session = getSession();
-        if (session != null) session.removeListener();
+        if (session != null) {
+            session.removeListener();
+        }
     }
 
-    private UserSession getSession() { return UserSession.getInstance(); }
+    private UserSession getSession() {
+        return UserSession.getInstance();
+    }
 
-    // ══════════════════════════════════════════════════════════════════════════
-    // INITIALIZATION
-    // ══════════════════════════════════════════════════════════════════════════
+
+    // ─── Initialization ──────────────────────────────────────────────────────
 
     private void initViews() {
-        drawerLayout   = findViewById(R.id.drawer_layout);
+        drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
-        toolbar        = findViewById(R.id.toolbar);
-        loadingDialog  = new LoadingDialog(this);
+        toolbar = findViewById(R.id.toolbar);
     }
 
-    private void setupToolbar() { setSupportActionBar(toolbar); }
+    private void setupToolbar() {
+        setSupportActionBar(toolbar);
+    }
 
-    // ══════════════════════════════════════════════════════════════════════════
-    // NAVIGATION DRAWER
-    // ══════════════════════════════════════════════════════════════════════════
+
+    // ─── Navigation Drawer ───────────────────────────────────────────────────
 
     private void setupNavigationDrawer() {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
@@ -179,11 +173,11 @@ public class MainActivity extends BaseActivity
 
         navigationView.setNavigationItemSelectedListener(this);
 
-        View header      = navigationView.getHeaderView(0);
-        ivProfile        = header.findViewById(R.id.ivProfile);
+        View header = navigationView.getHeaderView(0);
+        ivProfile = header.findViewById(R.id.ivProfile);
         lottieProfileNav = header.findViewById(R.id.lottieProfileNav);
-        tvUsername       = header.findViewById(R.id.tvUsername);
-        tvUserEmail      = header.findViewById(R.id.tvUserEmail);
+        tvUsername = header.findViewById(R.id.tvUsername);
+        tvUserEmail = header.findViewById(R.id.tvUserEmail);
 
         updateNavHeaderProfile();
         colorLogoutItem();
@@ -201,10 +195,12 @@ public class MainActivity extends BaseActivity
         return super.onOptionsItemSelected(item);
     }
 
-    /** Warna merah pada teks item Logout. */
     private void colorLogoutItem() {
         MenuItem logoutItem = navigationView.getMenu().findItem(R.id.nav_logout);
-        if (logoutItem == null) return;
+        if (logoutItem == null) {
+            return;
+        }
+
         SpannableString s = new SpannableString(logoutItem.getTitle());
         TypedValue tv = new TypedValue();
         getTheme().resolveAttribute(R.attr.color_error, tv, true);
@@ -230,37 +226,48 @@ public class MainActivity extends BaseActivity
 
         NavigationView.LayoutParams params = new NavigationView.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        );
         params.gravity = Gravity.BOTTOM;
         footer.setLayoutParams(params);
 
         navigationView.addView(footer);
     }
 
-    // ══════════════════════════════════════════════════════════════════════════
-    // BACK GESTURE
-    // ══════════════════════════════════════════════════════════════════════════
+
+    // ─── Back Gesture ────────────────────────────────────────────────────────
 
     private void setupGestureBack() {
         View container = findViewById(R.id.fragment_container);
         container.setOnTouchListener((v, e) -> {
-            Fragment current = getSupportFragmentManager()
-                    .findFragmentById(R.id.fragment_container);
-            if (current instanceof HomeFragment) return false;
+            Fragment current = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            if (current instanceof HomeFragment) {
+                return false;
+            }
 
             switch (e.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    startX    = e.getX();
+                    startX = e.getX();
                     return true;
+
                 case MotionEvent.ACTION_MOVE:
                     float delta = e.getX() - startX;
-                    if (delta > 0) { isSwiping = true; v.setTranslationX(delta * 0.8f); }
+                    if (delta > 0) {
+                        isSwiping = true;
+                        v.setTranslationX(delta * 0.8f);
+                    }
                     return true;
+
                 case MotionEvent.ACTION_UP:
                     float move = e.getX() - startX;
-                    if (isSwiping && move > v.getWidth() / 3f) animateBack(v);
-                    else v.animate().translationX(0).setDuration(200).start();
-                    if (Math.abs(move) < 10) v.performClick();
+                    if (isSwiping && move > v.getWidth() / 3f) {
+                        animateBack(v);
+                    } else {
+                        v.animate().translationX(0).setDuration(200).start();
+                    }
+                    if (Math.abs(move) < 10) {
+                        v.performClick();
+                    }
                     isSwiping = false;
                     return true;
             }
@@ -275,20 +282,16 @@ public class MainActivity extends BaseActivity
         }).start();
     }
 
-    // ══════════════════════════════════════════════════════════════════════════
-    // FRAGMENT NAVIGATION
-    // ══════════════════════════════════════════════════════════════════════════
+
+    // ─── Fragment Navigation ─────────────────────────────────────────────────
 
     public void showFragment(Fragment fragment, String title, boolean addToBackStack) {
-        showLoading();
-        loadingStartTime = System.currentTimeMillis();
+        showLoading(); // Custom implementation handles the start time
 
         handler.postDelayed(() -> {
             if (addToBackStack) {
                 getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(
-                                android.R.anim.fade_in,
-                                android.R.anim.fade_out)
+                        .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                         .replace(R.id.fragment_container, fragment, title)
                         .addToBackStack(title)
                         .commitAllowingStateLoss();
@@ -301,36 +304,26 @@ public class MainActivity extends BaseActivity
             getSupportFragmentManager().executePendingTransactions();
             syncTitleAndHighlight();
 
-            // Hitung sisa waktu loading agar minimal MIN_LOADING_DURATION
             long elapsed = System.currentTimeMillis() - loadingStartTime;
             long remainingTime = Math.max(0, MIN_LOADING_DURATION - elapsed);
 
-            handler.postDelayed(() -> loadingDialog.dismiss(), remainingTime);
-        }, 300); // Delay awal lebih kecil untuk proses fragment
+            handler.postDelayed(this::hideLoading, remainingTime);
+        }, 300);
     }
 
     private void setupBackStackListener() {
-        getSupportFragmentManager().addOnBackStackChangedListener(() -> {
-            // FIX 2: Post ke main looper agar fragment sudah fully attached
-            // sebelum kita baca via findFragmentById(). Tanpa ini, saat back stack
-            // di-pop (gesture back / back button), fragment lama masih terbaca.
-            new Handler(Looper.getMainLooper()).post(this::syncTitleAndHighlight);
-        });
+        getSupportFragmentManager().addOnBackStackChangedListener(() -> new Handler(Looper.getMainLooper()).post(this::syncTitleAndHighlight));
     }
 
-    /**
-     * Single source of truth untuk update title toolbar + highlight nav.
-     * Dipanggil dari: showFragment(), backStackListener, onResume().
-     */
     private void syncTitleAndHighlight() {
-        Fragment f = getSupportFragmentManager()
-                .findFragmentById(R.id.fragment_container);
-        if (getSupportActionBar() == null) return;
+        Fragment f = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if (getSupportActionBar() == null) {
+            return;
+        }
 
         if (f instanceof ToolbarTitleProvider) {
             getSupportActionBar().setTitle(((ToolbarTitleProvider) f).getToolbarTitleRes());
         } else if (f == null) {
-            // Tidak ada fragment → default ke Home
             getSupportActionBar().setTitle(R.string.menu_title_home);
             Typeface tf = getAppFont();
 
@@ -345,32 +338,24 @@ public class MainActivity extends BaseActivity
         highlightActiveMenu(f);
     }
 
-    // Tetap ada untuk kompatibilitas (dipanggil dari onResume)
     private void updateToolbarTitleByFragment() {
         syncTitleAndHighlight();
     }
 
-    /**
-     * Men-check item nav yang sesuai fragment aktif.
-     * Rekursif ke sub-menu agar semua level ter-update.
-     * f == null → default highlight ke Home.
-     */
     private void highlightActiveMenu(Fragment f) {
         if (navigationView == null) return;
 
-        int activeId = R.id.nav_home; // default
-        if      (f instanceof ProfileFragment)  activeId = R.id.nav_profile;
-        else if (f instanceof SettingsFragment) activeId = R.id.nav_settings;
-        // HomeFragment / null → nav_home
-        // Notes/Gemini/Notif  → tidak punya fragment, tidak di-highlight
+        int activeId = R.id.nav_home;
+
+        if (f instanceof ProfileFragment) {
+            activeId = R.id.nav_profile;
+        } else if (f instanceof SettingsFragment) {
+            activeId = R.id.nav_settings;
+        }
 
         setMenuItemChecked(navigationView.getMenu(), activeId);
     }
 
-    /**
-     * Rekursif: iterasi seluruh item + sub-menu,
-     * set checked=true hanya untuk activeId, lainnya false.
-     */
     private void setMenuItemChecked(Menu menu, int activeId) {
         for (int i = 0; i < menu.size(); i++) {
             MenuItem item = menu.getItem(i);
@@ -382,9 +367,8 @@ public class MainActivity extends BaseActivity
         }
     }
 
-    // ══════════════════════════════════════════════════════════════════════════
-    // DRAWER ITEM SELECTION
-    // ══════════════════════════════════════════════════════════════════════════
+
+    // ─── Drawer Item Selection ───────────────────────────────────────────────
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -398,21 +382,20 @@ public class MainActivity extends BaseActivity
             hideNotificationBadge();
 
         } else if (id == R.id.nav_notes) {
-            // Notes membuka NoteActivity — bukan fragment
             startActivity(new Intent(this, NoteActivity.class));
 
         } else if (id == R.id.nav_gemini) {
-            // Gemini membuka ChatActivity — bukan fragment
             startActivity(new Intent(this, ChatActivity.class));
 
         } else {
             Fragment fragment = getFragmentForMenu(id);
-            if (fragment != null)
+            if (fragment != null) {
                 showFragment(
                         fragment,
                         Objects.requireNonNull(item.getTitle()).toString(),
                         id != R.id.nav_home
                 );
+            }
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
@@ -420,44 +403,39 @@ public class MainActivity extends BaseActivity
     }
 
     private Fragment getFragmentForMenu(int id) {
-        if (id == R.id.nav_home)     return new HomeFragment();
-        if (id == R.id.nav_profile)  return new ProfileFragment();
+        if (id == R.id.nav_home) return new HomeFragment();
+        if (id == R.id.nav_profile) return new ProfileFragment();
         if (id == R.id.nav_settings) return new SettingsFragment();
         return null;
     }
 
-    // ══════════════════════════════════════════════════════════════════════════
-    // PROFILE HEADER
-    // ══════════════════════════════════════════════════════════════════════════
+
+    // ─── Profile Header ──────────────────────────────────────────────────────
 
     @Override
-    public void onProfileUpdated() { runOnUiThread(this::updateNavHeaderProfile); }
+    public void onProfileUpdated() {
+        runOnUiThread(this::updateNavHeaderProfile);
+    }
 
-    /**
-     * Mengisi nav header dengan data profil user yang sedang login.
-     * Logika SAMA PERSIS dengan ProfileFragment.refreshProfileData()
-     * agar email konsisten di kedua tempat:
-     *   ada email di JSON → pakai itu
-     *   tidak ada         → username + "@example.com"  (sama dengan ProfileFragment)
-     *   guest/tidak login → showGuestProfile()
-     */
     public void updateNavHeaderProfile() {
         try {
-            UserSession session  = getSession();
-            String      username = session.getUsername();
+            UserSession session = getSession();
+            String username = session.getUsername();
 
-            if (username == null || username.isEmpty()) { showGuestProfile(); return; }
+            if (username == null || username.isEmpty()) {
+                showGuestProfile();
+                return;
+            }
 
-            // loadCurrentProfileJson() — API yang sama dipakai ProfileFragment
-            JSONObject json     = session.loadCurrentProfileJson();
-            String     fullName = username;
-            String     email    = username + "@example.com"; // fallback sama dengan ProfileFragment
-            String     photo    = "";
+            JSONObject json = session.loadCurrentProfileJson();
+            String fullName = username;
+            String email = username + "@example.com";
+            String photo = "";
 
             if (json != null) {
-                fullName = json.optString("username",  fullName);
-                email    = json.optString("email",     email);   // timpa fallback jika tersimpan
-                photo    = json.optString("photoPath", "");
+                fullName = json.optString("username", fullName);
+                email = json.optString("email", email);
+                photo = json.optString("photoPath", "");
             }
 
             tvUsername.setText(fullName);
@@ -481,35 +459,31 @@ public class MainActivity extends BaseActivity
         }
     }
 
-    /**
-     * Tampilkan Lottie guest dan isi email dengan fallback guest.
-     * Format email guest mengikuti pola yang sama: "guest@example.com"
-     * bukan string statis, agar konsisten dengan logika ProfileFragment.
-     */
     private void showGuestProfile() {
         ivProfile.setVisibility(View.GONE);
         lottieProfileNav.setVisibility(View.VISIBLE);
         tvUsername.setText(R.string.title_guest);
-        tvUserEmail.setText(R.string.placeholder_email); // "guest@example.com"
+        tvUserEmail.setText(R.string.placeholder_email);
         lottieProfileNav.setAnimation(R.raw.profile_animation);
         lottieProfileNav.playAnimation();
     }
 
-    // ══════════════════════════════════════════════════════════════════════════
-    // NOTIFICATION BADGE
-    // ══════════════════════════════════════════════════════════════════════════
+
+    // ─── Notification Badge ──────────────────────────────────────────────────
 
     private void setupNotificationBadge() {
-        MenuItem    item    = navigationView.getMenu().findItem(R.id.nav_notifications);
+        MenuItem item = navigationView.getMenu().findItem(R.id.nav_notifications);
         if (item == null) return;
-        FrameLayout frame   = new FrameLayout(this);
-        View        badge   = new View(this);
-        float       density = getResources().getDisplayMetrics().density;
+
+        FrameLayout frame = new FrameLayout(this);
+        View badge = new View(this);
+        float density = getResources().getDisplayMetrics().density;
 
         badge.setBackgroundResource(R.drawable.badge_red_circle);
 
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-                (int) (8 * density), (int) (8 * density));
+                (int) (8 * density), (int) (8 * density)
+        );
         params.gravity = Gravity.TOP | Gravity.END;
         params.setMargins(0, (int) (17 * density), (int) (8 * density), 0);
 
@@ -521,16 +495,19 @@ public class MainActivity extends BaseActivity
     }
 
     public void showNotificationBadge() {
-        if (notificationBadge != null) notificationBadge.setVisibility(View.VISIBLE);
+        if (notificationBadge != null) {
+            notificationBadge.setVisibility(View.VISIBLE);
+        }
     }
 
     public void hideNotificationBadge() {
-        if (notificationBadge != null) notificationBadge.setVisibility(View.GONE);
+        if (notificationBadge != null) {
+            notificationBadge.setVisibility(View.GONE);
+        }
     }
 
-    // ══════════════════════════════════════════════════════════════════════════
-    // LOGOUT
-    // ══════════════════════════════════════════════════════════════════════════
+
+    // ─── Logout ──────────────────────────────────────────────────────────────
 
     private void showLogoutDialog() {
         DialogUtils.showConfirmDialog(
@@ -539,40 +516,44 @@ public class MainActivity extends BaseActivity
                 getString(R.string.logout_message),
                 getString(R.string.logout),
                 getString(R.string.cancel),
-                this::logout, null
+                this::logout,
+                null
         );
     }
 
     public void logout() {
         showLoading();
+
         handler.postDelayed(() -> {
             try {
                 String username = UserSession.getInstance().getUsername();
                 ChatSessionManager.getInstance(this).onUserLogout(username);
                 UserSession.getInstance().logout();
+
+                handler.removeCallbacksAndMessages(null);
+
+                hideLoading();
+
                 Intent i = new Intent(this, LoginActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
                 finish();
+
             } catch (Exception e) {
                 Log.e(TAG, "Logout error: " + e.getMessage());
             }
-            long elapsed = System.currentTimeMillis() - loadingStartTime;
-            long remainingTime = Math.max(0, MIN_LOADING_DURATION - elapsed);
-            handler.postDelayed(() -> loadingDialog.dismiss(), remainingTime);
         }, LOGOUT_DELAY);
     }
 
-    // ══════════════════════════════════════════════════════════════════════════
-    // UTILITIES
-    // ══════════════════════════════════════════════════════════════════════════
+
+    // ─── Utilities ───────────────────────────────────────────────────────────
 
     public void applyCurrentLanguage() {
         String lang = UserSession.getInstance().getLanguage();
         Locale locale = new Locale(lang == null || lang.isEmpty() ? "en" : lang);
         Locale.setDefault(locale);
 
-        android.content.res.Resources     res    = getResources();
+        android.content.res.Resources res = getResources();
         android.content.res.Configuration config = res.getConfiguration();
         config.setLocale(locale);
         res.updateConfiguration(config, res.getDisplayMetrics());
@@ -580,43 +561,45 @@ public class MainActivity extends BaseActivity
 
     private void requestNotificationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
-                && ContextCompat.checkSelfPermission(
-                this, Manifest.permission.POST_NOTIFICATIONS)
-                != PackageManager.PERMISSION_GRANTED) {
+                && ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.POST_NOTIFICATIONS},
                     PERMISSION_REQUEST_CODE);
         }
     }
 
-    private void showLoading() {
+    // Overrides showLoading to attach custom timer logic without redefining the Dialog
+    public void showLoading() {
         runOnUiThread(() -> {
-            if (!loadingDialog.isShowing()) {
-                loadingDialog.show();
-                loadingStartTime = System.currentTimeMillis();
-            }
+            super.showLoading();
+            loadingStartTime = System.currentTimeMillis();
         });
     }
 
-    // ══════════════════════════════════════════════════════════════════════════
-    // SESSION LISTENERS
-    // ══════════════════════════════════════════════════════════════════════════
 
-    private final UserSession.UserSessionListener mainSessionListener =
-            new UserSession.UserSessionListener() {
-                @Override public void onBadgeCleared() {
-                    UserSession.UserSessionListener.super.onBadgeCleared();
-                }
-                @Override public void onProfileUpdated() {
-                    runOnUiThread(MainActivity.this::updateNavHeaderProfile);
-                }
-            };
+    // ─── Session Listeners ───────────────────────────────────────────────────
 
-    private final UserSession.UserSessionListener badgeSessionListener =
-            new UserSession.UserSessionListener() {
-                @Override public void onBadgeCleared()   { hideNotificationBadge(); }
-                @Override public void onProfileUpdated() {
-                    UserSession.UserSessionListener.super.onProfileUpdated();
-                }
-            };
+    private final UserSession.UserSessionListener mainSessionListener = new UserSession.UserSessionListener() {
+        @Override
+        public void onBadgeCleared() {
+            UserSession.UserSessionListener.super.onBadgeCleared();
+        }
+
+        @Override
+        public void onProfileUpdated() {
+            runOnUiThread(MainActivity.this::updateNavHeaderProfile);
+        }
+    };
+
+    private final UserSession.UserSessionListener badgeSessionListener = new UserSession.UserSessionListener() {
+        @Override
+        public void onBadgeCleared() {
+            hideNotificationBadge();
+        }
+
+        @Override
+        public void onProfileUpdated() {
+            UserSession.UserSessionListener.super.onProfileUpdated();
+        }
+    };
 }

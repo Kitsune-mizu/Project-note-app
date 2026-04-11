@@ -16,18 +16,40 @@ import com.android.alpha.utils.LoadingDialog;
 
 public class BaseActivity extends AppCompatActivity {
 
+    private LoadingDialog loadingDialog;
+
+    // ─── Lifecycle ─────────────────────────────────────────────────
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         applyTheme();
         super.onCreate(savedInstanceState);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (loadingDialog != null) {
+            if (loadingDialog.isShowing()) {
+                loadingDialog.dismiss();
+            }
+            loadingDialog = null;
+        }
+    }
+
+    // ─── Theme & Configuration ─────────────────────────────────────
+
     protected void applyTheme() {
         SharedPreferences prefs = getSharedPreferences("app_settings", MODE_PRIVATE);
         String mode = prefs.getString("theme_mode", "system");
         String colorTheme = prefs.getString("color_theme", "blue");
 
-        // APPLY COLOR THEME
+        applyColorTheme(colorTheme);
+        applyDarkMode(mode);
+    }
+
+    private void applyColorTheme(String colorTheme) {
         switch (colorTheme) {
             case "purple":
                 setTheme(R.style.Theme_Alpha_Purple);
@@ -41,12 +63,14 @@ public class BaseActivity extends AppCompatActivity {
             case "orange":
                 setTheme(R.style.Theme_Alpha_Orange);
                 break;
+            case "blue":
             default:
                 setTheme(R.style.Theme_Alpha);
                 break;
         }
+    }
 
-        // APPLY DARK MODE
+    private void applyDarkMode(String mode) {
         switch (mode) {
             case "light":
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -54,13 +78,16 @@ public class BaseActivity extends AppCompatActivity {
             case "dark":
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 break;
+            case "system":
             default:
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
                 break;
         }
     }
 
-    // ================= FONT =================
+
+    // ─── Typography & Fonts ────────────────────────────────────────
+
     protected Typeface getAppFont() {
         try {
             return ResourcesCompat.getFont(this, R.font.linottesemibold);
@@ -78,10 +105,37 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    // ================= COLOR ATTR =================
+
+    // ─── Resource Utilities ────────────────────────────────────────
+
     public int getAttrColor(int attr) {
         TypedValue tv = new TypedValue();
         getTheme().resolveAttribute(attr, tv, true);
         return tv.data;
+    }
+
+
+    // ─── Dialog Utilities (Added) ──────────────────────────────────
+
+    public void showLoading() {
+        if (isFinishing() || isDestroyed()) return;
+
+        if (loadingDialog == null) {
+            loadingDialog = new LoadingDialog(this);
+        }
+
+        if (!loadingDialog.isShowing()) {
+            loadingDialog.show();
+        }
+    }
+
+    public void hideLoading() {
+        try {
+            if (loadingDialog != null && loadingDialog.isShowing()) {
+                if (!isFinishing() && !isDestroyed()) {
+                    loadingDialog.dismiss();
+                }
+            }
+        } catch (Exception ignored) {}
     }
 }

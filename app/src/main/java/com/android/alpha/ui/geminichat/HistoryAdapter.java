@@ -18,8 +18,10 @@ import java.util.List;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
 
+    // ─── Variables & Interfaces ──────────────────────────────────────────────
+
     private final List<ChatSession> sessions;
-    private final HistoryListener   listener;
+    private final HistoryListener listener;
 
     public interface HistoryListener {
         void onSessionClick(ChatSession session);
@@ -27,10 +29,16 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         void onDeleteClick(ChatSession session, int position);
     }
 
+
+    // ─── Constructor ─────────────────────────────────────────────────────────
+
     public HistoryAdapter(List<ChatSession> sessions, HistoryListener listener) {
         this.sessions = sessions;
         this.listener = listener;
     }
+
+
+    // ─── Adapter Overrides ───────────────────────────────────────────────────
 
     @NonNull
     @Override
@@ -46,21 +54,27 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     }
 
     @Override
-    public int getItemCount() { return sessions.size(); }
+    public int getItemCount() {
+        return sessions.size();
+    }
+
+
+    // ─── ViewHolder ──────────────────────────────────────────────────────────
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView    titleText;
+        private final TextView titleText;
         private final ImageButton moreButton;
 
         public ViewHolder(@NonNull View v) {
             super(v);
-            titleText  = v.findViewById(R.id.historyTitle);
+            titleText = v.findViewById(R.id.historyTitle);
             moreButton = v.findViewById(R.id.historyMoreBtn);
         }
 
         void bind(ChatSession session, HistoryListener listener) {
             titleText.setText(session.getTitle());
+
             itemView.setOnClickListener(v -> listener.onSessionClick(session));
 
             moreButton.setOnClickListener(anchor -> {
@@ -72,26 +86,34 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
                         popup,
                         ViewGroup.LayoutParams.WRAP_CONTENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT,
-                        true);
+                        true
+                );
+
                 popupWindow.setElevation(16f);
                 popupWindow.setOutsideTouchable(true);
                 popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
                 popup.findViewById(R.id.menuRename).setOnClickListener(v -> {
                     int pos = getBindingAdapterPosition();
-                    if (pos != RecyclerView.NO_POSITION) listener.onRenameClick(session, pos);
+                    if (pos != RecyclerView.NO_POSITION) {
+                        listener.onRenameClick(session, pos);
+                    }
                     popupWindow.dismiss();
                 });
 
                 popup.findViewById(R.id.menuDelete).setOnClickListener(v -> {
                     int pos = getBindingAdapterPosition();
-                    if (pos != RecyclerView.NO_POSITION) listener.onDeleteClick(session, pos);
+                    if (pos != RecyclerView.NO_POSITION) {
+                        listener.onDeleteClick(session, pos);
+                    }
                     popupWindow.dismiss();
                 });
 
                 popup.measure(
                         View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
-                        View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+                        View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+                );
+
                 int offsetX = -popup.getMeasuredWidth() + anchor.getWidth();
                 popupWindow.showAsDropDown(anchor, offsetX, 0);
             });

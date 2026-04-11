@@ -13,25 +13,17 @@ import com.android.alpha.R;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
 
-/**
- * Utility class untuk menampilkan berbagai jenis BottomSheetDialog secara konsisten.
- * Semua dialog bersifat stateless dan dipanggil via static method.
- */
 public class DialogUtils {
 
-    // --- Interface ---
+    // ─── Interface ───────────────────────────────────────────────────────────
 
-    /** Callback untuk dialog yang membutuhkan input teks dari pengguna */
     public interface DialogCallback {
         void onConfirm(String inputText);
     }
 
-    // --- Dialog Factory ---
 
-    /**
-     * Buat BottomSheetDialog dengan layout yang ditentukan.
-     * View hasil inflate dikembalikan via array viewHolder agar bisa diakses pemanggil.
-     */
+    // ─── Dialog Factory ──────────────────────────────────────────────────────
+
     @SuppressLint("InflateParams")
     private static BottomSheetDialog createDialog(Context context, int layoutId, View[] viewHolder) {
         BottomSheetDialog dialog = new BottomSheetDialog(context, R.style.BottomSheetDialogTheme);
@@ -41,12 +33,9 @@ public class DialogUtils {
         return dialog;
     }
 
-    // --- Dialog Types ---
 
-    /**
-     * Tampilkan dialog konfirmasi dengan dua tombol (positif dan negatif).
-     * Cocok untuk aksi yang membutuhkan persetujuan pengguna sebelum dieksekusi.
-     */
+    // ─── Dialog Types ────────────────────────────────────────────────────────
+
     @SuppressLint("InflateParams")
     public static void showConfirmDialog(
             Context context,
@@ -61,8 +50,8 @@ public class DialogUtils {
         BottomSheetDialog dialog = createDialog(context, R.layout.dialog_confirm, holder);
         View view = holder[0];
 
-        TextView tvTitle        = view.findViewById(R.id.tvTitle);
-        TextView tvMessage      = view.findViewById(R.id.tvMessage);
+        TextView tvTitle = view.findViewById(R.id.tvTitle);
+        TextView tvMessage = view.findViewById(R.id.tvMessage);
         MaterialButton btnPositive = view.findViewById(R.id.btnPositive);
         MaterialButton btnNegative = view.findViewById(R.id.btnNegative);
 
@@ -72,21 +61,22 @@ public class DialogUtils {
         btnNegative.setText(negativeText);
 
         btnPositive.setOnClickListener(v -> {
-            if (onConfirm != null) onConfirm.run();
+            if (onConfirm != null) {
+                onConfirm.run();
+            }
             dialog.dismiss();
         });
+
         btnNegative.setOnClickListener(v -> {
-            if (onCancel != null) onCancel.run();
+            if (onCancel != null) {
+                onCancel.run();
+            }
             dialog.dismiss();
         });
 
         dialog.show();
     }
 
-    /**
-     * Tampilkan dialog dengan input teks dan dua tombol (konfirmasi dan batal).
-     * Teks yang diinput dikembalikan melalui DialogCallback.
-     */
     @SuppressLint("InflateParams")
     public static void showInputDialog(
             Context context,
@@ -101,10 +91,10 @@ public class DialogUtils {
         BottomSheetDialog dialog = createDialog(context, R.layout.dialog_input, holder);
         View view = holder[0];
 
-        TextView tvTitle        = view.findViewById(R.id.tvDialogTitle);
-        EditText etInput        = view.findViewById(R.id.etInput);
+        TextView tvTitle = view.findViewById(R.id.tvDialogTitle);
+        EditText etInput = view.findViewById(R.id.etInput);
         MaterialButton btnConfirm = view.findViewById(R.id.btnConfirm);
-        MaterialButton btnCancel  = view.findViewById(R.id.btnCancel);
+        MaterialButton btnCancel = view.findViewById(R.id.btnCancel);
 
         tvTitle.setText(title);
         etInput.setHint(hint);
@@ -121,7 +111,6 @@ public class DialogUtils {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String input = s.toString().trim();
-
                 boolean isValid = !input.isEmpty();
                 btnConfirm.setEnabled(isValid);
             }
@@ -143,18 +132,17 @@ public class DialogUtils {
                 return;
             }
 
-            if (callback != null) callback.onConfirm(input);
+            if (callback != null) {
+                callback.onConfirm(input);
+            }
+
             dialog.dismiss();
         });
-        btnCancel.setOnClickListener(v -> dialog.dismiss());
 
+        btnCancel.setOnClickListener(v -> dialog.dismiss());
         dialog.show();
     }
 
-    /**
-     * Tampilkan dialog informasi dengan satu tombol penutup.
-     * Cocok untuk menampilkan pesan atau pemberitahuan tanpa aksi lanjutan.
-     */
     @SuppressLint("InflateParams")
     public static void showInfoDialog(
             Context context,
@@ -167,26 +155,24 @@ public class DialogUtils {
         BottomSheetDialog dialog = createDialog(context, R.layout.dialog_info, holder);
         View view = holder[0];
 
-        TextView tvTitle        = view.findViewById(R.id.tvTitle);
-        TextView tvMessage      = view.findViewById(R.id.tvMessage);
-        MaterialButton btnOk    = view.findViewById(R.id.btnOk);
+        TextView tvTitle = view.findViewById(R.id.tvTitle);
+        TextView tvMessage = view.findViewById(R.id.tvMessage);
+        MaterialButton btnOk = view.findViewById(R.id.btnOk);
 
         tvTitle.setText(title);
         tvMessage.setText(message);
         btnOk.setText(buttonText);
 
         btnOk.setOnClickListener(v -> {
-            if (onClose != null) onClose.run();
+            if (onClose != null) {
+                onClose.run();
+            }
             dialog.dismiss();
         });
 
         dialog.show();
     }
 
-    /**
-     * Tampilkan dialog konfirmasi dengan countdown timer pada tombol positif.
-     * Tombol positif dinonaktifkan hingga hitungan mundur selesai, lalu baru bisa diklik.
-     */
     @SuppressLint("InflateParams")
     public static void showCountdownDialog(
             Context context,
@@ -201,8 +187,8 @@ public class DialogUtils {
         BottomSheetDialog dialog = createDialog(context, R.layout.dialog_confirm, holder);
         View view = holder[0];
 
-        TextView tvTitle           = view.findViewById(R.id.tvTitle);
-        TextView tvMessage         = view.findViewById(R.id.tvMessage);
+        TextView tvTitle = view.findViewById(R.id.tvTitle);
+        TextView tvMessage = view.findViewById(R.id.tvMessage);
         MaterialButton btnPositive = view.findViewById(R.id.btnPositive);
         MaterialButton btnNegative = view.findViewById(R.id.btnNegative);
 
@@ -211,7 +197,6 @@ public class DialogUtils {
         btnNegative.setText(negativeText);
         btnPositive.setEnabled(false);
 
-        // Countdown: perbarui label tombol setiap detik, aktifkan setelah hitungan selesai
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
             int secondsLeft = countdownSeconds;
@@ -219,8 +204,7 @@ public class DialogUtils {
             @Override
             public void run() {
                 if (secondsLeft > 0) {
-                    btnPositive.setText(
-                            context.getString(R.string.text_with_countdown, positiveText, secondsLeft));
+                    btnPositive.setText(context.getString(R.string.text_with_countdown, positiveText, secondsLeft));
                     secondsLeft--;
                     handler.postDelayed(this, 1000);
                 } else {
@@ -228,7 +212,9 @@ public class DialogUtils {
                     btnPositive.setText(positiveText);
                     btnPositive.setOnClickListener(v -> {
                         dialog.dismiss();
-                        if (onNext != null) onNext.run();
+                        if (onNext != null) {
+                            onNext.run();
+                        }
                     });
                 }
             }

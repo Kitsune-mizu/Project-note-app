@@ -49,27 +49,29 @@ import java.util.Locale;
 @SuppressLint("CustomSplashScreen")
 public class SplashActivity extends BaseActivity {
 
+    // ─── Constants & Variables ───────────────────────────────────────────────
+
     private static final String TAG = "SplashActivity";
     private static final int LOCATION_PERMISSION_REQUEST = 101;
-    private static final int REQUEST_CHECK_SETTINGS      = 102;
+    private static final int REQUEST_CHECK_SETTINGS = 102;
 
-    // Phase 1 Views
     private LottieAnimationView lottieAnimationView;
-
-    // Phase 2 Views
     private LinearLayout greetingContainer;
-    private ImageView    imgFlag;
-    private TextView     tvGreeting;
+    private ImageView imgFlag;
+    private TextView tvGreeting;
 
     private FusedLocationProviderClient fusedLocationClient;
-    private LocationCallback            locationCallback;
-    private LocationRequest             locationRequest;
+    private LocationCallback locationCallback;
+    private LocationRequest locationRequest;
 
     private String lastCountry = "";
     private boolean isFlagLoaded = false;
     private boolean isGreetingReady = false;
 
     private final Handler handler = new Handler();
+
+
+    // ─── Lifecycle ───────────────────────────────────────────────────────────
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,28 +85,43 @@ public class SplashActivity extends BaseActivity {
         playSplashSequence();
     }
 
-    private void initViews() {
-        // Phase 1
-        lottieAnimationView = findViewById(R.id.lottieAnimationView);
 
-        // Phase 2
+    // ─── Initialization ──────────────────────────────────────────────────────
+
+    private void initViews() {
+        lottieAnimationView = findViewById(R.id.lottieAnimationView);
         greetingContainer = findViewById(R.id.greetingContainer);
-        imgFlag           = findViewById(R.id.imgFlag);
-        tvGreeting        = findViewById(R.id.tvGreeting);
+        imgFlag = findViewById(R.id.imgFlag);
+        tvGreeting = findViewById(R.id.tvGreeting);
 
         TextView tvVersion = findViewById(R.id.tvVersion);
 
-        // Apply font dari BaseActivity
         applyFont(tvGreeting, tvVersion);
 
         if (tvVersion != null) {
             try {
-                String v = getPackageManager()
-                        .getPackageInfo(getPackageName(), 0).versionName;
+                String v = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
                 tvVersion.setText(getString(R.string.splash_version_format, v));
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
         }
     }
+
+
+    // ─── Navigation ──────────────────────────────────────────────────────────
+
+    private void goNext() {
+        if (fusedLocationClient != null && locationCallback != null) {
+            fusedLocationClient.removeLocationUpdates(locationCallback);
+        }
+
+        startActivity(new Intent(this, UserSession.getInstance().isLoggedIn() ? MainActivity.class : LoginActivity.class));
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        finish();
+    }
+
+
+    // ─── Animations ──────────────────────────────────────────────────────────
 
     private void playSplashSequence() {
         lottieAnimationView.setAnimation(R.raw.splash_animation);
@@ -112,30 +129,129 @@ public class SplashActivity extends BaseActivity {
         handler.postDelayed(this::checkLocationPermission, 3000);
     }
 
-    private void goNext() {
-        if (fusedLocationClient != null && locationCallback != null)
-            fusedLocationClient.removeLocationUpdates(locationCallback);
+    private void preloadFlagAndGreeting(String countryCode) {
+        isFlagLoaded = false;
+        isGreetingReady = false;
 
-        startActivity(new Intent(this,
-                UserSession.getInstance().isLoggedIn() ? MainActivity.class : LoginActivity.class));
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-        finish();
+        String flagUrl = "https://flagcdn.com/w320/" + countryCode + ".png";
+        String greeting = getManualGreeting(countryCode);
+
+        tvGreeting.setText(greeting);
+        isGreetingReady = true;
+
+        int size = 200;
+        RequestOptions options = new RequestOptions()
+                .override(size, (int) (size * 0.665f))
+                .transform(new RoundedCorners(12));
+
+        Glide.with(this)
+                .load(flagUrl)
+                .apply(options)
+                .listener(new com.bumptech.glide.request.RequestListener<>() {
+                    @Override
+                    public boolean onLoadFailed(
+                            @androidx.annotation.Nullable com.bumptech.glide.load.engine.GlideException e,
+                            Object model,
+                            com.bumptech.glide.request.target.Target<android.graphics.drawable.Drawable> target,
+                            boolean isFirstResource) {
+                        Log.e(TAG, "Flag load failed", e);
+                        isFlagLoaded = true;
+                        checkAndTransitionToPhase2();
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(
+                            android.graphics.drawable.Drawable resource,
+                            Object model,
+                            com.bumptech.glide.request.target.Target<android.graphics.drawable.Drawable> target,
+                            com.bumptech.glide.load.DataSource dataSource,
+                            boolean isFirstResource) {
+                        isFlagLoaded = true;
+                        checkAndTransitionToPhase2();
+                        return false;
+                    }
+                })
+                .into(imgFlag);
     }
 
-    // ── Location Permission ────────────────────────────────────────────────────
+    private void checkAndTransitionToPhase2() {
+        if (isFlagLoaded && isGreetingReady) {
+            handler.post(this::transitionToPhase2);
+        }
+    }
+
+    private void transitionToPhase2() {
+        lottieAnimationView.animate()
+                .alpha(0f)
+                .setDuration(400)
+                .withEndAction(() -> {
+                    lottieAnimationView.setVisibility(View.GONE);
+                    showGreetingSequence();
+                })
+                .start();
+    }
+
+    private void showGreetingSequence() {
+        greetingContainer.setVisibility(View.VISIBLE);
+        greetingContainer.setAlpha(0f);
+
+        imgFlag.setVisibility(View.VISIBLE);
+        imgFlag.setAlpha(0f);
+        imgFlag.setScaleX(0.8f);
+        imgFlag.setScaleY(0.8f);
+
+        imgFlag.animate()
+                .alpha(1f)
+                .scaleX(1f)
+                .scaleY(1f)
+                .setDuration(600)
+                .withStartAction(() -> greetingContainer.animate().alpha(1f).setDuration(600).start())
+                .withEndAction(this::showGreetingText)
+                .start();
+    }
+
+    private void showGreetingText() {
+        tvGreeting.setVisibility(View.VISIBLE);
+        tvGreeting.setAlpha(0f);
+        tvGreeting.setTranslationY(20f);
+
+        tvGreeting.animate()
+                .alpha(1f)
+                .translationY(0f)
+                .setDuration(500)
+                .setStartDelay(200)
+                .withEndAction(() -> handler.postDelayed(this::goNext, 2000))
+                .start();
+    }
+
+
+    // ─── Location Permissions ────────────────────────────────────────────────
 
     private void checkLocationPermission() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                    this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    LOCATION_PERMISSION_REQUEST);
+                    LOCATION_PERMISSION_REQUEST
+            );
         } else {
             checkLocationSettings();
         }
     }
 
-    // ── GPS Settings Check ─────────────────────────────────────────────────────
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == LOCATION_PERMISSION_REQUEST && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            checkLocationSettings();
+        } else {
+            getNetworkLocationFallback();
+        }
+    }
+
+
+    // ─── Location Settings & Updates ─────────────────────────────────────────
 
     private void checkLocationSettings() {
         locationRequest = new LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 4000)
@@ -154,8 +270,7 @@ public class SplashActivity extends BaseActivity {
                 .addOnFailureListener(this, e -> {
                     if (e instanceof ResolvableApiException) {
                         try {
-                            ((ResolvableApiException) e).startResolutionForResult(
-                                    this, REQUEST_CHECK_SETTINGS);
+                            ((ResolvableApiException) e).startResolutionForResult(this, REQUEST_CHECK_SETTINGS);
                         } catch (Exception ex) {
                             Log.e(TAG, "startResolution failed", ex);
                             getNetworkLocationFallback();
@@ -178,30 +293,19 @@ public class SplashActivity extends BaseActivity {
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == LOCATION_PERMISSION_REQUEST
-                && grantResults.length > 0
-                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            checkLocationSettings();
-        } else {
-            getNetworkLocationFallback();
-        }
-    }
-
-    // ── Location Updates ───────────────────────────────────────────────────────
-
     @SuppressLint("MissingPermission")
     private void startRealtimeLocationUpdates() {
-        if (fusedLocationClient == null) return;
+        if (fusedLocationClient == null) {
+            return;
+        }
 
         locationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(@NonNull LocationResult result) {
                 Location location = result.getLastLocation();
-                if (location == null) return;
+                if (location == null) {
+                    return;
+                }
                 handleLocation(location);
             }
         };
@@ -209,7 +313,8 @@ public class SplashActivity extends BaseActivity {
         fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, getMainLooper());
     }
 
-    // ── Geolocation Processing ─────────────────────────────────────────────────
+
+    // ─── Geocoding & Processing ──────────────────────────────────────────────
 
     private void handleLocation(Location location) {
         double lat = location.getLatitude();
@@ -219,6 +324,7 @@ public class SplashActivity extends BaseActivity {
             try {
                 Geocoder geocoder = new Geocoder(SplashActivity.this, Locale.getDefault());
                 List<Address> addresses = geocoder.getFromLocation(lat, lon, 1);
+
                 runOnUiThread(() -> {
                     if (addresses != null && !addresses.isEmpty()) {
                         updateCountry(addresses.get(0).getCountryCode());
@@ -234,22 +340,32 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void updateCountry(String countryCode) {
-        if (countryCode == null) return;
+        if (countryCode == null) {
+            return;
+        }
+
         countryCode = countryCode.toLowerCase(Locale.ROOT);
+
         if (!countryCode.equals(lastCountry)) {
             lastCountry = countryCode;
             preloadFlagAndGreeting(countryCode);
         }
     }
 
-    // ── Fallback ───────────────────────────────────────────────────────────────
+
+    // ─── Fallback Location (IP/Locale) ───────────────────────────────────────
 
     private void getNetworkLocationFallback() {
         new Thread(() -> {
             try {
                 String countryCode = getCountryCodeFromIP();
-                runOnUiThread(() -> updateCountry(
-                        countryCode.isEmpty() ? Locale.getDefault().getCountry() : countryCode));
+                runOnUiThread(() -> {
+                    if (countryCode.isEmpty()) {
+                        updateCountry(Locale.getDefault().getCountry());
+                    } else {
+                        updateCountry(countryCode);
+                    }
+                });
             } catch (Exception e) {
                 Log.e(TAG, "Network location failed: " + e.getMessage());
                 runOnUiThread(this::useLocaleFallback);
@@ -266,142 +382,25 @@ public class SplashActivity extends BaseActivity {
         connection.setRequestMethod("GET");
         connection.setConnectTimeout(4000);
         connection.setReadTimeout(4000);
+
         return new JSONObject(readResponse(connection))
                 .optString("country_code", "")
                 .toLowerCase(Locale.ROOT);
     }
 
     private String readResponse(HttpURLConnection connection) throws Exception {
-        try (BufferedReader reader = new BufferedReader(
-                new InputStreamReader(connection.getInputStream()))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
             StringBuilder response = new StringBuilder();
             String line;
-            while ((line = reader.readLine()) != null) response.append(line);
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
             return response.toString();
         }
     }
 
-    // ── Preload & Display ──────────────────────────────────────────────────────
 
-    /**
-     * CRITICAL: Preload flag and greeting BEFORE transitioning from Phase 1 to Phase 2
-     * This ensures smooth display without delays
-     */
-    private void preloadFlagAndGreeting(String countryCode) {
-        isFlagLoaded = false;
-        isGreetingReady = false;
-
-        String flagUrl = "https://flagcdn.com/w320/" + countryCode + ".png";
-        String greeting = getManualGreeting(countryCode);
-
-        // Prepare greeting text (instant)
-        tvGreeting.setText(greeting);
-        isGreetingReady = true;
-
-        // Preload flag image with Glide
-        int size = 200; // Match XML layout size
-        RequestOptions options = new RequestOptions()
-                .override(size, (int)(size * 0.665f)) // 200x133
-                .transform(new RoundedCorners(12));
-
-        Glide.with(this)
-                .load(flagUrl)
-                .apply(options)
-                .listener(new com.bumptech.glide.request.RequestListener<>() {
-                    @Override
-                    public boolean onLoadFailed(
-                            @androidx.annotation.Nullable com.bumptech.glide.load.engine.GlideException e,
-                            Object model,
-                            com.bumptech.glide.request.target.Target<android.graphics.drawable.Drawable> target,
-                            boolean isFirstResource) {
-                        Log.e(TAG, "Flag load failed", e);
-                        // Even on failure, continue with transition
-                        isFlagLoaded = true;
-                        checkAndTransitionToPhase2();
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onResourceReady(
-                            android.graphics.drawable.Drawable resource,
-                            Object model,
-                            com.bumptech.glide.request.target.Target<android.graphics.drawable.Drawable> target,
-                            com.bumptech.glide.load.DataSource dataSource,
-                            boolean isFirstResource) {
-                        isFlagLoaded = true;
-                        checkAndTransitionToPhase2();
-                        return false;
-                    }
-                })
-                .into(imgFlag);
-    }
-
-    /**
-     * Only transition to Phase 2 when BOTH flag and greeting are ready
-     */
-    private void checkAndTransitionToPhase2() {
-        if (isFlagLoaded && isGreetingReady) {
-            handler.post(this::transitionToPhase2);
-        }
-    }
-
-    /**
-     * Smooth transition from Phase 1 (Lottie) to Phase 2 (Flag + Greeting)
-     */
-    private void transitionToPhase2() {
-        // Fade out Lottie animation
-        lottieAnimationView.animate()
-                .alpha(0f)
-                .setDuration(400)
-                .withEndAction(() -> {
-                    lottieAnimationView.setVisibility(View.GONE);
-                    showGreetingSequence();
-                })
-                .start();
-    }
-
-    /**
-     * Display flag first, then greeting
-     */
-    private void showGreetingSequence() {
-        // Show container
-        greetingContainer.setVisibility(View.VISIBLE);
-        greetingContainer.setAlpha(0f);
-
-        // Step 1: Fade in FLAG first
-        imgFlag.setVisibility(View.VISIBLE);
-        imgFlag.setAlpha(0f);
-        imgFlag.setScaleX(0.8f);
-        imgFlag.setScaleY(0.8f);
-
-        imgFlag.animate()
-                .alpha(1f)
-                .scaleX(1f)
-                .scaleY(1f)
-                .setDuration(600)
-                .withStartAction(() -> greetingContainer.animate().alpha(1f).setDuration(600).start())
-                .withEndAction(this::showGreetingText)
-                .start();
-    }
-
-    /**
-     * Step 2: Show greeting text after flag appears
-     */
-    private void showGreetingText() {
-        tvGreeting.setVisibility(View.VISIBLE);
-        tvGreeting.setAlpha(0f);
-        tvGreeting.setTranslationY(20f);
-
-        tvGreeting.animate()
-                .alpha(1f)
-                .translationY(0f)
-                .setDuration(500)
-                .setStartDelay(200)
-                .withEndAction(() -> handler.postDelayed(this::goNext, 2000))
-                .start();
-    }
-
-    // ── Greeting Messages ──────────────────────────────────────────────────────
+    // ─── Greeting Helper ─────────────────────────────────────────────────────
 
     private String getManualGreeting(String countryCode) {
         return switch (countryCode.toLowerCase()) {

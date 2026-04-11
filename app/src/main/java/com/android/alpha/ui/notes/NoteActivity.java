@@ -21,13 +21,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.android.alpha.R;
 import com.android.alpha.base.BaseActivity;
 import com.android.alpha.data.session.UserSession;
 import com.android.alpha.ui.geminichat.ChatActivity;
 import com.android.alpha.utils.DialogUtils;
-import com.android.alpha.utils.LoadingDialog;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -40,30 +38,36 @@ import java.util.stream.Collectors;
 public class NoteActivity extends BaseActivity
         implements NoteAdapter.OnNoteClickListener, NoteAdapter.OnSelectionModeListener {
 
-    private NoteAdapter   adapter;
-    private NoteViewModel viewModel;
-    private List<Note>    allNotes = new ArrayList<>();
+    // ─── Constants & Variables ───────────────────────────────────────────────
 
-    private RecyclerView                 recyclerView;
-    private FloatingActionButton         fabAddNote;
+    private NoteAdapter adapter;
+    private NoteViewModel viewModel;
+    private List<Note> allNotes = new ArrayList<>();
+
+    private RecyclerView recyclerView;
+    private FloatingActionButton fabAddNote;
     private ExtendedFloatingActionButton fabGemini;
-    private View                         cardFabGemini;   // wrapper card untuk hide/show
-    private View                         cardFabAddNote;  // wrapper card untuk hide/show
-    private LinearLayout                 selectionModeActionBar;
-    private RelativeLayout               selectionModeHeader;
-    private TextView                     tvSelectionCount;
-    private SearchView                   searchView;
-    private View                         appBarLayout;
-    private LoadingDialog                loadingDialog;
+    private View cardFabGemini;
+    private View cardFabAddNote;
+    private LinearLayout selectionModeActionBar;
+    private RelativeLayout selectionModeHeader;
+    private TextView tvSelectionCount;
+    private SearchView searchView;
+    private View appBarLayout;
 
     private final Handler handler = new Handler(Looper.getMainLooper());
-    private enum MultiAction { PIN, DELETE }
+
+    private enum MultiAction {
+        PIN, DELETE
+    }
+
+
+    // ─── Lifecycle ───────────────────────────────────────────────────────────
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
-        loadingDialog  = new LoadingDialog(this);
 
         initViewModel();
         initViews();
@@ -71,25 +75,25 @@ public class NoteActivity extends BaseActivity
         setupRecyclerView();
         setupListeners();
         handleIncomingNote();
+
         viewModel.getActiveNotes().observe(this, notes -> {
             allNotes = notes;
             applyFilter();
         });
 
-        loadingDialog.show();
-
-        new Handler(Looper.getMainLooper()).postDelayed(() -> loadingDialog.dismiss(), 1200); // 1.2 detik
+        showLoading(); // Inherited from BaseActivity
+        new Handler(Looper.getMainLooper()).postDelayed(this::hideLoading, 1200);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         viewModel.loadNotes(this);
-        // Setiap masuk halaman: extend FAB gemini, lalu shrink otomatis setelah 2.5 detik
         showExtendedGeminiFab();
     }
 
-    // ── Extended FAB logic ────────────────────────────────────────────────────
+
+    // ─── Extended FAB Logic ──────────────────────────────────────────────────
 
     private void showExtendedGeminiFab() {
         handler.removeCallbacksAndMessages(null);
@@ -97,7 +101,8 @@ public class NoteActivity extends BaseActivity
         handler.postDelayed(() -> fabGemini.shrink(), 2500);
     }
 
-    // ── Init ─────────────────────────────────────────────────────────────────
+
+    // ─── Initialization ──────────────────────────────────────────────────────
 
     private void initViewModel() {
         viewModel = new ViewModelProvider(this).get(NoteViewModel.class);
@@ -106,7 +111,6 @@ public class NoteActivity extends BaseActivity
                     .getUserData(UserSession.getInstance().getUsername()).userId;
             viewModel.setUserId(userId);
         } catch (IllegalStateException e) {
-            // UserSession belum init (cold start langsung ke NoteActivity)
             startActivity(new Intent(this, com.android.alpha.ui.auth.LoginActivity.class)
                     .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
             finish();
@@ -114,16 +118,16 @@ public class NoteActivity extends BaseActivity
     }
 
     private void initViews() {
-        recyclerView           = findViewById(R.id.recycler_view_notes);
-        fabAddNote             = findViewById(R.id.fab_add_note);
-        fabGemini              = findViewById(R.id.fab_gemini);
-        cardFabGemini          = findViewById(R.id.card_fab_gemini);
-        cardFabAddNote         = findViewById(R.id.card_fab_add_note);
+        recyclerView = findViewById(R.id.recycler_view_notes);
+        fabAddNote = findViewById(R.id.fab_add_note);
+        fabGemini = findViewById(R.id.fab_gemini);
+        cardFabGemini = findViewById(R.id.card_fab_gemini);
+        cardFabAddNote = findViewById(R.id.card_fab_add_note);
         selectionModeActionBar = findViewById(R.id.selection_mode_action_bar);
-        selectionModeHeader    = findViewById(R.id.selection_mode_header);
-        tvSelectionCount       = findViewById(R.id.tv_selection_count);
-        searchView             = findViewById(R.id.search_view);
-        appBarLayout           = findViewById(R.id.app_bar_layout);
+        selectionModeHeader = findViewById(R.id.selection_mode_header);
+        tvSelectionCount = findViewById(R.id.tv_selection_count);
+        searchView = findViewById(R.id.search_view);
+        appBarLayout = findViewById(R.id.app_bar_layout);
     }
 
     private void setupRecyclerView() {
@@ -132,13 +136,18 @@ public class NoteActivity extends BaseActivity
         recyclerView.setAdapter(adapter);
     }
 
-    // ── Incoming note dari ChatActivity ──────────────────────────────────────
+
+    // ─── Incoming Note Logic ─────────────────────────────────────────────────
 
     private void handleIncomingNote() {
         Intent intent = getIntent();
-        if (intent == null) return;
-        String title   = intent.getStringExtra("note_title");
+        if (intent == null) {
+            return;
+        }
+
+        String title = intent.getStringExtra("note_title");
         String content = intent.getStringExtra("note_content");
+
         if (content != null && !content.isEmpty()) {
             openEditNoteWithContent(title != null ? title : "", content);
         }
@@ -149,18 +158,20 @@ public class NoteActivity extends BaseActivity
         note.setTitle(title);
         note.setContent(content);
         viewModel.saveNote(this, note);
+
         Intent intent = new Intent(this, EditNoteActivity.class);
         intent.putExtra("note_id", note.getId());
         startActivity(intent);
+
         Toast.makeText(this, getString(R.string.toast_note_saved_from_ai), Toast.LENGTH_SHORT).show();
     }
 
-    // ── Listeners ────────────────────────────────────────────────────────────
+
+    // ─── Listeners & Filters ─────────────────────────────────────────────────
 
     @SuppressLint("ClickableViewAccessibility")
     private void setupListeners() {
-        fabAddNote.setOnClickListener(v ->
-                startActivity(new Intent(this, EditNoteActivity.class)));
+        fabAddNote.setOnClickListener(v -> startActivity(new Intent(this, EditNoteActivity.class)));
 
         fabGemini.setOnClickListener(v -> {
             handler.removeCallbacksAndMessages(null);
@@ -174,24 +185,35 @@ public class NoteActivity extends BaseActivity
 
         searchView.clearFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override public boolean onQueryTextSubmit(String q) { applyFilter(q); return true; }
-            @Override public boolean onQueryTextChange(String t)  { applyFilter(t); return true; }
+            @Override
+            public boolean onQueryTextSubmit(String q) {
+                applyFilter(q);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String t) {
+                applyFilter(t);
+                return true;
+            }
         });
 
         recyclerView.setOnTouchListener((v, event) -> {
-            if (!searchView.isIconified()) { searchView.setIconified(true); searchView.clearFocus(); }
-            if (event.getAction() == MotionEvent.ACTION_UP) v.performClick();
+            if (!searchView.isIconified()) {
+                searchView.setIconified(true);
+                searchView.clearFocus();
+            }
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                v.performClick();
+            }
             return false;
         });
     }
 
-    // ── Filter ───────────────────────────────────────────────────────────────
-
     private void applyFilter(String query) {
         String s = query != null ? query.toLowerCase(Locale.ROOT) : "";
         List<Note> filtered = allNotes.stream()
-                .filter(n -> n.getTitle().toLowerCase().contains(s)
-                        || n.getContent().toLowerCase().contains(s))
+                .filter(n -> n.getTitle().toLowerCase().contains(s) || n.getContent().toLowerCase().contains(s))
                 .collect(Collectors.toList());
         adapter.updateNotes(filtered);
     }
@@ -200,22 +222,31 @@ public class NoteActivity extends BaseActivity
         applyFilter(searchView.getQuery() != null ? searchView.getQuery().toString() : "");
     }
 
-    // ── Multi-selection ───────────────────────────────────────────────────────
+
+    // ─── Multi-Selection & Actions ───────────────────────────────────────────
 
     private void handleMultiAction(MultiAction action) {
         Set<String> selectedIds = adapter.getSelectedNoteIds();
-        if (selectedIds.isEmpty()) return;
+        if (selectedIds.isEmpty()) {
+            return;
+        }
+
         List<Note> notes = allNotes.stream()
                 .filter(n -> selectedIds.contains(n.getId()))
                 .toList();
+
         switch (action) {
             case PIN:
                 boolean targetPin = !notes.stream().allMatch(Note::isPinned);
-                notes.forEach(n -> { n.setPinned(targetPin); viewModel.saveNote(this, n); });
+                notes.forEach(n -> {
+                    n.setPinned(targetPin);
+                    viewModel.saveNote(this, n);
+                });
                 Toast.makeText(this,
                         targetPin ? getString(R.string.toast_pinned) : getString(R.string.toast_unpinned),
                         Toast.LENGTH_SHORT).show();
                 break;
+
             case DELETE:
                 DialogUtils.showConfirmDialog(this,
                         getString(R.string.dialog_delete_multiple_title),
@@ -230,11 +261,13 @@ public class NoteActivity extends BaseActivity
                         }, null);
                 return;
         }
+
         adapter.exitSelectionMode();
         viewModel.loadNotes(this);
     }
 
-    // ── Adapter callbacks ─────────────────────────────────────────────────────
+
+    // ─── Adapter Callbacks ───────────────────────────────────────────────────
 
     @Override
     public void onNoteClick(Note note) {
@@ -248,7 +281,7 @@ public class NoteActivity extends BaseActivity
         int vis = active ? View.GONE : View.VISIBLE;
         cardFabGemini.setVisibility(vis);
         cardFabAddNote.setVisibility(vis);
-        appBarLayout.setVisibility(vis);  // TAMBAHKAN INI - sembunyikan search bar
+        appBarLayout.setVisibility(vis);
         selectionModeHeader.setVisibility(active ? View.VISIBLE : View.GONE);
         selectionModeActionBar.setVisibility(active ? View.VISIBLE : View.GONE);
     }
@@ -259,63 +292,48 @@ public class NoteActivity extends BaseActivity
                 String.format(Locale.getDefault(), getString(R.string.selection_count_format), count));
     }
 
-    // ── SearchView styling ────────────────────────────────────────────────────
+
+    // ─── SearchView Styling ──────────────────────────────────────────────────
 
     private void setupSearchView() {
         searchView.post(() -> {
-
-            // ── Remove default underline / background
             View searchPlate = searchView.findViewById(androidx.appcompat.R.id.search_plate);
             if (searchPlate != null) {
                 searchPlate.setBackground(null);
             }
 
-            // ── EditText (input + placeholder)
-            android.widget.EditText et =
-                    searchView.findViewById(androidx.appcompat.R.id.search_src_text);
+            android.widget.EditText et = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
 
             if (et != null) {
-
-                // Load font (support TTF / OTF)
                 Typeface tf;
                 try {
-                    tf = androidx.core.content.res.ResourcesCompat.getFont(
-                            this, R.font.linottesemibold);
+                    tf = androidx.core.content.res.ResourcesCompat.getFont(this, R.font.linottesemibold);
                 } catch (Exception e) {
-                    tf = Typeface.DEFAULT; // fallback biar gak crash
+                    tf = Typeface.DEFAULT;
                 }
 
                 if (tf != null) {
                     et.setTypeface(tf);
                 }
 
-                // Style text + hint
                 et.setBackground(null);
                 et.setHint(getString(R.string.search_notes_hint));
 
                 int textColor = getAttrColor(R.attr.text_color);
 
                 et.setTextColor(textColor);
-                et.setHintTextColor(ColorUtils.setAlphaComponent(textColor, 153)); // 60%
-
-                et.setTextSize(14); // opsional biar konsisten
+                et.setHintTextColor(ColorUtils.setAlphaComponent(textColor, 153));
+                et.setTextSize(14);
             }
 
-            // ── Search icon
-            ImageView searchIcon =
-                    searchView.findViewById(androidx.appcompat.R.id.search_mag_icon);
+            ImageView searchIcon = searchView.findViewById(androidx.appcompat.R.id.search_mag_icon);
 
             if (searchIcon != null) {
                 searchIcon.setImageResource(R.drawable.ic_search_note);
-                searchIcon.setColorFilter(
-                        getAttrColor(R.attr.text_color),
-                        PorterDuff.Mode.SRC_IN
-                );
+                searchIcon.setColorFilter(getAttrColor(R.attr.text_color), PorterDuff.Mode.SRC_IN);
             }
 
-            // ── Remove close icon (no ghost click)
-            ImageView closeIcon =
-                    searchView.findViewById(androidx.appcompat.R.id.search_close_btn);
+            ImageView closeIcon = searchView.findViewById(androidx.appcompat.R.id.search_close_btn);
 
             if (closeIcon != null) {
                 closeIcon.setVisibility(View.GONE);

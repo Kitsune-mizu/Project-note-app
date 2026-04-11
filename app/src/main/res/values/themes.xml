@@ -21,13 +21,6 @@
         <item name="color_yellow">@color/color_yellow</item>
         <item name="color_blue">@color/color_blue</item>
 
-        <!-- ================= STATUS BAR (LIGHT MODE) ================= -->
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:windowLightStatusBar">true</item>
-
-        <!-- ================= NAVIGATION BAR (LIGHT MODE) ================= -->
-        <item name="android:navigationBarColor">@color/color_1</item>
-
         <!-- ================= WINDOW PROPERTIES ================= -->
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
 
@@ -39,6 +32,9 @@
         <item name="color_2">@color/color_2</item>
         <item name="color_3">@color/color_3</item>
         <item name="color_4">@color/color_4</item>
+        <item name="android:navigationBarColor">@color/color_3</item>
+        <item name="android:statusBarColor">@color/color_3</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <!-- PURPLE -->
@@ -47,6 +43,9 @@
         <item name="color_2">@color/color_2_purple</item>
         <item name="color_3">@color/color_3_purple</item>
         <item name="color_4">@color/color_4_purple</item>
+        <item name="android:navigationBarColor">@color/color_3_purple</item>
+        <item name="android:statusBarColor">@color/color_3_purple</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <!-- PINK -->
@@ -55,6 +54,9 @@
         <item name="color_2">@color/color_2_pink</item>
         <item name="color_3">@color/color_3_pink</item>
         <item name="color_4">@color/color_4_pink</item>
+        <item name="android:navigationBarColor">@color/color_3_pink</item>
+        <item name="android:statusBarColor">@color/color_3_pink</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <!-- GREEN -->
@@ -63,6 +65,9 @@
         <item name="color_2">@color/color_2_green</item>
         <item name="color_3">@color/color_3_green</item>
         <item name="color_4">@color/color_4_green</item>
+        <item name="android:navigationBarColor">@color/color_3_green</item>
+        <item name="android:statusBarColor">@color/color_3_green</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <!-- ORANGE -->
@@ -71,6 +76,9 @@
         <item name="color_2">@color/color_2_orange</item>
         <item name="color_3">@color/color_3_orange</item>
         <item name="color_4">@color/color_4_orange</item>
+        <item name="android:navigationBarColor">@color/color_3_orange</item>
+        <item name="android:statusBarColor">@color/color_3_orange</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <!-- ═══════════════════════════════════════════════════════════════════ -->

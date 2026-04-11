@@ -9,75 +9,79 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-/**
- * Model entity untuk menyimpan data catatan ke database Room.
- * Mengimplementasikan Serializable agar bisa dikirim antar komponen.
- */
 @Entity(tableName = "notes")
 public class Note implements Serializable {
 
-    // Primary key unik berdasarkan timestamp saat dibuat
+    // ─── Variables ───────────────────────────────────────────────────────────
+
     @PrimaryKey
     @NonNull
     private String id;
-
-    // Judul catatan
     private String title = "";
-
-    // Isi catatan (bisa berformat HTML)
     private String content = "";
-
-    // Waktu terakhir catatan dibuat/diubah (dalam milliseconds)
     private long timestamp;
-
-    // Status pin catatan
     private boolean pinned = false;
 
-    // --- Constructors ---
 
-    /** Membuat catatan baru dengan ID otomatis dari waktu saat ini */
+    // ─── Constructors ────────────────────────────────────────────────────────
+
     public Note() {
         this.id = String.valueOf(System.currentTimeMillis());
         this.timestamp = System.currentTimeMillis();
     }
 
-    /** Membuat catatan dengan ID yang ditentukan secara manual */
     public Note(@NonNull String id) {
         this.id = id;
         this.timestamp = System.currentTimeMillis();
     }
 
-    // --- Getters ---
+
+    // ─── Getters & Setters ───────────────────────────────────────────────────
 
     @NonNull
-    public String getId() { return id; }
+    public String getId() {
+        return id;
+    }
 
-    public String getTitle() { return title; }
+    public void setId(@NonNull String id) {
+        this.id = id;
+    }
 
-    public String getContent() { return content; }
+    public String getTitle() {
+        return title;
+    }
 
-    public long getTimestamp() { return timestamp; }
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-    public boolean isPinned() { return pinned; }
+    public String getContent() {
+        return content;
+    }
 
-    // --- Setters ---
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-    public void setId(@NonNull String id) { this.id = id; }
+    public long getTimestamp() {
+        return timestamp;
+    }
 
-    public void setTitle(String title) { this.title = title; }
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
 
-    public void setContent(String content) { this.content = content; }
+    public boolean isPinned() {
+        return pinned;
+    }
 
-    public void setTimestamp(long timestamp) { this.timestamp = timestamp; }
+    public void setPinned(boolean pinned) {
+        this.pinned = pinned;
+    }
 
-    public void setPinned(boolean pinned) { this.pinned = pinned; }
 
-    // --- Utility ---
+    // ─── Utilities ───────────────────────────────────────────────────────────
 
-    /**
-     * Mengembalikan pratinjau isi catatan (maks 100 karakter).
-     * HTML di-strip, newline diganti spasi, dan diberi "..." jika terpotong.
-     */
     public String getSubtitle() {
         String cleaned = android.text.Html
                 .fromHtml(content, android.text.Html.FROM_HTML_MODE_LEGACY)
@@ -85,15 +89,13 @@ public class Note implements Serializable {
                 .trim()
                 .replace("\n", " ");
 
-        return cleaned.length() > 100
-                ? cleaned.substring(0, 100) + "..."
-                : cleaned;
+        if (cleaned.length() > 100) {
+            return cleaned.substring(0, 100) + "...";
+        } else {
+            return cleaned;
+        }
     }
 
-    /**
-     * Mengembalikan tanggal terformat dari timestamp catatan.
-     * Contoh output: "Jan 21, 14:30"
-     */
     public String getFormattedDate() {
         return new SimpleDateFormat("MMM dd, HH:mm", Locale.getDefault())
                 .format(new Date(timestamp));

@@ -38,6 +38,25 @@
     </style>
 
     <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- ALL COLOR THEMES → DARK MODE (OVERRIDE) -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+    <!-- DEFAULT (BLUE) → DARK -->
+    <style name="Theme.Alpha" parent="AppTheme" />
+
+    <!-- PURPLE → DARK -->
+    <style name="Theme.Alpha.Purple" parent="AppTheme" />
+
+    <!-- PINK → DARK -->
+    <style name="Theme.Alpha.Pink" parent="AppTheme" />
+
+    <!-- GREEN → DARK -->
+    <style name="Theme.Alpha.Green" parent="AppTheme" />
+
+    <!-- ORANGE → DARK -->
+    <style name="Theme.Alpha.Orange" parent="AppTheme" />
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
     <!-- DIALOG -->
     <!-- ═══════════════════════════════════════════════════════════════════ -->
 

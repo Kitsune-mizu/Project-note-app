@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- DARK MODE THEME (SIMPLIFIED) -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
     <style name="AppTheme" parent="Theme.Material3.Dark.NoActionBar">
 
         <!-- ================= CORE COLOR SYSTEM ================= -->
@@ -16,22 +19,77 @@
         <item name="color_4">@color/color_4_dark</item>
         <item name="text_color">@color/text_dark</item>
 
-        <!-- ================= ACCENT COLORS (NIGHT) ================= -->
+        <!-- ================= ACCENT COLORS ================= -->
         <item name="color_error">@color/color_error_night</item>
         <item name="color_green">@color/color_green_night</item>
         <item name="color_yellow">@color/color_yellow_night</item>
         <item name="color_blue">@color/color_blue_night</item>
 
-        <!-- ================= STATUS BAR (DARK MODE) ================= -->
+        <!-- ================= STATUS BAR ================= -->
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">false</item>
 
-        <!-- ================= NAVIGATION BAR (DARK MODE) ================= -->
+        <!-- ================= NAVIGATION BAR ================= -->
         <item name="android:navigationBarColor">@color/color_1_dark</item>
-        <item name="android:windowLightNavigationBar">false</item>
 
-        <!-- ================= WINDOW PROPERTIES ================= -->
+        <!-- ================= WINDOW ================= -->
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
 
     </style>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- ALL COLOR THEMES → DARK MODE (OVERRIDE) -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+    <!-- DEFAULT (BLUE) → DARK -->
+    <style name="Theme.Alpha" parent="AppTheme" />
+
+    <!-- PURPLE → DARK -->
+    <style name="Theme.Alpha.Purple" parent="AppTheme" />
+
+    <!-- PINK → DARK -->
+    <style name="Theme.Alpha.Pink" parent="AppTheme" />
+
+    <!-- GREEN → DARK -->
+    <style name="Theme.Alpha.Green" parent="AppTheme" />
+
+    <!-- ORANGE → DARK -->
+    <style name="Theme.Alpha.Orange" parent="AppTheme" />
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- DIALOG -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+    <style name="RoundedDialog" parent="Theme.Material3.Dark.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowMinWidthMajor">85%</item>
+        <item name="android:windowMinWidthMinor">85%</item>
+        <item name="colorPrimary">@color/color_4_dark</item>
+        <item name="colorAccent">@color/color_4_dark</item>
+        <item name="android:backgroundTint">@color/color_2_dark</item>
+    </style>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- BOTTOM SHEET -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+    <style name="ModernBottomSheetDialog" parent="Theme.Material3.Dark.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/ModernBottomSheetStyle</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <style name="ModernBottomSheetStyle" parent="Widget.Material3.BottomSheet.Modal">
+        <item name="shapeAppearanceOverlay">@style/BottomSheetShape</item>
+        <item name="backgroundTint">@color/color_2_dark</item>
+    </style>
+
+    <style name="BottomSheetShape" parent="ShapeAppearance.Material3.Corner.Large">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">20dp</item>
+        <item name="cornerSizeTopRight">20dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+
 </resources>

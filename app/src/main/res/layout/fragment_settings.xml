@@ -253,6 +253,8 @@
                         android:id="@+id/switchNotifications"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:thumbTint="@color/switch_thumb"
+                        app:trackTint="@color/switch_track"
                         android:checked="true"
                         android:contentDescription="@string/cd_notifications_toggle" />
                 </LinearLayout>
@@ -271,6 +273,7 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
+                        android:contentDescription="@string/cd_dark_mode_icon"
                         app:srcCompat="@drawable/ic_dark_mode"
                         app:tint="?attr/text_color" />
 
@@ -304,6 +307,7 @@
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
+                        android:contentDescription="@null"
                         app:srcCompat="@drawable/ic_chevron_right"
                         app:tint="?attr/text_color" />
                 </LinearLayout>
@@ -322,6 +326,7 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
+                        android:contentDescription="@string/cd_color_theme_icon"
                         app:srcCompat="@drawable/ic_palette"
                         app:tint="?attr/text_color" />
 
@@ -355,6 +360,7 @@
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
+                        android:contentDescription="@null"
                         app:srcCompat="@drawable/ic_chevron_right"
                         app:tint="?attr/text_color" />
                 </LinearLayout>
@@ -397,7 +403,7 @@
                             android:id="@+id/textCurrentLanguage"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
+                            android:layout_marginTop="7dp"
                             android:text="@string/language_subtitle"
                             android:fontFamily="@font/linottesemibold"
                             android:textAppearance="?attr/textAppearanceLabelSmall"

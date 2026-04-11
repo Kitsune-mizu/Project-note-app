@@ -4,7 +4,7 @@
     android:orientation="horizontal"
     android:gravity="center_vertical"
     android:padding="14dp"
-    android:background="?attr/color_1">
+    android:background="?attr/color_2">
 
     <ImageView
         android:id="@+id/iconTheme"

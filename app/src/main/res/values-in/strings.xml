@@ -333,6 +333,9 @@
     <string name="color_theme_green">Hijau Alam</string>
     <string name="color_theme_orange">Jingga Senja</string>
 
+    <string name="cd_color_theme_icon">Pilih tema warna</string>
+    <string name="cd_dark_mode_icon">Pengaturan mode tampilan</string>
+
     <!-- ══════════════════════════════════════════════════════════════
          PETA
     ══════════════════════════════════════════════════════════════ -->

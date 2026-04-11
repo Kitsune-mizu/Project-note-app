@@ -335,6 +335,9 @@
     <string name="color_theme_green">Green Nature</string>
     <string name="color_theme_orange">Sunset Orange</string>
 
+    <string name="cd_color_theme_icon">Select color theme</string>
+    <string name="cd_dark_mode_icon">Display mode settings</string>
+
     <!-- ══════════════════════════════════════════════════════════════
          MAP
     ══════════════════════════════════════════════════════════════ -->

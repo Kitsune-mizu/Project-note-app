@@ -55,28 +55,26 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-/**
- * Fragment that displays an OpenStreetMap map view, supports location search with
- * Nominatim autocomplete, GPS location retrieval, marker placement, and reverse geocoding.
- * Calls {@link OnLocationSelectedListener} when the user confirms a location.
- */
 public class MapFragment extends Fragment {
 
-    // ─── CONSTANTS ─────────────────────────────────────────────────────────────
-    /** Default map center point (Jakarta, Indonesia). */
-    private final GeoPoint DEFAULT_POINT  = new GeoPoint(-6.2088, 106.8456);
-    /** Duration in milliseconds that a reverse-geocode result stays valid in cache. */
-    private static final long CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+    // ─── Constants ───────────────────────────────────────────────────────────
 
-    // ─── UI COMPONENTS ─────────────────────────────────────────────────────────
-    private MapView            mapView;
-    private EditText           etSearch;
-    private TextView           tvLocationName;
-    private RecyclerView       rvSuggestions;
+    private final GeoPoint DEFAULT_POINT = new GeoPoint(-6.2088, 106.8456);
+    private static final long CACHE_DURATION = 5 * 60 * 1000;
+
+
+    // ─── UI Components ───────────────────────────────────────────────────────
+
+    private MapView mapView;
+    private EditText etSearch;
+    private TextView tvLocationName;
+    private RecyclerView rvSuggestions;
     private ShimmerFrameLayout shimmerLayout;
-    private LoadingDialog      loadingDialog;
+    private LoadingDialog loadingDialog;
 
-    // ─── LOCATION & NETWORK ────────────────────────────────────────────────────
+
+    // ─── Location & Network ──────────────────────────────────────────────────
+
     private FusedLocationProviderClient fusedLocationClient;
     private final OkHttpClient client = new OkHttpClient.Builder()
             .connectTimeout(10, TimeUnit.SECONDS)
@@ -84,53 +82,54 @@ public class MapFragment extends Fragment {
             .build();
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
 
-    // ─── STATE & ADAPTERS ──────────────────────────────────────────────────────
-    private GeoPoint                  selectedPoint;
-    private Marker                    currentMarker;
+
+    // ─── State & Adapters ────────────────────────────────────────────────────
+
+    private GeoPoint selectedPoint;
+    private Marker currentMarker;
     private LocationSuggestionAdapter suggestionAdapter;
     private OnLocationSelectedListener listener;
-    private Runnable                  reverseRunnable;
-
-    // ─── CACHE ─────────────────────────────────────────────────────────────────
+    private Runnable reverseRunnable;
     private final Map<String, CacheEntry> locationCache = new HashMap<>();
 
-    /** Simple timestamped cache entry for reverse-geocoded addresses. */
+
+    // ─── Interfaces & Classes ────────────────────────────────────────────────
+
     private static class CacheEntry {
         String address;
-        long   timestamp;
+        long timestamp;
 
         CacheEntry(String address, long timestamp) {
-            this.address   = address;
+            this.address = address;
             this.timestamp = timestamp;
         }
     }
 
-    // ─── INTERFACE ─────────────────────────────────────────────────────────────
-
-    /** Callback triggered when the user confirms a location selection. */
     public interface OnLocationSelectedListener {
         void onLocationSelected(String location);
     }
 
-    /** Registers the listener that receives the confirmed location string. */
     public void setOnLocationSelectedListener(OnLocationSelectedListener listener) {
         this.listener = listener;
     }
 
-    // ─── PERMISSION LAUNCHER ───────────────────────────────────────────────────
 
-    /** Requests ACCESS_FINE_LOCATION and triggers GPS fetch if granted. */
-    private final ActivityResultLauncher<String> locationPermissionLauncher =
-            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
-                if (isGranted) getMyLocation();
-                else           showToast(R.string.location_permission_denied);
-            });
+    // ─── Permission Launcher ─────────────────────────────────────────────────
 
-    // ══════════════════════════════════════════════════════════════════════════
-    // LIFECYCLE
-    // ══════════════════════════════════════════════════════════════════════════
+    private final ActivityResultLauncher<String> locationPermissionLauncher = registerForActivityResult(
+            new ActivityResultContracts.RequestPermission(),
+            isGranted -> {
+                if (isGranted) {
+                    getMyLocation();
+                } else {
+                    showToast(R.string.location_permission_denied);
+                }
+            }
+    );
 
-    /** Inflates the layout, sets up all components, and triggers initial GPS location fetch. */
+
+    // ─── Lifecycle ───────────────────────────────────────────────────────────
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -138,6 +137,7 @@ public class MapFragment extends Fragment {
 
         loadingDialog = new LoadingDialog(requireContext());
         loadingDialog.show();
+
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             if (isAdded()) {
                 loadingDialog.dismiss();
@@ -154,32 +154,32 @@ public class MapFragment extends Fragment {
         return rootView;
     }
 
-    /** Resumes the OSMDroid map tile rendering. */
     @Override
     public void onResume() {
         super.onResume();
-        if (mapView != null) mapView.onResume();
+        if (mapView != null) {
+            mapView.onResume();
+        }
     }
 
-    /** Pauses the OSMDroid map tile rendering. */
     @Override
     public void onPause() {
         super.onPause();
-        if (mapView != null) mapView.onPause();
+        if (mapView != null) {
+            mapView.onPause();
+        }
     }
 
-    // ══════════════════════════════════════════════════════════════════════════
-    // INITIALIZATION & SETUP
-    // ══════════════════════════════════════════════════════════════════════════
 
-    /** Binds all view references and initializes the fused location client. */
+    // ─── Initialization & Setup ──────────────────────────────────────────────
+
     private void initViews(View rootView) {
-        mapView               = rootView.findViewById(R.id.osm_map);
-        etSearch              = rootView.findViewById(R.id.etSearch);
-        tvLocationName        = rootView.findViewById(R.id.tvLocationName);
-        rvSuggestions         = rootView.findViewById(R.id.rvSuggestions);
-        shimmerLayout         = rootView.findViewById(R.id.shimmerLocation);
-        fusedLocationClient   = LocationServices.getFusedLocationProviderClient(requireActivity());
+        mapView = rootView.findViewById(R.id.osm_map);
+        etSearch = rootView.findViewById(R.id.etSearch);
+        tvLocationName = rootView.findViewById(R.id.tvLocationName);
+        rvSuggestions = rootView.findViewById(R.id.rvSuggestions);
+        shimmerLayout = rootView.findViewById(R.id.shimmerLocation);
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity());
 
         ((BaseActivity) requireActivity()).applyFont(
                 etSearch,
@@ -187,7 +187,6 @@ public class MapFragment extends Fragment {
         );
     }
 
-    /** Applies the current app language and sets the activity title for this screen. */
     private void setupToolbar() {
         if (getActivity() != null) {
             ((MainActivity) getActivity()).applyCurrentLanguage();
@@ -195,15 +194,10 @@ public class MapFragment extends Fragment {
         }
     }
 
-    /**
-     * Configures OSMDroid with the OpenStreetMap tile source, enables multi-touch,
-     * sets the initial zoom and center, and adds a tap listener overlay.
-     */
     private void setupMapView() {
         LocaleHelper.setLocale(requireContext(), getLanguage());
 
-        Configuration.getInstance().load(requireContext(),
-                requireContext().getSharedPreferences("osmdroid", 0));
+        Configuration.getInstance().load(requireContext(), requireContext().getSharedPreferences("osmdroid", 0));
         Configuration.getInstance().setUserAgentValue(requireContext().getPackageName());
         Configuration.getInstance().setOsmdroidBasePath(requireContext().getCacheDir());
         Configuration.getInstance().setOsmdroidTileCache(requireContext().getCacheDir());
@@ -219,38 +213,40 @@ public class MapFragment extends Fragment {
         controller.setCenter(DEFAULT_POINT);
 
         mapView.getOverlays().add(new MapEventsOverlay(new MapEventsReceiver() {
-            @Override public boolean singleTapConfirmedHelper(GeoPoint point) { updateMarker(point); return true; }
-            @Override public boolean longPressHelper(GeoPoint point)          { return false; }
+            @Override
+            public boolean singleTapConfirmedHelper(GeoPoint point) {
+                updateMarker(point);
+                return true;
+            }
+
+            @Override
+            public boolean longPressHelper(GeoPoint point) {
+                return false;
+            }
         }));
     }
 
-    /**
-     * Sets up the suggestion RecyclerView and its adapter.
-     * On item selection, updates the search field, moves the map, and shows the location name.
-     */
     private void setupRecyclerView() {
         rvSuggestions.setLayoutManager(new LinearLayoutManager(getContext()));
+
         suggestionAdapter = new LocationSuggestionAdapter(new ArrayList<>(), suggestion -> {
             etSearch.setText(suggestion.displayName);
             rvSuggestions.setVisibility(View.GONE);
 
             GeoPoint point = new GeoPoint(suggestion.lat, suggestion.lon);
             updateMarker(point);
+
             mapView.getController().setZoom(16.0);
             mapView.getController().animateTo(point);
             tvLocationName.setText(suggestion.displayName);
         });
+
         rvSuggestions.setAdapter(suggestionAdapter);
     }
 
-    /**
-     * Wires all button click listeners, the search TextWatcher (fires after 2+ chars),
-     * and a map touch listener that hides the suggestions list.
-     */
     @SuppressLint("ClickableViewAccessibility")
     private void setupListeners(View rootView) {
-        rootView.findViewById(R.id.btnCancel)
-                .setOnClickListener(v -> requireActivity().getSupportFragmentManager().popBackStack());
+        rootView.findViewById(R.id.btnCancel).setOnClickListener(v -> requireActivity().getSupportFragmentManager().popBackStack());
 
         rootView.findViewById(R.id.btnConfirm).setOnClickListener(v -> {
             if (selectedPoint != null && listener != null) {
@@ -264,35 +260,42 @@ public class MapFragment extends Fragment {
         rootView.findViewById(R.id.btnMyLocation).setOnClickListener(v -> getMyLocation());
 
         etSearch.addTextChangedListener(new TextWatcher() {
-            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            @Override public void afterTextChanged(Editable s) {}
-            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length() > 2) fetchSuggestions(s.toString().trim());
-                else                rvSuggestions.setVisibility(View.GONE);
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() > 2) {
+                    fetchSuggestions(s.toString().trim());
+                } else {
+                    rvSuggestions.setVisibility(View.GONE);
+                }
             }
         });
 
         mapView.setOnTouchListener((v, event) -> {
-            if (event.getAction() == MotionEvent.ACTION_UP) v.performClick();
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                v.performClick();
+            }
             rvSuggestions.setVisibility(View.GONE);
             return false;
         });
     }
 
-    // ══════════════════════════════════════════════════════════════════════════
-    // MAP MARKER
-    // ══════════════════════════════════════════════════════════════════════════
 
-    /**
-     * Removes the previous marker, places a new draggable marker at the given point,
-     * updates {@link #selectedPoint}, and triggers reverse geocoding.
-     */
+    // ─── Map Marker ──────────────────────────────────────────────────────────
+
     private void updateMarker(GeoPoint point) {
         if (mapView == null || getContext() == null || !isAdded()) {
             return;
         }
 
-        if (currentMarker != null) mapView.getOverlays().remove(currentMarker);
+        if (currentMarker != null) {
+            mapView.getOverlays().remove(currentMarker);
+        }
 
         currentMarker = new Marker(mapView);
         currentMarker.setPosition(point);
@@ -302,9 +305,16 @@ public class MapFragment extends Fragment {
         currentMarker.setDraggable(true);
 
         currentMarker.setOnMarkerDragListener(new Marker.OnMarkerDragListener() {
-            @Override public void onMarkerDragStart(Marker marker) {}
-            @Override public void onMarkerDrag(Marker marker)      { selectedPoint = marker.getPosition(); }
-            @Override public void onMarkerDragEnd(Marker marker) {
+            @Override
+            public void onMarkerDragStart(Marker marker) {}
+
+            @Override
+            public void onMarkerDrag(Marker marker) {
+                selectedPoint = marker.getPosition();
+            }
+
+            @Override
+            public void onMarkerDragEnd(Marker marker) {
                 selectedPoint = marker.getPosition();
                 fetchLocationName(selectedPoint);
             }
@@ -316,19 +326,12 @@ public class MapFragment extends Fragment {
         fetchLocationName(point);
     }
 
-    // ══════════════════════════════════════════════════════════════════════════
-    // LOCATION SERVICES
-    // ══════════════════════════════════════════════════════════════════════════
 
-    /**
-     * Requests the device's current GPS location using the FusedLocationProviderClient.
-     * Requests the ACCESS_FINE_LOCATION permission first if not already granted.
-     * Shows a Toast if the GPS is off or the location cannot be retrieved.
-     */
+    // ─── Location Services ───────────────────────────────────────────────────
+
     @SuppressLint("MissingPermission")
     private void getMyLocation() {
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             locationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION);
             return;
         }
@@ -347,11 +350,11 @@ public class MapFragment extends Fragment {
                         fusedLocationClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, null)
                                 .addOnSuccessListener(location -> {
                                     if (!isAdded() || mapView == null) return;
+
                                     if (location != null) {
                                         GeoPoint point = new GeoPoint(location.getLatitude(), location.getLongitude());
                                         mapView.post(() -> {
                                             if (mapView == null) return;
-
                                             updateMarker(point);
                                             mapView.getController().setZoom(16.0);
                                             mapView.getController().animateTo(point);
@@ -365,14 +368,9 @@ public class MapFragment extends Fragment {
                 .addOnFailureListener(e -> showToast(R.string.turn_on_gps_prompt));
     }
 
-    // ══════════════════════════════════════════════════════════════════════════
-    // NOMINATIM API CALLS
-    // ══════════════════════════════════════════════════════════════════════════
 
-    /**
-     * Fetches location autocomplete suggestions from Nominatim for the given query string.
-     * Results are posted to the adapter on the main thread. Hides the list on failure or empty result.
-     */
+    // ─── Nominatim API Calls ─────────────────────────────────────────────────
+
     private void fetchSuggestions(String query) {
         rvSuggestions.setVisibility(View.VISIBLE);
 
@@ -397,7 +395,10 @@ public class MapFragment extends Fragment {
                         JSONObject obj = arr.getJSONObject(i);
                         double lat = obj.optDouble("lat", Double.NaN);
                         double lon = obj.optDouble("lon", Double.NaN);
-                        if (Double.isNaN(lat) || Double.isNaN(lon)) continue;
+
+                        if (Double.isNaN(lat) || Double.isNaN(lon)) {
+                            continue;
+                        }
 
                         newList.add(new LocationSuggestion(
                                 obj.optString("display_name", getString(R.string.unknown_location_api)),
@@ -407,7 +408,12 @@ public class MapFragment extends Fragment {
                     mainHandler.post(() -> {
                         if (!isAdded()) return;
                         suggestionAdapter.updateData(newList);
-                        rvSuggestions.setVisibility(newList.isEmpty() ? View.GONE : View.VISIBLE);
+
+                        if (newList.isEmpty()) {
+                            rvSuggestions.setVisibility(View.GONE);
+                        } else {
+                            rvSuggestions.setVisibility(View.VISIBLE);
+                        }
                     });
                 }
 
@@ -417,19 +423,13 @@ public class MapFragment extends Fragment {
         }).start();
     }
 
-    /**
-     * Starts a debounced (300 ms) reverse geocode lookup for the given point.
-     * Shows a shimmer while loading. Checks the in-memory cache before making a network call.
-     * Falls back to Photon if Nominatim returns no result.
-     */
     private void fetchLocationName(GeoPoint point) {
         shimmerLayout.setVisibility(View.VISIBLE);
         shimmerLayout.startShimmer();
 
         String key = point.getLatitude() + "," + point.getLongitude();
-        long   now = System.currentTimeMillis();
+        long now = System.currentTimeMillis();
 
-        // Return cached result if still valid
         CacheEntry cached = locationCache.get(key);
         if (cached != null && (now - cached.timestamp) < CACHE_DURATION) {
             tvLocationName.setText(cached.address);
@@ -437,14 +437,22 @@ public class MapFragment extends Fragment {
             return;
         }
 
-        // Debounce: cancel any pending reverse lookup
-        if (reverseRunnable != null) mainHandler.removeCallbacks(reverseRunnable);
+        if (reverseRunnable != null) {
+            mainHandler.removeCallbacks(reverseRunnable);
+        }
 
         reverseRunnable = () -> new Thread(() -> {
             String address = reverseNominatim(point);
-            if (address == null || address.isEmpty()) address = reversePhoton(point);
-            if (address == null || address.isEmpty()) address = getString(R.string.unknown_location);
-            else locationCache.put(key, new CacheEntry(address, now));
+
+            if (address == null || address.isEmpty()) {
+                address = reversePhoton(point);
+            }
+
+            if (address == null || address.isEmpty()) {
+                address = getString(R.string.unknown_location);
+            } else {
+                locationCache.put(key, new CacheEntry(address, now));
+            }
 
             final String finalAddress = address;
             mainHandler.post(() -> {
@@ -456,10 +464,6 @@ public class MapFragment extends Fragment {
         mainHandler.postDelayed(reverseRunnable, 300);
     }
 
-    /**
-     * Calls the Nominatim reverse geocode endpoint and assembles a formatted address string.
-     * @return the formatted address, or null on failure.
-     */
     private String reverseNominatim(GeoPoint point) {
         try {
             String url = String.format(Locale.US,
@@ -474,29 +478,29 @@ public class MapFragment extends Fragment {
             try (Response response = client.newCall(request).execute()) {
                 if (!response.isSuccessful()) return null;
 
-                JSONObject obj  = new JSONObject(response.body().string());
+                JSONObject obj = new JSONObject(response.body().string());
                 JSONObject addr = obj.optJSONObject("address");
-                if (addr == null) return obj.optString("display_name", null);
 
-                String house    = addr.optString("house_number", "");
-                String road     = addr.optString("road", "");
-                String suburb   = addr.optString("suburb", addr.optString("village", ""));
-                String city     = addr.optString("city", addr.optString("town", addr.optString("county", "")));
-                String state    = addr.optString("state", "");
+                if (addr == null) {
+                    return obj.optString("display_name", null);
+                }
+
+                String house = addr.optString("house_number", "");
+                String road = addr.optString("road", "");
+                String suburb = addr.optString("suburb", addr.optString("village", ""));
+                String city = addr.optString("city", addr.optString("town", addr.optString("county", "")));
+                String state = addr.optString("state", "");
                 String province = addr.optString("province", "");
                 String postcode = addr.optString("postcode", "");
-                String country  = addr.optString("country", "");
+                String country = addr.optString("country", "");
 
                 return formatAddress(house, road, suburb, city, state, province, postcode, country);
             }
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
         return null;
     }
 
-    /**
-     * Calls the Photon reverse geocode endpoint as a fallback to Nominatim.
-     * @return the formatted address, or null on failure.
-     */
     private String reversePhoton(GeoPoint point) {
         try {
             String url = String.format(Locale.US,
@@ -511,52 +515,53 @@ public class MapFragment extends Fragment {
             try (Response response = client.newCall(request).execute()) {
                 if (!response.isSuccessful()) return null;
 
-                JSONObject root     = new JSONObject(response.body().string());
-                JSONArray  features = root.optJSONArray("features");
-                if (features == null || features.length() == 0) return null;
+                JSONObject root = new JSONObject(response.body().string());
+                JSONArray features = root.optJSONArray("features");
+
+                if (features == null || features.length() == 0) {
+                    return null;
+                }
 
                 JSONObject props = features.getJSONObject(0).getJSONObject("properties");
 
-                String road     = props.optString("street", "");
-                String suburb   = props.optString("suburb", "");
-                String city     = props.optString("city", "");
-                String state    = props.optString("state", "");
-                String country  = props.optString("country", "");
+                String road = props.optString("street", "");
+                String suburb = props.optString("suburb", "");
+                String city = props.optString("city", "");
+                String state = props.optString("state", "");
+                String country = props.optString("country", "");
                 String postcode = props.optString("postcode", "");
 
                 return formatAddress(road, suburb, city, state, postcode, country);
             }
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
         return null;
     }
 
-    /**
-     * Joins non-empty address parts into a single comma-separated string.
-     * @param parts varargs of address components (nulls and empty strings are skipped).
-     * @return the assembled address string.
-     */
     private String formatAddress(String... parts) {
         StringBuilder sb = new StringBuilder();
         for (String p : parts) {
             if (p != null && !p.isEmpty()) {
-                if (sb.length() > 0) sb.append(", ");
+                if (sb.length() > 0) {
+                    sb.append(", ");
+                }
                 sb.append(p);
             }
         }
         return sb.toString();
     }
 
-    // ══════════════════════════════════════════════════════════════════════════
-    // UTILITIES
-    // ══════════════════════════════════════════════════════════════════════════
 
-    /** Returns the user's saved language code, defaulting to "en" if unset. */
+    // ─── Utilities ───────────────────────────────────────────────────────────
+
     private String getLanguage() {
         String lang = UserSession.getInstance().getLanguage();
-        return (lang == null || lang.isEmpty()) ? "en" : lang;
+        if (lang == null || lang.isEmpty()) {
+            return "en";
+        }
+        return lang;
     }
 
-    /** Shows a short Toast using the given string resource ID. */
     private void showToast(int res) {
         Toast.makeText(getContext(), res, Toast.LENGTH_SHORT).show();
     }
