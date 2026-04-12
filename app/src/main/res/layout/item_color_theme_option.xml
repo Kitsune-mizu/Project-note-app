@@ -50,6 +50,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:visibility="gone"
+        android:contentDescription="@string/desc_icon_check"
         app:srcCompat="@drawable/ic_check_circle"
         app:tint="?attr/text_color" />
 

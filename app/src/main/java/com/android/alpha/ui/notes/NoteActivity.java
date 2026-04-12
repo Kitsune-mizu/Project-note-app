@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -15,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.graphics.ColorUtils;
 import androidx.lifecycle.ViewModelProvider;
@@ -64,6 +66,7 @@ public class NoteActivity extends BaseActivity
 
     // ─── Lifecycle ───────────────────────────────────────────────────────────
 
+    @RequiresApi(api = Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -169,6 +172,7 @@ public class NoteActivity extends BaseActivity
 
     // ─── Listeners & Filters ─────────────────────────────────────────────────
 
+    @RequiresApi(api = Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
     @SuppressLint("ClickableViewAccessibility")
     private void setupListeners() {
         fabAddNote.setOnClickListener(v -> startActivity(new Intent(this, EditNoteActivity.class)));
@@ -225,6 +229,7 @@ public class NoteActivity extends BaseActivity
 
     // ─── Multi-Selection & Actions ───────────────────────────────────────────
 
+    @RequiresApi(api = Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
     private void handleMultiAction(MultiAction action) {
         Set<String> selectedIds = adapter.getSelectedNoteIds();
         if (selectedIds.isEmpty()) {

@@ -338,6 +338,9 @@
     <string name="cd_color_theme_icon">Select color theme</string>
     <string name="cd_dark_mode_icon">Display mode settings</string>
 
+    <string name="desc_icon_theme">Theme Icon</string>
+    <string name="desc_icon_check">Selected Indicator</string>
+
     <!-- ══════════════════════════════════════════════════════════════
          MAP
     ══════════════════════════════════════════════════════════════ -->

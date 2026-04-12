@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    res/values/themes.xml  →  LIGHT MODE (default)
+    res/values-night/themes.xml  →  DARK MODE (override)
+-->
 <resources>
 
     <!-- ═══════════════════════════════════════════════════════════════════ -->
-    <!-- LIGHT MODE THEME -->
+    <!-- BASE LIGHT THEME                                                    -->
     <!-- ═══════════════════════════════════════════════════════════════════ -->
     <style name="AppTheme" parent="Theme.Material3.Light.NoActionBar">
 
@@ -13,6 +17,10 @@
         <item name="android:colorBackground">@color/color_1</item>
 
         <!-- ================= CUSTOM COLOR ATTRIBUTES ================= -->
+        <item name="color_1">@color/color_1</item>
+        <item name="color_2">@color/color_2</item>
+        <item name="color_3">@color/color_3</item>
+        <item name="color_4">@color/color_4</item>
         <item name="text_color">@color/text_light</item>
 
         <!-- ================= ACCENT COLORS ================= -->
@@ -21,100 +29,93 @@
         <item name="color_yellow">@color/color_yellow</item>
         <item name="color_blue">@color/color_blue</item>
 
-        <!-- ================= WINDOW PROPERTIES ================= -->
+        <!-- ================= STATUS BAR ================= -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <!-- ================= NAVIGATION BAR ================= -->
+        <item name="android:navigationBarColor">@color/color_1</item>
+
+        <!-- ================= WINDOW ================= -->
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
 
     </style>
 
-    <!-- DEFAULT (BLUE) -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- LIGHT — BLUE (default)                                              -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
     <style name="Theme.Alpha" parent="AppTheme">
+        <item name="colorPrimary">@color/color_4</item>
         <item name="color_1">@color/color_1</item>
         <item name="color_2">@color/color_2</item>
         <item name="color_3">@color/color_3</item>
         <item name="color_4">@color/color_4</item>
-        <item name="android:navigationBarColor">@color/color_3</item>
-        <item name="android:statusBarColor">@color/color_3</item>
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/color_1</item>
     </style>
 
-    <!-- PURPLE -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- LIGHT — PURPLE                                                       -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
     <style name="Theme.Alpha.Purple" parent="AppTheme">
+        <item name="colorPrimary">@color/color_4_purple</item>
         <item name="color_1">@color/color_1_purple</item>
         <item name="color_2">@color/color_2_purple</item>
         <item name="color_3">@color/color_3_purple</item>
         <item name="color_4">@color/color_4_purple</item>
-        <item name="android:navigationBarColor">@color/color_3_purple</item>
-        <item name="android:statusBarColor">@color/color_3_purple</item>
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/color_1_purple</item>
     </style>
 
-    <!-- PINK -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- LIGHT — PINK                                                         -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
     <style name="Theme.Alpha.Pink" parent="AppTheme">
+        <item name="colorPrimary">@color/color_4_pink</item>
         <item name="color_1">@color/color_1_pink</item>
         <item name="color_2">@color/color_2_pink</item>
         <item name="color_3">@color/color_3_pink</item>
         <item name="color_4">@color/color_4_pink</item>
-        <item name="android:navigationBarColor">@color/color_3_pink</item>
-        <item name="android:statusBarColor">@color/color_3_pink</item>
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/color_1_pink</item>
     </style>
 
-    <!-- GREEN -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- LIGHT — GREEN                                                        -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
     <style name="Theme.Alpha.Green" parent="AppTheme">
+        <item name="colorPrimary">@color/color_4_green</item>
         <item name="color_1">@color/color_1_green</item>
         <item name="color_2">@color/color_2_green</item>
         <item name="color_3">@color/color_3_green</item>
         <item name="color_4">@color/color_4_green</item>
-        <item name="android:navigationBarColor">@color/color_3_green</item>
-        <item name="android:statusBarColor">@color/color_3_green</item>
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/color_1_green</item>
     </style>
 
-    <!-- ORANGE -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- LIGHT — ORANGE                                                       -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
     <style name="Theme.Alpha.Orange" parent="AppTheme">
+        <item name="colorPrimary">@color/color_4_orange</item>
         <item name="color_1">@color/color_1_orange</item>
         <item name="color_2">@color/color_2_orange</item>
         <item name="color_3">@color/color_3_orange</item>
         <item name="color_4">@color/color_4_orange</item>
-        <item name="android:navigationBarColor">@color/color_3_orange</item>
-        <item name="android:statusBarColor">@color/color_3_orange</item>
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/color_1_orange</item>
     </style>
 
     <!-- ═══════════════════════════════════════════════════════════════════ -->
-    <!-- COMPONENT STYLES -->
+    <!-- DIALOG                                                               -->
     <!-- ═══════════════════════════════════════════════════════════════════ -->
-
-    <style name="CircleShape" parent="ShapeAppearance.Material3.Corner.Full">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">50%</item>
-    </style>
-
-    <style name="ActionIconStyle">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">48dp</item>
-        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
-        <item name="android:padding">12dp</item>
-        <item name="android:tint">?attr/text_color</item>
-    </style>
-
-    <!-- ═══════════════════════════════════════════════════════════════════ -->
-    <!-- DIALOG STYLES -->
-    <!-- ═══════════════════════════════════════════════════════════════════ -->
-
     <style name="RoundedDialog" parent="Theme.Material3.Light.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowMinWidthMajor">85%</item>
         <item name="android:windowMinWidthMinor">85%</item>
-        <item name="colorPrimary">?attr/color_4</item>
-        <item name="colorAccent">?attr/color_4</item>
-        <item name="android:backgroundTint">?attr/color_2</item>
+        <item name="colorPrimary">@color/color_4</item>
+        <item name="colorAccent">@color/color_4</item>
+        <item name="android:backgroundTint">@color/color_2</item>
     </style>
 
     <!-- ═══════════════════════════════════════════════════════════════════ -->
-    <!-- BOTTOM SHEET STYLES -->
+    <!-- BOTTOM SHEET                                                         -->
     <!-- ═══════════════════════════════════════════════════════════════════ -->
-
     <style name="ModernBottomSheetDialog" parent="Theme.Material3.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/ModernBottomSheetStyle</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
@@ -123,7 +124,7 @@
 
     <style name="ModernBottomSheetStyle" parent="Widget.Material3.BottomSheet.Modal">
         <item name="shapeAppearanceOverlay">@style/BottomSheetShape</item>
-        <item name="backgroundTint">?attr/color_2</item>
+        <item name="backgroundTint">@color/color_2</item>
     </style>
 
     <style name="BottomSheetShape" parent="ShapeAppearance.Material3.Corner.Large">
@@ -132,6 +133,17 @@
         <item name="cornerSizeTopRight">20dp</item>
         <item name="cornerSizeBottomLeft">0dp</item>
         <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+
+    <style name="ActionIconStyle">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:padding">8dp</item>
+    </style>
+
+    <style name="CircleShape">
+        <item name="android:shape">oval</item>
     </style>
 
 </resources>

@@ -59,6 +59,9 @@ public class UserSession {
     private UserSessionListener badgeListener;
     private ActivityClearedListener activityClearedListener;
 
+    private String detectedCountryName = "";
+    public String getDetectedCountryName() { return detectedCountryName; }
+    public void setDetectedCountryName(String name) { detectedCountryName = name; }
 
     // ─── Models & Interfaces ─────────────────────────────────────────────────
 

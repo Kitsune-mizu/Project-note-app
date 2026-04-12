@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    res/values-night/themes.xml  →  DARK MODE OVERRIDE
+    File ini menimpa res/values/themes.xml saat dark mode aktif.
+    Semua color_1..4 di-override ke dark palette.
+-->
 <resources>
 
     <!-- ═══════════════════════════════════════════════════════════════════ -->
-    <!-- DARK MODE THEME (SIMPLIFIED) -->
+    <!-- BASE DARK THEME                                                      -->
     <!-- ═══════════════════════════════════════════════════════════════════ -->
     <style name="AppTheme" parent="Theme.Material3.Dark.NoActionBar">
 
@@ -38,28 +43,18 @@
     </style>
 
     <!-- ═══════════════════════════════════════════════════════════════════ -->
-    <!-- ALL COLOR THEMES → DARK MODE (OVERRIDE) -->
+    <!-- DARK — semua color theme pakai dark palette yang sama               -->
+    <!-- (sesuai struktur asli: semua parent AppTheme dark)                 -->
     <!-- ═══════════════════════════════════════════════════════════════════ -->
-
-    <!-- DEFAULT (BLUE) → DARK -->
-    <style name="Theme.Alpha" parent="AppTheme" />
-
-    <!-- PURPLE → DARK -->
+    <style name="Theme.Alpha"        parent="AppTheme" />
     <style name="Theme.Alpha.Purple" parent="AppTheme" />
-
-    <!-- PINK → DARK -->
-    <style name="Theme.Alpha.Pink" parent="AppTheme" />
-
-    <!-- GREEN → DARK -->
-    <style name="Theme.Alpha.Green" parent="AppTheme" />
-
-    <!-- ORANGE → DARK -->
+    <style name="Theme.Alpha.Pink"   parent="AppTheme" />
+    <style name="Theme.Alpha.Green"  parent="AppTheme" />
     <style name="Theme.Alpha.Orange" parent="AppTheme" />
 
     <!-- ═══════════════════════════════════════════════════════════════════ -->
-    <!-- DIALOG -->
+    <!-- DIALOG (dark)                                                        -->
     <!-- ═══════════════════════════════════════════════════════════════════ -->
-
     <style name="RoundedDialog" parent="Theme.Material3.Dark.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowMinWidthMajor">85%</item>
@@ -70,9 +65,8 @@
     </style>
 
     <!-- ═══════════════════════════════════════════════════════════════════ -->
-    <!-- BOTTOM SHEET -->
+    <!-- BOTTOM SHEET (dark)                                                  -->
     <!-- ═══════════════════════════════════════════════════════════════════ -->
-
     <style name="ModernBottomSheetDialog" parent="Theme.Material3.Dark.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/ModernBottomSheetStyle</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
@@ -90,6 +84,17 @@
         <item name="cornerSizeTopRight">20dp</item>
         <item name="cornerSizeBottomLeft">0dp</item>
         <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+
+    <style name="ActionIconStyle">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:padding">8dp</item>
+    </style>
+
+    <style name="CircleShape">
+        <item name="android:shape">oval</item>
     </style>
 
 </resources>

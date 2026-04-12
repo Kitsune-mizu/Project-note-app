@@ -336,6 +336,9 @@
     <string name="cd_color_theme_icon">Pilih tema warna</string>
     <string name="cd_dark_mode_icon">Pengaturan mode tampilan</string>
 
+    <string name="desc_icon_theme">Ikon Tema</string>
+    <string name="desc_icon_check">Indikator Terpilih</string>
+
     <!-- ══════════════════════════════════════════════════════════════
          PETA
     ══════════════════════════════════════════════════════════════ -->
