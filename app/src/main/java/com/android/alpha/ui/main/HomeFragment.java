@@ -377,7 +377,13 @@ public class HomeFragment extends Fragment implements
     }
 
     private void updateDateTime() {
-        tvDateTime.setText(dateFormat.format(new Date()));
+        String date = dateFormat.format(new Date());
+        String country = UserSession.getInstance().getDetectedCountryName();
+        if (country != null && !country.isEmpty()) {
+            tvDateTime.setText(date + " • " + country);
+        } else {
+            tvDateTime.setText(date);
+        }
     }
 
 

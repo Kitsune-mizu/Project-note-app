@@ -484,6 +484,11 @@ public class SplashActivity extends BaseActivity {
 
                 runOnUiThread(() -> {
                     if (addresses != null && !addresses.isEmpty()) {
+                        String countryName = addresses.get(0).getCountryName();
+                        UserSession.getInstance().setDetectedCountryName(
+                                countryName != null ? countryName : ""
+                        );
+
                         updateCountry(addresses.get(0).getCountryCode());
                     } else {
                         getNetworkLocationFallback();
@@ -515,7 +520,7 @@ public class SplashActivity extends BaseActivity {
     private void getNetworkLocationFallback() {
         new Thread(() -> {
             try {
-                String countryCode = getCountryCodeFromIP();
+                String countryCode = getCountryNameFromIP();
                 runOnUiThread(() -> {
                     if (countryCode.isEmpty()) {
                         updateCountry(Locale.getDefault().getCountry());
@@ -534,14 +539,23 @@ public class SplashActivity extends BaseActivity {
         updateCountry(Locale.getDefault().getCountry().toLowerCase());
     }
 
-    private String getCountryCodeFromIP() throws Exception {
-        HttpURLConnection connection = (HttpURLConnection) new URL("https://ipapi.co/json/").openConnection();
+    private String getCountryNameFromIP() throws Exception {
+        HttpURLConnection connection =
+                (HttpURLConnection) new URL("https://ipapi.co/json/").openConnection();
+
         connection.setRequestMethod("GET");
         connection.setConnectTimeout(4000);
         connection.setReadTimeout(4000);
 
-        return new JSONObject(readResponse(connection))
-                .optString("country_code", "")
+        JSONObject json = new JSONObject(readResponse(connection));
+
+        // simpan nama negara
+        UserSession.getInstance().setDetectedCountryName(
+                json.optString("country_name", "")
+        );
+
+        // return kode negara
+        return json.optString("country_code", "")
                 .toLowerCase(Locale.ROOT);
     }
 
