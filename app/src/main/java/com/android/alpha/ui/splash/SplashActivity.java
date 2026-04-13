@@ -188,81 +188,410 @@ public class SplashActivity extends BaseActivity {
         return "<!DOCTYPE html><html><head>"
                 + "<meta name='viewport' content='width=device-width,initial-scale=1'>"
                 + "<style>"
-                + "html,body{margin:0;padding:0;background:transparent;display:flex;"
-                + "align-items:center;justify-content:center;height:100%;width:100%;}"
-                + "svg{width:100%;height:auto;max-width:320px;}"
-                + ".bubble{animation:pulse 2s ease-in-out infinite;transform-origin:160px 95px;}"
-                + ".d1{animation:dotblink 1.2s 0s infinite;}"
-                + ".d2{animation:dotblink 1.2s 0.4s infinite;}"
-                + ".d3{animation:dotblink 1.2s 0.8s infinite;}"
-                + ".sp{animation:sparkle 2s ease-in-out infinite;}"
-                + ".sp.s2{animation-delay:0.5s;}.sp.s3{animation-delay:1s;}"
-                + ".sp.s4{animation-delay:1.5s;}.sp.s5{animation-delay:0.3s;}"
-                + ".sp.s6{animation-delay:0.9s;}.sp.s7{animation-delay:1.3s;}"
-                + ".sp.s8{animation-delay:0.7s;}"
-                + ".bar-fill{animation:barload 2.4s ease-in-out infinite;}"
-                + "@keyframes pulse{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.05);opacity:0.9;}}"
-                + "@keyframes dotblink{0%,80%,100%{opacity:0.2;}40%{opacity:1;}}"
-                + "@keyframes sparkle{0%,100%{opacity:0;transform:scale(0.5);}50%{opacity:1;transform:scale(1);}}"
-                + "@keyframes barload{0%{width:0;}70%{width:114px;}85%{width:114px;}100%{width:0;}}"
+                + "*{margin:0;padding:0;box-sizing:border-box;}"
+                // full layar, tanpa scroll
+                + "html,body{width:100%;height:100%;overflow:hidden;background:transparent;"
+                + "display:flex;align-items:center;justify-content:center;}"
+                + "svg{display:block;width:100%;height:100%;}"
+
+                // ── speech bubble ──
+                + ".bubble{animation:pulse 2.2s ease-in-out infinite;transform-origin:200px 90px;}"
+
+                // ── dots ──
+                + ".d1{animation:blink 1.2s 0.0s infinite;}"
+                + ".d2{animation:blink 1.2s 0.4s infinite;}"
+                + ".d3{animation:blink 1.2s 0.8s infinite;}"
+
+                // ── sparkle ──
+                + ".sp{animation:spark 2s ease-in-out infinite;}"
+                + ".sp.a1{animation-delay:0.0s;}.sp.a2{animation-delay:0.5s;}"
+                + ".sp.a3{animation-delay:1.0s;}.sp.a4{animation-delay:1.5s;}"
+                + ".sp.a5{animation-delay:0.3s;}.sp.a6{animation-delay:0.9s;}"
+                + ".sp.a7{animation-delay:1.3s;}.sp.a8{animation-delay:0.7s;}"
+                + ".sp.a9{animation-delay:0.2s;}.sp.a10{animation-delay:1.1s;}"
+
+                // ── bar ──
+                + ".bar{animation:barload 2.4s ease-in-out infinite;}"
+
+                // ── environment & karakter ──
+                + ".sway{animation:sway 3.6s ease-in-out infinite;}"
+                + ".fox{animation:jump 1.6s ease-in-out infinite;transform-origin:56px 330px;}"
+                + ".fish{animation:swim 2.2s ease-in-out infinite;}"
+                + ".fish2{animation:swim2 2.8s ease-in-out infinite;}"
+                + ".cathead{transform-origin:192px 294px;}"
+                + ".ghost{animation:floatup 2s ease-in-out infinite;transform-origin:340px 300px;}"
+                + ".cat{animation:jump2 1.8s ease-in-out infinite;transform-origin:470px 330px;}"
+                + ".mushroom{animation:bounce 1.4s ease-in-out infinite;transform-origin:130px 330px;}"
+
+                // ── bubble pop ──
+                + ".bp1{animation:pop 2.4s 0.0s infinite;}"
+                + ".bp2{animation:pop 2.4s 0.8s infinite;}"
+                + ".bp3{animation:pop 2.4s 1.6s infinite;}"
+                + ".bp4{animation:pop 2.4s 0.4s infinite;}"
+                + ".bp5{animation:pop 2.4s 1.2s infinite;}"
+                + ".bp6{animation:pop 2.4s 2.0s infinite;}"
+                + ".bp7{animation:pop 2.4s 0.6s infinite;}"
+                + ".bp8{animation:pop 2.4s 1.8s infinite;}"
+                + ".bxa{animation:bxa 2.4s ease-out infinite;}"
+                + ".bxb{animation:bxb 2.4s ease-out infinite;}"
+                + ".bxc{animation:bxc 2.4s ease-out infinite;}"
+                + ".bxd{animation:bxd 2.4s ease-out infinite;}"
+                + ".bxa.d1{animation-delay:0.0s;}.bxb.d1{animation-delay:0.0s;}"
+                + ".bxc.d1{animation-delay:0.0s;}.bxd.d1{animation-delay:0.0s;}"
+                + ".bxa.d2{animation-delay:0.8s;}.bxb.d2{animation-delay:0.8s;}"
+                + ".bxc.d2{animation-delay:0.8s;}.bxd.d2{animation-delay:0.8s;}"
+                + ".bxa.d3{animation-delay:1.6s;}.bxb.d3{animation-delay:1.6s;}"
+                + ".bxc.d3{animation-delay:1.6s;}.bxd.d3{animation-delay:1.6s;}"
+                + ".bxa.d4{animation-delay:0.4s;}.bxb.d4{animation-delay:0.4s;}"
+                + ".bxc.d4{animation-delay:0.4s;}.bxd.d4{animation-delay:0.4s;}"
+
+                // ── keyframes ──
+                + "@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.04);}}"
+                + "@keyframes blink{0%,80%,100%{opacity:0.15;}40%{opacity:1;}}"
+                + "@keyframes spark{0%,100%{opacity:0;transform:scale(0.3);}50%{opacity:1;transform:scale(1);}}"
+                + "@keyframes barload{0%{width:0;}65%{width:160px;}80%{width:160px;}100%{width:0;}}"
+                + "@keyframes sway{0%,100%{transform:skewX(0deg);}50%{transform:skewX(-6deg);}}"
+                + "@keyframes jump{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}"
+                + "@keyframes jump2{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}"
+                + "@keyframes swim{0%,100%{transform:translateX(0);}50%{transform:translateX(12px);}}"
+                + "@keyframes swim2{0%,100%{transform:translateX(0);}50%{transform:translateX(-10px);}}"
+                + "@keyframes floatup{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}"
+                + "@keyframes bounce{0%,100%{transform:scaleY(1);}50%{transform:scaleY(0.88);}}"
+                + "@keyframes pop{"
+                +   "0%{opacity:0;transform:scale(0.1) translateY(6px);}"
+                +   "30%{opacity:1;transform:scale(1) translateY(-6px);}"
+                +   "65%{opacity:0.8;transform:scale(1.2) translateY(-12px);}"
+                +   "80%{opacity:0;transform:scale(0.1) translateY(-16px);}"
+                +   "100%{opacity:0;}"
+                + "}"
+                + "@keyframes bxa{0%,65%{opacity:0;transform:translate(0,0);}80%{opacity:1;transform:translate(-8px,-6px);}100%{opacity:0;transform:translate(-14px,-12px);}}"
+                + "@keyframes bxb{0%,65%{opacity:0;transform:translate(0,0);}80%{opacity:1;transform:translate(8px,-6px);}100%{opacity:0;transform:translate(14px,-12px);}}"
+                + "@keyframes bxc{0%,65%{opacity:0;transform:translate(0,0);}80%{opacity:1;transform:translate(-6px,4px);}100%{opacity:0;transform:translate(-10px,10px);}}"
+                + "@keyframes bxd{0%,65%{opacity:0;transform:translate(0,0);}80%{opacity:1;transform:translate(6px,4px);}100%{opacity:0;transform:translate(10px,10px);}}"
+
                 + "</style></head><body>"
-                + "<svg viewBox='0 0 320 200' xmlns='http://www.w3.org/2000/svg'>"
+                // viewBox 540×420 — proporsi layar portrait, scale ke full
+                + "<svg viewBox='0 0 540 420' preserveAspectRatio='xMidYMid meet' xmlns='http://www.w3.org/2000/svg'>"
+
+                // ══════════════════════════════════════════════════
+                // SPEECH BUBBLE — Tepat di tengah atas
+                // ══════════════════════════════════════════════════
+                + "<g transform='translate(45, 10)'>"
                 + "<g class='bubble'>"
-                + "<rect x='56' y='34' width='8' height='8' fill='" + cBorder + "'/>"
-                + "<rect x='64' y='30' width='8' height='8' fill='" + cBorder + "'/>"
-                + "<rect x='72' y='28' width='96' height='6' fill='" + cBorder + "'/>"
-                + "<rect x='168' y='24' width='8' height='8' fill='" + cBorder + "'/>"
-                + "<rect x='176' y='24' width='8' height='6' fill='" + cBorder + "'/>"
-                + "<rect x='184' y='26' width='56' height='6' fill='" + cBorder + "'/>"
-                + "<rect x='240' y='24' width='6' height='6' fill='" + cBorder + "'/>"
-                + "<rect x='246' y='26' width='6' height='6' fill='" + cBorder + "'/>"
-                + "<rect x='252' y='30' width='6' height='76' fill='" + cBorder + "'/>"
-                + "<rect x='246' y='106' width='6' height='8' fill='" + cBorder + "'/>"
-                + "<rect x='238' y='108' width='8' height='8' fill='" + cBorder + "'/>"
-                + "<rect x='68' y='114' width='170' height='6' fill='" + cBorder + "'/>"
-                + "<rect x='60' y='108' width='8' height='6' fill='" + cBorder + "'/>"
-                + "<rect x='54' y='100' width='6' height='8' fill='" + cBorder + "'/>"
-                + "<rect x='48' y='48' width='6' height='52' fill='" + cBorder + "'/>"
-                + "<rect x='54' y='40' width='6' height='8' fill='" + cBorder + "'/>"
-                + "<rect x='60' y='38' width='184' height='72' fill='" + cAccentLight + "'/>"
-                + "<rect x='54' y='46' width='6' height='58' fill='" + cAccentLight + "'/>"
-                + "<rect x='244' y='36' width='6' height='70' fill='" + cAccentLight + "'/>"
-                + "<rect x='64' y='108' width='176' height='6' fill='" + cAccentLight + "'/>"
-                + "<rect x='74' y='44' width='158' height='58' fill='" + cAccent + "'/>"
-                + "<rect x='66' y='52' width='8' height='44' fill='" + cAccent + "'/>"
-                + "<rect x='232' y='52' width='8' height='44' fill='" + cAccent + "'/>"
-                + "<rect x='74' y='96' width='158' height='6' fill='" + cAccent + "'/>"
-                + "<rect x='208' y='80' width='24' height='18' fill='" + cAccentLight + "'/>"
-                + "<rect x='82' y='52' width='142' height='44' fill='" + cMid + "'/>"
-                + "<rect x='74' y='58' width='8' height='34' fill='" + cMid + "'/>"
-                + "<rect x='224' y='58' width='8' height='26' fill='" + cMid + "'/>"
-                + "<rect x='82' y='94' width='126' height='6' fill='" + cMid + "'/>"
-                + "<rect x='204' y='76' width='18' height='16' fill='" + cAccentLight + "'/>"
-                + "<rect class='d1' x='124' y='66' width='12' height='12' fill='" + cAccent + "'/>"
-                + "<rect class='d2' x='144' y='66' width='12' height='12' fill='" + cAccent + "'/>"
-                + "<rect class='d3' x='164' y='66' width='12' height='12' fill='" + cAccent + "'/>"
+                // border luar piksel
+                + "<rect x='100' y='20' width='10' height='10' fill='" + cBorder + "'/>"
+                + "<rect x='110' y='12' width='10' height='10' fill='" + cBorder + "'/>"
+                + "<rect x='120' y='10' width='120' height='8'  fill='" + cBorder + "'/>"
+                + "<rect x='240' y='8'  width='10' height='10' fill='" + cBorder + "'/>"
+                + "<rect x='250' y='8'  width='10' height='8'  fill='" + cBorder + "'/>"
+                + "<rect x='260' y='10' width='80' height='8'  fill='" + cBorder + "'/>"
+                + "<rect x='340' y='8'  width='8'  height='8'  fill='" + cBorder + "'/>"
+                + "<rect x='348' y='10' width='8'  height='8'  fill='" + cBorder + "'/>"
+                + "<rect x='356' y='14' width='8'  height='106' fill='" + cBorder + "'/>"
+                + "<rect x='348' y='120' width='8' height='10' fill='" + cBorder + "'/>"
+                + "<rect x='338' y='124' width='10' height='10' fill='" + cBorder + "'/>"
+                + "<rect x='112' y='130' width='226' height='8' fill='" + cBorder + "'/>"
+                + "<rect x='102' y='124' width='10' height='8'  fill='" + cBorder + "'/>"
+                + "<rect x='94'  y='114' width='8'  height='10' fill='" + cBorder + "'/>"
+                + "<rect x='88'  y='32' width='8'  height='82' fill='" + cBorder + "'/>"
+                + "<rect x='94'  y='22' width='8'  height='10' fill='" + cBorder + "'/>"
+                // fill luar
+                + "<rect x='102' y='26' width='246' height='100' fill='" + cAccentLight + "'/>"
+                + "<rect x='94'  y='34' width='8'   height='88'  fill='" + cAccentLight + "'/>"
+                + "<rect x='346' y='22' width='8'   height='104' fill='" + cAccentLight + "'/>"
+                + "<rect x='110' y='124' width='228' height='8'  fill='" + cAccentLight + "'/>"
+                // ring dalam
+                + "<rect x='114' y='34' width='224' height='82' fill='" + cAccent + "'/>"
+                + "<rect x='104' y='44' width='10'  height='64' fill='" + cAccent + "'/>"
+                + "<rect x='334' y='44' width='10'  height='64' fill='" + cAccent + "'/>"
+                + "<rect x='114' y='114' width='224' height='8' fill='" + cAccent + "'/>"
+                // notch kanan
+                + "<rect x='296' y='90' width='38' height='24' fill='" + cAccentLight + "'/>"
+                // center
+                + "<rect x='124' y='44' width='204' height='64' fill='" + cMid + "'/>"
+                + "<rect x='114' y='54' width='10'  height='46' fill='" + cMid + "'/>"
+                + "<rect x='324' y='54' width='10'  height='36' fill='" + cMid + "'/>"
+                + "<rect x='124' y='106' width='172' height='8' fill='" + cMid + "'/>"
+                + "<rect x='292' y='86' width='30' height='20' fill='" + cAccentLight + "'/>"
+                // 3 dots besar
+                + "<rect class='d1' x='176' y='68' width='16' height='16' fill='" + cAccent + "'/>"
+                + "<rect class='d2' x='204' y='68' width='16' height='16' fill='" + cAccent + "'/>"
+                + "<rect class='d3' x='232' y='68' width='16' height='16' fill='" + cAccent + "'/>"
+                + "</g></g>"
+
+                // ══════════════════════════════════════════════════
+                // SPARKLE ATAS
+                // ══════════════════════════════════════════════════
+                + "<g transform='translate(45, 10)'>"
+                + "<rect class='sp a1'  x='70'  y='18'  width='8' height='8' fill='" + cBorder + "'/>"
+                + "<rect class='sp a2'  x='78'  y='8'   width='6' height='6' fill='" + cBorder + "'/>"
+                + "<rect class='sp a3'  x='368' y='6'   width='8' height='8' fill='" + cBorder + "'/>"
+                + "<rect class='sp a4'  x='380' y='22'  width='6' height='6' fill='" + cBorder + "'/>"
+                + "<rect class='sp a5'  x='60'  y='100' width='6' height='6' fill='" + cBorder + "'/>"
+                + "<rect class='sp a6'  x='382' y='112' width='8' height='8' fill='" + cBorder + "'/>"
+                + "<rect class='sp a7'  x='150' y='148' width='6' height='6' fill='" + cBorder + "'/>"
+                + "<rect class='sp a8'  x='270' y='148' width='6' height='6' fill='" + cBorder + "'/>"
+                + "<rect class='sp a9'  x='400' y='60'  width='6' height='6' fill='" + cBorder + "'/>"
+                + "<rect class='sp a10' x='50'  y='54'  width='6' height='6' fill='" + cBorder + "'/>"
                 + "</g>"
-                + "<rect class='sp'    x='36'  y='34'  width='6' height='6' fill='" + cBorder + "'/>"
-                + "<rect class='sp s2' x='42'  y='22'  width='6' height='6' fill='" + cBorder + "'/>"
-                + "<rect class='sp s3' x='260' y='20'  width='6' height='6' fill='" + cBorder + "'/>"
-                + "<rect class='sp s4' x='270' y='36'  width='6' height='6' fill='" + cBorder + "'/>"
-                + "<rect class='sp s5' x='28'  y='88'  width='6' height='6' fill='" + cBorder + "'/>"
-                + "<rect class='sp s6' x='272' y='100' width='6' height='6' fill='" + cBorder + "'/>"
-                + "<rect class='sp s7' x='126' y='126' width='6' height='6' fill='" + cBorder + "'/>"
-                + "<rect class='sp s8' x='194' y='130' width='6' height='6' fill='" + cBorder + "'/>"
-                + "<rect x='102' y='148' width='116' height='10' fill='" + cMid + "'/>"
-                + "<rect x='102' y='148' width='116' height='10' fill='none' stroke='" + cBorder + "' stroke-width='1.5'/>"
-                + "<rect x='100' y='146' width='4' height='4' fill='" + cBorder + "'/>"
-                + "<rect x='216' y='146' width='4' height='4' fill='" + cBorder + "'/>"
-                + "<rect x='100' y='156' width='4' height='4' fill='" + cBorder + "'/>"
-                + "<rect x='216' y='156' width='4' height='4' fill='" + cBorder + "'/>"
-                + "<clipPath id='bc'><rect x='103' y='149' width='114' height='8'/></clipPath>"
+
+                // ══════════════════════════════════════════════════
+                // LOADING BAR
+                // ══════════════════════════════════════════════════
+                + "<rect x='188' y='165' width='164' height='12' fill='" + cMid + "'/>"
+                + "<rect x='188' y='165' width='164' height='12' fill='none' stroke='" + cBorder + "' stroke-width='2'/>"
+                + "<rect x='185' y='162' width='5' height='5' fill='" + cBorder + "'/>"
+                + "<rect x='350' y='162' width='5' height='5' fill='" + cBorder + "'/>"
+                + "<rect x='185' y='175' width='5' height='5' fill='" + cBorder + "'/>"
+                + "<rect x='350' y='175' width='5' height='5' fill='" + cBorder + "'/>"
+                + "<clipPath id='bc'><rect x='190' y='167' width='160' height='8'/></clipPath>"
                 + "<g clip-path='url(#bc)'>"
-                + "<rect class='bar-fill' x='103' y='149' width='0' height='8' fill='" + cAccent + "'/>"
+                + "<rect class='bar' x='190' y='167' width='0' height='8' fill='" + cAccent + "'/>"
                 + "</g>"
-                + "<text x='160' y='176' text-anchor='middle' font-family='monospace' "
-                + "font-size='10' fill='" + cBorder + "' font-weight='bold' "
-                + "letter-spacing='2' opacity='0.7'>LOADING...</text>"
+                + "<text x='270' y='192' text-anchor='middle' font-family='monospace' font-size='11' fill='" + cBorder + "' font-weight='bold' letter-spacing='3' opacity='0.6'>LOADING...</text>"
+
+                // ══════════════════════════════════════════════════
+                // PIJAKAN / GROUND SCENERY (Rumput, Batu, Terumbu)
+                // Diturunkan sedikit menggunakan translate(0, 25)
+                // ══════════════════════════════════════════════════
+                + "<g class='scenery' transform='translate(0, 25)'>"
+                // Garis tanah utama
+                + "<rect x='0' y='465' width='540' height='2' fill='" + cBorder + "'/>"
+                + "<rect x='0' y='467' width='540' height='14' fill='" + cMid + "' opacity='0.3'/>"
+
+                // Tekstur tanah (dots pelengkap)
+                + "<rect x='30'  y='470' width='6' height='2' fill='" + cBorder + "' opacity='0.2'/>"
+                + "<rect x='120' y='474' width='4' height='2' fill='" + cBorder + "' opacity='0.2'/>"
+                + "<rect x='250' y='469' width='8' height='2' fill='" + cBorder + "' opacity='0.2'/>"
+                + "<rect x='380' y='473' width='4' height='2' fill='" + cBorder + "' opacity='0.2'/>"
+                + "<rect x='480' y='470' width='6' height='2' fill='" + cBorder + "' opacity='0.2'/>"
+
+                // Rumput Kiri (Swaying)
+                + "<g class='sway' style='transform-origin:15px 465px;'>"
+                + "<rect x='14' y='452' width='4' height='13' fill='#6B8E7B'/>"
+                + "<rect x='10' y='456' width='4' height='9' fill='#6B8E7B'/>"
+                + "<rect x='18' y='460' width='4' height='5' fill='#8BA888'/>"
+                + "</g>"
+
+                // Terumbu Karang Biru
+                + "<rect x='120' y='440' width='8' height='25' fill='#4D97A8'/>"
+                + "<rect x='128' y='446' width='6' height='6' fill='#4D97A8'/>"
+                + "<rect x='114' y='452' width='6' height='6' fill='#4D97A8'/>"
+                + "<rect x='116' y='444' width='4' height='6' fill='#74B4C2'/>"
+
+                // Batu Tengah
+                + "<rect x='210' y='456' width='16' height='9' fill='#94A3B8'/>"
+                + "<rect x='214' y='452' width='8' height='4' fill='#CBD5E1'/>"
+
+                // Rumput Laut (Swaying)
+                + "<g class='sway' style='transform-origin:290px 465px;'>"
+                + "<rect x='288' y='435' width='4' height='30' fill='#6B8E7B'/>"
+                + "<rect x='292' y='442' width='4' height='10' fill='#6B8E7B'/>"
+                + "<rect x='284' y='452' width='4' height='10' fill='#8BA888'/>"
+                + "</g>"
+
+                // Terumbu Karang Pink
+                + "<rect x='380' y='430' width='6' height='35' fill='#C17798'/>"
+                + "<rect x='386' y='440' width='8' height='6' fill='#C17798'/>"
+                + "<rect x='374' y='452' width='6' height='6' fill='#C17798'/>"
+                + "<rect x='382' y='434' width='2' height='12' fill='#D19AAF'/>"
+
+                // Batu & Rumput Kanan
+                + "<rect x='490' y='460' width='12' height='5' fill='#94A3B8'/>"
+                + "<g class='sway' style='transform-origin:498px 465px;'>"
+                + "<rect x='496' y='452' width='4' height='8' fill='#8BA888'/>"
+                + "</g>"
+                + "</g>"
+
+                // ══════════════════════════════════════════════════
+                // KARAKTER 1: RUBAH (Diturunkan sedikit agar natural saat melompat)
+                // ══════════════════════════════════════════════════
+                + "<g transform='translate(47, 160)'>"
+                + "<g class='fox'>"
+                + "<rect x='28' y='274' width='8'  height='10' fill='#C67D53'/>"
+                + "<rect x='30' y='276' width='3'  height='5'  fill='#CBD5E1'/>"
+                + "<rect x='44' y='274' width='8'  height='10' fill='#C67D53'/>"
+                + "<rect x='46' y='276' width='3'  height='5'  fill='#CBD5E1'/>"
+                + "<rect x='26' y='284' width='30' height='22' fill='#C67D53'/>"
+                + "<rect x='28' y='290' width='26' height='14' fill='#CBD5E1'/>"
+                + "<rect x='30' y='292' width='6'  height='6'  fill='" + cBorder + "'/>"
+                + "<rect x='31' y='293' width='3'  height='3'  fill='" + cMid + "'/>"
+                + "<rect x='44' y='292' width='6'  height='6'  fill='" + cBorder + "'/>"
+                + "<rect x='45' y='293' width='3'  height='3'  fill='" + cMid + "'/>"
+                + "<rect x='38' y='298' width='4'  height='3'  fill='#715548'/>"
+                + "<rect x='28' y='306' width='26' height='14' fill='#C67D53'/>"
+                + "<rect x='54' y='304' width='8'  height='8'  fill='#C67D53'/>"
+                + "<rect x='60' y='298' width='6'  height='6'  fill='#CBD5E1'/>"
+                + "<rect x='28' y='320' width='8'  height='6'  fill='" + cBorder + "'/>"
+                + "<rect x='44' y='320' width='8'  height='6'  fill='" + cBorder + "'/>"
+                + "</g></g>"
+
+                // ══════════════════════════════════════════════════
+                // KARAKTER 2: JAMUR
+                // ══════════════════════════════════════════════════
+                + "<g transform='translate(53, 160)'>"
+                + "<g class='mushroom'>"
+                + "<rect x='108' y='282' width='44' height='6'  fill='#C76262'/>"
+                + "<rect x='104' y='288' width='52' height='30' fill='#C76262'/>"
+                + "<rect x='100' y='292' width='6'  height='22' fill='#A14B4B'/>"
+                + "<rect x='154' y='292' width='6'  height='22' fill='#A14B4B'/>"
+                + "<rect x='112' y='292' width='8' height='8' fill='#CBD5E1'/>"
+                + "<rect x='140' y='296' width='6' height='6' fill='#CBD5E1'/>"
+                + "<rect x='126' y='300' width='6' height='6' fill='#CBD5E1'/>"
+                + "<rect x='112' y='318' width='36' height='14' fill='#94A3B8'/>"
+                + "<rect x='108' y='320' width='4'  height='10' fill='#64748B'/>"
+                + "<rect x='148' y='320' width='4'  height='10' fill='#64748B'/>"
+                + "<rect x='118' y='294' width='4' height='4' fill='" + cBorder + "'/>"
+                + "<rect x='119' y='295' width='2' height='2' fill='" + cMid + "'/>"
+                + "<rect x='138' y='294' width='4' height='4' fill='" + cBorder + "'/>"
+                + "<rect x='139' y='295' width='2' height='2' fill='" + cMid + "'/>"
+                + "</g></g>"
+
+                // ══════════════════════════════════════════════════
+                // KARAKTER 3: KEPALA KUCING KOTAK
+                // ══════════════════════════════════════════════════
+                + "<g transform='translate(78, 188)'>"
+                + "<rect class='sp a5' x='174' y='274' width='4' height='4' fill='" + cAccent + "'/>"
+                + "<rect class='sp a8' x='208' y='278' width='3' height='3' fill='" + cAccentLight + "'/>"
+                + "<rect class='sp a9' x='170' y='300' width='3' height='3' fill='" + cAccentLight + "'/>"
+                + "<rect class='sp a6' x='206' y='304' width='4' height='4' fill='" + cAccent + "'/>"
+                + "<g class='cathead'>"
+                + "<rect x='182' y='286' width='20' height='16' fill='#DEC273'/>"
+                + "<rect x='182' y='280' width='6'  height='6'  fill='#CBA344'/>"
+                + "<rect x='196' y='280' width='6'  height='6'  fill='#CBA344'/>"
+                + "<rect x='186' y='292' width='2'  height='2'  fill='" + cBorder + "'/>"
+                + "<rect x='196' y='292' width='2'  height='2'  fill='" + cBorder + "'/>"
+                + "<rect x='190' y='294' width='4'  height='2'  fill='#A8832E'/>"
+                + "</g></g>"
+
+                // ══════════════════════════════════════════════════
+                // KARAKTER 4: HANTU (Diturunkan agar menjauh dari ikan)
+                // ══════════════════════════════════════════════════
+                + "<g transform='translate(31, 140)'>"
+                + "<g class='ghost'>"
+                + "<rect x='312' y='268' width='40' height='8'  fill='#CBD5E1'/>"
+                + "<rect x='306' y='276' width='52' height='40' fill='#CBD5E1'/>"
+                + "<rect x='302' y='282' width='6'  height='32' fill='#94A3B8'/>"
+                + "<rect x='356' y='282' width='6'  height='32' fill='#94A3B8'/>"
+                + "<rect x='302' y='314' width='8'  height='8'  fill='#94A3B8'/>"
+                + "<rect x='318' y='314' width='8'  height='10' fill='#CBD5E1'/>"
+                + "<rect x='332' y='314' width='8'  height='8'  fill='#94A3B8'/>"
+                + "<rect x='346' y='314' width='8'  height='10' fill='#CBD5E1'/>"
+                + "<rect x='314' y='284' width='8'  height='8'  fill='" + cBorder + "'/>"
+                + "<rect x='316' y='286' width='3'  height='3'  fill='" + cMid + "'/>"
+                + "<rect x='342' y='284' width='8'  height='8'  fill='" + cBorder + "'/>"
+                + "<rect x='344' y='286' width='3'  height='3'  fill='" + cMid + "'/>"
+                + "<rect x='320' y='298' width='4'  height='3'  fill='" + cBorder + "'/>"
+                + "<rect x='328' y='300' width='4'  height='3'  fill='" + cBorder + "'/>"
+                + "<rect x='336' y='298' width='4'  height='3'  fill='" + cBorder + "'/>"
+                + "<rect x='330' y='262' width='6'  height='6'  fill='#CBA344'/>"
+                + "<rect x='328' y='264' width='2'  height='2'  fill='#DEC273'/>"
+                + "<rect x='336' y='264' width='2'  height='2'  fill='#DEC273'/>"
+                + "</g></g>"
+
+                // ══════════════════════════════════════════════════
+                // KARAKTER 5: KUCING 8BIT (Diturunkan sedikit agar natural saat melompat)
+                // ══════════════════════════════════════════════════
+                + "<g transform='translate(-7, 158)'>"
+                + "<g class='cat'>"
+                + "<rect x='440' y='274' width='6' height='10' fill='#475569'/>"
+                + "<rect x='442' y='276' width='2' height='5'  fill='#C17798'/>"
+                + "<rect x='456' y='274' width='6' height='10' fill='#475569'/>"
+                + "<rect x='458' y='276' width='2' height='5'  fill='#C17798'/>"
+                + "<rect x='438' y='284' width='28' height='20' fill='#475569'/>"
+                + "<rect x='440' y='288' width='24' height='14' fill='#CBD5E1'/>"
+                + "<rect x='442' y='290' width='6' height='6'  fill='" + cBorder + "'/>"
+                + "<rect x='444' y='292' width='2' height='2'  fill='" + cMid + "'/>"
+                + "<rect x='456' y='290' width='6' height='6'  fill='" + cBorder + "'/>"
+                + "<rect x='458' y='292' width='2' height='2'  fill='" + cMid + "'/>"
+                + "<rect x='451' y='296' width='4' height='3'  fill='#C17798'/>"
+                + "<rect x='440' y='298' width='8' height='2'  fill='" + cBorder + "'/>"
+                + "<rect x='456' y='298' width='8' height='2'  fill='" + cBorder + "'/>"
+                + "<rect x='440' y='304' width='28' height='18' fill='#475569'/>"
+                + "<rect x='466' y='310' width='8' height='6'  fill='#475569'/>"
+                + "<rect x='472' y='304' width='6' height='6'  fill='#475569'/>"
+                + "<rect x='476' y='300' width='4' height='4'  fill='#CBD5E1'/>"
+                + "<rect x='442' y='322' width='8' height='6'  fill='#CBD5E1'/>"
+                + "<rect x='454' y='322' width='8' height='6'  fill='#CBD5E1'/>"
+                + "</g></g>"
+
+                // ══════════════════════════════════════════════════
+                // IKAN 1
+                // ══════════════════════════════════════════════════
+                + "<g transform='translate(-40, 130)'>"
+                + "<g class='fish'>"
+                + "<rect x='168' y='244' width='10' height='6' fill='#4D97A8'/>"
+                + "<rect x='166' y='242' width='5'  height='3' fill='#4D97A8'/>"
+                + "<rect x='166' y='248' width='5'  height='3' fill='#4D97A8'/>"
+                + "<rect x='174' y='238' width='32' height='18' fill='#4D97A8'/>"
+                + "<rect x='176' y='242' width='24' height='8'  fill='#74B4C2'/>"
+                + "<rect x='182' y='234' width='10' height='6'  fill='#377382'/>"
+                + "<rect x='196' y='240' width='6'  height='6'  fill='" + cBorder + "'/>"
+                + "<rect x='197' y='241' width='3'  height='3'  fill='" + cMid + "'/>"
+                + "<rect x='202' y='246' width='3'  height='3'  fill='" + cBorder + "'/>"
+                + "<rect x='178' y='239' width='3'  height='3'  fill='#377382'/>"
+                + "<rect x='186' y='239' width='3'  height='3'  fill='#377382'/>"
+                + "</g></g>"
+
+                // ══════════════════════════════════════════════════
+                // IKAN 2
+                // ══════════════════════════════════════════════════
+                + "<g transform='translate(40, 110)'>"
+                + "<g class='fish2'>"
+                + "<rect x='366' y='252' width='10' height='6' fill='#C17798'/>"
+                + "<rect x='374' y='250' width='5'  height='3' fill='#C17798'/>"
+                + "<rect x='374' y='256' width='5'  height='3' fill='#C17798'/>"
+                + "<rect x='338' y='246' width='32' height='18' fill='#C17798'/>"
+                + "<rect x='340' y='250' width='24' height='8'  fill='#D19AAF'/>"
+                + "<rect x='346' y='242' width='10' height='6'  fill='#9E5877'/>"
+                + "<rect x='342' y='248' width='6'  height='6'  fill='" + cBorder + "'/>"
+                + "<rect x='343' y='249' width='3'  height='3'  fill='" + cMid + "'/>"
+                + "<rect x='338' y='254' width='3'  height='3'  fill='" + cBorder + "'/>"
+                + "<rect x='356' y='247' width='3'  height='3'  fill='#9E5877'/>"
+                + "<rect x='362' y='247' width='3'  height='3'  fill='#9E5877'/>"
+                + "</g></g>"
+
+                // ══════════════════════════════════════════════════
+                // GELEMBUNG POP 8BIT
+                // ══════════════════════════════════════════════════
+                + "<g transform='translate(47, 160)'>" // Disesuaikan dengan posisi Rubah
+                + "<g class='bp1'><rect x='40' y='258' width='6' height='6' fill='none' stroke='" + cAccent + "' stroke-width='2'/></g>"
+                + "<g class='bxa d1'><rect x='40' y='258' width='3' height='3' fill='" + cAccent + "'/></g>"
+                + "<g class='bxb d1'><rect x='44' y='258' width='3' height='3' fill='" + cAccentLight + "'/></g>"
+                + "<g class='bxc d1'><rect x='40' y='262' width='3' height='3' fill='" + cMid + "'/></g>"
+                + "<g class='bxd d1'><rect x='44' y='262' width='3' height='3' fill='" + cAccent + "'/></g>"
+                + "</g>"
+
+                + "<g transform='translate(53, 160)'>"
+                + "<g class='bp2'><rect x='122' y='266' width='8' height='8' fill='none' stroke='" + cAccentLight + "' stroke-width='2'/></g>"
+                + "<g class='bxa d2'><rect x='122' y='266' width='3' height='3' fill='" + cAccentLight + "'/></g>"
+                + "<g class='bxb d2'><rect x='127' y='266' width='3' height='3' fill='" + cAccent + "'/></g>"
+                + "<g class='bxc d2'><rect x='122' y='271' width='3' height='3' fill='" + cBorder + "'/></g>"
+                + "<g class='bxd d2'><rect x='127' y='271' width='3' height='3' fill='" + cAccentLight + "'/></g>"
+                + "</g>"
+
+                + "<g transform='translate(31, 140)'>" // Disesuaikan dengan posisi Hantu
+                + "<g class='bp3'><rect x='326' y='254' width='6' height='6' fill='none' stroke='" + cAccent + "' stroke-width='2'/></g>"
+                + "<g class='bxa d3'><rect x='326' y='254' width='3' height='3' fill='" + cAccent + "'/></g>"
+                + "<g class='bxb d3'><rect x='330' y='254' width='3' height='3' fill='" + cMid + "'/></g>"
+                + "<g class='bxc d3'><rect x='326' y='258' width='3' height='3' fill='" + cAccentLight + "'/></g>"
+                + "<g class='bxd d3'><rect x='330' y='258' width='3' height='3' fill='" + cAccent + "'/></g>"
+                + "</g>"
+
+                + "<g transform='translate(-7, 158)'>" // Disesuaikan dengan posisi Kucing 8-bit
+                + "<g class='bp4'><rect x='454' y='258' width='8' height='8' fill='none' stroke='" + cAccentLight + "' stroke-width='2'/></g>"
+                + "<g class='bxa d4'><rect x='454' y='258' width='3' height='3' fill='" + cAccentLight + "'/></g>"
+                + "<g class='bxb d4'><rect x='459' y='258' width='3' height='3' fill='" + cAccent + "'/></g>"
+                + "<g class='bxc d4'><rect x='454' y='263' width='3' height='3' fill='" + cMid + "'/></g>"
+                + "<g class='bxd d4'><rect x='459' y='263' width='3' height='3' fill='" + cBorder + "'/></g>"
+                + "</g>"
+
+                // bubble ekstra di background
+                + "<g class='bp5'><rect x='80'  y='342' width='5' height='5' fill='none' stroke='" + cAccent + "' stroke-width='1.5'/></g>"
+                + "<g class='bp6'><rect x='248' y='334' width='5' height='5' fill='none' stroke='" + cAccentLight + "' stroke-width='1.5'/></g>"
+                + "<g class='bp7'><rect x='406' y='348' width='4' height='4' fill='none' stroke='" + cAccent + "' stroke-width='1'/></g>"
+                + "<g class='bp8'><rect x='160' y='330' width='4' height='4' fill='none' stroke='" + cMid + "' stroke-width='1'/></g>"
+
                 + "</svg></body></html>";
     }
 

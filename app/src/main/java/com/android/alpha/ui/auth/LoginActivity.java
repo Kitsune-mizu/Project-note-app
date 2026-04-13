@@ -149,7 +149,9 @@ public class LoginActivity extends BaseActivity {
 
             if (session.login(username, password)) {
                 saveCredentials(username, password);
-                startActivity(new Intent(this, MainActivity.class));
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 finish();
             } else {
                 tilPassword.setError(getString(R.string.incorrect_password));

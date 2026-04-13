@@ -1,13 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    Layout: Splash Screen - TWO PHASES
-
-    PHASE 1 (Startup): SVG Pixel Animation (via WebView) + Version
-    PHASE 2 (Location Detected): Flag + Greeting
-
-    Warna SVG di-inject dari tema aktif di SplashActivity.java
-    sehingga otomatis mengikuti color_theme & dark/light mode.
--->
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -17,25 +8,19 @@
     android:background="?attr/color_3"
     tools:context=".ui.splash.SplashActivity">
 
-    <!-- ══════════════════════════════════════════════════════════════════ -->
-    <!-- PHASE 1: STARTUP — SVG Pixel Bubble Animation                     -->
-    <!-- ID: splashWebView (bukan lottieAnimationView)                     -->
-    <!-- Warna di-set programatik dari tema, background transparan         -->
-    <!-- ══════════════════════════════════════════════════════════════════ -->
+    <!-- PHASE 1: SVG full layar -->
     <WebView
         android:id="@+id/splashWebView"
-        android:layout_width="320dp"
-        android:layout_height="220dp"
-        android:visibility="visible"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="@android:color/transparent"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- ══════════════════════════════════════════════════════════════════ -->
-    <!-- PHASE 2: LOCATION DETECTED — Flag + Greeting                      -->
-    <!-- ══════════════════════════════════════════════════════════════════ -->
+    <!-- PHASE 2: Flag + Greeting -->
     <LinearLayout
         android:id="@+id/greetingContainer"
         android:layout_width="wrap_content"
@@ -48,7 +33,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Flag Image (will appear first) -->
         <ImageView
             android:id="@+id/imgFlag"
             android:layout_width="200dp"
@@ -58,7 +42,6 @@
             android:scaleType="centerCrop"
             android:visibility="invisible" />
 
-        <!-- Greeting Text (will appear after flag) -->
         <TextView
             android:id="@+id/tvGreeting"
             android:layout_width="wrap_content"
@@ -66,7 +49,7 @@
             android:layout_marginTop="32dp"
             android:gravity="center"
             android:text="@string/hello_message"
-            android:fontFamily="@font/linottebold"
+            android:fontFamily="@font/linottesemibold"
             android:textAppearance="?attr/textAppearanceHeadlineMedium"
             android:textColor="?attr/text_color"
             android:textStyle="bold"
@@ -74,20 +57,17 @@
 
     </LinearLayout>
 
-    <!-- ══════════════════════════════════════════════════════════════════ -->
-    <!-- BOTTOM BAR: Version (bar loading sudah ada di dalam SVG)          -->
-    <!-- ══════════════════════════════════════════════════════════════════ -->
+    <!-- Version text -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="32dp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <!-- App Version -->
         <TextView
             android:id="@+id/tvVersion"
             android:layout_width="wrap_content"
