@@ -1,6 +1,6 @@
 <div align="center">
   <br>
-  <img src="https://github.com/Kitsune-mizu/Project-note-app/blob/main/Kitsune_note.png" alt="Android Studio" height="200" align="middle">
+  <img src="https://github.com/Kitsune-mizu/Kitsune_Note/blob/main/Kitsune_note.png" alt="Android Studio" height="200" align="middle">
 <h1 style="margin: 0;">Kitsune Note</h1>
   <h3 style="margin: 0;">A Next-Generation Note-Taking Experience</h3>
   <p><a href="#en-english">English</a> &nbsp;|&nbsp; <a href="#id-bahasa-indonesia">Bahasa Indonesia</a></p>
@@ -8,7 +8,7 @@
 
 ---
 
-- **<h4>[ APK RELEASES ]</h4>** [Kitsune Note Latest](https://github.com/Kitsune-mizu/Project-note-app/releases/)
+- **<h4>[ APK RELEASES ]</h4>** [Kitsune Note Latest](https://github.com/Kitsune-mizu/Kitsune_Note/releases/)
 
 ---
 
