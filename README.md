@@ -1,15 +1,14 @@
 <div align="center">
   <br>
-  <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/android-studio-icon.png" alt="Android Studio" height="40" align="middle">
-  &nbsp; &nbsp; <span style="font-size: 16px; color: #6c757d;">✖</span> &nbsp; &nbsp;
-  <img src="https://img.shields.io/badge/KITSUNE-FFFFFF?style=for-the-badge&logoColor=black" alt="KITSUNE" height="30" align="middle">
-  <br><br>
-  <h2 style="margin: 0;">K I T S U N E &nbsp; N O T E</h2>
-  <p><i>A Next-Generation Note-Taking Experience</i></p>
-  <br>
+  <img src="https://github.com/Kitsune-mizu/Project-note-app/blob/main/Kitsune_note.png" alt="Android Studio" height="200" align="middle">
+<h1 style="margin: 0;">Kitsune Note</h1>
+  <h3 style="margin: 0;">A Next-Generation Note-Taking Experience</h3>
   <p><a href="#en-english">English</a> &nbsp;|&nbsp; <a href="#id-bahasa-indonesia">Bahasa Indonesia</a></p>
-  <br>
 </div>
+
+---
+
+- **<h4>[ APK RELEASES ]</h4>** [Kitsune Note Latest](https://github.com/Kitsune-mizu/Project-note-app/releases/)
 
 ---
 
@@ -48,4 +47,9 @@
 <div align="center">
   <br>
   <small><i>Built with precision by Developer × Kitsune | Powered by Android Studio & Gemini AI</i></small>
+<br><br>
+  <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/android-studio-icon.png" alt="Android Studio" height="40" align="middle">
+  &nbsp; &nbsp; <span style="font-size: 16px; color: #6c757d;">✖</span> &nbsp; &nbsp;
+  <img src="https://img.shields.io/badge/KITSUNE-FFFFFF?style=for-the-badge&logoColor=black" alt="KITSUNE" height="30" align="middle">
+  <br>
 </div>
