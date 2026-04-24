@@ -124,7 +124,16 @@
 
     <style name="ModernBottomSheetStyle" parent="Widget.Material3.BottomSheet.Modal">
         <item name="shapeAppearanceOverlay">@style/BottomSheetShape</item>
-        <item name="backgroundTint">@color/color_2</item>
+        <item name="backgroundTint">?attr/color_2</item>
+    </style>
+
+    <style name="BottomSheetDialogTheme" parent="Theme.Material3.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetDialogStyle</item>
+    </style>
+
+    <style name="BottomSheetDialogStyle" parent="Widget.Material3.BottomSheet.Modal">
+        <item name="shapeAppearanceOverlay">@style/BottomSheetShape</item>
+        <item name="backgroundTint">?attr/color_2</item>
     </style>
 
     <style name="BottomSheetShape" parent="ShapeAppearance.Material3.Corner.Large">

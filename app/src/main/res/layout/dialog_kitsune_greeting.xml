@@ -77,7 +77,7 @@
                     android:id="@+id/btnClosePopup"
                     android:layout_width="28dp"
                     android:layout_height="28dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:background="@android:color/transparent"
                     android:src="@drawable/ic_close"
                     android:contentDescription="@string/button_close"
                     app:tint="?attr/text_color"/>

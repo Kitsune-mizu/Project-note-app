@@ -489,9 +489,9 @@ public class SettingsFragment extends Fragment implements
 
             ((TextView) item.findViewById(R.id.tvColorThemeName)).setText(getString(names[i]));
 
-            item.findViewById(R.id.colorPreview1).setBackgroundColor(ContextCompat.getColor(requireContext(), colorPreviews[i][0]));
-            item.findViewById(R.id.colorPreview2).setBackgroundColor(ContextCompat.getColor(requireContext(), colorPreviews[i][1]));
-            item.findViewById(R.id.colorPreview3).setBackgroundColor(ContextCompat.getColor(requireContext(), colorPreviews[i][2]));
+            setCircleBackground(item.findViewById(R.id.colorPreview1), ContextCompat.getColor(requireContext(), colorPreviews[i][0]));
+            setCircleBackground(item.findViewById(R.id.colorPreview2), ContextCompat.getColor(requireContext(), colorPreviews[i][1]));
+            setCircleBackground(item.findViewById(R.id.colorPreview3), ContextCompat.getColor(requireContext(), colorPreviews[i][2]));
 
             if (themes[i].equals(current)) {
                 item.findViewById(R.id.iconCheck).setVisibility(View.VISIBLE);
@@ -508,6 +508,21 @@ public class SettingsFragment extends Fragment implements
 
         dialog.setContentView(sheet);
         dialog.show();
+    }
+
+    private void setCircleBackground(View view, int color) {
+        android.graphics.drawable.GradientDrawable circle = new android.graphics.drawable.GradientDrawable();
+        circle.setShape(android.graphics.drawable.GradientDrawable.OVAL);
+        circle.setColor(color);
+
+        android.util.TypedValue typedValue = new android.util.TypedValue();
+        requireContext().getTheme().resolveAttribute(R.attr.text_color, typedValue, true);
+        int strokeColor = typedValue.data;
+
+        int strokeWidth = (int) (1.5f * requireContext().getResources().getDisplayMetrics().density); // 1.5dp
+        circle.setStroke(strokeWidth, strokeColor);
+
+        view.setBackground(circle);
     }
 
     private void setColorTheme(String theme) {
