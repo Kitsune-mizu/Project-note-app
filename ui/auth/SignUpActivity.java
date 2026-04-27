@@ -1,4 +1,4 @@
-package com.android.alpha.ui.auth;
+package com.android.kitsune.ui.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,9 +14,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.android.alpha.R;
-import com.android.alpha.data.session.UserSession;
-import com.android.alpha.utils.LoadingDialog;
+import com.android.kitsune.R;
+import com.android.kitsune.data.session.UserSession;
+import com.android.kitsune.utils.LoadingDialog;
 
 public class SignUpActivity extends AppCompatActivity {
 

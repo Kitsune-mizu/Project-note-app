@@ -1,4 +1,4 @@
-package com.android.alpha;
+package com.android.kitsune;
 
 import android.Manifest;
 import android.content.Intent;
@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.android.alpha.ui.map.MapFragment;
+import com.android.kitsune.ui.map.MapFragment;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
@@ -32,15 +32,15 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.android.alpha.data.local.UserStorageManager;
-import com.android.alpha.data.session.UserSession;
-import com.android.alpha.ui.auth.LoginActivity;
-import com.android.alpha.ui.home.HomeFragment;
-import com.android.alpha.ui.home.NotificationActivity;
-import com.android.alpha.ui.profile.ProfileFragment;
-import com.android.alpha.ui.profile.SettingsFragment;
-import com.android.alpha.utils.DialogUtils;
-import com.android.alpha.utils.LoadingDialog;
+import com.android.kitsune.data.local.UserStorageManager;
+import com.android.kitsune.data.session.UserSession;
+import com.android.kitsune.ui.auth.LoginActivity;
+import com.android.kitsune.ui.home.HomeFragment;
+import com.android.kitsune.ui.home.NotificationActivity;
+import com.android.kitsune.ui.profile.ProfileFragment;
+import com.android.kitsune.ui.profile.SettingsFragment;
+import com.android.kitsune.utils.DialogUtils;
+import com.android.kitsune.utils.LoadingDialog;
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 import android.content.Context;
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity
 
         if (lang == null || lang.isEmpty()) lang = "en";
 
-        Context localeContext = com.android.alpha.utils.LocaleHelper.setLocale(newBase, lang);
+        Context localeContext = com.android.kitsune.utils.LocaleHelper.setLocale(newBase, lang);
         super.attachBaseContext(localeContext);
     }
 

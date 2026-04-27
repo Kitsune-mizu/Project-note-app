@@ -1,4 +1,4 @@
-package com.android.alpha.ui.home;
+package com.android.kitsune.ui.home;
 
 import android.os.Parcel;
 import android.os.Parcelable;

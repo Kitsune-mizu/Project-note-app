@@ -1,4 +1,4 @@
-package com.android.alpha.ui.profile;
+package com.android.kitsune.ui.profile;
 
 // ---------- IMPORTS ----------
 
@@ -28,14 +28,14 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.LottieDrawable;
-import com.android.alpha.ui.home.ActivityItem;
-import com.android.alpha.MainActivity;
-import com.android.alpha.ui.map.MapFragment;
-import com.android.alpha.R;
-import com.android.alpha.ui.common.Refreshable;
-import com.android.alpha.data.session.UserSession;
-import com.android.alpha.utils.DialogUtils; // Assuming DialogUtils is external
-import com.android.alpha.utils.ShimmerHelper;
+import com.android.kitsune.ui.home.ActivityItem;
+import com.android.kitsune.MainActivity;
+import com.android.kitsune.ui.map.MapFragment;
+import com.android.kitsune.R;
+import com.android.kitsune.ui.common.Refreshable;
+import com.android.kitsune.data.session.UserSession;
+import com.android.kitsune.utils.DialogUtils; // Assuming DialogUtils is external
+import com.android.kitsune.utils.ShimmerHelper;
 import com.bumptech.glide.Glide;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

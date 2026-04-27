@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/color_1"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="32dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingTop="32dp"
+            android:paddingBottom="24dp"
+            android:paddingHorizontal="24dp">
+
+            <ImageView
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:contentDescription="@null"
+                app:srcCompat="@drawable/ic_backup_cloud"
+                app:tint="?attr/text_color" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/title_backup_restore"
+                android:fontFamily="@font/linottesemibold"
+                android:textAppearance="?attr/textAppearanceHeadlineSmall"
+                android:textColor="?attr/text_color"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:gravity="center"
+                android:text="@string/desc_backup_restore"
+                android:fontFamily="@font/linottesemibold"
+                android:textAppearance="?attr/textAppearanceBodySmall"
+                android:textColor="?attr/text_color"
+                android:alpha="0.6" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="24dp"
+            android:paddingBottom="4dp"
+            android:text="@string/header_google_account"
+            android:fontFamily="@font/linottesemibold"
+            android:textAppearance="?attr/textAppearanceLabelSmall"
+            android:textColor="?attr/text_color"
+            android:alpha="0.5" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:strokeColor="?attr/color_4"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:id="@+id/layoutGoogleAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/color_2"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="16dp">
+
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:contentDescription="@null"
+                    app:srcCompat="@drawable/ic_google"
+                    android:padding="6dp"
+                    android:background="@drawable/circle_background" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_google_account"
+                        android:fontFamily="@font/linottesemibold"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        android:textColor="?attr/text_color" />
+
+                    <TextView
+                        android:id="@+id/tvGoogleAccount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/label_tap_to_connect_account"
+                        android:fontFamily="@font/linottesemibold"
+                        android:textAppearance="?attr/textAppearanceLabelSmall"
+                        android:textColor="?attr/text_color"
+                        android:alpha="0.6"
+                        android:maxLines="1"
+                        android:ellipsize="end" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:contentDescription="@null"
+                    app:srcCompat="@drawable/ic_chevron_right"
+                    app:tint="?attr/text_color" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="24dp"
+            android:paddingBottom="4dp"
+            android:text="@string/header_backup_status"
+            android:fontFamily="@font/linottesemibold"
+            android:textAppearance="?attr/textAppearanceLabelSmall"
+            android:textColor="?attr/text_color"
+            android:alpha="0.5" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:strokeColor="?attr/color_4"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/color_2"
+                android:orientation="vertical"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:contentDescription="@null"
+                        app:srcCompat="@drawable/ic_history"
+                        app:tint="?attr/text_color" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:text="@string/label_last_backup"
+                        android:fontFamily="@font/linottesemibold"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        android:textColor="?attr/text_color" />
+
+                    <TextView
+                        android:id="@+id/tvLastBackupTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/backup_never"
+                        android:fontFamily="@font/linottesemibold"
+                        android:textAppearance="?attr/textAppearanceLabelSmall"
+                        android:textColor="?attr/text_color"
+                        android:alpha="0.6" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="12dp"
+                    android:alpha="0.08"
+                    android:background="?attr/text_color" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:contentDescription="@null"
+                        app:srcCompat="@drawable/ic_storage"
+                        app:tint="?attr/text_color" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:text="@string/label_backup_size"
+                        android:fontFamily="@font/linottesemibold"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        android:textColor="?attr/text_color" />
+
+                    <TextView
+                        android:id="@+id/tvBackupSize"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/divider_line"
+                        android:fontFamily="@font/linottesemibold"
+                        android:textAppearance="?attr/textAppearanceLabelSmall"
+                        android:textColor="?attr/text_color"
+                        android:alpha="0.6" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvDriveBackupInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/msg_connect_google_info"
+                    android:fontFamily="@font/linottesemibold"
+                    android:textAppearance="?attr/textAppearanceLabelSmall"
+                    android:textColor="?attr/text_color"
+                    android:alpha="0.5"
+                    android:background="@drawable/bg_dialog_rounded"
+                    android:padding="10dp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="24dp"
+            android:paddingBottom="4dp"
+            android:text="@string/header_auto_backup"
+            android:fontFamily="@font/linottesemibold"
+            android:textAppearance="?attr/textAppearanceLabelSmall"
+            android:textColor="?attr/text_color"
+            android:alpha="0.5" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:strokeColor="?attr/color_4"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/color_2"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/layoutAutoBackup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="14dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:contentDescription="@null"
+                        app:srcCompat="@drawable/ic_backup_auto"
+                        app:tint="?attr/text_color" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/label_backup_to_drive"
+                            android:fontFamily="@font/linottesemibold"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
+                            android:textColor="?attr/text_color" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="@string/desc_enable_auto_backup"
+                            android:fontFamily="@font/linottesemibold"
+                            android:textAppearance="?attr/textAppearanceLabelSmall"
+                            android:textColor="?attr/text_color"
+                            android:alpha="0.6" />
+
+                    </LinearLayout>
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:thumbTint="@color/switch_thumb"
+                        app:trackTint="@color/switch_track" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="56dp"
+                    android:alpha="0.08"
+                    android:background="?attr/text_color" />
+
+                <LinearLayout
+                    android:id="@+id/layoutFrequency"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="14dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:contentDescription="@null"
+                        app:srcCompat="@drawable/ic_schedule"
+                        app:tint="?attr/text_color" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/label_backup_frequency"
+                            android:fontFamily="@font/linottesemibold"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
+                            android:textColor="?attr/text_color" />
+
+                        <TextView
+                            android:id="@+id/tvAutoFrequency"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="@string/freq_weekly"
+                            android:fontFamily="@font/linottesemibold"
+                            android:textAppearance="?attr/textAppearanceLabelSmall"
+                            android:textColor="?attr/text_color"
+                            android:alpha="0.6" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:contentDescription="@null"
+                        app:srcCompat="@drawable/ic_chevron_right"
+                        app:tint="?attr/text_color" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardProgress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:strokeColor="?attr/color_4"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/color_2"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tvProgressStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/status_preparing"
+                    android:fontFamily="@font/linottesemibold"
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    android:textColor="?attr/text_color"
+                    android:layout_marginBottom="10dp" />
+
+                <ProgressBar
+                    android:id="@+id/progressBackup"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:max="100"
+                    android:progress="0"
+                    android:progressBackgroundTint="?attr/color_4"
+                    android:progressTint="?attr/color_3" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="24dp"
+            android:paddingBottom="4dp"
+            android:text="@string/header_backup_actions"
+            android:fontFamily="@font/linottesemibold"
+            android:textAppearance="?attr/textAppearanceLabelSmall"
+            android:textColor="?attr/text_color"
+            android:alpha="0.5" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:strokeColor="?attr/color_4"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/color_2"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/layoutBackupNow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="16dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:contentDescription="@null"
+                        app:srcCompat="@drawable/ic_backup_cloud"
+                        app:tint="?attr/color_blue" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:text="@string/action_backup_now"
+                        android:fontFamily="@font/linottesemibold"
+                        android:textAppearance="?attr/textAppearanceBodyLarge"
+                        android:textColor="?attr/color_blue"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:contentDescription="@null"
+                        app:srcCompat="@drawable/ic_chevron_right"
+                        app:tint="?attr/color_blue" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="56dp"
+                    android:alpha="0.08"
+                    android:background="?attr/text_color" />
+
+                <LinearLayout
+                    android:id="@+id/layoutRestore"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="16dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:contentDescription="@null"
+                        app:srcCompat="@drawable/ic_restore"
+                        app:tint="?attr/text_color" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/action_restore_from_drive"
+                            android:fontFamily="@font/linottesemibold"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
+                            android:textColor="?attr/text_color" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="@string/desc_restore_items"
+                            android:fontFamily="@font/linottesemibold"
+                            android:textAppearance="?attr/textAppearanceLabelSmall"
+                            android:textColor="?attr/text_color"
+                            android:alpha="0.6" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:contentDescription="@null"
+                        app:srcCompat="@drawable/ic_chevron_right"
+                        app:tint="?attr/text_color" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="8dp"
+            android:text="@string/desc_backup_footnote"
+            android:fontFamily="@font/linottesemibold"
+            android:textAppearance="?attr/textAppearanceLabelSmall"
+            android:textColor="?attr/text_color"
+            android:alpha="0.45"
+            android:lineSpacingMultiplier="1.4" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

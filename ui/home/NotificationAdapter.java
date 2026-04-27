@@ -1,4 +1,4 @@
-package com.android.alpha.ui.home;
+package com.android.kitsune.ui.home;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -13,9 +13,9 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.alpha.R;
-import com.android.alpha.data.session.UserSession;
-import com.android.alpha.utils.DialogUtils;
+import com.android.kitsune.R;
+import com.android.kitsune.data.session.UserSession;
+import com.android.kitsune.utils.DialogUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

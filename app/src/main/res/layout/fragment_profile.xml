@@ -1,28 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Layout: Profile Screen (Modern - Fixed)
-    Fix 1: FAB style diganti ke Widget.MaterialComponents.FloatingActionButton
-    Fix 2: fabEditBg dipindah ke FrameLayout agar tidak overlap dengan konten
-    Lottie: lottieProfile — DIPERTAHANKAN
-    UPDATED: Shimmer diperbaiki dan hanya muncul saat load pertama
+    Layout: Profile Screen — WhatsApp Style (v4)
+    - FAB edit DIHAPUS — avatar langsung bisa di-tap
+    - BottomSheet untuk ganti foto (like SettingsFragment style)
+    - Flat list rows tanpa card
+    - Lottie & Shimmer dipertahankan
 -->
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/color_1"
-    android:clipToPadding="false"
+    android:background="?attr/color_2"
     android:fitsSystemWindows="true">
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:ignore="ExtraText">
+        android:layout_height="match_parent">
 
-        <!-- ── PROFILE CONTENT ── -->
+        <!-- ══ PROFILE CONTENT ══ -->
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scrollViewProfile"
             android:layout_width="match_parent"
@@ -32,165 +29,339 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingBottom="32dp">
 
-                <!-- ── PROFILE HEADER ── -->
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="280dp"
-                    android:background="@drawable/gradient_primary">
-
-                    <!-- Background Image -->
-                    <ImageView
-                        android:id="@+id/ivBackground"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:contentDescription="@string/cd_profile_background"
-                        android:scaleType="centerCrop"
-                        android:visibility="gone" />
-
-                    <!-- Profile Center Content -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="24dp">
-
-                        <!-- Profile Image / Lottie Container -->
-                        <RelativeLayout
-                            android:layout_width="140dp"
-                            android:layout_height="140dp"
-                            android:layout_marginBottom="14dp">
-
-                            <!-- Lottie Default Profile — DIPERTAHANKAN -->
-                            <com.airbnb.lottie.LottieAnimationView
-                                android:id="@+id/lottieProfile"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_centerInParent="true"
-                                android:contentDescription="@string/cd_profile_animation" />
-
-                            <ImageView
-                                android:id="@+id/ivProfile"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_centerInParent="true"
-                                android:contentDescription="@string/cd_profile_picture"
-                                android:scaleType="centerCrop"
-                                android:visibility="gone" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/profile_border" />
-
-                            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                                android:id="@+id/fabEditProfile"
-                                style="@style/Widget.MaterialComponents.FloatingActionButton"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_alignParentBottom="true"
-                                android:layout_marginEnd="-9dp"
-                                android:layout_marginBottom="-7dp"
-                                android:contentDescription="@string/cd_edit_profile_button"
-                                android:src="@drawable/ic_edit"
-                                app:backgroundTint="?attr/color_4"
-                                app:fabCustomSize="32dp"
-                                app:maxImageSize="16dp"
-                                app:tint="?attr/text_color"
-                                app:useCompatPadding="true" />
-
-                        </RelativeLayout>
-
-                        <TextView
-                            android:id="@+id/tvProfileName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/placeholder_name"
-                            android:fontFamily="@font/linottesemibold"
-                            android:textAppearance="?attr/textAppearanceHeadlineSmall"
-                            android:textColor="?attr/text_color"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tvProfileEmail"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:alpha="0.85"
-                            android:text="@string/placeholder_email"
-                            android:fontFamily="@font/linottesemibold"
-                            android:textColor="?attr/text_color"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-
-                    <!-- fabEditBg di sini sebagai child langsung FrameLayout -->
-                    <com.google.android.material.floatingactionbutton.FloatingActionButton
-                        android:id="@+id/fabEditBg"
-                        style="@style/Widget.MaterialComponents.FloatingActionButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="top|end"
-                        android:layout_margin="12dp"
-                        android:contentDescription="@string/cd_edit_background_button"
-                        android:src="@drawable/ic_edit"
-                        app:backgroundTint="?attr/color_4"
-                        app:fabCustomSize="32dp"
-                        app:maxImageSize="16dp"
-                        app:tint="?attr/text_color"
-                        app:useCompatPadding="true" />
-
-                </FrameLayout>
-
-                <!-- ── PERSONAL INFO CARD ── -->
-                <com.google.android.material.card.MaterialCardView
+                <!-- ══ HEADER ══ -->
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="2dp"
-                    app:strokeColor="?attr/color_4"
-                    app:strokeWidth="1dp">
+                    android:background="?attr/color_2"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingTop="36dp"
+                    android:paddingBottom="20dp"
+                    android:paddingStart="24dp"
+                    android:paddingEnd="24dp">
+
+                    <!--
+                        Avatar Container — clickable untuk buka BottomSheet
+                        Overlay kamera muncul di sudut bawah kanan
+                    -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/layoutAvatarContainer"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_marginBottom="16dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:cardCornerRadius="60dp"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="0dp"
+                        app:cardBackgroundColor="@android:color/transparent"
+                        android:foreground="?attr/selectableItemBackground">
+
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:id="@+id/lottieProfile"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@string/cd_profile_animation" />
+
+                        <ImageView
+                            android:id="@+id/ivProfile"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@string/cd_profile_picture"
+                            android:scaleType="centerCrop"
+                            android:visibility="gone" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/profile_border" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Nama -->
+                    <TextView
+                        android:id="@+id/tvProfileName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/linottesemibold"
+                        android:text="@string/placeholder_name"
+                        android:textAppearance="?attr/textAppearanceHeadlineSmall"
+                        android:textColor="?attr/text_color"
+                        android:textStyle="bold" />
+
+                    <!-- Email -->
+                    <TextView
+                        android:id="@+id/tvProfileEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:alpha="0.55"
+                        android:fontFamily="@font/linottesemibold"
+                        android:text="@string/placeholder_email"
+                        android:textColor="?attr/text_color"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+                <!-- ══ DIVIDER FULL ══ -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:alpha="0.08"
+                    android:background="?attr/text_color" />
+
+                <!-- ══ SECTION LABEL ══ -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="24dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="24dp"
+                    android:paddingBottom="4dp"
+                    android:text="@string/header_personal_info"
+                    android:fontFamily="@font/linottesemibold"
+                    android:textAppearance="?attr/textAppearanceLabelSmall"
+                    android:textColor="?attr/text_color"
+                    android:textStyle="bold"
+                    android:alpha="0.55" />
+
+                <!-- ══ ROW: Full Name ══ -->
+                <LinearLayout
+                    android:id="@+id/layoutEditName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="24dp"
+                    android:paddingEnd="16dp"
+                    android:paddingVertical="14dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:contentDescription="@null"
+                        app:srcCompat="@drawable/ic_person"
+                        app:tint="?attr/text_color" />
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="20dp"
-                        android:background="?attr/color_2">
+                        android:layout_marginStart="20dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="12dp"
-                            android:drawablePadding="10dp"
-                            android:text="@string/header_personal_info"
+                            android:alpha="0.55"
                             android:fontFamily="@font/linottesemibold"
-                            android:textAppearance="?attr/textAppearanceTitleMedium"
-                            android:textColor="?attr/text_color"
-                            android:textStyle="bold"
-                            app:drawableStartCompat="@drawable/ic_person_info"
-                            app:drawableTint="?attr/text_color" />
+                            android:text="@string/field_full_name"
+                            android:textAppearance="?attr/textAppearanceLabelSmall"
+                            android:textColor="?attr/text_color" />
 
-                        <include
-                            layout="@layout/item_profile_info"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-
+                        <TextView
+                            android:id="@+id/tvFullName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:fontFamily="@font/linottesemibold"
+                            android:text="@string/placeholder_name"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
+                            android:textColor="?attr/text_color" />
                     </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+                <!-- Divider inset -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="68dp"
+                    android:layout_marginEnd="30dp"
+                    android:alpha="0.07"
+                    android:background="?attr/text_color" />
+
+                <!-- ══ ROW: Email ══ -->
+                <LinearLayout
+                    android:id="@+id/layoutEditEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="24dp"
+                    android:paddingEnd="16dp"
+                    android:paddingVertical="14dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:contentDescription="@null"
+                        app:srcCompat="@drawable/ic_email"
+                        app:tint="?attr/text_color" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:alpha="0.55"
+                            android:fontFamily="@font/linottesemibold"
+                            android:text="@string/field_email"
+                            android:textAppearance="?attr/textAppearanceLabelSmall"
+                            android:textColor="?attr/text_color" />
+
+                        <TextView
+                            android:id="@+id/tvEmail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:fontFamily="@font/linottesemibold"
+                            android:text="@string/placeholder_email"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
+                            android:textColor="?attr/text_color" />
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+                <!-- Divider inset -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="68dp"
+                    android:layout_marginEnd="30dp"
+                    android:alpha="0.07"
+                    android:background="?attr/text_color" />
+
+                <!-- ══ ROW: Birthday ══ -->
+                <LinearLayout
+                    android:id="@+id/layoutEditBirthday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="24dp"
+                    android:paddingEnd="16dp"
+                    android:paddingVertical="14dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:contentDescription="@null"
+                        app:srcCompat="@drawable/ic_cake"
+                        app:tint="?attr/text_color" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:alpha="0.55"
+                            android:fontFamily="@font/linottesemibold"
+                            android:text="@string/field_birthday"
+                            android:textAppearance="?attr/textAppearanceLabelSmall"
+                            android:textColor="?attr/text_color" />
+
+                        <TextView
+                            android:id="@+id/tvBirthday"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:fontFamily="@font/linottesemibold"
+                            android:text="@string/default_birthday"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
+                            android:textColor="?attr/text_color" />
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+                <!-- Divider inset -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="68dp"
+                    android:layout_marginEnd="30dp"
+                    android:alpha="0.07"
+                    android:background="?attr/text_color" />
+
+                <!-- ══ ROW: Location ══ -->
+                <LinearLayout
+                    android:id="@+id/layoutEditLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="24dp"
+                    android:paddingEnd="16dp"
+                    android:paddingVertical="14dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:contentDescription="@null"
+                        app:srcCompat="@drawable/ic_location"
+                        app:tint="?attr/text_color" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:alpha="0.55"
+                            android:fontFamily="@font/linottesemibold"
+                            android:text="@string/field_location"
+                            android:textAppearance="?attr/textAppearanceLabelSmall"
+                            android:textColor="?attr/text_color" />
+
+                        <TextView
+                            android:id="@+id/tvLocation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:fontFamily="@font/linottesemibold"
+                            android:text="@string/default_location"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
+                            android:textColor="?attr/text_color" />
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
-        <!-- ── SHIMMER LAYER (DIPERBAIKI) ── -->
+        <!-- ══ SHIMMER LAYER ══ -->
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/shimmerLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/transparent"
             android:visibility="gone"
             app:shimmer_auto_start="false">
 
@@ -199,89 +370,102 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- Skeleton: Header Background -->
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="280dp"
-                    android:background="?attr/color_4">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="24dp">
-
-                        <!-- Skeleton Profile Picture -->
-                        <View
-                            android:layout_width="140dp"
-                            android:layout_height="140dp"
-                            android:layout_marginBottom="16dp"
-                            android:background="@drawable/shimmer_rounded" />
-
-                        <!-- Skeleton Name -->
-                        <View
-                            android:layout_width="160dp"
-                            android:layout_height="24dp"
-                            android:layout_marginBottom="10dp"
-                            android:background="@drawable/shimmer_rounded" />
-
-                        <!-- Skeleton Email -->
-                        <View
-                            android:layout_width="120dp"
-                            android:layout_height="16dp"
-                            android:background="@drawable/shimmer_rounded" />
-                    </LinearLayout>
-                </FrameLayout>
-
-                <!-- Skeleton: Personal Info Card -->
-                <com.google.android.material.card.MaterialCardView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    app:cardCornerRadius="20dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingTop="36dp"
+                    android:paddingBottom="20dp"
+                    android:paddingStart="24dp"
+                    android:paddingEnd="24dp">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_marginBottom="16dp"
+                        app:cardCornerRadius="60dp"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="0dp"
+                        app:cardBackgroundColor="?attr/color_4" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="150dp"
+                        android:layout_height="27dp"
+                        android:layout_marginBottom="9dp"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="0dp"
+                        app:cardBackgroundColor="?attr/color_3" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="160dp"
+                        android:layout_height="14dp"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="0dp"
+                        app:cardBackgroundColor="?attr/color_3" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?attr/color_4" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="120dp"
+                    android:layout_height="14dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="12dp"
+                    app:cardCornerRadius="6dp"
                     app:cardElevation="0dp"
                     app:strokeWidth="0dp"
-                    app:cardBackgroundColor="?attr/color_4">
+                    app:cardBackgroundColor="?attr/color_4" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="20dp">
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="12dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="0dp"
+                    app:cardBackgroundColor="?attr/color_3" />
 
-                        <!-- Header -->
-                        <View
-                            android:layout_width="150dp"
-                            android:layout_height="20dp"
-                            android:layout_marginBottom="16dp"
-                            android:background="@drawable/shimmer_rounded" />
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="12dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="0dp"
+                    app:cardBackgroundColor="?attr/color_3" />
 
-                        <!-- Info Items -->
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="60dp"
-                            android:layout_marginBottom="12dp"
-                            android:background="@drawable/shimmer_rounded" />
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="12dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="0dp"
+                    app:cardBackgroundColor="?attr/color_3" />
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="60dp"
-                            android:layout_marginBottom="12dp"
-                            android:background="@drawable/shimmer_rounded" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="60dp"
-                            android:layout_marginBottom="12dp"
-                            android:background="@drawable/shimmer_rounded" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="60dp"
-                            android:background="@drawable/shimmer_rounded" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="0dp"
+                    app:cardBackgroundColor="?attr/color_3" />
 
             </LinearLayout>
         </com.facebook.shimmer.ShimmerFrameLayout>

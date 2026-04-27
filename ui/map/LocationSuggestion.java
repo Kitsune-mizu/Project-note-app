@@ -1,4 +1,4 @@
-package com.android.alpha.ui.map;
+package com.android.kitsune.ui.map;
 
 // ---------- CLASS DEFINITION ----------
 

@@ -1,4 +1,4 @@
-package com.android.alpha.ui.profile;
+package com.android.kitsune.ui.profile;
 
 import android.Manifest;
 import android.app.NotificationManager;
@@ -31,12 +31,12 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
-import com.android.alpha.MainActivity;
-import com.android.alpha.R;
-import com.android.alpha.data.session.UserSession;
-import com.android.alpha.ui.auth.ForgotPasswordActivity;
-import com.android.alpha.ui.auth.LoginActivity;
-import com.android.alpha.utils.DialogUtils;
+import com.android.kitsune.MainActivity;
+import com.android.kitsune.R;
+import com.android.kitsune.data.session.UserSession;
+import com.android.kitsune.ui.auth.ForgotPasswordActivity;
+import com.android.kitsune.ui.auth.LoginActivity;
+import com.android.kitsune.utils.DialogUtils;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
 public class SettingsFragment extends Fragment {

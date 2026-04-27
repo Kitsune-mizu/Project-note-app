@@ -251,22 +251,17 @@
     <string name="toast_profile_updated">プロフィールを更新しました。</string>
     <string name="activity_profile_updated_title">プロフィール更新</string>
     <string name="activity_profile_updated_desc">プロフィール情報が更新されました。</string>
-    <string name="cd_profile_background">プロフィール背景</string>
     <string name="cd_profile_animation">プロフィールアニメーション</string>
     <string name="cd_profile_picture">プロフィール画像</string>
-    <string name="cd_edit_profile_button">プロフィール画像を編集</string>
-    <string name="cd_edit_background_button">背景画像を編集</string>
     <string name="placeholder_email">john.doe@example.com</string>
     <string name="header_personal_info">個人情報</string>
 
     <!-- ── プロフィール情報アイテム ── -->
     <string name="placeholder_name">山田 太郎</string>
-    <string name="cd_edit_full_name">氏名を編集</string>
-    <string name="cd_edit_email">メールを編集</string>
-    <string name="placeholder_birthday">1990年1月1日</string>
-    <string name="cd_edit_birthday">生年月日を編集</string>
-    <string name="placeholder_location">東京, 日本</string>
-    <string name="cd_edit_location">場所を編集</string>
+
+    <string name="bs_profile_picture_title">プロフィール写真</string>
+    <string name="bs_profile_picture_message">どうしますか？</string>
+    <string name="bs_action_change_picture">写真を変更</string>
 
     <!-- ══════════════════════════════════════════════════════════════
          設定
@@ -347,6 +342,107 @@
 
     <string name="desc_icon_theme">テーマアイコン</string>
     <string name="desc_icon_check">選択済みインジケーター</string>
+
+    <string name="backup_never">履歴なし</string>
+    <string name="backup_just_now">たった今</string>
+    <string name="backup_hours_ago">%1$d 時間前</string>
+
+    <string name="status_preparing_backup">バックアップを準備中…</string>
+    <string name="status_connecting_drive">Google ドライブに接続中…</string>
+    <string name="status_collecting_chat">チャット履歴を収集中…</string>
+    <string name="status_collecting_profile">プロフィールデータを収集中…</string>
+    <string name="status_collecting_notes">メモを収集中…</string>
+    <string name="status_uploading_drive">Google ドライブにアップロード中…</string>
+    <string name="status_backup_complete">バックアップ完了！</string>
+
+    <string name="status_locating_backup">バックアップファイルを検索中…</string>
+    <string name="status_downloading_backup">バックアップデータをダウンロード中…</string>
+    <string name="status_restoring_chat">チャット履歴を復元中…</string>
+    <string name="status_restoring_notes">メモを復元中…</string>
+    <string name="status_restoring_profile">プロフィールを復元中…</string>
+    <string name="status_restore_complete">復元完了！</string>
+
+    <string name="msg_backup_success">バックアップが Google ドライブに保存されました</string>
+    <string name="msg_restore_success">データが Google ドライブから復元されました</string>
+
+    <string name="err_not_logged_in_google">Google にログインしていません。先に Google アカウントを連携してください。</string>
+    <string name="err_no_active_session">有効なセッションが見つかりません。</string>
+    <string name="err_backup_failed">バックアップに失敗しました: %1$s</string>
+    <string name="err_no_backup_found">このアカウントのバックアップは見つかりませんでした。</string>
+    <string name="err_restore_failed">復元に失敗しました: %1$s</string>
+
+    <string name="title_backup_restore">バックアップと復元</string>
+
+    <string name="label_tap_to_connect_account">タップしてアカウントを連携</string>
+    <string name="msg_connect_google_info">バックアップ情報を表示するには Google アカウントを連携してください</string>
+    <string name="msg_no_backup_drive">Google ドライブにバックアップはありません</string>
+    <string name="msg_cannot_load_backup_info">バックアップ情報を読み込めませんでした</string>
+
+    <string name="label_drive_backup_info">ドライブのバックアップ: %1$s · %2$s</string>
+
+    <string name="dialog_title_connect_google">Google アカウントを連携</string>
+    <string name="dialog_msg_connect_backup">Google ドライブにバックアップするには、Google アカウントでログインする必要があります。続行しますか？</string>
+    <string name="dialog_msg_connect_restore">データを復元するには、同じ Google アカウントでログインする必要があります。</string>
+    <string name="dialog_title_restore">データを復元しますか？</string>
+    <string name="dialog_msg_restore_confirm">現在のチャット履歴、メモ、プロフィールがバックアップデータに置き換わります。続行しますか？</string>
+    <string name="action_connect">連携する</string>
+    <string name="action_restore">復元する</string>
+
+    <string name="sheet_title_backup_success">バックアップ完了</string>
+    <string name="sheet_msg_backup_success">すべてのデータが Google ドライブに正常に保存されました。</string>
+    <string name="sheet_title_restore_success">復元完了</string>
+    <string name="sheet_msg_restore_success">データが Google ドライブから正常に復元されました。</string>
+
+    <string name="status_preparing">準備中…</string>
+    <string name="status_starting_restore">復元を開始中…</string>
+
+    <string name="freq_daily">毎日</string>
+    <string name="freq_weekly">毎週</string>
+    <string name="freq_monthly">毎月</string>
+
+    <string name="toast_google_login_failed">Google ログインに失敗しました。もう一度お試しください。</string>
+    <string name="toast_google_account_disconnected">Google アカウントの連携を解除しました</string>
+    <string name="toast_google_account_connected">Google アカウントを連携しました: %1$s</string>
+    <string name="toast_connect_google_first">先に Google アカウントを連携してください</string>
+    <string name="toast_auto_backup_enabled">自動バックアップを有効にしました</string>
+    <string name="toast_auto_backup_disabled">自動バックアップを無効にしました</string>
+    <string name="toast_backup_failed">バックアップ失敗: %1$s</string>
+    <string name="toast_restore_failed">復元失敗: %1$s</string>
+
+    <string name="desc_backup_restore">チャット履歴、メモ、プロフィールを Google ドライブに保存します。ログイン情報は含まれません。</string>
+    <string name="header_google_account">Google アカウント</string>
+    <string name="label_google_account">Google アカウント</string>
+
+    <string name="header_backup_status">バックアップの状態</string>
+    <string name="label_last_backup">最終バックアップ</string>
+    <string name="label_backup_size">バックアップのサイズ</string>
+
+    <string name="header_auto_backup">自動バックアップ</string>
+    <string name="label_backup_to_drive">Google ドライブにバックアップ</string>
+    <string name="desc_enable_auto_backup">自動バックアップを有効にする</string>
+    <string name="label_backup_frequency">バックアップの頻度</string>
+
+    <string name="header_backup_actions">バックアップと復元</string>
+    <string name="action_backup_now">今すぐバックアップ</string>
+    <string name="action_restore_from_drive">Google ドライブから復元</string>
+    <string name="desc_restore_items">チャット、メモ、プロフィール</string>
+
+    <string name="desc_backup_footnote">バックアップにはチャット履歴、メモ、プロフィールが含まれます。ログイン情報は保存されません。データは Google ドライブの専用フォルダに保存され、他人はアクセスできません。</string>
+
+    <string name="title_backup_frequency">バックアップの頻度</string>
+
+    <string name="action_done">完了</string>
+    <string name="action_change_google_account">アカウントを変更</string>
+    <string name="action_disconnect_account">連携を解除</string>
+
+    <string name="label_connected_account">連携済みのアカウント</string>
+
+    <string name="header_backup">ストレージとバックアップ</string>
+    <string name="backup_title">バックアップと復元</string>
+    <string name="backup_subtitle_none">バックアップなし</string>
+    <string name="backup_subtitle_last">最終バックアップ: %1$s</string>
+
+    <string name="user_email_placeholder">user@gmail.com</string>
 
     <!-- ══════════════════════════════════════════════════════════════
          マップ
@@ -439,5 +535,6 @@
 
     <string name="error_empty_input">空白にはできません</string>
     <string name="error_min_one_word">少なくとも1単語必要です</string>
+    <string name="divider_line">—</string>
 
 </resources>

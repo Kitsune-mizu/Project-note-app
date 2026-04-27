@@ -1,4 +1,4 @@
-package com.android.alpha.ui.splash;
+package com.android.kitsune.ui.splash;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -21,10 +21,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.android.alpha.MainActivity;
-import com.android.alpha.R;
-import com.android.alpha.data.session.UserSession;
-import com.android.alpha.ui.auth.LoginActivity;
+import com.android.kitsune.MainActivity;
+import com.android.kitsune.R;
+import com.android.kitsune.data.session.UserSession;
+import com.android.kitsune.ui.auth.LoginActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;

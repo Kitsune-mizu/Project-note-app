@@ -1,4 +1,4 @@
-package com.android.alpha.ui.map;
+package com.android.kitsune.ui.map;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -22,10 +22,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.alpha.MainActivity;
-import com.android.alpha.R;
-import com.android.alpha.data.session.UserSession;
-import com.android.alpha.utils.LocaleHelper;
+import com.android.kitsune.MainActivity;
+import com.android.kitsune.R;
+import com.android.kitsune.data.session.UserSession;
+import com.android.kitsune.utils.LocaleHelper;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;

@@ -1,4 +1,4 @@
-package com.android.alpha.ui.notes;
+package com.android.kitsune.ui.notes;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,8 +7,8 @@ import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.alpha.R;
-import com.android.alpha.data.local.NoteStorage;
+import com.android.kitsune.R;
+import com.android.kitsune.data.local.NoteStorage;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 

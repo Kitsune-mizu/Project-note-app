@@ -1,4 +1,4 @@
-package com.android.alpha.data.local;
+package com.android.kitsune.data.local;
 
 import android.content.Context;
 import android.util.Log;

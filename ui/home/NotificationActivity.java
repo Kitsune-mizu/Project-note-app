@@ -1,4 +1,4 @@
-package com.android.alpha.ui.home;
+package com.android.kitsune.ui.home;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,8 +11,8 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.alpha.R;
-import com.android.alpha.data.session.UserSession;
+import com.android.kitsune.R;
+import com.android.kitsune.data.session.UserSession;
 
 import java.util.ArrayList;
 import java.util.List;

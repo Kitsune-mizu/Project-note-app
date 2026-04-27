@@ -1,4 +1,4 @@
-package com.android.alpha.data.session;
+package com.android.kitsune.data.session;
 
 import android.Manifest;
 import android.app.NotificationChannel;
@@ -15,9 +15,9 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
-import com.android.alpha.R;
-import com.android.alpha.data.local.UserStorageManager;
-import com.android.alpha.ui.home.ActivityItem;
+import com.android.kitsune.R;
+import com.android.kitsune.data.local.UserStorageManager;
+import com.android.kitsune.ui.home.ActivityItem;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

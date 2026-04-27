@@ -1,4 +1,4 @@
-package com.android.alpha.ui.auth;
+package com.android.kitsune.ui.auth;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,10 +16,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.android.alpha.MainActivity;
-import com.android.alpha.R;
-import com.android.alpha.data.session.UserSession;
-import com.android.alpha.utils.LoadingDialog;
+import com.android.kitsune.MainActivity;
+import com.android.kitsune.R;
+import com.android.kitsune.data.session.UserSession;
+import com.android.kitsune.utils.LoadingDialog;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.android.alpha.utils;
+package com.android.kitsune.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.android.alpha.R;
+import com.android.kitsune.R;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
 

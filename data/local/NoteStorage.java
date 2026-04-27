@@ -1,10 +1,10 @@
-package com.android.alpha.data.local;
+package com.android.kitsune.data.local;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.android.alpha.ui.notes.NoteModel;
+import com.android.kitsune.ui.notes.NoteModel;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

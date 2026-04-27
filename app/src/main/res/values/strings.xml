@@ -251,22 +251,17 @@
     <string name="toast_profile_updated">Profile updated.</string>
     <string name="activity_profile_updated_title">Profile Updated</string>
     <string name="activity_profile_updated_desc">Your profile information has been updated.</string>
-    <string name="cd_profile_background">Profile Background</string>
     <string name="cd_profile_animation">Profile Animation</string>
     <string name="cd_profile_picture">Profile Picture</string>
-    <string name="cd_edit_profile_button">Edit Profile Picture</string>
-    <string name="cd_edit_background_button">Edit Background Image</string>
     <string name="placeholder_email">john.doe@example.com</string>
     <string name="header_personal_info">Personal Information</string>
 
     <!-- ── Profile Info Item ── -->
     <string name="placeholder_name">John Doe</string>
-    <string name="cd_edit_full_name">Edit Full Name</string>
-    <string name="cd_edit_email">Edit Email</string>
-    <string name="placeholder_birthday">January 1, 1990</string>
-    <string name="cd_edit_birthday">Edit Date of Birth</string>
-    <string name="placeholder_location">New York, USA</string>
-    <string name="cd_edit_location">Edit Location</string>
+
+    <string name="bs_profile_picture_title">Profile Picture</string>
+    <string name="bs_profile_picture_message">What would you like to do?</string>
+    <string name="bs_action_change_picture">Change Picture</string>
 
     <!-- ══════════════════════════════════════════════════════════════
          SETTINGS
@@ -350,6 +345,108 @@
 
     <string name="desc_icon_theme">Theme Icon</string>
     <string name="desc_icon_check">Selected Indicator</string>
+
+    <!-- Backup Settings -->
+    <string name="backup_never">Never</string>
+    <string name="backup_just_now">Just now</string>
+    <string name="backup_hours_ago">%1$d hours ago</string>
+
+    <string name="status_preparing_backup">Preparing backup…</string>
+    <string name="status_connecting_drive">Connecting to Google Drive…</string>
+    <string name="status_collecting_chat">Collecting chat history…</string>
+    <string name="status_collecting_profile">Collecting profile data…</string>
+    <string name="status_collecting_notes">Collecting notes…</string>
+    <string name="status_uploading_drive">Uploading to Google Drive…</string>
+    <string name="status_backup_complete">Backup complete!</string>
+
+    <string name="status_locating_backup">Locating backup file…</string>
+    <string name="status_downloading_backup">Downloading backup data…</string>
+    <string name="status_restoring_chat">Restoring chat history…</string>
+    <string name="status_restoring_notes">Restoring notes…</string>
+    <string name="status_restoring_profile">Restoring profile…</string>
+    <string name="status_restore_complete">Restore complete!</string>
+
+    <string name="msg_backup_success">Backup successfully saved to Google Drive</string>
+    <string name="msg_restore_success">Data successfully restored from Google Drive</string>
+
+    <string name="err_not_logged_in_google">Not logged in with Google. Please link a Google account first.</string>
+    <string name="err_no_active_session">No active session found.</string>
+    <string name="err_backup_failed">Backup failed: %1$s</string>
+    <string name="err_no_backup_found">No backup found for this account.</string>
+    <string name="err_restore_failed">Restore failed: %1$s</string>
+
+    <string name="title_backup_restore">Backup &amp; Restore</string>
+
+    <string name="label_tap_to_connect_account">Tap to connect account</string>
+    <string name="msg_connect_google_info">Connect Google account to view backup info</string>
+    <string name="msg_no_backup_drive">No backup found in Google Drive</string>
+    <string name="msg_cannot_load_backup_info">Cannot load backup info</string>
+
+    <string name="label_drive_backup_info">Drive backup: %1$s · %2$s</string>
+
+    <string name="dialog_title_connect_google">Connect Google Account</string>
+    <string name="dialog_msg_connect_backup">To backup to Google Drive, you need to log in with a Google account. Continue?</string>
+    <string name="dialog_msg_connect_restore">To restore data, you need to log in with the same Google account.</string>
+    <string name="dialog_title_restore">Restore Data?</string>
+    <string name="dialog_msg_restore_confirm">This will replace your current chat history, notes, and profile with the backup data. Continue?</string>
+    <string name="action_connect">Connect</string>
+    <string name="action_restore">Restore</string>
+
+    <string name="sheet_title_backup_success">Backup Successful</string>
+    <string name="sheet_msg_backup_success">All data has been successfully saved to your Google Drive.</string>
+    <string name="sheet_title_restore_success">Restore Successful</string>
+    <string name="sheet_msg_restore_success">Your data has been successfully restored from Google Drive.</string>
+
+    <string name="status_preparing">Preparing…</string>
+    <string name="status_starting_restore">Starting restore…</string>
+
+    <string name="freq_daily">Daily</string>
+    <string name="freq_weekly">Weekly</string>
+    <string name="freq_monthly">Monthly</string>
+
+    <string name="toast_google_login_failed">Google login failed. Please try again.</string>
+    <string name="toast_google_account_disconnected">Google account disconnected</string>
+    <string name="toast_google_account_connected">Google account connected: %1$s</string>
+    <string name="toast_connect_google_first">Please connect your Google account first</string>
+    <string name="toast_auto_backup_enabled">Auto backup enabled</string>
+    <string name="toast_auto_backup_disabled">Auto backup disabled</string>
+    <string name="toast_backup_failed">Backup failed: %1$s</string>
+    <string name="toast_restore_failed">Restore failed: %1$s</string>
+
+    <string name="desc_backup_restore">Save your chat history, notes, and profile to Google Drive. Login credentials are not included.</string>
+    <string name="header_google_account">GOOGLE ACCOUNT</string>
+    <string name="label_google_account">Google Account</string>
+
+    <string name="header_backup_status">BACKUP STATUS</string>
+    <string name="label_last_backup">Last backup</string>
+    <string name="label_backup_size">Backup size</string>
+
+    <string name="header_auto_backup">AUTO BACKUP</string>
+    <string name="label_backup_to_drive">Backup to Google Drive</string>
+    <string name="desc_enable_auto_backup">Enable automatic backups</string>
+    <string name="label_backup_frequency">Backup frequency</string>
+
+    <string name="header_backup_actions">BACKUP &amp; RESTORE</string>
+    <string name="action_backup_now">Backup Now</string>
+    <string name="action_restore_from_drive">Restore from Google Drive</string>
+    <string name="desc_restore_items">Chats, notes, and profile</string>
+
+    <string name="desc_backup_footnote">Backups include your chat history, notes, and profile. Login information is not saved. Your data is stored in a private Google Drive folder and cannot be accessed by anyone else.</string>
+
+    <string name="title_backup_frequency">Backup Frequency</string>
+
+    <string name="action_done">Done</string>
+    <string name="action_change_google_account">Change Google Account</string>
+    <string name="action_disconnect_account">Disconnect</string>
+
+    <string name="label_connected_account">Connected Account</string>
+
+    <string name="header_backup">Storage &amp; Backup</string>
+    <string name="backup_title">Backup &amp; Restore</string>
+    <string name="backup_subtitle_none">Never backed up</string>
+    <string name="backup_subtitle_last">Last backup: %1$s</string>
+
+    <string name="user_email_placeholder">user@gmail.com</string>
 
     <!-- ══════════════════════════════════════════════════════════════
          MAP
@@ -443,5 +540,6 @@
 
     <string name="error_empty_input">Cannot be empty</string>
     <string name="error_min_one_word">Must be at least 1 word</string>
+    <string name="divider_line">—</string>
 
 </resources>

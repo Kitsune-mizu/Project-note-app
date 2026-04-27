@@ -1,4 +1,4 @@
-package com.android.alpha.ui.notes;
+package com.android.kitsune.ui.notes;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,8 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.alpha.R;
-import com.android.alpha.data.local.NoteStorage;
+import com.android.kitsune.R;
+import com.android.kitsune.data.local.NoteStorage;
 
 import java.util.ArrayList;
 

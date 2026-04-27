@@ -251,22 +251,17 @@
     <string name="toast_profile_updated">Profil diperbarui.</string>
     <string name="activity_profile_updated_title">Profil Diperbarui</string>
     <string name="activity_profile_updated_desc">Informasi profil Anda telah diperbarui.</string>
-    <string name="cd_profile_background">Latar Belakang Profil</string>
     <string name="cd_profile_animation">Animasi Profil</string>
     <string name="cd_profile_picture">Foto Profil</string>
-    <string name="cd_edit_profile_button">Edit Foto Profil</string>
-    <string name="cd_edit_background_button">Edit Gambar Latar</string>
     <string name="placeholder_email">john.doe@example.com</string>
     <string name="header_personal_info">Informasi Pribadi</string>
 
     <!-- ── Item Info Profil ── -->
     <string name="placeholder_name">John Doe</string>
-    <string name="cd_edit_full_name">Edit Nama Lengkap</string>
-    <string name="cd_edit_email">Edit Email</string>
-    <string name="placeholder_birthday">1 Januari 1990</string>
-    <string name="cd_edit_birthday">Edit Tanggal Lahir</string>
-    <string name="placeholder_location">New York, USA</string>
-    <string name="cd_edit_location">Edit Lokasi</string>
+
+    <string name="bs_profile_picture_title">Foto Profil</string>
+    <string name="bs_profile_picture_message">Apa yang ingin Anda lakukan?</string>
+    <string name="bs_action_change_picture">Ganti Foto</string>
 
     <!-- ══════════════════════════════════════════════════════════════
          PENGATURAN
@@ -347,6 +342,107 @@
 
     <string name="desc_icon_theme">Ikon Tema</string>
     <string name="desc_icon_check">Indikator Terpilih</string>
+
+    <string name="backup_never">Belum pernah</string>
+    <string name="backup_just_now">Baru saja</string>
+    <string name="backup_hours_ago">%1$d jam yang lalu</string>
+
+    <string name="status_preparing_backup">Mempersiapkan pencadangan…</string>
+    <string name="status_connecting_drive">Menghubungkan ke Google Drive…</string>
+    <string name="status_collecting_chat">Mengumpulkan riwayat chat…</string>
+    <string name="status_collecting_profile">Mengumpulkan data profil…</string>
+    <string name="status_collecting_notes">Mengumpulkan catatan…</string>
+    <string name="status_uploading_drive">Mengunggah ke Google Drive…</string>
+    <string name="status_backup_complete">Pencadangan selesai!</string>
+
+    <string name="status_locating_backup">Mencari file cadangan…</string>
+    <string name="status_downloading_backup">Mengunduh data cadangan…</string>
+    <string name="status_restoring_chat">Memulihkan riwayat chat…</string>
+    <string name="status_restoring_notes">Memulihkan catatan…</string>
+    <string name="status_restoring_profile">Memulihkan profil…</string>
+    <string name="status_restore_complete">Pemulihan selesai!</string>
+
+    <string name="msg_backup_success">Cadangan berhasil disimpan ke Google Drive</string>
+    <string name="msg_restore_success">Data berhasil dipulihkan dari Google Drive</string>
+
+    <string name="err_not_logged_in_google">Belum masuk dengan Google. Harap hubungkan akun Google terlebih dahulu.</string>
+    <string name="err_no_active_session">Tidak ada sesi aktif yang ditemukan.</string>
+    <string name="err_backup_failed">Pencadangan gagal: %1$s</string>
+    <string name="err_no_backup_found">Tidak ada cadangan yang ditemukan untuk akun ini.</string>
+    <string name="err_restore_failed">Pemulihan gagal: %1$s</string>
+
+    <string name="title_backup_restore">Cadangkan &amp; Pulihkan</string>
+
+    <string name="label_tap_to_connect_account">Ketuk untuk hubungkan akun</string>
+    <string name="msg_connect_google_info">Hubungkan akun Google untuk melihat info cadangan</string>
+    <string name="msg_no_backup_drive">Tidak ada cadangan di Google Drive</string>
+    <string name="msg_cannot_load_backup_info">Gagal memuat info cadangan</string>
+
+    <string name="label_drive_backup_info">Cadangan Drive: %1$s · %2$s</string>
+
+    <string name="dialog_title_connect_google">Hubungkan Akun Google</string>
+    <string name="dialog_msg_connect_backup">Untuk mencadangkan ke Google Drive, Anda perlu masuk dengan akun Google. Lanjutkan?</string>
+    <string name="dialog_msg_connect_restore">Untuk memulihkan data, Anda perlu masuk dengan akun Google yang sama.</string>
+    <string name="dialog_title_restore">Pulihkan Data?</string>
+    <string name="dialog_msg_restore_confirm">Ini akan mengganti riwayat chat, catatan, dan profil saat ini dengan data cadangan. Lanjutkan?</string>
+    <string name="action_connect">Hubungkan</string>
+    <string name="action_restore">Pulihkan</string>
+
+    <string name="sheet_title_backup_success">Pencadangan Berhasil</string>
+    <string name="sheet_msg_backup_success">Semua data telah berhasil disimpan ke Google Drive Anda.</string>
+    <string name="sheet_title_restore_success">Pemulihan Berhasil</string>
+    <string name="sheet_msg_restore_success">Data Anda berhasil dipulihkan dari Google Drive.</string>
+
+    <string name="status_preparing">Mempersiapkan…</string>
+    <string name="status_starting_restore">Memulai pemulihan…</string>
+
+    <string name="freq_daily">Harian</string>
+    <string name="freq_weekly">Mingguan</string>
+    <string name="freq_monthly">Bulanan</string>
+
+    <string name="toast_google_login_failed">Login Google gagal. Silakan coba lagi.</string>
+    <string name="toast_google_account_disconnected">Akun Google terputus</string>
+    <string name="toast_google_account_connected">Akun Google terhubung: %1$s</string>
+    <string name="toast_connect_google_first">Harap hubungkan akun Google terlebih dahulu</string>
+    <string name="toast_auto_backup_enabled">Pencadangan otomatis diaktifkan</string>
+    <string name="toast_auto_backup_disabled">Pencadangan otomatis dinonaktifkan</string>
+    <string name="toast_backup_failed">Pencadangan gagal: %1$s</string>
+    <string name="toast_restore_failed">Pemulihan gagal: %1$s</string>
+
+    <string name="desc_backup_restore">Simpan riwayat chat, catatan, dan profil ke Google Drive. Kredensial login tidak disertakan.</string>
+    <string name="header_google_account">AKUN GOOGLE</string>
+    <string name="label_google_account">Akun Google</string>
+
+    <string name="header_backup_status">STATUS CADANGAN</string>
+    <string name="label_last_backup">Cadangan terakhir</string>
+    <string name="label_backup_size">Ukuran cadangan</string>
+
+    <string name="header_auto_backup">CADANGAN OTOMATIS</string>
+    <string name="label_backup_to_drive">Cadangkan ke Google Drive</string>
+    <string name="desc_enable_auto_backup">Aktifkan pencadangan otomatis</string>
+    <string name="label_backup_frequency">Frekuensi pencadangan</string>
+
+    <string name="header_backup_actions">CADANGKAN &amp; PULIHKAN</string>
+    <string name="action_backup_now">Cadangkan Sekarang</string>
+    <string name="action_restore_from_drive">Pulihkan dari Google Drive</string>
+    <string name="desc_restore_items">Chat, catatan, dan profil</string>
+
+    <string name="desc_backup_footnote">Cadangan mencakup riwayat chat, catatan, dan profil. Info login tidak disimpan. Data Anda disimpan di folder pribadi Google Drive dan tidak dapat diakses orang lain.</string>
+
+    <string name="title_backup_frequency">Frekuensi Cadangan</string>
+
+    <string name="action_done">Selesai</string>
+    <string name="action_change_google_account">Ganti Akun Google</string>
+    <string name="action_disconnect_account">Putus Koneksi</string>
+
+    <string name="label_connected_account">Akun Terhubung</string>
+
+    <string name="header_backup">Penyimpanan &amp; Cadangan</string>
+    <string name="backup_title">Cadangkan &amp; Pulihkan</string>
+    <string name="backup_subtitle_none">Belum pernah dicadangkan</string>
+    <string name="backup_subtitle_last">Cadangan terakhir: %1$s</string>
+
+    <string name="user_email_placeholder">user@gmail.com</string>
 
     <!-- ══════════════════════════════════════════════════════════════
          PETA
@@ -439,5 +535,6 @@
 
     <string name="error_empty_input">Tidak boleh kosong</string>
     <string name="error_min_one_word">Minimal harus 1 kata</string>
+    <string name="divider_line">—</string>
 
 </resources>

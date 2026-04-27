@@ -1,4 +1,4 @@
-package com.android.alpha.utils;
+package com.android.kitsune.utils;
 
 import android.content.Context;
 import android.content.res.Configuration;

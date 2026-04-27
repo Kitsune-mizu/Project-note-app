@@ -1,4 +1,4 @@
-package com.android.alpha.ui.home;
+package com.android.kitsune.ui.home;
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,17 +21,17 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.LottieDrawable;
-import com.android.alpha.MainActivity;
-import com.android.alpha.R;
-import com.android.alpha.data.local.NoteStorage;
-import com.android.alpha.ui.common.Refreshable;
-import com.android.alpha.data.session.UserSession;
-import com.android.alpha.data.local.UserStorageManager;
-import com.android.alpha.ui.notes.EditNoteActivity;
-import com.android.alpha.ui.notes.NoteModel;
-import com.android.alpha.ui.notes.NotesActivity;
-import com.android.alpha.utils.ShimmerHelper;
-import com.android.alpha.utils.DialogUtils;
+import com.android.kitsune.MainActivity;
+import com.android.kitsune.R;
+import com.android.kitsune.data.local.NoteStorage;
+import com.android.kitsune.ui.common.Refreshable;
+import com.android.kitsune.data.session.UserSession;
+import com.android.kitsune.data.local.UserStorageManager;
+import com.android.kitsune.ui.notes.EditNoteActivity;
+import com.android.kitsune.ui.notes.NoteModel;
+import com.android.kitsune.ui.notes.NotesActivity;
+import com.android.kitsune.utils.ShimmerHelper;
+import com.android.kitsune.utils.DialogUtils;
 import com.facebook.shimmer.ShimmerFrameLayout;
 
 import org.json.JSONObject;

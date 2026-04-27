@@ -44,7 +44,7 @@
     <!-- ═══════════════════════════════════════════════════════════════════ -->
     <!-- LIGHT — BLUE (default)                                              -->
     <!-- ═══════════════════════════════════════════════════════════════════ -->
-    <style name="Theme.Alpha" parent="AppTheme">
+    <style name="Theme.Kitsune" parent="AppTheme">
         <item name="colorPrimary">@color/color_4</item>
         <item name="color_1">@color/color_1</item>
         <item name="color_2">@color/color_2</item>
@@ -56,7 +56,7 @@
     <!-- ═══════════════════════════════════════════════════════════════════ -->
     <!-- LIGHT — PURPLE                                                       -->
     <!-- ═══════════════════════════════════════════════════════════════════ -->
-    <style name="Theme.Alpha.Purple" parent="AppTheme">
+    <style name="Theme.Kitsune.Purple" parent="AppTheme">
         <item name="colorPrimary">@color/color_4_purple</item>
         <item name="color_1">@color/color_1_purple</item>
         <item name="color_2">@color/color_2_purple</item>
@@ -68,7 +68,7 @@
     <!-- ═══════════════════════════════════════════════════════════════════ -->
     <!-- LIGHT — PINK                                                         -->
     <!-- ═══════════════════════════════════════════════════════════════════ -->
-    <style name="Theme.Alpha.Pink" parent="AppTheme">
+    <style name="Theme.Kitsune.Pink" parent="AppTheme">
         <item name="colorPrimary">@color/color_4_pink</item>
         <item name="color_1">@color/color_1_pink</item>
         <item name="color_2">@color/color_2_pink</item>
@@ -80,7 +80,7 @@
     <!-- ═══════════════════════════════════════════════════════════════════ -->
     <!-- LIGHT — GREEN                                                        -->
     <!-- ═══════════════════════════════════════════════════════════════════ -->
-    <style name="Theme.Alpha.Green" parent="AppTheme">
+    <style name="Theme.Kitsune.Green" parent="AppTheme">
         <item name="colorPrimary">@color/color_4_green</item>
         <item name="color_1">@color/color_1_green</item>
         <item name="color_2">@color/color_2_green</item>
@@ -92,7 +92,7 @@
     <!-- ═══════════════════════════════════════════════════════════════════ -->
     <!-- LIGHT — ORANGE                                                       -->
     <!-- ═══════════════════════════════════════════════════════════════════ -->
-    <style name="Theme.Alpha.Orange" parent="AppTheme">
+    <style name="Theme.Kitsune.Orange" parent="AppTheme">
         <item name="colorPrimary">@color/color_4_orange</item>
         <item name="color_1">@color/color_1_orange</item>
         <item name="color_2">@color/color_2_orange</item>

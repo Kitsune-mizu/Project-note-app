@@ -1,4 +1,4 @@
-package com.android.alpha.utils;
+package com.android.kitsune.utils;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -10,7 +10,7 @@ import android.view.Window;
 import androidx.annotation.NonNull;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.android.alpha.R;
+import com.android.kitsune.R;
 
 public class LoadingDialog extends Dialog {
 

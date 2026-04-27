@@ -251,22 +251,17 @@
     <string name="toast_profile_updated">프로필이 업데이트되었습니다.</string>
     <string name="activity_profile_updated_title">프로필 업데이트</string>
     <string name="activity_profile_updated_desc">프로필 정보가 업데이트되었습니다.</string>
-    <string name="cd_profile_background">프로필 배경</string>
     <string name="cd_profile_animation">프로필 애니메이션</string>
     <string name="cd_profile_picture">프로필 사진</string>
-    <string name="cd_edit_profile_button">프로필 사진 편집</string>
-    <string name="cd_edit_background_button">배경 이미지 편집</string>
     <string name="placeholder_email">john.doe@example.com</string>
     <string name="header_personal_info">개인 정보</string>
 
     <!-- ── 프로필 정보 아이템 ── -->
     <string name="placeholder_name">홍 길동</string>
-    <string name="cd_edit_full_name">이름 편집</string>
-    <string name="cd_edit_email">이메일 편집</string>
-    <string name="placeholder_birthday">1990년 1월 1일</string>
-    <string name="cd_edit_birthday">생년월일 편집</string>
-    <string name="placeholder_location">서울, 대한민국</string>
-    <string name="cd_edit_location">위치 편집</string>
+
+    <string name="bs_profile_picture_title">프로필 사진</string>
+    <string name="bs_profile_picture_message">무엇을 하시겠습니까?</string>
+    <string name="bs_action_change_picture">사진 변경</string>
 
     <!-- ══════════════════════════════════════════════════════════════
          설정
@@ -347,6 +342,107 @@
 
     <string name="desc_icon_theme">테마 아이콘</string>
     <string name="desc_icon_check">선택 표시기</string>
+
+    <string name="backup_never">백업 없음</string>
+    <string name="backup_just_now">방금 전</string>
+    <string name="backup_hours_ago">%1$d시간 전</string>
+
+    <string name="status_preparing_backup">백업 준비 중…</string>
+    <string name="status_connecting_drive">Google 드라이브 연결 중…</string>
+    <string name="status_collecting_chat">대화 기록 수집 중…</string>
+    <string name="status_collecting_profile">프로필 데이터 수집 중…</string>
+    <string name="status_collecting_notes">메모 수집 중…</string>
+    <string name="status_uploading_drive">Google 드라이브 업로드 중…</string>
+    <string name="status_backup_complete">백업 완료!</string>
+
+    <string name="status_locating_backup">백업 파일 찾는 중…</string>
+    <string name="status_downloading_backup">백업 데이터 다운로드 중…</string>
+    <string name="status_restoring_chat">대화 기록 복원 중…</string>
+    <string name="status_restoring_notes">메모 복원 중…</string>
+    <string name="status_restoring_profile">프로필 복원 중…</string>
+    <string name="status_restore_complete">복원 완료!</string>
+
+    <string name="msg_backup_success">백업이 Google 드라이브에 저장되었습니다</string>
+    <string name="msg_restore_success">Google 드라이브에서 데이터를 복원했습니다</string>
+
+    <string name="err_not_logged_in_google">Google에 로그인되어 있지 않습니다. 먼저 Google 계정을 연결하세요.</string>
+    <string name="err_no_active_session">활성 세션을 찾을 수 없습니다.</string>
+    <string name="err_backup_failed">백업 실패: %1$s</string>
+    <string name="err_no_backup_found">이 계정의 백업을 찾을 수 없습니다.</string>
+    <string name="err_restore_failed">복원 실패: %1$s</string>
+
+    <string name="title_backup_restore">백업 및 복원</string>
+
+    <string name="label_tap_to_connect_account">탭하여 계정 연결</string>
+    <string name="msg_connect_google_info">백업 정보를 보려면 Google 계정을 연결하세요</string>
+    <string name="msg_no_backup_drive">Google 드라이브에 백업이 없습니다</string>
+    <string name="msg_cannot_load_backup_info">백업 정보를 불러올 수 없습니다</string>
+
+    <string name="label_drive_backup_info">드라이브 백업: %1$s · %2$s</string>
+
+    <string name="dialog_title_connect_google">Google 계정 연결</string>
+    <string name="dialog_msg_connect_backup">Google 드라이브에 백업하려면 Google 계정으로 로그인해야 합니다. 계속하시겠습니까?</string>
+    <string name="dialog_msg_connect_restore">데이터를 복원하려면 동일한 Google 계정으로 로그인해야 합니다.</string>
+    <string name="dialog_title_restore">데이터를 복원하시겠습니까?</string>
+    <string name="dialog_msg_restore_confirm">현재 대화 기록, 메모, 프로필이 백업 데이터로 대체됩니다. 계속하시겠습니까?</string>
+    <string name="action_connect">연결하기</string>
+    <string name="action_restore">복원하기</string>
+
+    <string name="sheet_title_backup_success">백업 완료</string>
+    <string name="sheet_msg_backup_success">모든 데이터가 Google 드라이브에 성공적으로 저장되었습니다.</string>
+    <string name="sheet_title_restore_success">복원 완료</string>
+    <string name="sheet_msg_restore_success">Google 드라이브에서 데이터를 성공적으로 복원했습니다.</string>
+
+    <string name="status_preparing">준비 중…</string>
+    <string name="status_starting_restore">복원 시작 중…</string>
+
+    <string name="freq_daily">매일</string>
+    <string name="freq_weekly">매주</string>
+    <string name="freq_monthly">매월</string>
+
+    <string name="toast_google_login_failed">Google 로그인 실패. 다시 시도해 주세요.</string>
+    <string name="toast_google_account_disconnected">Google 계정 연결이 해제되었습니다</string>
+    <string name="toast_google_account_connected">Google 계정이 연결되었습니다: %1$s</string>
+    <string name="toast_connect_google_first">먼저 Google 계정을 연결해 주세요</string>
+    <string name="toast_auto_backup_enabled">자동 백업이 활성화되었습니다</string>
+    <string name="toast_auto_backup_disabled">자동 백업이 비활성화되었습니다</string>
+    <string name="toast_backup_failed">백업 실패: %1$s</string>
+    <string name="toast_restore_failed">복원 실패: %1$s</string>
+
+    <string name="desc_backup_restore">대화 기록, 메모, 프로필을 Google 드라이브에 저장합니다. 로그인 정보는 포함되지 않습니다.</string>
+    <string name="header_google_account">Google 계정</string>
+    <string name="label_google_account">Google 계정</string>
+
+    <string name="header_backup_status">백업 상태</string>
+    <string name="label_last_backup">최근 백업</string>
+    <string name="label_backup_size">백업 크기</string>
+
+    <string name="header_auto_backup">자동 백업</string>
+    <string name="label_backup_to_drive">Google 드라이브에 백업</string>
+    <string name="desc_enable_auto_backup">자동 백업 활성화</string>
+    <string name="label_backup_frequency">백업 빈도</string>
+
+    <string name="header_backup_actions">백업 및 복원</string>
+    <string name="action_backup_now">지금 백업</string>
+    <string name="action_restore_from_drive">Google 드라이브에서 복원</string>
+    <string name="desc_restore_items">대화, 메모, 프로필</string>
+
+    <string name="desc_backup_footnote">백업에는 대화 기록, 메모 및 프로필이 포함됩니다. 로그인 정보는 저장되지 않습니다. 데이터는 Google 드라이브의 전용 폴더에 저장되며 타인은 액세스할 수 없습니다.</string>
+
+    <string name="title_backup_frequency">백업 빈도</string>
+
+    <string name="action_done">완료</string>
+    <string name="action_change_google_account">계정 변경</string>
+    <string name="action_disconnect_account">연결 해제</string>
+
+    <string name="label_connected_account">연결된 계정</string>
+
+    <string name="header_backup">저장공간 및 백업</string>
+    <string name="backup_title">백업 및 복원</string>
+    <string name="backup_subtitle_none">백업 기록 없음</string>
+    <string name="backup_subtitle_last">최근 백업: %1$s</string>
+
+    <string name="user_email_placeholder">user@gmail.com</string>
 
     <!-- ══════════════════════════════════════════════════════════════
          지도
@@ -439,5 +535,6 @@
 
     <string name="error_empty_input">비워 둘 수 없습니다</string>
     <string name="error_min_one_word">최소 1단어 이상이어야 합니다</string>
+    <string name="divider_line">—</string>
 
 </resources>

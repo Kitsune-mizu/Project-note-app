@@ -1,4 +1,4 @@
-package com.android.alpha.ui.notes;
+package com.android.kitsune.ui.notes;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -6,8 +6,8 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.alpha.R;
-import com.android.alpha.data.local.NoteStorage;
+import com.android.kitsune.R;
+import com.android.kitsune.data.local.NoteStorage;
 
 public class EditNoteActivity extends AppCompatActivity {
 

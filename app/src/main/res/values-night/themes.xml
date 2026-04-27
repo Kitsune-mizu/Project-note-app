@@ -46,11 +46,11 @@
     <!-- DARK — semua color theme pakai dark palette yang sama               -->
     <!-- (sesuai struktur asli: semua parent AppTheme dark)                 -->
     <!-- ═══════════════════════════════════════════════════════════════════ -->
-    <style name="Theme.Alpha"        parent="AppTheme" />
-    <style name="Theme.Alpha.Purple" parent="AppTheme" />
-    <style name="Theme.Alpha.Pink"   parent="AppTheme" />
-    <style name="Theme.Alpha.Green"  parent="AppTheme" />
-    <style name="Theme.Alpha.Orange" parent="AppTheme" />
+    <style name="Theme.Kitsune"        parent="AppTheme" />
+    <style name="Theme.Kitsune.Purple" parent="AppTheme" />
+    <style name="Theme.Kitsune.Pink"   parent="AppTheme" />
+    <style name="Theme.Kitsune.Green"  parent="AppTheme" />
+    <style name="Theme.Kitsune.Orange" parent="AppTheme" />
 
     <!-- ═══════════════════════════════════════════════════════════════════ -->
     <!-- DIALOG (dark)                                                        -->
@@ -105,5 +105,4 @@
     <style name="CircleShape">
         <item name="android:shape">oval</item>
     </style>
-
 </resources>

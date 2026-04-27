@@ -1,4 +1,4 @@
-package com.android.alpha.ui.notes;
+package com.android.kitsune.ui.notes;
 
 public class NoteModel {
     public int id;
