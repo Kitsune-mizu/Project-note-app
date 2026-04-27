@@ -106,4 +106,23 @@
         <item name="android:shape">oval</item>
     </style>
 
+    <style name="KitsuneDatePickerTheme" parent="ThemeOverlay.Material3.MaterialCalendar">
+        <item name="colorPrimary">?attr/color_4</item>
+        <item name="colorOnPrimary">?attr/color_1</item>
+        <item name="colorSurface">?attr/color_1</item>
+        <item name="colorOnSurface">?attr/text_color</item>
+        <item name="colorSurfaceVariant">?attr/color_2</item>
+        <item name="colorOnSurfaceVariant">?attr/text_color</item>
+        <item name="colorTertiary">?attr/color_3</item>
+        <item name="colorSecondaryContainer">?attr/color_3</item>
+        <item name="colorOnSecondaryContainer">?attr/text_color</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:maxWidth">360dp</item>
+
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.MediumComponent</item>
+    </style>
+    <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerSize">16dp</item>
+    </style>
 </resources>

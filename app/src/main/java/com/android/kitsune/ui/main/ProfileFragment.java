@@ -1,7 +1,6 @@
 package com.android.kitsune.ui.main;
 
 import android.app.Activity;
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -33,6 +32,7 @@ import com.android.kitsune.utils.DialogUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.material.datepicker.MaterialDatePicker;
 import com.yalantis.ucrop.UCrop;
 
 import org.json.JSONObject;
@@ -383,18 +383,40 @@ public class ProfileFragment extends Fragment implements
 
     private void pickDate() {
         Calendar c = Calendar.getInstance();
-        new DatePickerDialog(requireContext(),
-                (view, year, month, day) -> {
-                    String date = String.format(Locale.getDefault(), "%s %d, %d",
-                            new DateFormatSymbols().getMonths()[month], day, year);
-                    tvBirthday.setText(date);
-                    saveProfileSafely("birthday", date);
-                    notifyChange();
-                },
-                c.get(Calendar.YEAR),
-                c.get(Calendar.MONTH),
-                c.get(Calendar.DAY_OF_MONTH)
-        ).show();
+
+        String existing = tvBirthday.getText().toString();
+        if (!existing.isEmpty() &&
+                !existing.equals(getString(R.string.default_birthday))) {
+            try {
+                java.text.SimpleDateFormat sdf =
+                        new java.text.SimpleDateFormat("MMMM d, yyyy", Locale.getDefault());
+                java.util.Date parsed = sdf.parse(existing);
+                if (parsed != null) c.setTime(parsed);
+            } catch (Exception ignored) {}
+        }
+
+        MaterialDatePicker<Long> datePicker = MaterialDatePicker.Builder
+                .datePicker()
+                .setTitleText(getString(R.string.field_birthday))
+                .setSelection(c.getTimeInMillis())
+                .setTheme(R.style.KitsuneDatePickerTheme)
+                .build();
+
+        datePicker.addOnPositiveButtonClickListener(selection -> {
+            Calendar selected = Calendar.getInstance();
+            selected.setTimeInMillis(selection);
+
+            String date = String.format(Locale.getDefault(), "%s %d, %d",
+                    new DateFormatSymbols().getMonths()[selected.get(Calendar.MONTH)],
+                    selected.get(Calendar.DAY_OF_MONTH),
+                    selected.get(Calendar.YEAR));
+
+            tvBirthday.setText(date);
+            saveProfileSafely("birthday", date);
+            notifyChange();
+        });
+
+        datePicker.show(getParentFragmentManager(), "kitsune_date_picker");
     }
 
     private void openMapPicker() {
